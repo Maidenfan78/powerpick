@@ -134,7 +134,7 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 ┣ 📜tsconfig.json
 ┣ 📂app
 ┃ ┣ 📜index.tsx
-┃ ┣ 📜theme.tsx
+┃ ┣ 📜_theme.tsx
 ┃ ┣ 📜tokens.json
 ┃ ┗ 📜_layout.tsx
 ┣ 📂assets

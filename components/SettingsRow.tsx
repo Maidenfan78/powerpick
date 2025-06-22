@@ -1,6 +1,6 @@
 // components/SettingsRow.tsx
 import { Switch, Text, View, StyleSheet } from 'react-native';
-import { useTheme } from '../app/theme';
+import { useTheme } from '../app/_theme';
 
 export default function CvdSwitch() {
   const { isCvd, toggleCvd, tokens } = useTheme();

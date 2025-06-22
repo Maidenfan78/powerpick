@@ -9,7 +9,7 @@
 ┣ 📜tsconfig.json
 ┣ 📂app
 ┃ ┣ 📜index.tsx
-┃ ┣ 📜theme.tsx
+┃ ┣ 📜_theme.tsx
 ┃ ┣ 📜tokens.json
 ┃ ┗ 📜_layout.tsx
 ┣ 📂assets
