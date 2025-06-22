@@ -33,6 +33,7 @@ export interface ThemePalette {
 
 export interface ThemeContextValue extends ThemePalette {
   toggleCvd: () => void;
+  toggleScheme: () => void;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -65,6 +66,7 @@ const buildPalette = (scheme: ColorScheme, isCvd: boolean): ThemePalette => {
 /* -------------------------------------------------------------------------- */
 
 const CVD_KEY = "pp:isCvd"; // AsyncStorage key
+const SCHEME_KEY = "pp:scheme";
 
 const ThemeCtx = createContext<ThemeContextValue | undefined>(undefined);
 
@@ -78,11 +80,17 @@ export const useColorTokens = () => useTheme().tokens.color;
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const osScheme = (useColorScheme() as ColorScheme) ?? "light"; // null → light
+  const [scheme, setScheme] = useState<ColorScheme>(osScheme);
   const [isCvd, setIsCvd] = useState(false);
 
-  /* Load persisted CVD preference on mount */
+  /* Load persisted preferences on mount */
   useEffect(() => {
-    AsyncStorage.getItem(CVD_KEY).then((v) => setIsCvd(v === "1"));
+    AsyncStorage.multiGet([CVD_KEY, SCHEME_KEY]).then((entries) => {
+      entries.forEach(([key, value]) => {
+        if (key === CVD_KEY && value !== null) setIsCvd(value === "1");
+        if (key === SCHEME_KEY && value) setScheme(value as ColorScheme);
+      });
+    });
   }, []);
 
   /* Toggle + persist CVD flag */
@@ -93,8 +101,17 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     });
   };
 
-  const palette = buildPalette(osScheme, isCvd);
-  const value: ThemeContextValue = { ...palette, toggleCvd };
+  /* Toggle + persist colour scheme */
+  const toggleScheme = () => {
+    setScheme((prev) => {
+      const next = prev === "light" ? "dark" : "light";
+      AsyncStorage.setItem(SCHEME_KEY, next);
+      return next;
+    });
+  };
+
+  const palette = buildPalette(scheme, isCvd);
+  const value: ThemeContextValue = { ...palette, toggleCvd, toggleScheme };
 
   return <ThemeCtx.Provider value={value}>{children}</ThemeCtx.Provider>;
 };
