@@ -5,9 +5,8 @@ import { StatusBar } from 'expo-status-bar';
 import Header from '../components/Header';
 import RegionPicker from '../components/RegionPicker';
 import { useTheme } from '../lib/theme';
-import { supabase } from '../lib/supabase';
 import GameGrid from '../components/GameGrid';
-import { Game } from '../components/GameCard';
+import { Game, fetchGames } from '../lib/gamesApi';
 import { useRouter } from 'expo-router';
 
 export default function IndexScreen() {
@@ -18,19 +17,10 @@ export default function IndexScreen() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchGames = async () => {
+    const loadGames = async () => {
       try {
-        const { data, error } = await supabase
-          .from('games')
-          .select('id, name, logo_url, jackpot')
-          .returns<Game[]>();
-
-        if (error) {
-          console.error('Supabase error:', error);
-          setError(error.message);
-        } else {
-          setGames(data ?? []);
-        }
+        const data = await fetchGames();
+        setGames(data);
       } catch (err) {
         console.error('Unexpected fetch error:', err);
         setError((err as Error).message);
@@ -39,7 +29,7 @@ export default function IndexScreen() {
       }
     };
 
-    fetchGames();
+    loadGames();
   }, []);
 
   const handleSelectGame = (game: Game) => {
