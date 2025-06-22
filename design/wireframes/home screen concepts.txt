@@ -1,0 +1,70 @@
+# Home Screen – Concept Notes
+
+> **Purpose**  — This document gives every role (UI/UX, Frontend, Art, Research) a single source of truth for the first‑pass layout and flow of the Powerpick home screen. Iterate freely, but start here.
+
+---
+
+## 1. Visual Hierarchy
+
+1. **Header (Top App Bar)**
+
+   * Text logo: **“Powerpick”**
+   * Colour: brand primary `#0C244B` background, accent‑gold underline accent optional.
+   * Dense height (≈ 56 dp mobile, 64 dp web).
+2. **Region Selector (Drop‑Down)**
+
+   * Placement: directly under the header, centred, width ≈ 75 % of screen.
+   * Options: **Australia · USA · Europe**.
+   * Style: white container (`#FFFFFF`), rounded‑md corners, chevron‑down icon.
+   * Interaction: on tap, reveals a modal picker; selection persists via React Context.
+3. **Game Grid / List**
+
+   * Dynamically shows only games for the chosen region.
+   * Each *Game Card* includes: mini logo, game name, next‑draw jackpot (if available).
+   * Card tap opens **Game Options Sheet** (see §2).
+4. **Footer or FAB (optional)**
+
+   * “Predict Numbers” floating action button could appear once a game is selected.
+   * Colour accent‑gold `#F5A623` for high affordance.
+
+---
+
+## 2. Game Options Sheet
+
+When a user taps a game card, slide up a bottom sheet (mobile) or side drawer (web) with:
+
+| Action                         | Description                                                       |
+| ------------------------------ | ----------------------------------------------------------------- |
+| **Generate / Predict Numbers** | Opens number generator with hot/cold sliders & bell‑curve helper. |
+| **Latest Draws**               | Shows last 20 draws with winning numbers & jackpot.               |
+| **Statistics**                 | Hot, cold, overdue, pair frequency, gap charts.                   |
+| **Bell‑Curve Info**            | Short explainer modal on balanced sums (links to FAQ).            |
+
+---
+
+## 3. Interaction Flow (Happy Path)
+
+1. Launch app → header + empty region set to **Australia** by default.
+2. User taps **Region Selector** → chooses **USA**.
+3. Game grid repopulates with *Mega Millions*, *US Powerball*, *Florida Lotto*, *Texas Lotto*, *Lucky for Life*.
+4. User taps *Mega Millions* → bottom sheet appears.
+5. User taps **Generate / Predict Numbers** → navigates to generator screen with sliders pre‑tuned to bell‑curve band.
+6. User saves a set → toast confirms and sheet closes.
+
+---
+
+## 4. Design Guardrails
+
+* **Accessibility**: Region selector must have AA contrast against header; ensure drop‑down is large enough for touch.
+* **Performance**: Lazy‑load game logos (< 60 kB per SVG/PNG).
+* **Internationalisation**: Region names keyed in `i18n.ts` for future locales.
+
+---
+
+## 5. Open Questions
+
+1. Should recent jackpot amounts show on the game card or only inside the sheet?
+2. Admit multi‑region favourites (e.g., user picks one Aus & one US game)?
+3. Animation spec for card → sheet (scale + fade vs. slide)?
+
+Add comments or propose changes in the *UI/UX Design* thread before moving to high‑fidelity mock‑ups.

@@ -1,0 +1,82 @@
+Low-fi wireframes for the Powerpick home screen (mobile + web) with navigation and accessibility call-outs. Start here, then iterate in Figma.
+
+Mobile (Portrait · 360 × 800)
+┌──────────────────────────────────────────────┐
+│ Powerpick ───────────────────────────  ☰    │  Top App Bar (#0C244B, 56 dp)
+├──────────────────────────────────────────────┤
+│ ▼ Australia                                  │  Region Selector (75 % width, 48 dp)
+├──────────────────────────────────────────────┤
+│ ▢ Sat Lotto   $5 m ▸ │ ▢ Powerball  $20 m ▸ │
+│                                              │  2-col responsive game cards
+│ ▢ Oz Lotto    $10 m ▸│ ▢ Weekday WF $1 m ▸  │
+│                                              │  (lazy-loaded SVG logos < 60 kB)
+│ ▢ Set 4 Life  $20k ▸ │ ▢ ...                │
+├──────────────────────────────────────────────┤
+│                                              │
+│                      + Predict Numbers       │  FAB (accent #F5A623, 56 dp dia)
+│                                              │
+└──────────────────────────────────────────────┘
+
+Bottom-sheet on card tap (90 % width, 48 dp handles)  
+┌────────── Game Options ──────────┐  
+│  ● Generate / Predict Numbers    │  
+│  ● Latest Draws                  │  
+│  ● Statistics                    │  
+│  ● Bell-Curve Info               │  
+└──────────────────────────────────┘
+
+Navigation Notes
+
+Trigger	Result	Component
+Region selector tap	ModalPicker → updates React Context	<Modal>
+Game card tap	BottomSheet slides up (iOS sheet/Android bottom panel)	react-native-reanimated-bottom-sheet
+Bottom-sheet option tap	Router push (/game/[id]/predict, /history, etc.)	Expo Router
+
+Web (Desktop · 1280 × 800)
+┌──────────────────────────────────────────────────────────────┐
+│ Powerpick                        ▼ Australia        • • •    │  Top Bar (64 dp)
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐ │
+│  │ Sat Lotto │  │ Powerball │  │ Oz Lotto  │  │ Weekday WF│ │  4-col grid
+│  │  $5 m ▸   │  │  $20 m ▸  │  │  $10 m ▸  │  │  $1 m ▸   │
+│  └───────────┘  └───────────┘  └───────────┘  └───────────┘ │
+│                                                              │
+│  (cards wrap responsively at ≥ 1024 px → 3-col, ≤ 768 px → 2)│
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+Floating “Predict Numbers” button appears bottom-right after a game is selected.
+
+Side drawer variant of Game Options appears from the right at 400 px width.
+
+---
+
+### Accessibility Highlights
+
+* **Colour & Contrast**  
+  * Primary `#0C244B` + white text = 9.3 : 1 (AA ✓, AAA ✓).  
+  * Accent `#F5A623` on deep blue = 4.6 : 1 (AA ✓ for icons/buttons).  
+  * Provide monochrome icon fall-backs for colour-blind users.
+
+* **Touch & Click Targets**  
+  * Minimum 48 × 48 dp (WCAG) → all cards/FAB padded accordingly.  
+  * Keyboard-navigable focus rings on web (`:focus-visible`).
+
+* **Motion & Reduce Motion**  
+  * Sheet/side-drawer uses 150 ms ease-out; respect OS “Reduce Motion” flag.
+
+* **Semantic Roles**  
+  * Header: `<header>`; Region Selector: `<button aria-haspopup="listbox">`; cards: `<button aria-label="Open Mega Millions options">`.
+
+* **Dynamic Type**  
+  * Use `sp` / `rem` units; allow OS font scaling up to 120 %.
+
+---
+
+### Next Actions ✔️
+
+* Wire remaining flows (History ➜ Draw Detail, Generator ➜ Save Set).  
+* Validate contrast on light & dark mode palettes.  
+* Conduct 5-user hallway test focusing on Region Selector discoverability and card-to-sheet flow.  
+* Export tokens (colour, spacing, font sizes) to `design/tokens.json` for dev hand-off.
+
