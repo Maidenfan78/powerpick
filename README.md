@@ -104,13 +104,7 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
    ```
 2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys and Slack webhooks.
 3. **Database** – run `/supabase/init.sql` or `supabase db reset` then `supabase start`.
-4. **Back‑fill Draw Data**
-
-   ```bash
-   pip install -r scripts/requirements.txt
-   python scripts/download_all.py
-   ```
-5. **Run the App**
+4. **Run the App**
    \| Platform | Command                | Notes |
    \| -------- | ---------------------- | ----- |
    \| Mobile   | `npm run start`        | Scan QR in **Expo Go** |
@@ -147,7 +141,6 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 ┃ ┣ 📜GameCard.tsx
 ┃ ┣ 📜GameGrid.tsx
 ┃ ┣ 📜Header.tsx
-┃ ┣ 📜SettingsRow.tsx
 ┃ ┗ 📜RegionPicker.tsx
 ┣ 📂design
 ┃ ┣ 📂mockups
