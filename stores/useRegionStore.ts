@@ -1,4 +1,4 @@
-// apps/mobile/src/stores/useRegionStore.ts
+// stores/useRegionStore.ts
 import { create } from 'zustand';
 
 export type Region = 'AU' | 'US' | 'EU';
