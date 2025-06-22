@@ -8,13 +8,7 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 import { useTheme } from '../lib/theme';
-
-export type Game = {
-  id: string;
-  name: string;
-  logo_url: string; // ✅ matches DB column, not camelCase
-  jackpot: number;
-};
+import { Game } from '../lib/gamesApi';
 
 type GameCardProps = {
   game: Game;
@@ -57,17 +51,16 @@ export default function GameCard({ game, onPress }: GameCardProps) {
       accessibilityRole="button"
       accessibilityLabel={`Open ${game.name} options`}
     >
-    <Image
-      source={
-        game.logo_url
-          ? { uri: game.logo_url }
-          : require('../assets/placeholder.png')
-  }
-  style={styles.logo}
-  resizeMode="contain"
-/>
+      <Image
+        source={
+          game.logoUrl
+            ? { uri: game.logoUrl }
+            : require('../assets/placeholder.png')
+        }
+        style={styles.logo}
+        resizeMode="contain"
+      />
 
-      
       <Text style={styles.name}>{game.name}</Text>
       <Text style={styles.jackpot}>{game.jackpot}</Text>
     </Pressable>

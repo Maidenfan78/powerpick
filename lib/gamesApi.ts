@@ -25,6 +25,6 @@ export async function fetchGames(): Promise<Game[]> {
     id: row.id,
     name: row.name,
     logoUrl: row.logo_url,
-    jackpot: `$${(row.jackpot as number).toLocaleString()}`,
+    jackpot: `$${Number(row.jackpot).toLocaleString()}`,
   }));
 }

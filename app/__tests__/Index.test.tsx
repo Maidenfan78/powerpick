@@ -10,15 +10,6 @@ jest.mock('expo-constants', () => ({
   },
 }));
 
-// Mock supabase client to avoid real network requests
-jest.mock('../../lib/supabase', () => {
-  const from = jest.fn(() => ({
-    select: jest.fn(() => ({
-      returns: jest.fn().mockResolvedValue({ data: [], error: null }),
-    })),
-  }));
-  return { supabase: { from } };
-});
 
 // Avoid requiring the real expo-router module in tests
 jest.mock('expo-router', () => ({ useRouter: () => ({ push: jest.fn() }) }));
