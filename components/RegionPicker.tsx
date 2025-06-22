@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, Modal, StyleSheet } from 'react-native';
 import { ChevronDown, Check } from 'lucide-react-native';
 
-import { useTheme } from '../app/_theme';
+import { useTheme } from '../lib/theme';
 import { useRegionStore, Region } from '../stores/useRegionStore';
 
 const REGION_OPTIONS: Region[] = ['AU', 'US', 'EU'];

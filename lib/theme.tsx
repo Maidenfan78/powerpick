@@ -1,13 +1,12 @@
-// app/_theme.tsx
+// lib/theme.tsx
 // -----------------------------------------------------------------------------
 // Central theme context (light / dark + Colour‑Vision Deficiency toggle)
 // -----------------------------------------------------------------------------
 // Usage:
-//   import { useTheme } from "../app/_theme";
+//   import { useTheme } from "../lib/theme";
 //   const { tokens, toggleCvd } = useTheme();
 //
 // * Never import tokens.json directly in components – always go through context
-// * The leading underscore keeps Expo Router from treating this as a route file
 // -----------------------------------------------------------------------------
 import React, {
   createContext,
@@ -18,7 +17,7 @@ import React, {
 } from "react";
 import { useColorScheme } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import baseTokens from "./tokens.json";
+import baseTokens from "../app/tokens.json";
 
 /* -------------------------------------------------------------------------- */
 /*                              Type definitions                               */
