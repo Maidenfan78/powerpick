@@ -172,9 +172,18 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 
 ```
 
-*(Full tree in [`folder-structure.md`](folder-structure.md))* fileciteturn5file14
+*(Full tree in [`folder_tree.md`](folder_tree.md))* fileciteturn5file14
 
 ---
+## Vendored Dependencies
+
+All runtime and development packages live in the `vendor/` folder.  
+To install or update them, run:
+
+```bash
+npm install --prefix vendor
+---
+
 
 ## 👥 Personas & Documentation
 
