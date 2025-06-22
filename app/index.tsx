@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/Header';
 import RegionPicker from '../components/RegionPicker';
-import CvdSwitch from '../components/SettingsRow';
+import SettingsRow from '../components/SettingsRow';
 import ThemeSwitch from '../components/ThemeSwitch';
 import { useTheme } from '../lib/theme';
 import { supabase } from '../lib/supabase';
@@ -63,7 +63,7 @@ export default function IndexScreen() {
           <Text style={styles.debugText}>🎲 {gameCount} games loaded</Text>
         )}
       </View>
-      <CvdSwitch />
+      <SettingsRow />
       <ThemeSwitch />
     </SafeAreaView>
   );
