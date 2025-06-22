@@ -1,0 +1,9 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title-ticket" role="img">
+  <title id="title-ticket">Powerpick Lucky Ticket icon</title>
+  <!-- ticket body -->
+  <path d="M8 8 h40 a4 4 0 0 1 4 4 v12 a6 6 0 0 0 0 12 v12 a4 4 0 0 1 -4 4 h-40 a4 4 0 0 1 -4 -4 v-12 a6 6 0 0 0 0 -12 v-12 a4 4 0 0 1 4 -4 z" fill="#0C244B"/>
+  <!-- starburst -->
+  <g transform="translate(40 20)">
+    <polygon points="0,-6 1.8,-1.8 6,0 1.8,1.8 0,6 -1.8,1.8 -6,0 -1.8,-1.8" fill="#F5A623"/>
+  </g>
+</svg>

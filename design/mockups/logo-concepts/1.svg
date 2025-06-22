@@ -1,0 +1,9 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title-parrow" role="img">
+  <title id="title-parrow">Powerpick P‑Arrow monogram</title>
+  <!-- P stem -->
+  <rect x="18" y="12" width="8" height="40" fill="#0C244B"/>
+  <!-- P bowl / arrow -->
+  <path d="M26 12 h18 a14 14 0 1 1 0 28 h-18 z" fill="#0C244B"/>
+  <!-- arrow head accent -->
+  <path d="M44 22 l6 6 -6 6 z" fill="#F5A623"/>
+</svg>
