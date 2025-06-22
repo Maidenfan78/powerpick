@@ -13,10 +13,21 @@ jest.mock('expo-constants', () => ({
 // Mock supabase client to avoid real network requests
 jest.mock('../../lib/supabase', () => {
   const from = jest.fn(() => ({
-    select: jest.fn().mockResolvedValue({ count: 1, data: [], error: null }),
+    select: jest.fn(() => ({
+      returns: jest.fn().mockResolvedValue({ data: [], error: null }),
+    })),
   }));
   return { supabase: { from } };
 });
+
+// Avoid requiring the real expo-router module in tests
+jest.mock('expo-router', () => ({ useRouter: () => ({ push: jest.fn() }) }));
+
+// Simplify native modules that rely on browser APIs
+jest.mock('expo-status-bar', () => ({ StatusBar: () => null }));
+
+// Mock SVG imports used in components
+jest.mock('../../assets/powerpick_logo_full.svg', () => 'PowerpickLogo');
 
 import React from 'react';
 import { render } from '@testing-library/react-native';
@@ -24,7 +35,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { ThemeProvider } from '../../lib/theme'; // ← correct import name
 import IndexScreen from '../../app/index';
 
-test('renders without crashing', () => {
+test('renders default region label', () => {
   const tree = render(
     <PaperProvider>
       <ThemeProvider>
@@ -32,5 +43,6 @@ test('renders without crashing', () => {
       </ThemeProvider>
     </PaperProvider>
   );
-  expect(tree.getByText(/Powerpick/i)).toBeTruthy();
+  // Assert on visible UI text rather than accessibility label
+  expect(tree.getByText('Australia')).toBeTruthy();
 });
