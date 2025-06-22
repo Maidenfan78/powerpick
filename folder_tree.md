@@ -22,7 +22,6 @@
 ┃ ┣ 📜GameCard.tsx
 ┃ ┣ 📜GameGrid.tsx
 ┃ ┣ 📜Header.tsx
-┃ ┣ 📜SettingsRow.tsx
 ┃ ┗ 📜RegionPicker.tsx
 ┣ 📂design
 ┃ ┣ 📂mockups
