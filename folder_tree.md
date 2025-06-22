@@ -1,5 +1,5 @@
 📦powerpick
-┣ 📜.env
+┣ 📜.env.example
 ┣ 📜.gitignore
 ┣ 📜app.config.ts
 ┣ 📜app.json
