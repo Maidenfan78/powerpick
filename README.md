@@ -134,6 +134,7 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 ┣ 📜tsconfig.json
 ┣ 📂app
 ┃ ┣ 📜index.tsx
+┃ ┣ 📜theme.tsx
 ┃ ┣ 📜tokens.json
 ┃ ┗ 📜_layout.tsx
 ┣ 📂assets
@@ -147,6 +148,7 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 ┃ ┣ 📜GameCard.tsx
 ┃ ┣ 📜GameGrid.tsx
 ┃ ┣ 📜Header.tsx
+┃ ┣ 📜SettingsRow.tsx
 ┃ ┗ 📜RegionPicker.tsx
 ┣ 📂design
 ┃ ┣ 📂mockups
@@ -163,6 +165,9 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 ┃ ┗ 📜supabase.ts
 ┣ 📂stores
 ┃ ┗ 📜useRegionStore.ts
+┣ 📂Docs
+  ┗ 📂Research
+    ┗ 📜competitive-colours.md
 
 
 ```

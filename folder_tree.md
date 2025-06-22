@@ -9,6 +9,7 @@
 ┣ 📜tsconfig.json
 ┣ 📂app
 ┃ ┣ 📜index.tsx
+┃ ┣ 📜theme.tsx
 ┃ ┣ 📜tokens.json
 ┃ ┗ 📜_layout.tsx
 ┣ 📂assets
@@ -22,6 +23,7 @@
 ┃ ┣ 📜GameCard.tsx
 ┃ ┣ 📜GameGrid.tsx
 ┃ ┣ 📜Header.tsx
+┃ ┣ 📜SettingsRow.tsx
 ┃ ┗ 📜RegionPicker.tsx
 ┣ 📂design
 ┃ ┣ 📂mockups
@@ -38,3 +40,6 @@
 ┃ ┗ 📜supabase.ts
 ┣ 📂stores
 ┃ ┗ 📜useRegionStore.ts
+┣ 📂Docs
+  ┗ 📂Research
+    ┗ 📜competitive-colours.md
