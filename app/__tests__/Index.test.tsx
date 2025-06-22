@@ -10,6 +10,14 @@ jest.mock('expo-constants', () => ({
   },
 }));
 
+// Mock supabase client to avoid real network requests
+jest.mock('../../lib/supabase', () => {
+  const from = jest.fn(() => ({
+    select: jest.fn().mockResolvedValue({ count: 1, data: [], error: null }),
+  }));
+  return { supabase: { from } };
+});
+
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
