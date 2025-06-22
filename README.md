@@ -134,7 +134,6 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 ┣ 📜tsconfig.json
 ┣ 📂app
 ┃ ┣ 📜index.tsx
-┃ ┣ 📜_theme.tsx
 ┃ ┣ 📜tokens.json
 ┃ ┗ 📜_layout.tsx
 ┣ 📂assets
@@ -162,7 +161,8 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 ┣ 📂lib
 ┃ ┣ 📜database.types.ts
 ┃ ┣ 📜gamesApi.ts
-┃ ┗ 📜supabase.ts
+┃ ┣ 📜supabase.ts
+┃ ┗ 📜theme.tsx
 ┣ 📂stores
 ┃ ┗ 📜useRegionStore.ts
 ┣ 📂Docs

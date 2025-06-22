@@ -9,7 +9,6 @@
 ┣ 📜tsconfig.json
 ┣ 📂app
 ┃ ┣ 📜index.tsx
-┃ ┣ 📜_theme.tsx
 ┃ ┣ 📜tokens.json
 ┃ ┗ 📜_layout.tsx
 ┣ 📂assets
@@ -37,7 +36,8 @@
 ┣ 📂lib
 ┃ ┣ 📜database.types.ts
 ┃ ┣ 📜gamesApi.ts
-┃ ┗ 📜supabase.ts
+┃ ┣ 📜supabase.ts
+┃ ┗ 📜theme.tsx
 ┣ 📂stores
 ┃ ┗ 📜useRegionStore.ts
 ┣ 📂Docs
