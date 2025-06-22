@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import { useTheme } from '../lib/theme';
 
-export interface Game {
+export type Game = {
   id: string;
   name: string;
-  logoUrl: string;
-  jackpot: string; // e.g. "$5 m"
-}
+  logo_url: string; // ✅ matches DB column, not camelCase
+  jackpot: number;
+};
 
 type GameCardProps = {
   game: Game;
@@ -57,11 +57,17 @@ export default function GameCard({ game, onPress }: GameCardProps) {
       accessibilityRole="button"
       accessibilityLabel={`Open ${game.name} options`}
     >
-      <Image
-        source={{ uri: game.logoUrl }}
-        style={styles.logo}
-        resizeMode="contain"
-      />
+    <Image
+      source={
+        game.logo_url
+          ? { uri: game.logo_url }
+          : require('../assets/placeholder.png')
+  }
+  style={styles.logo}
+  resizeMode="contain"
+/>
+
+      
       <Text style={styles.name}>{game.name}</Text>
       <Text style={styles.jackpot}>{game.jackpot}</Text>
     </Pressable>

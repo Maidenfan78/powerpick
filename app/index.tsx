@@ -1,34 +1,50 @@
-// /app/index.tsx
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/Header';
 import RegionPicker from '../components/RegionPicker';
-import SettingsRow from '../components/SettingsRow';
-import ThemeSwitch from '../components/ThemeSwitch';
 import { useTheme } from '../lib/theme';
 import { supabase } from '../lib/supabase';
+import GameGrid from '../components/GameGrid';
+import { Game } from '../components/GameCard';
+import { useRouter } from 'expo-router';
 
 export default function IndexScreen() {
   const { tokens } = useTheme();
-  const [gameCount, setGameCount] = useState<number | null>(null);
+  const router = useRouter();
+  const [games, setGames] = useState<Game[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // quick connectivity test: count rows in 'games' table
-    supabase
-      .from('games')
-      .select('id', { count: 'exact', head: true })
-      .then(({ count, error }) => {
+    const fetchGames = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('games')
+          .select('id, name, logo_url, jackpot')
+          .returns<Game[]>();
+
         if (error) {
           console.error('Supabase error:', error);
           setError(error.message);
         } else {
-          setGameCount(count ?? 0);
+          setGames(data ?? []);
         }
-      });
+      } catch (err) {
+        console.error('Unexpected fetch error:', err);
+        setError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGames();
   }, []);
+
+  const handleSelectGame = (game: Game) => {
+    router.push(`/game/${game.id}/options`);
+  };
 
   const styles = StyleSheet.create({
     container: {
@@ -36,7 +52,8 @@ export default function IndexScreen() {
       backgroundColor: tokens.color.brand.primary.value,
       padding: 16,
     },
-    debugContainer: {
+    gridContainer: {
+      flex: 1,
       marginTop: 20,
     },
     debugText: {
@@ -54,17 +71,16 @@ export default function IndexScreen() {
       <StatusBar style="light" />
       <Header />
       <RegionPicker />
-      <View style={styles.debugContainer}>
+
+      <View style={styles.gridContainer}>
         {error ? (
           <Text style={styles.errorText}>❌ {error}</Text>
-        ) : gameCount === null ? (
+        ) : loading ? (
           <Text style={styles.debugText}>Loading games…</Text>
         ) : (
-          <Text style={styles.debugText}>🎲 {gameCount} games loaded</Text>
+          <GameGrid games={games} onSelectGame={handleSelectGame} />
         )}
       </View>
-      <SettingsRow />
-      <ThemeSwitch />
     </SafeAreaView>
   );
 }
