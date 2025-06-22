@@ -4,7 +4,7 @@ import { Stack } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
-import { ThemeProvider } from './theme';
+import { ThemeProvider } from './_theme';
 
 export default function Layout() {
   return (
