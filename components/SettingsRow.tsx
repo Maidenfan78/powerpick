@@ -2,7 +2,7 @@
 import { Switch, Text, View, StyleSheet } from 'react-native';
 import { useTheme } from '../lib/theme';
 
-export default function CvdSwitch() {
+export default function SettingsRow() {
   const { isCvd, toggleCvd, tokens } = useTheme();
   return (
     <View style={styles.row}>
