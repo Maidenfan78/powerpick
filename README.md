@@ -102,7 +102,7 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
    npm ci            # installs exact locked dependencies
    npm test          # runs Jest smoke suite
    ```
-2. **Environment** – copy `.env.example` → `.env` and fill in Supabase keys + Slack webhooks.
+2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys and Slack webhooks.
 3. **Database** – run `/supabase/init.sql` or `supabase db reset` then `supabase start`.
 4. **Back‑fill Draw Data**
 
@@ -124,7 +124,7 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 
 ```
 📦powerpick
-┣ 📜.env
+┣ 📜.env.example
 ┣ 📜.gitignore
 ┣ 📜app.config.ts
 ┣ 📜app.json
