@@ -5,9 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/Header';
 import RegionPicker from '../components/RegionPicker';
+import CvdSwitch from '../components/SettingsRow';
+import ThemeSwitch from '../components/ThemeSwitch';
+import { useTheme } from '../lib/theme';
 import { supabase } from '../lib/supabase';
 
 export default function IndexScreen() {
+  const { tokens } = useTheme();
   const [gameCount, setGameCount] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,6 +30,25 @@ export default function IndexScreen() {
       });
   }, []);
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: tokens.color.brand.primary.value,
+      padding: 16,
+    },
+    debugContainer: {
+      marginTop: 20,
+    },
+    debugText: {
+      color: tokens.color.neutral['0'].value,
+      fontSize: 18,
+    },
+    errorText: {
+      color: '#FF6666',
+      fontSize: 18,
+    },
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
@@ -40,25 +63,8 @@ export default function IndexScreen() {
           <Text style={styles.debugText}>🎲 {gameCount} games loaded</Text>
         )}
       </View>
+      <CvdSwitch />
+      <ThemeSwitch />
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0C244B',
-    padding: 16,
-  },
-  debugContainer: {
-    marginTop: 20,
-  },
-  debugText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-  },
-  errorText: {
-    color: '#FF6666',
-    fontSize: 18,
-  },
-});

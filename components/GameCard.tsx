@@ -7,7 +7,7 @@ import {
   Pressable,
   GestureResponderEvent,
 } from 'react-native';
-import tokens from '../app/tokens.json';
+import { useTheme } from '../lib/theme';
 
 export interface Game {
   id: string;
@@ -22,6 +22,34 @@ type GameCardProps = {
 };
 
 export default function GameCard({ game, onPress }: GameCardProps) {
+  const { tokens } = useTheme();
+  const styles = StyleSheet.create({
+    card: {
+      flex: 1,
+      backgroundColor: tokens.color.neutral['0'].value,
+      borderRadius: tokens.radius.md.value,
+      padding: tokens.spacing['4'].value,
+      alignItems: 'center',
+      margin: tokens.spacing['2'].value,
+    },
+    logo: {
+      width: 48,
+      height: 48,
+      marginBottom: tokens.spacing['2'].value,
+    },
+    name: {
+      fontSize: tokens.typography.fontSizes.md.value,
+      fontWeight: '500',
+      color: tokens.color.brand.primary.value,
+      marginBottom: tokens.spacing['1'].value,
+    },
+    jackpot: {
+      fontSize: tokens.typography.fontSizes.sm.value,
+      fontWeight: '400',
+      color: tokens.color.neutral['600'].value,
+    },
+  });
+
   return (
     <Pressable
       style={styles.card}
@@ -40,29 +68,3 @@ export default function GameCard({ game, onPress }: GameCardProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    backgroundColor: tokens.color.neutral['0'].value,
-    borderRadius: tokens.radius.md.value,
-    padding: tokens.spacing['4'].value,
-    alignItems: 'center',
-    margin: tokens.spacing['2'].value,
-  },
-  logo: {
-    width: 48,
-    height: 48,
-    marginBottom: tokens.spacing['2'].value,
-  },
-  name: {
-    fontSize: tokens.typography.fontSizes.md.value,
-    fontWeight: '500',
-    color: tokens.color.brand.primary.value,
-    marginBottom: tokens.spacing['1'].value,
-  },
-  jackpot: {
-    fontSize: tokens.typography.fontSizes.sm.value,
-    fontWeight: '400',
-    color: tokens.color.neutral['600'].value,
-  },
-});
