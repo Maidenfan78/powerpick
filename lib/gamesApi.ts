@@ -6,7 +6,7 @@ const STORAGE_BUCKET = 'powerpick';
 export interface Game {
   id: string;
   name: string;
-  logoUrl: string;   // full public URL to the SVG
+  logoUrl: string;   // full public URL to the PNG logo
   jackpot: string;   // formatted string like "$5,000,000"
 }
 

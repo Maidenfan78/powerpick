@@ -17,8 +17,8 @@ jest.mock('expo-router', () => ({ useRouter: () => ({ push: jest.fn() }) }));
 // Simplify native modules that rely on browser APIs
 jest.mock('expo-status-bar', () => ({ StatusBar: () => null }));
 
-// Mock SVG imports used in components
-jest.mock('../../assets/powerpick_logo_full.svg', () => 'PowerpickLogo');
+// Mock PNG logo import used in components
+jest.mock('../../assets/logo.png', () => 1);
 
 import React from 'react';
 import { render } from '@testing-library/react-native';
