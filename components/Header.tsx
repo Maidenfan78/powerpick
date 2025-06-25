@@ -2,7 +2,7 @@ import { View, Pressable, StyleSheet, Platform } from 'react-native';
 import { useTheme } from '../lib/theme';
 import { useRouter } from 'expo-router';
 import { Text } from 'react-native'; // 
-import PowerpickLogo from '../assets/powerpick_logo_full.svg';
+import PowerpickLogo from '../assets/logo.svg';
 
 export default function Header() {
   const { tokens } = useTheme();
@@ -18,8 +18,8 @@ export default function Header() {
       paddingHorizontal: 5,
     },
     logo: {
-      width: 120,
-      height: 32,
+      width: 500,
+      height: 80,
     },
     icon: {
       color: tokens.color.neutral['0'].value,
@@ -29,10 +29,10 @@ export default function Header() {
 
   return (
     <View style={styles.container}>
-      <PowerpickLogo width={340} height={6120} accessibilityLabel="Powerpick logo" />
+      <PowerpickLogo width={170} height={64} accessibilityLabel="Powerpick logo" />
       <Pressable onPress={() => router.push('/settings')}>
         <Text style={styles.icon}>☰</Text>
-      </Pressable>
+      </Pressable> 
     </View>
   );
 }
