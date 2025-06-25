@@ -1,8 +1,9 @@
-import { View, Pressable, StyleSheet, Platform } from 'react-native';
+import { View, Pressable, StyleSheet, Platform, Image } from 'react-native';
 import { useTheme } from '../lib/theme';
 import { useRouter } from 'expo-router';
 import { Text } from 'react-native'; // 
-import PowerpickLogo from '../assets/logo.svg';
+// Local PNG fallback logo for header
+const logo = require('../assets/logo.png');
 
 export default function Header() {
   const { tokens } = useTheme();
@@ -29,7 +30,12 @@ export default function Header() {
 
   return (
     <View style={styles.container}>
-      <PowerpickLogo width={170} height={64} accessibilityLabel="Powerpick logo" />
+      <Image
+        source={logo}
+        style={styles.logo}
+        accessibilityLabel="Powerpick logo"
+        resizeMode="contain"
+      />
       <Pressable onPress={() => router.push('/settings')}>
         <Text style={styles.icon}>☰</Text>
       </Pressable> 
