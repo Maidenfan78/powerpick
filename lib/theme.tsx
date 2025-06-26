@@ -43,10 +43,10 @@ export interface ThemeContextValue extends ThemePalette {
 /** Deep‑clone tokens then mutate according to scheme + cvd */
 const buildPalette = (scheme: ColorScheme, isCvd: boolean): ThemePalette => {
   // Modern JS environments have structuredClone; fall back to JSON copy
-  const t: any =
+  const t: typeof baseTokens =
     typeof globalThis.structuredClone === "function"
       ? globalThis.structuredClone(baseTokens)
-      : JSON.parse(JSON.stringify(baseTokens));
+      : (JSON.parse(JSON.stringify(baseTokens)) as typeof baseTokens);
 
   if (scheme === "dark") {
     t.color.brand.primary.value = t.color.brand.primary.dark.value;
