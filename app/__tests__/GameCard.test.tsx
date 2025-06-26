@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
-import { Image } from "react-native";
+import { Image, ActivityIndicator } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { ThemeProvider } from "../../lib/theme";
 import GameCard from "../../components/GameCard";
@@ -40,5 +40,14 @@ describe("GameCard", () => {
     );
 
     expect(UNSAFE_getByType(Image).props.source).toBe(1);
+  });
+
+  test("does not render ActivityIndicator when logo url empty", () => {
+    const { UNSAFE_queryByType } = render(
+      <GameCard game={{ ...baseGame, logoUrl: "" }} onPress={() => {}} />,
+      { wrapper: Wrapper },
+    );
+
+    expect(UNSAFE_queryByType(ActivityIndicator)).toBeNull();
   });
 });
