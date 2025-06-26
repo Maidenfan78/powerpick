@@ -15,6 +15,6 @@
     "resolveJsonModule": true,
     "jsx": "react-native"
   },
-  "include": ["**/*.ts", "**/*.tsx", "declarations.d.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "extends": "expo/tsconfig.base"
 }
