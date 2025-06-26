@@ -1,10 +1,11 @@
 // jest.config.cjs
 module.exports = {
   preset: 'jest-expo',
-  setupFiles: ['./jestSetup.cjs'],
-  setupFiles: ['./jestSetupMocks.cjs'],
-  setupFilesAfterEnv: ['./jestSetupAfterEnv.cjs'],
-  setupFilesAfterEnv: ['@testing-library/react-native/extend-expect'],
+  setupFiles: ['./jestSetup.cjs', './jestSetupMocks.cjs'],
+  setupFilesAfterEnv: [
+    './jestSetupAfterEnv.cjs',
+    '@testing-library/react-native/extend-expect',
+  ],
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest'
