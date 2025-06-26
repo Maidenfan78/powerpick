@@ -20,10 +20,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import baseTokens from "../app/tokens.json";
 
 /* -------------------------------------------------------------------------- */
-/*                              Type definitions                               */
+/*                              Type definitions                               */
 /* -------------------------------------------------------------------------- */
 
-export type ColorScheme = "light" | "dark"; // OS‑reported scheme
+export type ColorScheme = "light" | "dark"; // OS-reported scheme
 
 export interface ThemePalette {
   tokens: typeof baseTokens;

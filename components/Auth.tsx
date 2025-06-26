@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Alert } from "react-native";
+import { View, Alert, StyleSheet, Text } from "react-native";
 import { supabase } from "../lib/supabase";
 import { TextInput, Button } from "react-native-paper";
 
@@ -7,6 +7,11 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const styles = StyleSheet.create({
+    container: { padding: 16 },
+    input: { marginBottom: 16 },
+    signIn: { marginBottom: 8 },
+  });
 
   async function signIn() {
     setLoading(true);
@@ -30,32 +35,32 @@ export default function Auth() {
   }
 
   return (
-    <View style={{ padding: 16 }}>
+    <View style={styles.container}>
       <TextInput
         label="Email"
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
         keyboardType="email-address"
-        style={{ marginBottom: 16 }}
+        style={styles.input}
       />
       <TextInput
         label="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        style={{ marginBottom: 16 }}
+        style={styles.input}
       />
       <Button
         mode="contained"
         onPress={signIn}
         loading={loading}
-        style={{ marginBottom: 8 }}
+        style={styles.signIn}
       >
-        Sign In
+        <Text>Sign In</Text>
       </Button>
       <Button mode="outlined" onPress={signUp} loading={loading}>
-        Sign Up
+        <Text>Sign Up</Text>
       </Button>
     </View>
   );

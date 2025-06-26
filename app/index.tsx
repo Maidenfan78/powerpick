@@ -9,6 +9,8 @@ import GameGrid from "../components/GameGrid";
 import { Game, fetchGames } from "../lib/gamesApi";
 import { useRouter } from "expo-router";
 
+const ERROR_COLOR = "#FF6666";
+
 export default function IndexScreen() {
   const { tokens } = useTheme();
   const router = useRouter();
@@ -47,7 +49,7 @@ export default function IndexScreen() {
       fontSize: 18,
     },
     errorText: {
-      color: "#FF6666",
+      color: ERROR_COLOR,
       fontSize: 18,
     },
     gridContainer: {
