@@ -1,5 +1,5 @@
 // components/GameCard.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   Image,
@@ -42,8 +42,14 @@ export default function GameCard({ game, onPress }: GameCardProps) {
     },
   });
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!!game.logoUrl);
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!game.logoUrl) {
+      setLoading(false);
+    }
+  }, [game.logoUrl]);
 
   const imageSource =
     error || !game.logoUrl ? { uri: "" } : { uri: game.logoUrl };
