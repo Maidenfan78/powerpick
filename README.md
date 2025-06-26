@@ -26,7 +26,7 @@
 
 ## 🎯 Product Vision
 
-Powerpick is an **insight companion** for casual lotto players aged **25 – 55** who enjoy analysing trends before buying a ticket. It sits between the extremes of _pure luck_ and _snake‑oil predictions_ – surfacing real statistics in a clean, lightning‑fast UI. fileciteturn5file15
+Powerpick is an **insight companion** for casual lotto players aged **25 – 55** who enjoy analysing trends before buying a ticket. It sits between the extremes of _pure luck_ and _snake‑oil predictions_ – surfacing real statistics in a clean, lightning‑fast UI.
 
 - **Audience mindset:** data‑curious, mobile‑first, prefers visuals over spreadsheets.
 - **Design language:** deep‑blue foundation (`#0C244B`) for trust, gold/orange accents (`#F5A623`) for excitement, AA+ contrast throughout.
@@ -47,7 +47,7 @@ Powerpick is an **insight companion** for casual lotto players aged **25 –�
 
 ### 🎲 Bell‑Curve Sum Balancing (Why It Matters)
 
-Winning combinations tend to cluster around the statistical mean of the game’s total number space. Powerpick keeps suggestions inside the busiest 70 % of that bell curve while still respecting user‑defined hot/cold weightings. fileciteturn5file15
+Winning combinations tend to cluster around the statistical mean of the game’s total number space. Powerpick keeps suggestions inside the busiest 70 % of that bell curve while still respecting user‑defined hot/cold weightings.
 
 ---
 
@@ -55,15 +55,15 @@ Winning combinations tend to cluster around the statistical mean of the game’s
 
 Road‑mapping is broken into **phases** – each two weeks long and tracked in the GitHub project board.
 
-| Phase | Weeks  | Theme (lead)                          | Exit Criteria                                                                                       |
-| ----- | ------ | ------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| **0** |  1‑2   | Foundations (TPM)                     | CI pipeline green, design tokens merged, skeleton app boots on all platforms fileciteturn5file11 |
-| **1** |  3‑4   | Discovery (Research)                  | Updated research doc signed‑off                                                                     |
-| **2** |  5‑6   | Concept & Visual Design (UI/UX + Art) | Approved high‑fi mock‑ups                                                                           |
-| **3** |  7‑8   | Tech Scaffold (FE + BE)               | Header & Region Selector render live data                                                           |
-| **4** |  9‑14  | Implementation Sprints 1‑3            | Users can select region → generate & save numbers                                                   |
-| **5** |  15‑18 | Pre‑Launch Hardening                  | Zero P1 bugs; store listings approved                                                               |
-| **6** |  19‑∞  | Launch & Growth                       | Continuous ASO, feature expansion                                                                   |
+| Phase | Weeks  | Theme (lead)                          | Exit Criteria                                                                |
+| ----- | ------ | ------------------------------------- | ---------------------------------------------------------------------------- |
+| **0** |  1‑2   | Foundations (TPM)                     | CI pipeline green, design tokens merged, skeleton app boots on all platforms |
+| **1** |  3‑4   | Discovery (Research)                  | Updated research doc signed‑off                                              |
+| **2** |  5‑6   | Concept & Visual Design (UI/UX + Art) | Approved high‑fi mock‑ups                                                    |
+| **3** |  7‑8   | Tech Scaffold (FE + BE)               | Header & Region Selector render live data                                    |
+| **4** |  9‑14  | Implementation Sprints 1‑3            | Users can select region → generate & save numbers                            |
+| **5** |  15‑18 | Pre‑Launch Hardening                  | Zero P1 bugs; store listings approved                                        |
+| **6** |  19‑∞  | Launch & Growth                       | Continuous ASO, feature expansion                                            |
 
 For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.md`](docs/WORKFLOW.md).
 
@@ -167,7 +167,7 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 
 ```
 
-*(Full tree in [`folder_tree.md`](folder_tree.md))* fileciteturn5file14
+_(Full tree in [`folder_tree.md`](folder_tree.md))_
 
 ---
 
@@ -178,17 +178,18 @@ To install or update them, run:
 
 ```bash
 npm install --prefix vendor
----
+```
 
+---
 
 ## 👥 Personas & Documentation
 
-All role personas live in `/personas/` and are *the* reference for tone, deliverables, and hand‑offs. Start there if you’re unsure how to communicate or what’s expected. fileciteturn5file0turn5file2turn5file3turn5file4turn5file5turn5file6turn5file7
+All role personas live in `/personas/` and are _the_ reference for tone, deliverables, and hand‑offs. Start there if you’re unsure how to communicate or what’s expected.
 
 Additional research & design artefacts:
 
-* `docs/research/` – user interviews, demographic data.
-* `design/tokens.json` – source of truth for colour/spacing typography.
+- `docs/research/` – user interviews, demographic data.
+- `design/tokens.json` – source of truth for colour/spacing typography.
 
 ---
 
@@ -200,7 +201,6 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more informa
 
 ## 🙏 Acknowledgements
 
-* Australian, US, and EU lottery operators – for making draw data publicly available.
-* The Expo & Supabase communities for stellar open‑source tooling.
-* Everyone contributing code, design, testing, or feedback – you rock!
-```
+- Australian, US, and EU lottery operators – for making draw data publicly available.
+- The Expo & Supabase communities for stellar open‑source tooling.
+- Everyone contributing code, design, testing, or feedback – you rock!
