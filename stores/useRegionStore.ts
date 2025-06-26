@@ -10,5 +10,5 @@ interface RegionState {
 
 export const useRegionStore = create<RegionState>((set) => ({
   region: 'AU',
-  setRegion: (r) => set({ region: r }),
+  setRegion: (r: Region) => set({ region: r }),
 }));
