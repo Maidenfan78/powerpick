@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { useTheme } from "../lib/theme";
 import type { Game } from "../lib/gamesApi";
+import placeholder from "../assets/placeholder.png";
 
 type GameCardProps = {
   game: Game;
@@ -56,11 +57,7 @@ export default function GameCard({ game, onPress }: GameCardProps) {
     >
       {loading && <ActivityIndicator style={styles.logo} />}
       {error || !game.logoUrl ? (
-        <Image
-          source={require("../assets/placeholder.png")}
-          style={styles.logo}
-          resizeMode="contain"
-        />
+        <Image source={placeholder} style={styles.logo} resizeMode="contain" />
       ) : (
         <Image
           source={imageSource}

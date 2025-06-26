@@ -5,6 +5,8 @@ import { View, Text, Pressable, Modal, StyleSheet } from "react-native";
 import { useTheme } from "../lib/theme";
 import { useRegionStore, Region } from "../stores/useRegionStore";
 
+const BACKDROP_COLOR = "rgba(0,0,0,0.4)";
+
 const REGION_OPTIONS: Region[] = ["AU", "US", "EU"];
 
 export default function RegionPicker() {
@@ -19,7 +21,7 @@ export default function RegionPicker() {
   const styles = StyleSheet.create({
     backdrop: {
       alignItems: "center",
-      backgroundColor: "rgba(0,0,0,0.4)",
+      backgroundColor: BACKDROP_COLOR,
       flex: 1,
       justifyContent: "center",
     },
@@ -49,7 +51,7 @@ export default function RegionPicker() {
       marginLeft: 8,
     },
     modal: {
-      backgroundColor: "white",
+      backgroundColor: tokens.color.neutral["0"].value,
       borderRadius: 12,
       minWidth: "60%",
       padding: 16,

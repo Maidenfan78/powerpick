@@ -13,20 +13,69 @@ import { useRouter } from "expo-router";
 export default function SettingsScreen() {
   const { tokens, scheme, toggleScheme, isCvd, toggleCvd } = useTheme();
   const router = useRouter();
+  const styles = StyleSheet.create({
+    card: {
+      backgroundColor: tokens.color.neutral["0"].value,
+      borderRadius: 12,
+      elevation: 1,
+      marginHorizontal: 16,
+      marginTop: 8,
+      paddingVertical: 8,
+    },
+    container: { flex: 1 },
+    dismiss: {
+      color: tokens.color.neutral["0"].value,
+      fontSize: 20,
+    },
+    groupTitle: {
+      color: tokens.color.neutral["500"].value,
+      fontSize: 14,
+      paddingHorizontal: 16,
+      paddingTop: 24,
+    },
+    header: {
+      alignItems: "center",
+      backgroundColor: tokens.color.brand.primary.value,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      padding: 16,
+    },
+    headerTitle: {
+      color: tokens.color.neutral["0"].value,
+      fontSize: 20,
+      fontWeight: "700",
+    },
+    infoText: {
+      color: tokens.color.neutral["600"].value,
+      fontSize: 16,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+    },
+    label: { fontSize: 16 },
+    linkText: {
+      color: tokens.color.brand.primary.value,
+      fontSize: 16,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      textDecorationLine: "underline",
+    },
+    row: {
+      alignItems: "center",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+    },
+    separator: {
+      backgroundColor: tokens.color.neutral["100"].value,
+      height: 1,
+      marginHorizontal: 16,
+    },
+  });
 
   return (
-    <SafeAreaView
-      style={[
-        styles.container,
-        { backgroundColor: tokens.color.neutral["0"].value },
-      ]}
-    >
-      <View
-        style={[
-          styles.header,
-          { backgroundColor: tokens.color.brand.primary.value },
-        ]}
-      >
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
         <Text style={styles.headerTitle}>Settings</Text>
         <Pressable onPress={() => router.back()}>
           <Text style={styles.dismiss}>✕</Text>
@@ -82,11 +131,19 @@ function Row({
   disabled?: boolean;
 }) {
   const { tokens } = useTheme();
+  const styles = StyleSheet.create({
+    label: { color: tokens.color.brand.primary.value, fontSize: 16 },
+    row: {
+      alignItems: "center",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+    },
+  });
   return (
     <View style={styles.row}>
-      <Text style={[styles.label, { color: tokens.color.brand.primary.value }]}>
-        {label}
-      </Text>
+      <Text style={styles.label}>{label}</Text>
       <Switch
         value={value}
         onValueChange={onToggle}
@@ -98,66 +155,13 @@ function Row({
 }
 
 function Separator() {
+  const { tokens } = useTheme();
+  const styles = StyleSheet.create({
+    separator: {
+      backgroundColor: tokens.color.neutral["100"].value,
+      height: 1,
+      marginHorizontal: 16,
+    },
+  });
   return <View style={styles.separator} />;
 }
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    elevation: 1,
-    marginHorizontal: 16,
-    marginTop: 8,
-    paddingVertical: 8,
-  },
-  container: { flex: 1 },
-  dismiss: {
-    color: "#FFFFFF",
-    fontSize: 20,
-  },
-  groupTitle: {
-    color: "#6A6A6A",
-    fontSize: 14,
-    paddingHorizontal: 16,
-    paddingTop: 24,
-  },
-  header: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 16,
-  },
-  headerTitle: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    fontWeight: "700",
-  },
-  infoText: {
-    color: "#4C4C4C",
-    fontSize: 16,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  label: {
-    fontSize: 16,
-  },
-  linkText: {
-    color: "#0C244B",
-    fontSize: 16,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    textDecorationLine: "underline",
-  },
-  row: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  separator: {
-    backgroundColor: "#E0E0E0",
-    height: 1,
-    marginHorizontal: 16,
-  },
-});
