@@ -32,6 +32,4 @@
 
 ## Agent Behavior
 
-- Only modify files under `/app` or `/lib`
-- Avoid touching CI configs or environment config files
 - If generating new code, include relevant tests
