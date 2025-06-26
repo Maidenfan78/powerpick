@@ -1,9 +1,9 @@
-import { View, Pressable, StyleSheet, Platform, Image } from 'react-native';
-import { useTheme } from '../lib/theme';
-import { useRouter } from 'expo-router';
-import { Text } from 'react-native'; // 
+import { View, Pressable, StyleSheet, Platform, Image } from "react-native";
+import { useTheme } from "../lib/theme";
+import { useRouter } from "expo-router";
+import { Text } from "react-native"; //
 // Local PNG fallback logo for header
-const logo = require('../assets/logo.png');
+const logo = require("../assets/logo.png");
 
 export default function Header() {
   const { tokens } = useTheme();
@@ -11,20 +11,20 @@ export default function Header() {
 
   const styles = StyleSheet.create({
     container: {
+      alignItems: "center",
       backgroundColor: tokens.color.brand.primary.value,
+      flexDirection: "row",
       height: TOP_BAR_HEIGHT,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: "space-between",
       paddingHorizontal: 5,
     },
-    logo: {
-      width: 500,
-      height: 80,
-    },
     icon: {
-      color: tokens.color.neutral['0'].value,
+      color: tokens.color.neutral["0"].value,
       fontSize: 20,
+    },
+    logo: {
+      height: 80,
+      width: 500,
     },
   });
 
@@ -36,9 +36,9 @@ export default function Header() {
         accessibilityLabel="Powerpick logo"
         resizeMode="contain"
       />
-      <Pressable onPress={() => router.push('/settings')}>
+      <Pressable onPress={() => router.push("/settings")}>
         <Text style={styles.icon}>☰</Text>
-      </Pressable> 
+      </Pressable>
     </View>
   );
 }

@@ -1,7 +1,7 @@
-import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
-import GameCard from './GameCard';
-import { Game } from '../lib/gamesApi';
+import React from "react";
+import { FlatList, StyleSheet } from "react-native";
+import GameCard from "./GameCard";
+import { Game } from "../lib/gamesApi";
 
 type GameGridProps = {
   games: Game[];

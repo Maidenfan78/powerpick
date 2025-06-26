@@ -1,22 +1,21 @@
 ┌──────────────────────────────────────────────┐
-│ Settings                            [✕]      │  Top App Bar (#0C244B)
+│ Settings [✕] │ Top App Bar (#0C244B)
 ├──────────────────────────────────────────────┤
 
-   ▸ Display Settings
-   ┌──────────────────────────────────────────┐
-   │ Dark Mode                     ⬤◯       │  ToggleScheme (ThemeSwitch.tsx)
-   ├──────────────────────────────────────────┤
-   │ Colour-Blind Mode             ⬤◯       │  toggleCvd (SettingsRow.tsx)
-   └──────────────────────────────────────────┘
+▸ Display Settings
+┌──────────────────────────────────────────┐
+│ Dark Mode ⬤◯ │ ToggleScheme (ThemeSwitch.tsx)
+├──────────────────────────────────────────┤
+│ Colour-Blind Mode ⬤◯ │ toggleCvd (SettingsRow.tsx)
+└──────────────────────────────────────────┘
 
-   ▸ Notifications
-   ┌──────────────────────────────────────────┐
-   │ New Draw Alerts               ⬤◯       │  Future (e.g. Expo Notifications)
-   └──────────────────────────────────────────┘
+▸ Notifications
+┌──────────────────────────────────────────┐
+│ New Draw Alerts ⬤◯ │ Future (e.g. Expo Notifications)
+└──────────────────────────────────────────┘
 
-   ▸ App Info
-   ┌──────────────────────────────────────────┐
-   │ Version: 1.0.0                          │
-   │ Contact Support                         │
-   └──────────────────────────────────────────┘
-
+▸ App Info
+┌──────────────────────────────────────────┐
+│ Version: 1.0.0 │
+│ Contact Support │
+└──────────────────────────────────────────┘

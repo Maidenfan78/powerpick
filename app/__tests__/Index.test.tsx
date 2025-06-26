@@ -1,39 +1,38 @@
-jest.mock('expo-constants', () => ({
+jest.mock("expo-constants", () => ({
   __esModule: true,
   default: {
     expoConfig: {
       extra: {
-        SUPABASE_URL: 'https://test.supabase',
-        SUPABASE_ANON_KEY: 'anon-test-key',
+        SUPABASE_URL: "https://test.supabase",
+        SUPABASE_ANON_KEY: "anon-test-key",
       },
     },
   },
 }));
 
-
 // Avoid requiring the real expo-router module in tests
-jest.mock('expo-router', () => ({ useRouter: () => ({ push: jest.fn() }) }));
+jest.mock("expo-router", () => ({ useRouter: () => ({ push: jest.fn() }) }));
 
 // Simplify native modules that rely on browser APIs
-jest.mock('expo-status-bar', () => ({ StatusBar: () => null }));
+jest.mock("expo-status-bar", () => ({ StatusBar: () => null }));
 
 // Mock PNG logo import used in components
-jest.mock('../../assets/logo.png', () => 1);
+jest.mock("../../assets/logo.png", () => 1);
 
-import React from 'react';
-import { render } from '@testing-library/react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
-import { ThemeProvider } from '../../lib/theme'; // ← correct import name
-import IndexScreen from '../../app/index';
+import React from "react";
+import { render } from "@testing-library/react-native";
+import { Provider as PaperProvider } from "react-native-paper";
+import { ThemeProvider } from "../../lib/theme"; // ← correct import name
+import IndexScreen from "../../app/index";
 
-test('renders default region label', () => {
+test("renders default region label", () => {
   const tree = render(
     <PaperProvider>
       <ThemeProvider>
         <IndexScreen />
       </ThemeProvider>
-    </PaperProvider>
+    </PaperProvider>,
   );
   // Assert on visible UI text rather than accessibility label
-  expect(tree.getByText('Australia')).toBeTruthy();
+  expect(tree.getByText("Australia")).toBeTruthy();
 });

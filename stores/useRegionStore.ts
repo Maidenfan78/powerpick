@@ -1,7 +1,7 @@
 // stores/useRegionStore.ts
-import { create } from 'zustand';
+import { create } from "zustand";
 
-export type Region = 'AU' | 'US' | 'EU';
+export type Region = "AU" | "US" | "EU";
 
 interface RegionState {
   region: Region;
@@ -9,6 +9,6 @@ interface RegionState {
 }
 
 export const useRegionStore = create<RegionState>((set) => ({
-  region: 'AU',
+  region: "AU",
   setRegion: (r: Region) => set({ region: r }),
 }));

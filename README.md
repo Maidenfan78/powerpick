@@ -3,7 +3,7 @@
 **Predict smarter. Play responsibly.**
 
 > A cross‑platform (iOS · Android · Web) Expo/React Native app that delivers draw history, hot/cold analytics, and statistically‑weighted number suggestions for the world’s biggest lotteries—starting in **Australia** and expanding to the **USA** and **Europe**.
-> *Powerpick does **not** sell tickets or guarantee winnings – it simply visualises probability so players can make informed, responsible choices.*
+> _Powerpick does **not** sell tickets or guarantee winnings – it simply visualises probability so players can make informed, responsible choices._
 
 ![CI](https://github.com/<org>/powerpick/actions/workflows/ci.yml/badge.svg)
 
@@ -26,11 +26,11 @@
 
 ## 🎯 Product Vision
 
-Powerpick is an **insight companion** for casual lotto players aged **25 – 55** who enjoy analysing trends before buying a ticket. It sits between the extremes of *pure luck* and *snake‑oil predictions* – surfacing real statistics in a clean, lightning‑fast UI. fileciteturn5file15
+Powerpick is an **insight companion** for casual lotto players aged **25 – 55** who enjoy analysing trends before buying a ticket. It sits between the extremes of _pure luck_ and _snake‑oil predictions_ – surfacing real statistics in a clean, lightning‑fast UI. fileciteturn5file15
 
-* **Audience mindset:** data‑curious, mobile‑first, prefers visuals over spreadsheets.
-* **Design language:** deep‑blue foundation (`#0C244B`) for trust, gold/orange accents (`#F5A623`) for excitement, AA+ contrast throughout.
-* **Value proposition:** one‑tap draw lookup, digestible analytics, and fun yet transparent number suggestions – all wrapped in a freemium model that respects attention (banner ads only on the free tier).
+- **Audience mindset:** data‑curious, mobile‑first, prefers visuals over spreadsheets.
+- **Design language:** deep‑blue foundation (`#0C244B`) for trust, gold/orange accents (`#F5A623`) for excitement, AA+ contrast throughout.
+- **Value proposition:** one‑tap draw lookup, digestible analytics, and fun yet transparent number suggestions – all wrapped in a freemium model that respects attention (banner ads only on the free tier).
 
 ---
 
@@ -84,11 +84,12 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 ---
 
 ## 🎨 Visual Language & Accessibility
-* **Primary (`#0C244B`)** – trust, stability, legibility on light & dark backgrounds (9.3:1 on white).  
-* **Accent (`#F5A623`)** – energy, call-to-action, 4.6:1 on brand-primary.  
-* Dark-mode variants (`#081935`, `#FFC04D`) defined in `app/tokens.json`.  
-* All colour pairs pass WCAG 2.1 AA; primary text meets AAA.  
-* See `design/tokens.json` and Figma **Powerpick Design System** for full ramp.
+
+- **Primary (`#0C244B`)** – trust, stability, legibility on light & dark backgrounds (9.3:1 on white).
+- **Accent (`#F5A623`)** – energy, call-to-action, 4.6:1 on brand-primary.
+- Dark-mode variants (`#081935`, `#FFC04D`) defined in `app/tokens.json`.
+- All colour pairs pass WCAG 2.1 AA; primary text meets AAA.
+- See `design/tokens.json` and Figma **Powerpick Design System** for full ramp.
 
 ---
 
@@ -102,13 +103,14 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
    npm ci            # installs exact locked dependencies
    npm test          # runs Jest smoke suite
    ```
+
 2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys and Slack webhooks.
 3. **Database** – run `/supabase/init.sql` or `supabase db reset` then `supabase start`.
 4. **Run the App**
-   \| Platform | Command                | Notes |
+   \| Platform | Command | Notes |
    \| -------- | ---------------------- | ----- |
-   \| Mobile   | `npm run start`        | Scan QR in **Expo Go** |
-   \| Web      | `npm run web`          | Opens `http://localhost:19006` |
+   \| Mobile | `npm run start` | Scan QR in **Expo Go** |
+   \| Web | `npm run web` | Opens `http://localhost:19006` |
 
 > **Tip:** Use `npm run lint` & `npm run format` before every commit to keep CI green.
 
@@ -168,6 +170,7 @@ For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.m
 *(Full tree in [`folder_tree.md`](folder_tree.md))* fileciteturn5file14
 
 ---
+
 ## Vendored Dependencies
 
 All runtime and development packages live in the `vendor/` folder.  
@@ -200,3 +203,4 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more informa
 * Australian, US, and EU lottery operators – for making draw data publicly available.
 * The Expo & Supabase communities for stellar open‑source tooling.
 * Everyone contributing code, design, testing, or feedback – you rock!
+```

@@ -1,5 +1,5 @@
 // components/GameCard.tsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Text,
   Image,
@@ -9,9 +9,9 @@ import {
   ActivityIndicator,
   ViewStyle,
   StyleProp,
-} from 'react-native';
-import { useTheme } from '../lib/theme';
-import type { Game } from '../lib/gamesApi';
+} from "react-native";
+import { useTheme } from "../lib/theme";
+import type { Game } from "../lib/gamesApi";
 
 type GameCardProps = {
   game: Game;
@@ -22,22 +22,22 @@ export default function GameCard({ game, onPress }: GameCardProps) {
   const { tokens } = useTheme();
   const styles = StyleSheet.create({
     card: {
-      flex: 1,
-      backgroundColor: tokens.color.neutral['0'].value,
+      alignItems: "center",
+      backgroundColor: tokens.color.neutral["0"].value,
       borderRadius: tokens.radius.md.value,
-      padding: tokens.spacing['3'].value,
-      alignItems: 'center',
-      margin: tokens.spacing['2'].value,
-    },
-    logo: {
-      width: 96,
-      height: 96,
-      marginBottom: tokens.spacing['2'].value,
+      flex: 1,
+      margin: tokens.spacing["2"].value,
+      padding: tokens.spacing["3"].value,
     },
     jackpot: {
+      color: tokens.color.neutral["600"].value,
       fontSize: tokens.typography.fontSizes.sm.value,
-      fontWeight: '600',
-      color: tokens.color.neutral['600'].value,
+      fontWeight: "600",
+    },
+    logo: {
+      height: 96,
+      marginBottom: tokens.spacing["2"].value,
+      width: 96,
     },
   });
 
@@ -45,7 +45,7 @@ export default function GameCard({ game, onPress }: GameCardProps) {
   const [error, setError] = useState(false);
 
   const imageSource =
-    error || !game.logoUrl ? { uri: '' } : { uri: game.logoUrl };
+    error || !game.logoUrl ? { uri: "" } : { uri: game.logoUrl };
 
   return (
     <Pressable
@@ -57,7 +57,7 @@ export default function GameCard({ game, onPress }: GameCardProps) {
       {loading && <ActivityIndicator style={styles.logo} />}
       {error || !game.logoUrl ? (
         <Image
-          source={require('../assets/placeholder.png')}
+          source={require("../assets/placeholder.png")}
           style={styles.logo}
           resizeMode="contain"
         />

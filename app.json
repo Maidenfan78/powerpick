@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "powerpick", 
+    "scheme": "powerpick",
     "name": "powerpick",
     "slug": "powerpick",
     "version": "1.0.0",
@@ -27,8 +27,6 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-router"
-    ]
+    "plugins": ["expo-router"]
   }
 }

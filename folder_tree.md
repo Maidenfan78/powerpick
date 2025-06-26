@@ -40,5 +40,5 @@
 ┣ 📂stores
 ┃ ┗ 📜useRegionStore.ts
 ┣ 📂Docs
-  ┗ 📂Research
-    ┗ 📜competitive-colours.md
+┗ 📂Research
+┗ 📜competitive-colours.md

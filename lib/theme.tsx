@@ -78,19 +78,25 @@ export const useTheme = (): ThemeContextValue => {
 
 export const useColorTokens = () => useTheme().tokens.color;
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }: { children: ReactNode }) => {
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const osScheme = (useColorScheme() as ColorScheme) ?? "light"; // null → light
   const [scheme, setScheme] = useState<ColorScheme>(osScheme);
   const [isCvd, setIsCvd] = useState(false);
 
   /* Load persisted preferences on mount */
   useEffect(() => {
-    AsyncStorage.multiGet([CVD_KEY, SCHEME_KEY]).then((entries: readonly [string, string | null][]) => {
-      entries.forEach(([key, value]: readonly [string, string | null]) => {
-        if (key === CVD_KEY && value !== null) setIsCvd(value === "1");
-        if (key === SCHEME_KEY && value) setScheme(value as ColorScheme);
-      });
-    });
+    AsyncStorage.multiGet([CVD_KEY, SCHEME_KEY]).then(
+      (entries: readonly [string, string | null][]) => {
+        entries.forEach(([key, value]: readonly [string, string | null]) => {
+          if (key === CVD_KEY && value !== null) setIsCvd(value === "1");
+          if (key === SCHEME_KEY && value) setScheme(value as ColorScheme);
+        });
+      },
+    );
   }, []);
 
   /* Toggle + persist CVD flag */
