@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import GameCard from './GameCard';
 import { Game } from '../lib/gamesApi';
 
@@ -10,16 +10,13 @@ type GameGridProps = {
 
 export default function GameGrid({ games, onSelectGame }: GameGridProps) {
   return (
-    <FlatList
+    <FlatList<Game>
       data={games}
-      keyExtractor={item => item.id}
+      keyExtractor={(item: Game) => item.id}
       numColumns={2}
       contentContainerStyle={styles.list}
-      renderItem={({ item }) => (
-        <GameCard
-          game={item}
-          onPress={() => onSelectGame(item)}
-        />
+      renderItem={({ item }: { item: Game }) => (
+        <GameCard game={item} onPress={() => onSelectGame(item)} />
       )}
     />
   );
