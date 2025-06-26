@@ -44,8 +44,8 @@ export interface ThemeContextValue extends ThemePalette {
 const buildPalette = (scheme: ColorScheme, isCvd: boolean): ThemePalette => {
   // Modern JS environments have structuredClone; fall back to JSON copy
   const t: any =
-    typeof structuredClone === "function"
-      ? structuredClone(baseTokens)
+    typeof globalThis.structuredClone === "function"
+      ? globalThis.structuredClone(baseTokens)
       : JSON.parse(JSON.stringify(baseTokens));
 
   if (scheme === "dark") {
@@ -78,15 +78,15 @@ export const useTheme = (): ThemeContextValue => {
 
 export const useColorTokens = () => useTheme().tokens.color;
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }: { children: ReactNode }) => {
   const osScheme = (useColorScheme() as ColorScheme) ?? "light"; // null → light
   const [scheme, setScheme] = useState<ColorScheme>(osScheme);
   const [isCvd, setIsCvd] = useState(false);
 
   /* Load persisted preferences on mount */
   useEffect(() => {
-    AsyncStorage.multiGet([CVD_KEY, SCHEME_KEY]).then((entries) => {
-      entries.forEach(([key, value]) => {
+    AsyncStorage.multiGet([CVD_KEY, SCHEME_KEY]).then((entries: readonly [string, string | null][]) => {
+      entries.forEach(([key, value]: readonly [string, string | null]) => {
         if (key === CVD_KEY && value !== null) setIsCvd(value === "1");
         if (key === SCHEME_KEY && value) setScheme(value as ColorScheme);
       });
@@ -95,7 +95,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   /* Toggle + persist CVD flag */
   const toggleCvd = () => {
-    setIsCvd((prev) => {
+    setIsCvd((prev: boolean) => {
       AsyncStorage.setItem(CVD_KEY, prev ? "0" : "1");
       return !prev;
     });
@@ -103,7 +103,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   /* Toggle + persist colour scheme */
   const toggleScheme = () => {
-    setScheme((prev) => {
+    setScheme((prev: ColorScheme) => {
       const next = prev === "light" ? "dark" : "light";
       AsyncStorage.setItem(SCHEME_KEY, next);
       return next;
