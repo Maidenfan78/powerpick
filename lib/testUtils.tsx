@@ -1,4 +1,4 @@
-// app/__tests__/test-utils.tsx
+// lib/testUtils.tsx
 import React from "react";
 import {
   render as rtlRender,
