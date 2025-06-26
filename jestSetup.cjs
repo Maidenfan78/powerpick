@@ -19,8 +19,5 @@ jest.mock('@supabase/supabase-js', () => {
   };
 });
 
-// 3. Load React Native Testing Library matchers
-require('@testing-library/jest-native/extend-expect');
-
-// 4. Silence all console.error calls (prevents “Cannot log after tests are done”)
+// Silence all console.error calls (prevents “Cannot log after tests are done”)
 console.error = jest.fn();
