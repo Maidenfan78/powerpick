@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 export interface GeneratedNumbersState {
   sets: Record<string, number[][]>;
@@ -19,6 +19,6 @@ export const useGeneratedNumbersStore = create<GeneratedNumbersState>()(
           return { sets: { ...state.sets, [gameId]: [...current, numbers] } };
         }),
     }),
-    { name: STORAGE_KEY, getStorage: () => AsyncStorage },
+    { name: STORAGE_KEY, storage: createJSONStorage(() => AsyncStorage) },
   ),
 );
