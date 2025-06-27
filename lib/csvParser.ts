@@ -33,10 +33,9 @@ export function csvParseRows(text: string): string[][] {
 
   function token(): string | typeof EOL | typeof EOF {
     if (eof) return EOF;
-    if (eol) return (eol = false), EOL;
-    let i: number,
-      j = I,
-      c: number;
+    if (eol) return ((eol = false), EOL);
+    let i: number, c: number;
+    const j = I;
     if (text.charCodeAt(j) === QUOTE) {
       while (
         (I++ < N && text.charCodeAt(I) !== QUOTE) ||
@@ -58,7 +57,7 @@ export function csvParseRows(text: string): string[][] {
       } else if (c !== DELIMITER) continue;
       return text.slice(j, i);
     }
-    return (eof = true), text.slice(j, N);
+    return ((eof = true), text.slice(j, N));
   }
 
   while ((t = token()) !== EOF) {
