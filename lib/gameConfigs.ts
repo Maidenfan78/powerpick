@@ -6,21 +6,45 @@ export interface GameConfig {
   powerballMax?: number;
 }
 
+export function normalizeName(name: string): string {
+  return name.trim().toLowerCase();
+}
+
 export const gameConfigs: Record<string, GameConfig> = {
-  Powerball: { mainMax: 35, mainCount: 7, powerballMax: 20 },
-  "Saturday Lotto": { mainMax: 45, mainCount: 6, suppCount: 2, suppMax: 45 },
-  "Oz Lotto": { mainMax: 45, mainCount: 7, suppCount: 2, suppMax: 45 },
-  "Set for Life": { mainMax: 44, mainCount: 7, suppCount: 2, suppMax: 44 },
-  "Weekday Windfall": { mainMax: 45, mainCount: 6 },
+  [normalizeName("Powerball")]: {
+    mainMax: 35,
+    mainCount: 7,
+    powerballMax: 20,
+  },
+  [normalizeName("Saturday Lotto")]: {
+    mainMax: 45,
+    mainCount: 6,
+    suppCount: 2,
+    suppMax: 45,
+  },
+  [normalizeName("Oz Lotto")]: {
+    mainMax: 45,
+    mainCount: 7,
+    suppCount: 2,
+    suppMax: 45,
+  },
+  [normalizeName("Set for Life")]: {
+    mainMax: 44,
+    mainCount: 7,
+    suppCount: 2,
+    suppMax: 44,
+  },
+  [normalizeName("Weekday Windfall")]: { mainMax: 45, mainCount: 6 },
 };
 
 const nameAliases: Record<string, string> = {
-  "Sat Lotto": "Saturday Lotto",
-  "Weekday WF": "Weekday Windfall",
-  "Set 4 Life": "Set for Life",
+  [normalizeName("Sat Lotto")]: normalizeName("Saturday Lotto"),
+  [normalizeName("Weekday WF")]: normalizeName("Weekday Windfall"),
+  [normalizeName("Set 4 Life")]: normalizeName("Set for Life"),
 };
 
 export function getGameConfig(name: string): GameConfig | undefined {
-  const canonical = nameAliases[name] ?? name;
+  const normalized = normalizeName(name);
+  const canonical = nameAliases[normalized] ?? normalized;
   return gameConfigs[canonical];
 }
