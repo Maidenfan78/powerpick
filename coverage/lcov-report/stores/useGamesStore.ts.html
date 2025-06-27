@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for stores/useRegionStore.ts</title>
+    <title>Code coverage report for stores/useGamesStore.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">stores</a> useRegionStore.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">stores</a> useGamesStore.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -86,24 +86,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// stores/useRegionStore.ts
-import { create } from "zustand";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { create } from "zustand";
+import type { Game } from "../lib/gamesApi";
 &nbsp;
-export type Region = "AU" | "US" | "EU";
-&nbsp;
-interface RegionState {
-  region: Region;
-  setRegion: (r: Region) =&gt; void;
+interface GamesState {
+  games: Game[];
+  setGames: (games: Game[]) =&gt; void;
+  getGame: (id: string) =&gt; Game | undefined;
 }
 &nbsp;
-export const useRegionStore = create&lt;RegionState&gt;((set) =&gt; ({
-  region: "AU",
-  setRegion: (r: Region) =&gt; set({ region: r }),
+export const useGamesStore = create&lt;GamesState&gt;((set, get) =&gt; ({
+  games: [],
+  setGames: (games: Game[]) =&gt; set({ games }),
+  getGame: (id: string) =&gt; get().games.find((g) =&gt; g.id === id),
 }));
 &nbsp;</pre></td></tr></table></pre>
 

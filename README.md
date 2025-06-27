@@ -100,8 +100,8 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
    ```bash
    git clone git@github.com:<org>/powerpick.git
    cd powerpick
-   npm ci            # installs exact locked dependencies
-   npm test          # runs Jest smoke suite
+   yarn install --offline  # installs from /vendor without network
+   npm test               # runs Jest smoke suite
    ```
 
 2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys and Slack webhooks.
