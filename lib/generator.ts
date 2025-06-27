@@ -13,6 +13,9 @@ export function generateSet(
   rand: () => number = Math.random,
 ): number[] {
   const { maxNumber, pickCount } = config;
+  if (pickCount > maxNumber) {
+    throw new Error("pickCount cannot exceed maxNumber");
+  }
   const numbers: number[] = [];
   const mean = (pickCount * (maxNumber + 1)) / 2;
   const totalRange = pickCount * (maxNumber - 1);
