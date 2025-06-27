@@ -10,6 +10,13 @@ export interface Game {
   jackpot: string; // formatted string like "$5,000,000"
 }
 
+export interface GameRow {
+  id: string;
+  name: string;
+  logo_url: string;
+  jackpot: string;
+}
+
 /** Collapse any “//” in the pathname (preserving “https://”) */
 function normalizeUrl(url: string): string {
   return url.replace(/([^:]\/)\/+/g, "$1");
@@ -18,14 +25,14 @@ function normalizeUrl(url: string): string {
 export async function fetchGames(): Promise<Game[]> {
   const { data: rows, error } = await supabase
     .from("games")
-    .select<"id, name, logo_url, jackpot">("id, name, logo_url, jackpot");
+    .select<GameRow>("id, name, logo_url, jackpot");
 
   if (error) {
     console.error("Error fetching games:", error);
     throw error;
   }
 
-  return (rows ?? []).map((row) => {
+  return (rows ?? []).map((row: GameRow) => {
     const raw = (row.logo_url ?? "").trim();
     let url: string;
 
