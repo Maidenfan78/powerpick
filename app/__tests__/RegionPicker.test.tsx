@@ -13,7 +13,10 @@ const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 
 describe("RegionPicker", () => {
   beforeEach(() => {
-    useRegionStore.setState({ region: "AU" });
+    useRegionStore.setState({
+      region: "AU",
+      setRegion: (r) => useRegionStore.setState({ region: r }),
+    });
   });
 
   test("changes region when option selected", async () => {
@@ -23,10 +26,25 @@ describe("RegionPicker", () => {
     fireEvent.press(getByText("Australia"));
 
     const option = getByText("USA");
-    fireEvent.press(option);
+    fireEvent.press(option, { stopPropagation: jest.fn() });
 
     await waitFor(() => expect(useRegionStore.getState().region).toBe("US"));
     expect(queryByText("Australia")).toBeNull();
     expect(getByText("USA")).toBeTruthy();
+  });
+
+  test("selecting option only sets region once", async () => {
+    const setRegionMock = jest.fn((r) =>
+      useRegionStore.setState({ region: r }),
+    );
+    useRegionStore.setState({ setRegion: setRegionMock });
+
+    const { getByText } = render(<RegionPicker />, { wrapper: Wrapper });
+
+    fireEvent.press(getByText("Australia"));
+    fireEvent.press(getByText("USA"), { stopPropagation: jest.fn() });
+
+    await waitFor(() => expect(useRegionStore.getState().region).toBe("US"));
+    expect(setRegionMock).toHaveBeenCalledTimes(1);
   });
 });

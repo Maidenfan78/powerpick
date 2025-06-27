@@ -88,7 +88,8 @@ export default function RegionPicker() {
               <Pressable
                 key={opt}
                 style={styles.row}
-                onPress={() => {
+                onPress={(e) => {
+                  e.stopPropagation();
                   setRegion(opt);
                   setVisible(false);
                 }}
