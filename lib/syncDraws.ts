@@ -1,29 +1,25 @@
 import * as dotenv from "dotenv";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-// 1) Supabase client factory
-let supabase: SupabaseClient | null = null;
+// 1) Load environment variables
+dotenv.config();
 
-function getSupabase(): SupabaseClient {
-  if (supabase) return supabase;
-
-  dotenv.config();
-  const SUPABASE_URL: string = process.env.SUPABASE_URL ?? "";
-  const SUPABASE_ANON_KEY: string = process.env.SUPABASE_ANON_KEY ?? "";
-
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    throw new Error("Supabase credentials are missing");
-  }
-
-  console.log("DEBUG: SUPABASE_URL      =", SUPABASE_URL);
-  console.log(
-    "DEBUG: SUPABASE_ANON_KEY =",
-    SUPABASE_ANON_KEY.slice(0, 4) + "...",
-  );
-
-  supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  return supabase;
+// 2) Read and validate env vars
+const SUPABASE_URL: string = process.env.SUPABASE_URL ?? "";
+const SUPABASE_ANON_KEY: string = process.env.SUPABASE_ANON_KEY ?? "";
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  throw new Error("Supabase credentials are missing");
 }
+
+// 3) Debug credentials (only log partial anon key)
+console.log("DEBUG: SUPABASE_URL      =", SUPABASE_URL);
+console.log(
+  "DEBUG: SUPABASE_ANON_KEY =",
+  SUPABASE_ANON_KEY.slice(0, 4) + "...",
+);
+
+// 4) Initialize Supabase client
+const supabase: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // 5) Define game configuration interface and array
 interface Game {
@@ -46,7 +42,7 @@ interface CsvRow {
   [key: string]: string;
 }
 
-export function parseCsv(text: string): CsvRow[] {
+function parseCsv(text: string): CsvRow[] {
   const lines = text.trim().split(/\r?\n/);
   const headers = lines[0].split(",").map((h) => h.trim());
   return lines.slice(1).map((line) => {
@@ -58,7 +54,7 @@ export function parseCsv(text: string): CsvRow[] {
   });
 }
 
-export function extractNumbers(row: CsvRow, prefix: string): number[] {
+function extractNumbers(row: CsvRow, prefix: string): number[] {
   return Object.keys(row)
     .filter((key) => key.toLowerCase().startsWith(prefix.toLowerCase()))
     .map((key) => Number(row[key]))
@@ -120,7 +116,7 @@ async function syncGame(game: Game): Promise<void> {
     });
 
     // Remove <T> generic from .from and specify generic on upsert instead
-    const { data, error } = await getSupabase()
+    const { data, error } = await supabase
       .from(game.table)
       .upsert<DrawRecord>(records, { onConflict: "draw_number" });
 
@@ -136,12 +132,13 @@ async function syncGame(game: Game): Promise<void> {
 
 // 9) Run sync for all games
 export async function syncAllGames(): Promise<void> {
-  getSupabase();
   for (const game of GAMES) {
     // Sequential to avoid rate limits
     await syncGame(game);
   }
 }
+
+export { parseCsv, extractNumbers };
 
 // 10) If run directly, invoke sync
 if (require.main === module) {
