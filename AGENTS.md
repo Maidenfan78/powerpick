@@ -10,8 +10,9 @@
 
 ## Dependencies
 
-- Run `yarn install --offline` to install from the `/vendor` mirror
+- Run `yarn install --offline` to install from the `/vendor` mirror (configured via `.yarnrc`)
 - Update the mirror with `npm install --prefix vendor`
+- `requirements.txt` is intentionally empty as no Python packages are needed
 
 ## Coding Conventions
 
