@@ -28,7 +28,7 @@ describe("GameOptionsScreen", () => {
       .mockReturnValueOnce([8]);
     useGeneratedNumbersStore.setState({ sets: {} });
     useGamesStore.setState({
-      games: [{ id: "1", name: "Powerball", logoUrl: "", jackpot: "$0" }],
+      games: [{ id: "1", name: "pOwErBaLl", logoUrl: "", jackpot: "$0" }],
     });
   });
 
