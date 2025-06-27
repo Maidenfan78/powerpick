@@ -5,7 +5,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTheme } from "../../../lib/theme";
 import { generateSet } from "../../../lib/generator";
 import { useGeneratedNumbersStore } from "../../../stores/useGeneratedNumbersStore";
-import { gameConfigs } from "../../../lib/gameConfigs";
+import { gameConfigs, GameConfig } from "../../../lib/gameConfigs";
 import { useGamesStore } from "../../../stores/useGamesStore";
 
 export default function GameOptionsScreen() {
@@ -18,23 +18,26 @@ export default function GameOptionsScreen() {
   const config = game ? gameConfigs[game.name] : undefined;
 
   const handleGenerate = () => {
-    if (!config) return;
+    const cfg: GameConfig =
+      config ??
+      ({
+        mainMax: 50,
+        mainCount: 6,
+      } as GameConfig);
     const nums = generateSet({
-      maxNumber: config.mainMax,
-      pickCount: config.mainCount,
+      maxNumber: cfg.mainMax,
+      pickCount: cfg.mainCount,
     });
-    if (config.suppCount) {
+    if (cfg.suppCount) {
       nums.push(
         ...generateSet({
-          maxNumber: config.suppMax ?? config.mainMax,
-          pickCount: config.suppCount,
+          maxNumber: cfg.suppMax ?? cfg.mainMax,
+          pickCount: cfg.suppCount,
         }),
       );
     }
-    if (config.powerballMax) {
-      nums.push(
-        ...generateSet({ maxNumber: config.powerballMax, pickCount: 1 }),
-      );
+    if (cfg.powerballMax) {
+      nums.push(...generateSet({ maxNumber: cfg.powerballMax, pickCount: 1 }));
     }
     setCurrent(nums);
     if (id) saveNumbers(id, nums);

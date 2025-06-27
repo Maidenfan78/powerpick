@@ -109,8 +109,6 @@ async function syncGame(game: Game): Promise<void> {
     if (error) console.error("UPSERT ERROR:", game.table, error);
     const inserted = data as DrawRecord[] | null;
     console.log(`✅ ${game.table}: ${inserted?.length ?? 0} rows`);
-
-
   } catch (err) {
     console.error("SYNC ERROR:", game.table, err);
   }
@@ -127,7 +125,7 @@ export async function syncAllGames(): Promise<void> {
 export { parseCsv, extractNumbers };
 
 // 10) If run directly, invoke sync
-if (import.meta.url === `file://${process.argv[1]}`) {
+const isDirectRun = typeof require !== "undefined" && require.main === module;
+if (isDirectRun) {
   syncAllGames().catch((err) => console.error("FATAL:", err));
 }
-
