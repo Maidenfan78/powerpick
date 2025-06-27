@@ -8,3 +8,9 @@ test("generateSet returns numbers within range", () => {
   expect(nums).toEqual([3, 4, 5]);
   expect(nums.every((n) => n >= 1 && n <= 10)).toBe(true);
 });
+
+test("generateSet throws when pickCount exceeds maxNumber", () => {
+  expect(() => generateSet({ maxNumber: 3, pickCount: 5 })).toThrow(
+    "pickCount cannot exceed maxNumber",
+  );
+});
