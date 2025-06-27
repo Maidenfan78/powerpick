@@ -13,6 +13,12 @@ describe("draw parsing helpers", () => {
     ]);
   });
 
+  test("parseCsv handles quoted fields with commas", () => {
+    const csv = 'A,B\n"1,1","2,2"';
+    const rows = parseCsv(csv);
+    expect(rows).toEqual([{ A: "1,1", B: "2,2" }]);
+  });
+
   test("extractNumbers picks numeric columns by prefix", () => {
     const row = {
       "Winning Number 1": "5",

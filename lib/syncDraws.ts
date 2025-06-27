@@ -38,21 +38,7 @@ const GAMES: Game[] = [
 ];
 
 // 6) CSV parsing helpers
-interface CsvRow {
-  [key: string]: string;
-}
-
-function parseCsv(text: string): CsvRow[] {
-  const lines = text.trim().split(/\r?\n/);
-  const headers = lines[0].split(",").map((h) => h.trim());
-  return lines.slice(1).map((line) => {
-    const values = line.split(",");
-    return headers.reduce<CsvRow>((obj, header, idx) => {
-      obj[header] = (values[idx] || "").trim();
-      return obj;
-    }, {} as CsvRow);
-  });
-}
+import { csvParse as parseCsv, CsvRow } from "./csvParser";
 
 function extractNumbers(row: CsvRow, prefix: string): number[] {
   return Object.keys(row)
