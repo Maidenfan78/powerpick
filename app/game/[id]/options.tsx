@@ -5,7 +5,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTheme } from "../../../lib/theme";
 import { generateSet } from "../../../lib/generator";
 import { useGeneratedNumbersStore } from "../../../stores/useGeneratedNumbersStore";
-import { gameConfigs, GameConfig } from "../../../lib/gameConfigs";
+import { getGameConfig, GameConfig } from "../../../lib/gameConfigs";
 import { useGamesStore } from "../../../stores/useGamesStore";
 
 export default function GameOptionsScreen() {
@@ -15,7 +15,15 @@ export default function GameOptionsScreen() {
   const [current, setCurrent] = useState<number[]>([]);
   const saveNumbers = useGeneratedNumbersStore((s) => s.saveNumbers);
   const game = useGamesStore((s) => (id ? s.getGame(id) : undefined));
-  const config = game ? gameConfigs[game.name] : undefined;
+  const config = game ? getGameConfig(game.name) : undefined;
+
+  const descParts = [] as string[];
+  if (config) {
+    descParts.push(`${config.mainCount} main`);
+    if (config.suppCount) descParts.push(`${config.suppCount} supp`);
+    if (config.powerballMax) descParts.push("Powerball");
+  }
+  const description = descParts.join(" + ");
 
   const handleGenerate = () => {
     const cfg: GameConfig =
@@ -52,6 +60,12 @@ export default function GameOptionsScreen() {
     },
     buttonText: { color: tokens.color.neutral["0"].value, fontSize: 18 },
     close: { color: tokens.color.brand.primary.value, fontSize: 20 },
+    configText: {
+      color: tokens.color.brand.primary.value,
+      fontSize: 16,
+      marginBottom: 16,
+      textAlign: "center",
+    },
     container: { flex: 1, padding: 16 },
     header: {
       flexDirection: "row",
@@ -75,6 +89,10 @@ export default function GameOptionsScreen() {
           <Text style={styles.close}>✕</Text>
         </Pressable>
       </View>
+
+      {description !== "" && (
+        <Text style={styles.configText}>Pick {description}</Text>
+      )}
 
       {current.length > 0 && (
         <Text style={styles.numbers}>{current.join(" - ")}</Text>

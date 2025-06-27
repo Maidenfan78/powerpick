@@ -34,6 +34,7 @@ describe("GameOptionsScreen", () => {
 
   test("generates and displays numbers", () => {
     const { getByText } = render(<GameOptionsScreen />, { wrapper: Wrapper });
+    expect(getByText("Pick 7 main + Powerball")).toBeTruthy();
     fireEvent.press(getByText("Generate Numbers"));
     expect(getByText("1 - 2 - 3 - 4 - 5 - 6 - 7 - 8")).toBeTruthy();
   });

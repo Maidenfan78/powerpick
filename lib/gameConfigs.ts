@@ -13,3 +13,14 @@ export const gameConfigs: Record<string, GameConfig> = {
   "Set for Life": { mainMax: 44, mainCount: 7, suppCount: 2, suppMax: 44 },
   "Weekday Windfall": { mainMax: 45, mainCount: 6 },
 };
+
+const nameAliases: Record<string, string> = {
+  "Sat Lotto": "Saturday Lotto",
+  "Weekday WF": "Weekday Windfall",
+  "Set 4 Life": "Set for Life",
+};
+
+export function getGameConfig(name: string): GameConfig | undefined {
+  const canonical = nameAliases[name] ?? name;
+  return gameConfigs[canonical];
+}
