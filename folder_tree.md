@@ -1,6 +1,9 @@
 📦powerpick
 ┣ 📜.env.example
+┣ 📜.eslintrc.cjs
 ┣ 📜.gitignore
+┣ 📜.prettierignore
+┣ 📜.yarnrc
 ┣ 📜AGENTS.md
 ┣ 📜app.config.ts
 ┣ 📜app.json
@@ -14,9 +17,10 @@
 ┣ 📜README.md
 ┣ 📜requirements.txt
 ┣ 📜tsconfig.json
+┣ 📜tsconfig.node.json
 ┣ 📜yarn.lock
 ┣ 📂app
-┃ ┣ 📂__tests__
+┃ ┣ 📂**tests**
 ┃ ┣ 📂game
 ┃ ┣ 📜_layout.tsx
 ┃ ┣ 📜index.tsx
@@ -26,6 +30,7 @@
 ┃ ┣ 📜adaptive-icon.png
 ┃ ┣ 📜favicon.png
 ┃ ┣ 📜icon.png
+┃ ┣ 📜logo.png
 ┃ ┣ 📜placeholder.png
 ┃ ┗ 📜splash-icon.png
 ┣ 📂components
@@ -44,10 +49,12 @@
 ┃ ┣ 📜Phase_4.md
 ┃ ┣ 📜WORKFLOW.md
 ┃ ┗ 📂Research
-┃   ┗ 📜competitive-colours.md
+┃ ┗ 📜competitive-colours.md
 ┣ 📂lib
-┃ ┣ 📂__tests__
+┃ ┣ 📂**tests**
+┃ ┣ 📜csvParser.ts
 ┃ ┣ 📜database.types.ts
+┃ ┣ 📜gameConfigs.ts
 ┃ ┣ 📜gamesApi.ts
 ┃ ┣ 📜generator.ts
 ┃ ┣ 📜supabase.ts
@@ -58,9 +65,11 @@
 ┣ 📂personas
 ┃ ┗ 📜The Team.md
 ┣ 📂stores
+┃ ┣ 📜useGamesStore.ts
 ┃ ┣ 📜useGeneratedNumbersStore.ts
 ┃ ┗ 📜useRegionStore.ts
 ┣ 📂supabase
+┃ ┣ 📂.temp
 ┃ ┗ 📂migrations
 ┣ 📂vendor
 ┗ 📜folder_tree.md

@@ -122,7 +122,10 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ```
 📦powerpick
 ┣ 📜.env.example
+┣ 📜.eslintrc.cjs
 ┣ 📜.gitignore
+┣ 📜.prettierignore
+┣ 📜.yarnrc
 ┣ 📜AGENTS.md
 ┣ 📜app.config.ts
 ┣ 📜app.json
@@ -136,6 +139,7 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ┣ 📜README.md
 ┣ 📜requirements.txt
 ┣ 📜tsconfig.json
+┣ 📜tsconfig.node.json
 ┣ 📜yarn.lock
 ┣ 📂app
 ┃ ┣ 📂__tests__
@@ -146,6 +150,7 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ┃ ┗ 📜tokens.json
 ┣ 📂assets
 ┃ ┣ 📜adaptive-icon.png
+┃ ┣ 📜logo.png
 ┃ ┣ 📜favicon.png
 ┃ ┣ 📜icon.png
 ┃ ┣ 📜placeholder.png
@@ -169,7 +174,9 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ┃   ┗ 📜competitive-colours.md
 ┣ 📂lib
 ┃ ┣ 📂__tests__
+┃ ┣ 📜csvParser.ts
 ┃ ┣ 📜database.types.ts
+┃ ┣ 📜gameConfigs.ts
 ┃ ┣ 📜gamesApi.ts
 ┃ ┣ 📜generator.ts
 ┃ ┣ 📜supabase.ts
@@ -180,9 +187,11 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ┣ 📂personas
 ┃ ┗ 📜The Team.md
 ┣ 📂stores
+┃ ┣ 📜useGamesStore.ts
 ┃ ┣ 📜useGeneratedNumbersStore.ts
 ┃ ┗ 📜useRegionStore.ts
 ┣ 📂supabase
+┃ ┣ 📂.temp
 ┃ ┗ 📂migrations
 ┣ 📂vendor
 ┗ 📜folder_tree.md
@@ -196,11 +205,11 @@ _(Full tree in [`folder_tree.md`](folder_tree.md))_
 
 ## Vendored Dependencies
 
-All runtime and development packages live in the `vendor/` folder.  
+All runtime and development packages live in the `vendor/` folder. A `.yarnrc` file points Yarn to this offline mirror.
 To install or update them, run:
 
 ```bash
-npm install --prefix vendor
+yarn install --offline
 ```
 
 ---
