@@ -38,7 +38,7 @@ const GAMES: Game[] = [
 ];
 
 // 6) CSV parsing helpers
-import { csvParse as parseCsv, CsvRow } from "./csvParser";
+import { csvParse as parseCsv, CsvRow } from "./csvParser.ts";
 
 function extractNumbers(row: CsvRow, prefix: string): number[] {
   return Object.keys(row)
@@ -107,10 +107,10 @@ async function syncGame(game: Game): Promise<void> {
       .upsert<DrawRecord>(records, { onConflict: "draw_number" });
 
     if (error) console.error("UPSERT ERROR:", game.table, error);
-    else
-      console.log(
-        `✅ ${game.table}: ${Array.isArray(data) ? data.length : 0} rows`,
-      );
+    const inserted = data as DrawRecord[] | null;
+    console.log(`✅ ${game.table}: ${inserted?.length ?? 0} rows`);
+
+
   } catch (err) {
     console.error("SYNC ERROR:", game.table, err);
   }
@@ -127,6 +127,7 @@ export async function syncAllGames(): Promise<void> {
 export { parseCsv, extractNumbers };
 
 // 10) If run directly, invoke sync
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   syncAllGames().catch((err) => console.error("FATAL:", err));
 }
+
