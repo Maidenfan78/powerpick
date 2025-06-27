@@ -9,6 +9,42 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      games: {
+        Row: {
+          id: string;
+          name: string;
+          logo_url: string;
+          jackpot: string;
+          main_max: number | null;
+          main_count: number | null;
+          supp_count: number | null;
+          supp_max: number | null;
+          powerball_max: number | null;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          logo_url: string;
+          jackpot: string;
+          main_max?: number | null;
+          main_count?: number | null;
+          supp_count?: number | null;
+          supp_max?: number | null;
+          powerball_max?: number | null;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          logo_url?: string;
+          jackpot?: string;
+          main_max?: number | null;
+          main_count?: number | null;
+          supp_count?: number | null;
+          supp_max?: number | null;
+          powerball_max?: number | null;
+        };
+        Relationships: [];
+      };
       oz_lotto_draws: {
         Row: {
           draw_date: string;

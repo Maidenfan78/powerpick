@@ -5,7 +5,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTheme } from "../../../lib/theme";
 import { generateSet } from "../../../lib/generator";
 import { useGeneratedNumbersStore } from "../../../stores/useGeneratedNumbersStore";
-import { getGameConfig, GameConfig } from "../../../lib/gameConfigs";
+import type { GameConfig } from "../../../lib/gameConfigs";
 import { useGamesStore } from "../../../stores/useGamesStore";
 
 export default function GameOptionsScreen() {
@@ -15,7 +15,16 @@ export default function GameOptionsScreen() {
   const [current, setCurrent] = useState<number[]>([]);
   const saveNumbers = useGeneratedNumbersStore((s) => s.saveNumbers);
   const game = useGamesStore((s) => (id ? s.getGame(id) : undefined));
-  const config = game ? getGameConfig(game.name) : undefined;
+  const config: GameConfig | undefined =
+    game && game.mainMax && game.mainCount
+      ? {
+          mainMax: game.mainMax,
+          mainCount: game.mainCount,
+          suppCount: game.suppCount ?? undefined,
+          suppMax: game.suppMax ?? undefined,
+          powerballMax: game.powerballMax ?? undefined,
+        }
+      : undefined;
 
   const descParts = [] as string[];
   if (config) {

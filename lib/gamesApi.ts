@@ -8,6 +8,11 @@ export interface Game {
   name: string;
   logoUrl: string; // full public URL to the PNG logo
   jackpot: string; // formatted string like "$5,000,000"
+  mainMax: number | null;
+  mainCount: number | null;
+  suppCount: number | null;
+  suppMax: number | null;
+  powerballMax: number | null;
 }
 
 export interface GameRow {
@@ -15,6 +20,11 @@ export interface GameRow {
   name: string;
   logo_url: string;
   jackpot: string;
+  main_max: number | null;
+  main_count: number | null;
+  supp_count: number | null;
+  supp_max: number | null;
+  powerball_max: number | null;
 }
 
 /** Collapse any “//” in the pathname (preserving “https://”) */
@@ -25,7 +35,9 @@ function normalizeUrl(url: string): string {
 export async function fetchGames(): Promise<Game[]> {
   const { data: rows, error } = await supabase
     .from("games")
-    .select<GameRow>("id, name, logo_url, jackpot");
+    .select<GameRow>(
+      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max",
+    );
 
   if (error) {
     console.error("Error fetching games:", error);
@@ -52,6 +64,11 @@ export async function fetchGames(): Promise<Game[]> {
       name: row.name,
       logoUrl: url,
       jackpot: `$${Number(row.jackpot).toLocaleString()}`,
+      mainMax: row.main_max ?? null,
+      mainCount: row.main_count ?? null,
+      suppCount: row.supp_count ?? null,
+      suppMax: row.supp_max ?? null,
+      powerballMax: row.powerball_max ?? null,
     };
   });
 }

@@ -19,7 +19,17 @@ describe("fetchGames", () => {
   test("returns formatted games on success", async () => {
     const selectMock = jest.fn().mockResolvedValue({
       data: [
-        { id: "1", name: "Powerball", logo_url: "logo.png", jackpot: "1000" },
+        {
+          id: "1",
+          name: "Powerball",
+          logo_url: "logo.png",
+          jackpot: "1000",
+          main_max: 35,
+          main_count: 7,
+          supp_count: null,
+          supp_max: null,
+          powerball_max: 20,
+        },
       ],
       error: null,
     });
@@ -38,10 +48,17 @@ describe("fetchGames", () => {
         name: "Powerball",
         logoUrl: "https://cdn.example.com/logo.png",
         jackpot: "$1,000",
+        mainMax: 35,
+        mainCount: 7,
+        suppCount: null,
+        suppMax: null,
+        powerballMax: 20,
       },
     ]);
     expect(fromMock).toHaveBeenCalledWith("games");
-    expect(selectMock).toHaveBeenCalledWith("id, name, logo_url, jackpot");
+    expect(selectMock).toHaveBeenCalledWith(
+      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max",
+    );
   });
 
   test("throws when Supabase returns an error", async () => {
