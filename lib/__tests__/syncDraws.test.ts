@@ -1,4 +1,7 @@
-import { parseCsv, extractNumbers } from "../syncDraws";
+process.env.SUPABASE_URL = "http://localhost";
+process.env.SUPABASE_ANON_KEY = "anon";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { parseCsv, extractNumbers } = require("../syncDraws");
 
 describe("draw parsing helpers", () => {
   test("parseCsv splits rows into records", () => {
