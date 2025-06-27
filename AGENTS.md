@@ -6,6 +6,12 @@
 - `/lib`: business logic, helpers, and contexts
 - `/components`: reusable UI elements (use PascalCase)
 - `/app/__tests__`: unit tests using Jest + testing-library
+- `/vendor`: all runtime and development packages
+
+## Dependencies
+
+- Run `yarn install --offline` to install from the `/vendor` mirror
+- Update the mirror with `npm install --prefix vendor`
 
 ## Coding Conventions
 
