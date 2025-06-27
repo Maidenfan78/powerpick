@@ -65,7 +65,7 @@ Road‑mapping is broken into **phases** – each two weeks long and tracked in 
 | **5** |  15‑18 | Pre‑Launch Hardening                  | Zero P1 bugs; store listings approved                                        |
 | **6** |  19‑∞  | Launch & Growth                       | Continuous ASO, feature expansion                                            |
 
-For deeper detail see [`docs/Phase_0.md`](docs/Phase_0.md) and [`docs/WORKFLOW.md`](docs/WORKFLOW.md).
+For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.md`](Docs/WORKFLOW.md).
 
 ---
 
@@ -189,7 +189,7 @@ All role personas live in `/personas/` and are _the_ reference for tone, deliver
 
 Additional research & design artefacts:
 
-- `docs/research/` – user interviews, demographic data.
+- `Docs/Research/` – user interviews, demographic data.
 - `design/tokens.json` – source of truth for colour/spacing typography.
 
 ---
