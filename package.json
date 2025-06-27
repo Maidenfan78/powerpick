@@ -14,7 +14,6 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "test": "jest --coverage",
     "sync-draws": "node --loader ts-node/esm --no-warnings lib/syncDraws.ts"
-
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
