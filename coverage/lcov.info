@@ -1,5 +1,5 @@
 TN:
-SF:app/index.tsx
+SF:app\index.tsx
 FN:14,IndexScreen
 FN:21,(anonymous_1)
 FN:22,(anonymous_2)
@@ -39,7 +39,7 @@ BRF:4
 BRH:3
 end_of_record
 TN:
-SF:app/game/[id]/options.tsx
+SF:app\game\[id]\options.tsx
 FN:9,GameOptionsScreen
 FN:14,(anonymous_1)
 FN:16,(anonymous_2)
@@ -72,7 +72,7 @@ BRF:4
 BRH:3
 end_of_record
 TN:
-SF:assets/placeholder.png
+SF:assets\placeholder.png
 FNF:0
 FNH:0
 DA:1,2
@@ -82,7 +82,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components/GameCard.tsx
+SF:components\GameCard.tsx
 FN:22,GameCard
 FN:48,(anonymous_1)
 FN:72,(anonymous_2)
@@ -127,7 +127,7 @@ BRF:12
 BRH:12
 end_of_record
 TN:
-SF:components/GameGrid.tsx
+SF:components\GameGrid.tsx
 FN:11,GameGrid
 FN:15,(anonymous_1)
 FN:18,(anonymous_2)
@@ -148,7 +148,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components/Header.tsx
+SF:components\Header.tsx
 FN:7,Header
 FN:38,(anonymous_1)
 FNF:2
@@ -167,7 +167,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components/RegionPicker.tsx
+SF:components\RegionPicker.tsx
 FN:12,RegionPicker
 FN:14,(anonymous_1)
 FN:15,(anonymous_2)
@@ -212,7 +212,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:lib/gamesApi.ts
+SF:lib\gamesApi.ts
 FN:14,normalizeUrl
 FN:18,fetchGames
 FN:28,(anonymous_2)
@@ -250,7 +250,7 @@ BRF:8
 BRH:6
 end_of_record
 TN:
-SF:lib/generator.ts
+SF:lib\generator.ts
 FN:11,generateSet
 FN:28,(anonymous_1)
 FN:29,(anonymous_2)
@@ -287,7 +287,7 @@ BRF:7
 BRH:4
 end_of_record
 TN:
-SF:lib/supabase.ts
+SF:lib\supabase.ts
 FNF:0
 FNH:0
 DA:6,1
@@ -304,7 +304,7 @@ BRF:4
 BRH:3
 end_of_record
 TN:
-SF:lib/syncDraws.ts
+SF:lib\syncDraws.ts
 FN:45,parseCsv
 FN:47,(anonymous_1)
 FN:48,(anonymous_2)
@@ -415,7 +415,7 @@ BRF:24
 BRH:7
 end_of_record
 TN:
-SF:lib/theme.tsx
+SF:lib\theme.tsx
 FN:44,(anonymous_0)
 FN:73,(anonymous_1)
 FN:79,(anonymous_2)
@@ -507,7 +507,7 @@ BRF:22
 BRH:11
 end_of_record
 TN:
-SF:stores/useGeneratedNumbersStore.ts
+SF:stores\useGeneratedNumbersStore.ts
 FN:14,(anonymous_0)
 FN:16,(anonymous_1)
 FN:17,(anonymous_2)
@@ -533,7 +533,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:stores/useRegionStore.ts
+SF:stores\useRegionStore.ts
 FN:11,(anonymous_0)
 FN:13,(anonymous_1)
 FNF:2

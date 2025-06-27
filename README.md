@@ -106,7 +106,7 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 
 2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys and Slack webhooks.
 3. **Database** – run `/supabase/init.sql` or `supabase db reset` then `supabase start`.
-4. **Sync Draw History** – `ts-node lib/syncDraws.ts` fetches the latest results for all games.
+4. **Sync Draw History** – `npm run sync:draws` fetches the latest results for all games.
 5. **Run the App**
    \| Platform | Command | Notes |
    \| -------- | ---------------------- | ----- |
