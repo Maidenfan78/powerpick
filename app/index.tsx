@@ -8,6 +8,7 @@ import { useTheme } from "../lib/theme";
 import GameGrid from "../components/GameGrid";
 import { Game, fetchGames } from "../lib/gamesApi";
 import { useRouter } from "expo-router";
+import { useGamesStore } from "../stores/useGamesStore";
 
 const ERROR_COLOR = "#FF6666";
 
@@ -17,12 +18,14 @@ export default function IndexScreen() {
   const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const setGamesStore = useGamesStore((s) => s.setGames);
 
   useEffect(() => {
     const loadGames = async () => {
       try {
         const data = await fetchGames();
         setGames(data);
+        setGamesStore(data);
       } catch (err) {
         console.error("Unexpected fetch error:", err);
         setError((err as Error).message);

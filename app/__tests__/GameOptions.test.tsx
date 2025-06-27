@@ -5,6 +5,7 @@ import { ThemeProvider } from "../../lib/theme";
 import GameOptionsScreen from "../../app/game/[id]/options";
 import * as generator from "../../lib/generator";
 import { useGeneratedNumbersStore } from "../../stores/useGeneratedNumbersStore";
+import { useGamesStore } from "../../stores/useGamesStore";
 
 jest.mock("expo-router", () => ({
   useRouter: () => ({ back: jest.fn() }),
@@ -21,13 +22,19 @@ const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 
 describe("GameOptionsScreen", () => {
   beforeEach(() => {
-    (generator.generateSet as jest.Mock).mockReturnValue([1, 2, 3]);
+    (generator.generateSet as jest.Mock).mockReset();
+    (generator.generateSet as jest.Mock)
+      .mockReturnValueOnce([1, 2, 3, 4, 5, 6, 7])
+      .mockReturnValueOnce([8]);
     useGeneratedNumbersStore.setState({ sets: {} });
+    useGamesStore.setState({
+      games: [{ id: "1", name: "Powerball", logoUrl: "", jackpot: "$0" }],
+    });
   });
 
   test("generates and displays numbers", () => {
     const { getByText } = render(<GameOptionsScreen />, { wrapper: Wrapper });
     fireEvent.press(getByText("Generate Numbers"));
-    expect(getByText("1 - 2 - 3")).toBeTruthy();
+    expect(getByText("1 - 2 - 3 - 4 - 5 - 6 - 7 - 8")).toBeTruthy();
   });
 });
