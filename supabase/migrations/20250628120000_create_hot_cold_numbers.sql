@@ -12,4 +12,12 @@ ALTER TABLE public.hot_cold_numbers ENABLE ROW LEVEL SECURITY;
 
 GRANT INSERT ON TABLE public.hot_cold_numbers TO authenticated;
 GRANT UPDATE ON TABLE public.hot_cold_numbers TO authenticated;
+GRANT SELECT ON TABLE public.hot_cold_numbers TO anon;
+GRANT SELECT ON TABLE public.hot_cold_numbers TO authenticated;
+
+CREATE POLICY "Public read hot_cold_numbers"
+ON public.hot_cold_numbers
+FOR SELECT
+TO public
+USING (true);
 
