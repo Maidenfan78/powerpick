@@ -8,3 +8,6 @@ This phase covers **Implementation Sprints 1‑3**, where the core user flows co
 4. **Exit Criteria** – users can select region → generate & save numbers.
 
 Further adjustments may expand on these goals as the project progresses.
+
+**Current status (June 2025):** the region picker and number generator are live,
+saving predictions locally via Zustand. Sync scripts update draw data and hot/cold analytics in Supabase.

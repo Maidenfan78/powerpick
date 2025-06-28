@@ -68,6 +68,7 @@
 ┃ ┣ 📜supabase.ts
 ┃ ┣ 📜syncDraws.cjs
 ┃ ┣ 📜syncDraws.ts
+┃ ┣ 📜syncHotCold.ts
 ┃ ┣ 📜testUtils.tsx
 ┃ ┗ 📜theme.tsx
 ┣ 📂personas
