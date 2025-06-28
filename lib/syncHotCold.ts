@@ -94,9 +94,12 @@ export function computeHotCold(
 async function updateGameHotCold(game: GameConfig): Promise<void> {
   const { data, error } = await supabase
     .from(game.table)
-    .select<DrawRow>("winning_numbers, supplementary_numbers, powerball");
+    .select("winning_numbers, supplementary_numbers, powerball");
+
   if (error) throw error;
-  const rows = data ?? [];
+
+  // force it to your known shape:
+  const rows = (data ?? []) as DrawRow[];
   const record = computeHotCold(rows, game);
 
   const { error: upsertError } = await supabase
