@@ -42,14 +42,25 @@ export default function DrawsScreen() {
       <FlatList
         data={draws}
         keyExtractor={(item) => String(item.draw_number)}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.text}>
-              #{item.draw_number} - {item.draw_date} -{" "}
-              {item.winning_numbers.join(" - ")}
-            </Text>
-          </View>
-        )}
+        renderItem={({ item }) => {
+          const suppText = item.supplementary_numbers?.length
+            ? ` - Supp: ${item.supplementary_numbers.join(" - ")}`
+            : "";
+          const pbText =
+            item.powerball !== null && item.powerball !== undefined
+              ? ` - Powerball: ${item.powerball}`
+              : "";
+          return (
+            <View style={styles.item}>
+              <Text style={styles.text}>
+                #{item.draw_number} - {item.draw_date} -{" "}
+                {item.winning_numbers.join(" - ")}
+                {suppText}
+                {pbText}
+              </Text>
+            </View>
+          );
+        }}
       />
     </SafeAreaView>
   );
