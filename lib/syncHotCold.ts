@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import { calculateHotColdNumbers } from "./hotCold";
+import { calculateHotColdNumbers } from "./hotCold.ts";
 
 dotenv.config();
 
@@ -122,6 +122,10 @@ export async function syncAllHotCold(): Promise<void> {
   }
 }
 
-if (require.main === module) {
+const invokedDirectly =
+  (typeof require !== "undefined" && require.main === module) ||
+  process.argv[1]?.split(/[\\/]/).pop() === "syncHotCold.ts";
+
+if (invokedDirectly) {
   syncAllHotCold().catch((err) => console.error("FATAL:", err));
 }
