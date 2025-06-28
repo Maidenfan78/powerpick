@@ -112,6 +112,7 @@ export default function GameOptionsScreen() {
       borderRadius: 8,
       padding: 12,
     },
+    buttonSpacing: { marginTop: 12 },
     buttonText: { color: tokens.color.neutral["0"].value, fontSize: 18 },
     close: { color: tokens.color.brand.primary.value, fontSize: 20 },
     configText: {
@@ -208,6 +209,22 @@ export default function GameOptionsScreen() {
         accessibilityRole="button"
       >
         <Text style={styles.buttonText}>Generate Numbers</Text>
+      </Pressable>
+
+      <Pressable
+        style={[styles.button, styles.buttonSpacing]}
+        onPress={() => router.push(`/game/${id}/draws`)}
+        accessibilityRole="button"
+      >
+        <Text style={styles.buttonText}>Last 10 Draws</Text>
+      </Pressable>
+
+      <Pressable
+        style={[styles.button, styles.buttonSpacing]}
+        onPress={() => router.push(`/game/${id}/hotcold`)}
+        accessibilityRole="button"
+      >
+        <Text style={styles.buttonText}>Hot & Cold Numbers</Text>
       </Pressable>
     </SafeAreaView>
   );

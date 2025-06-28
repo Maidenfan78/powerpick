@@ -20,10 +20,16 @@ jest.mock("expo-constants", () => ({
   },
 }));
 
-jest.mock("expo-router", () => ({
-  useRouter: () => ({ back: jest.fn() }),
-  useLocalSearchParams: () => ({ id: "1" }),
-}));
+jest.mock("expo-router", () => {
+  const push = jest.fn();
+  return {
+    __esModule: true,
+    useRouter: () => ({ back: jest.fn(), push }),
+    useLocalSearchParams: () => ({ id: "1" }),
+    pushMock: push,
+  };
+});
+import { pushMock } from "expo-router";
 
 jest.mock("../../lib/generator");
 jest.mock("../../lib/gamesApi");
@@ -112,5 +118,19 @@ describe("GameOptionsScreen", () => {
     const ratio = getByLabelText("Hot cold ratio");
     fireEvent(ratio, "valueChange", 60);
     expect(ratio.props.value).toBe(60);
+  });
+
+  test("navigation buttons are rendered", () => {
+    const { getByText } = render(<GameOptionsScreen />, { wrapper: Wrapper });
+    expect(getByText("Last 10 Draws")).toBeTruthy();
+    expect(getByText("Hot & Cold Numbers")).toBeTruthy();
+  });
+
+  test("pressing navigation buttons pushes routes", () => {
+    const { getByText } = render(<GameOptionsScreen />, { wrapper: Wrapper });
+    fireEvent.press(getByText("Last 10 Draws"));
+    fireEvent.press(getByText("Hot & Cold Numbers"));
+    expect(pushMock).toHaveBeenCalledWith("/game/1/draws");
+    expect(pushMock).toHaveBeenCalledWith("/game/1/hotcold");
   });
 });
