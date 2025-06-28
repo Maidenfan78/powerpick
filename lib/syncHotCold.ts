@@ -4,13 +4,16 @@ import { calculateHotColdNumbers } from "./hotCold.ts";
 
 dotenv.config();
 
-const SUPABASE_URL: string = process.env.SUPABASE_URL ?? "";
-const SUPABASE_ANON_KEY: string = process.env.SUPABASE_ANON_KEY ?? "";
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  throw new Error("Supabase credentials are missing");
-}
+let supabase: SupabaseClient;
 
-const supabase: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+function initSupabase(): void {
+  const SUPABASE_URL: string = process.env.SUPABASE_URL ?? "";
+  const SUPABASE_ANON_KEY: string = process.env.SUPABASE_ANON_KEY ?? "";
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    throw new Error("Supabase credentials are missing");
+  }
+  supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
 
 interface GameConfig {
   id: string;
@@ -95,9 +98,15 @@ async function updateGameHotCold(game: GameConfig): Promise<void> {
     .select("draw_results(number, ball_types(name))")
     .eq("game_id", game.id);
 
-  if (error) throw error;
+  if (error) {
+    const msg =
+      typeof error === "object" && error && "message" in error
+        ? String((error as { message: unknown }).message)
+        : String(error);
+    throw new Error(msg);
+  }
 
-  const typedRows = (data ?? []) as DrawResultRow[];
+  const typedRows = (data ?? []) as unknown as DrawResultRow[];
   type Result = DrawResultRow["draw_results"][number];
 
   const rows = typedRows.map((row: DrawResultRow) => {
@@ -124,7 +133,13 @@ async function updateGameHotCold(game: GameConfig): Promise<void> {
   const { error: upsertError } = await supabase
     .from("hot_cold_numbers")
     .upsert(record, { onConflict: "game_id" });
-  if (upsertError) throw upsertError;
+  if (upsertError) {
+    const msg =
+      typeof upsertError === "object" && upsertError && "message" in upsertError
+        ? String((upsertError as { message: unknown }).message)
+        : String(upsertError);
+    throw new Error(msg);
+  }
   console.log(`✅ Updated hot/cold for game ${game.id}`);
 }
 
@@ -132,11 +147,25 @@ export async function syncAllHotCold(): Promise<void> {
   const { data, error } = await supabase
     .from("games")
     .select("id, main_max, supp_max, powerball_max");
-  if (error) throw error;
+  if (error) {
+    const msg =
+      typeof error === "object" && error && "message" in error
+        ? String((error as { message: unknown }).message)
+        : String(error);
+    throw new Error(msg);
+  }
   const games = (data ?? []) as GameConfig[];
   for (const g of games) {
     await updateGameHotCold(g);
   }
 }
 
-syncAllHotCold().catch((err) => console.error("FATAL:", err));
+async function main(): Promise<void> {
+  initSupabase();
+  await syncAllHotCold();
+}
+
+main().catch((err) => {
+  const errObj = err instanceof Error ? err : new Error(String(err));
+  console.error("FATAL:", errObj);
+});
