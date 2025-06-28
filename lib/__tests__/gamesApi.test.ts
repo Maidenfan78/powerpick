@@ -1,4 +1,9 @@
-import { fetchGames, fetchHotColdNumbers, fetchRecentDraws } from "../gamesApi";
+import {
+  fetchGames,
+  fetchHotColdNumbers,
+  fetchRecentDraws,
+  _clearCaches,
+} from "../gamesApi";
 import { supabase } from "../supabase";
 
 jest.mock("../supabase", () => ({
@@ -13,6 +18,7 @@ const storageFromMock = supabase.storage.from as jest.Mock;
 
 beforeEach(() => {
   jest.clearAllMocks();
+  _clearCaches();
 });
 
 describe("fetchGames", () => {
@@ -96,6 +102,35 @@ describe("fetchGames", () => {
 
     await expect(fetchGames()).rejects.toThrow(err);
   });
+
+  test("caches results between calls", async () => {
+    const selectMock = jest.fn().mockResolvedValue({
+      data: [
+        {
+          id: "3",
+          name: "Lotto",
+          logo_url: "lotto.png",
+          jackpot: "3000",
+          main_max: 40,
+          main_count: 6,
+          supp_count: 2,
+          supp_max: 40,
+          powerball_max: null,
+        },
+      ],
+      error: null,
+    });
+    const getPublicUrl = jest.fn().mockReturnValue({
+      data: { publicUrl: "https://cdn.example.com/lotto.png" },
+    });
+    fromMock.mockReturnValue({ select: selectMock });
+    storageFromMock.mockReturnValue({ getPublicUrl });
+
+    await fetchGames();
+    await fetchGames();
+    expect(selectMock).toHaveBeenCalledTimes(1);
+    expect(getPublicUrl).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe("fetchHotColdNumbers", () => {
@@ -141,6 +176,25 @@ describe("fetchHotColdNumbers", () => {
     expect(result.mainHot).toEqual([]);
     expect(result.mainCold).toEqual([]);
   });
+
+  test("caches hot/cold requests", async () => {
+    const response = {
+      data: { main_hot: [1], main_cold: [2] },
+      error: null,
+    };
+    const selectMock = jest.fn().mockReturnThis();
+    const eqMock = jest.fn().mockReturnThis();
+    const maybeSingleMock = jest.fn().mockResolvedValue(response);
+    fromMock.mockReturnValue({
+      select: selectMock,
+      eq: eqMock,
+      maybeSingle: maybeSingleMock,
+    });
+
+    await fetchHotColdNumbers("2");
+    await fetchHotColdNumbers("2");
+    expect(maybeSingleMock).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe("fetchRecentDraws", () => {
@@ -176,5 +230,22 @@ describe("fetchRecentDraws", () => {
     expect(limitMock).toHaveBeenCalledWith(10);
     expect(result[0].winning_numbers).toEqual([1, 2]);
     expect(result[0].powerball).toBe(3);
+  });
+
+  test("caches draw requests", async () => {
+    const selectMock = jest.fn().mockReturnThis();
+    const orderMock = jest.fn().mockReturnThis();
+    const eqMock = jest.fn().mockReturnThis();
+    const limitMock = jest.fn().mockResolvedValue({ data: [], error: null });
+    fromMock.mockReturnValue({
+      select: selectMock,
+      eq: eqMock,
+      order: orderMock,
+      limit: limitMock,
+    });
+
+    await fetchRecentDraws("game2");
+    await fetchRecentDraws("game2");
+    expect(limitMock).toHaveBeenCalledTimes(1);
   });
 });
