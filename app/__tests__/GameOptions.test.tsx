@@ -87,4 +87,30 @@ describe("GameOptionsScreen", () => {
     const { getByText } = render(<GameOptionsScreen />, { wrapper: Wrapper });
     expect(getByText("Pick 8 main + 2 supp + Powerball")).toBeTruthy();
   });
+  test("sliders are disabled when auto is on", () => {
+    const { getByLabelText } = render(<GameOptionsScreen />, {
+      wrapper: Wrapper,
+    });
+    const ratio = getByLabelText("Hot cold ratio");
+    expect(ratio.props.disabled).toBe(true);
+  });
+
+  test("sliders are disabled when auto is on", () => {
+    const { getByLabelText } = render(<GameOptionsScreen />, {
+      wrapper: Wrapper,
+    });
+    const ratio = getByLabelText("Hot cold ratio");
+    expect(ratio.props.disabled).toBe(true);
+  });
+
+  test("sliders can be adjusted when auto is off", () => {
+    const { getByLabelText } = render(<GameOptionsScreen />, {
+      wrapper: Wrapper,
+    });
+    const toggle = getByLabelText("Auto toggle");
+    fireEvent(toggle, "valueChange", false);
+    const ratio = getByLabelText("Hot cold ratio");
+    fireEvent(ratio, "valueChange", 60);
+    expect(ratio.props.value).toBe(60);
+  });
 });
