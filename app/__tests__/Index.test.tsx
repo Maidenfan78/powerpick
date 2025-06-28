@@ -18,12 +18,15 @@ jest.mock("expo-status-bar", () => ({ StatusBar: () => null }));
 
 // Mock PNG logo import used in components
 jest.mock("../../assets/logo.png", () => 1);
+jest.mock("../../assets/coming_soon_usa.png", () => 2);
+jest.mock("../../assets/coming_soon_eur.png", () => 3);
 
 import React from "react";
 import { render } from "@testing-library/react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { ThemeProvider } from "../../lib/theme"; // ← correct import name
 import IndexScreen from "../../app/index";
+import { useRegionStore } from "../../stores/useRegionStore";
 
 test("renders default region label", () => {
   const tree = render(
@@ -35,4 +38,19 @@ test("renders default region label", () => {
   );
   // Assert on visible UI text rather than accessibility label
   expect(tree.getByText("Australia")).toBeTruthy();
+});
+
+test("shows coming soon screen for US region", () => {
+  useRegionStore.setState({
+    region: "US",
+    setRegion: (r) => useRegionStore.setState({ region: r }),
+  });
+  const tree = render(
+    <PaperProvider>
+      <ThemeProvider>
+        <IndexScreen />
+      </ThemeProvider>
+    </PaperProvider>,
+  );
+  expect(tree.getByLabelText("USA coming soon")).toBeTruthy();
 });

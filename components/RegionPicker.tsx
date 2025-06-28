@@ -4,6 +4,7 @@ import { View, Text, Pressable, Modal, StyleSheet } from "react-native";
 
 import { useTheme } from "../lib/theme";
 import { useRegionStore, Region } from "../stores/useRegionStore";
+import { REGION_LABELS } from "../lib/regionConfig";
 
 const BACKDROP_COLOR = "rgba(0,0,0,0.4)";
 
@@ -15,8 +16,7 @@ export default function RegionPicker() {
   const setRegion = useRegionStore((s) => s.setRegion);
   const [visible, setVisible] = useState(false);
 
-  const labelFor = (r: Region) =>
-    ({ AU: "Australia", US: "USA", EU: "Europe" })[r];
+  const labelFor = (r: Region) => REGION_LABELS[r];
 
   const styles = StyleSheet.create({
     backdrop: {
