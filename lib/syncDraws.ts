@@ -102,6 +102,16 @@ async function syncGame(game: Game): Promise<void> {
     console.log(`DEBUG: Parsed rows = ${rows.length}`);
     if (rows[0]) console.log("DEBUG: First row =", rows[0]);
 
+    const drawRecords: {
+      game_id: string;
+      draw_number: number;
+      draw_date: string;
+    }[] = [];
+    const resultsMap = new Map<
+      number,
+      { winning: number[]; supp: number[]; powerball: number | null }
+    >();
+
     for (const row of rows) {
       const draw_number = Number(row["Draw number"]);
       const draw_date = formatDateDMY(row["Draw date"]);
@@ -111,63 +121,68 @@ async function syncGame(game: Game): Promise<void> {
         ? Number(row["Powerball Number"]) || null
         : null;
 
-      const { data: drawRows, error: upsertErr } = await supabase
-        .from("draws")
-        .upsert(
-          { game_id: game.gameId, draw_number, draw_date },
-          { onConflict: "game_id,draw_number" },
-        )
-        .select()
-        .single();
+      drawRecords.push({ game_id: game.gameId, draw_number, draw_date });
+      resultsMap.set(draw_number, {
+        winning: winning_numbers,
+        supp: supplementary_numbers,
+        powerball,
+      });
+    }
 
-      if (upsertErr) {
-        console.error("UPSERT DRAW ERROR:", upsertErr);
-        continue;
-      }
+    const { data: inserted, error: upsertErr } = await supabase
+      .from("draws")
+      .upsert(drawRecords, { onConflict: "game_id,draw_number" })
+      .select();
 
-      console.log("DEBUG: Upserted draw row =", drawRows);
+    if (upsertErr) {
+      console.error("UPSERT DRAW ERROR:", upsertErr);
+      return;
+    }
 
-      const draw_id = drawRows.id as number;
+    const drawIds = inserted?.map((d) => d.id as number) || [];
+    await supabase.from("draw_results").delete().in("draw_id", drawIds);
 
-      await supabase.from("draw_results").delete().eq("draw_id", draw_id);
-
-      const results = [
-        ...winning_numbers.map((n) => ({
-          draw_id,
+    const resultRows = [] as {
+      draw_id: number;
+      ball_type_id: number;
+      number: number;
+    }[];
+    for (const draw of inserted || []) {
+      const info = resultsMap.get(draw.draw_number)!;
+      resultRows.push(
+        ...info.winning.map((n) => ({
+          draw_id: draw.id as number,
           ball_type_id: game.mainTypeId,
           number: n,
         })),
-      ];
-
+      );
       if (game.suppTypeId) {
-        results.push(
-          ...supplementary_numbers.map((n) => ({
-            draw_id,
+        resultRows.push(
+          ...info.supp.map((n) => ({
+            draw_id: draw.id as number,
             ball_type_id: game.suppTypeId!,
             number: n,
           })),
         );
       }
-
-      if (game.powerballTypeId && powerball) {
-        results.push({
-          draw_id,
+      if (game.powerballTypeId && info.powerball) {
+        resultRows.push({
+          draw_id: draw.id as number,
           ball_type_id: game.powerballTypeId,
-          number: powerball,
+          number: info.powerball,
         });
       }
+    }
 
-      const { error: resultErr } = await supabase
-        .from("draw_results")
-        .insert(results);
-
-      if (resultErr) console.error("INSERT RESULTS ERROR:", resultErr);
-      else {
-        processed += 1;
-        console.log(
-          `✅ Draw ${draw_number} upserted (${results.length} results)`,
-        );
-      }
+    const { error: resultErr } = await supabase
+      .from("draw_results")
+      .insert(resultRows);
+    if (resultErr) console.error("INSERT RESULTS ERROR:", resultErr);
+    else {
+      processed = drawRecords.length;
+      console.log(
+        `✅ Upserted ${processed} draws (${resultRows.length} results)`,
+      );
     }
   } catch (err) {
     console.error("SYNC ERROR:", game.apiId, err);
@@ -177,11 +192,19 @@ async function syncGame(game: Game): Promise<void> {
 }
 
 // 9) Run sync for all games
-export async function syncAllGames(): Promise<void> {
-  for (const game of GAMES) {
-    // Sequential to avoid rate limits
-    await syncGame(game);
-  }
+export async function syncAllGames(concurrency = 2): Promise<void> {
+  const queue = [...GAMES];
+  const workers = Array.from(
+    { length: Math.min(concurrency, queue.length) },
+    async () => {
+      while (queue.length) {
+        const game = queue.shift();
+        if (!game) break;
+        await syncGame(game);
+      }
+    },
+  );
+  await Promise.all(workers);
 }
 
 export { parseCsv, extractNumbers };

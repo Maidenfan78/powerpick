@@ -108,9 +108,10 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 
 2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys and Slack webhooks.
 3. **Database** – run `/supabase/init.sql` or `supabase db reset` then `supabase start`.
-4. **Sync Draw History** – `npm run sync:draws` fetches the latest results for all games.
-5. **Update Hot & Cold Numbers** – `npm run sync:hotcold` populates analytics.
-6. **Run the App**
+4. **Create Indexes** – `node lib/createIndexes.ts` prints SQL. Execute it via the Supabase SQL editor.
+5. **Sync Draw History** – `npm run sync:draws` fetches the latest results for all games.
+6. **Update Hot & Cold Numbers** – `npm run sync:hotcold` populates analytics.
+7. **Run the App**
    \| Platform | Command | Notes |
    \| -------- | ---------------------- | ----- |
    \| Mobile | `npm run start` | Scan QR in **Expo Go** |

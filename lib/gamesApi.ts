@@ -1,6 +1,15 @@
 // lib/gamesApi.ts
 import { supabase } from "./supabase";
 
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const logoUrlCache: Record<string, string> = {};
+let gamesCache: { data: Game[]; timestamp: number } | null = null;
+const hotColdCache = new Map<
+  string,
+  { data: HotColdNumbers; timestamp: number }
+>();
+const drawsCache = new Map<string, { data: DrawResult[]; timestamp: number }>();
+
 const STORAGE_BUCKET = "powerpick";
 
 export interface Game {
@@ -32,7 +41,15 @@ function normalizeUrl(url: string): string {
   return url.replace(/([^:]\/)\/+/g, "$1");
 }
 
-export async function fetchGames(): Promise<Game[]> {
+export async function fetchGames(force = false): Promise<Game[]> {
+  if (
+    !force &&
+    gamesCache &&
+    Date.now() - gamesCache.timestamp < CACHE_TTL_MS
+  ) {
+    return gamesCache.data;
+  }
+
   const { data: rows, error } = await supabase
     .from("games")
     .select<GameRow>(
@@ -44,7 +61,7 @@ export async function fetchGames(): Promise<Game[]> {
     throw error;
   }
 
-  return (rows ?? []).map((row: GameRow) => {
+  const games = (rows ?? []).map((row: GameRow) => {
     const raw = (row.logo_url ?? "").trim();
     let url: string;
 
@@ -52,10 +69,13 @@ export async function fetchGames(): Promise<Game[]> {
       url = normalizeUrl(raw);
     } else {
       const key = raw.replace(/^\/+|\/+$/g, "");
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(key);
-      url = normalizeUrl(publicUrl);
+      if (!logoUrlCache[key]) {
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(key);
+        logoUrlCache[key] = normalizeUrl(publicUrl);
+      }
+      url = logoUrlCache[key];
     }
 
     console.log(`[GamesAPI] "${row.id}" → ${url}`);
@@ -71,6 +91,9 @@ export async function fetchGames(): Promise<Game[]> {
       powerballMax: row.powerball_max ?? null,
     };
   });
+
+  gamesCache = { data: games, timestamp: Date.now() };
+  return games;
 }
 
 export interface HotColdNumbers {
@@ -84,7 +107,12 @@ export interface HotColdNumbers {
 
 export async function fetchHotColdNumbers(
   gameId: string,
+  force = false,
 ): Promise<HotColdNumbers> {
+  const cached = hotColdCache.get(gameId);
+  if (!force && cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+    return cached.data;
+  }
   const { data, error } = await supabase
     .from("hot_cold_numbers")
     .select("*")
@@ -94,7 +122,7 @@ export async function fetchHotColdNumbers(
     console.error("Error fetching hot/cold:", error);
     throw error;
   }
-  return {
+  const result = {
     mainHot: data?.main_hot ?? [],
     mainCold: data?.main_cold ?? [],
     suppHot: data?.supp_hot ?? [],
@@ -102,6 +130,8 @@ export async function fetchHotColdNumbers(
     powerballHot: data?.powerball_hot ?? [],
     powerballCold: data?.powerball_cold ?? [],
   } as HotColdNumbers;
+  hotColdCache.set(gameId, { data: result, timestamp: Date.now() });
+  return result;
 }
 
 export interface DrawResult {
@@ -121,7 +151,15 @@ interface DrawRow {
   }[];
 }
 
-export async function fetchRecentDraws(gameId: string): Promise<DrawResult[]> {
+export async function fetchRecentDraws(
+  gameId: string,
+  force = false,
+): Promise<DrawResult[]> {
+  const cached = drawsCache.get(gameId);
+  if (!force && cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+    return cached.data;
+  }
+
   const { data, error } = await supabase
     .from("draws")
     .select<DrawRow>(
@@ -135,7 +173,7 @@ export async function fetchRecentDraws(gameId: string): Promise<DrawResult[]> {
     throw error;
   }
 
-  return (data ?? []).map((row) => {
+  const draws = (data ?? []).map((row) => {
     const results = row.draw_results || [];
     const winning_numbers = results
       .filter((r) => r.ball_types?.name === "main")
@@ -158,4 +196,14 @@ export async function fetchRecentDraws(gameId: string): Promise<DrawResult[]> {
       powerball,
     } as DrawResult;
   });
+
+  drawsCache.set(gameId, { data: draws, timestamp: Date.now() });
+  return draws;
+}
+
+export function _clearCaches(): void {
+  gamesCache = null;
+  hotColdCache.clear();
+  drawsCache.clear();
+  for (const key of Object.keys(logoUrlCache)) delete logoUrlCache[key];
 }
