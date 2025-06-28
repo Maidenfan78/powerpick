@@ -45,10 +45,10 @@ export default function GameOptionsScreen() {
 
   // Fallback for missing config
   const displayCfg: GameConfig = config ?? {
-    mainMax:      50,
-    mainCount:    6,
-    suppMax:      undefined,
-    suppCount:    undefined,
+    mainMax: 50,
+    mainCount: 6,
+    suppMax: undefined,
+    suppCount: undefined,
     powerballMax: undefined,
   };
 
@@ -58,7 +58,7 @@ export default function GameOptionsScreen() {
     displayCfg.suppCount !== undefined
       ? current.slice(
           displayCfg.mainCount,
-          displayCfg.mainCount + displayCfg.suppCount
+          displayCfg.mainCount + displayCfg.suppCount,
         )
       : [];
   const powerballNum =
@@ -75,7 +75,7 @@ export default function GameOptionsScreen() {
       ...generateSet({
         maxNumber: displayCfg.mainMax,
         pickCount: displayCfg.mainCount,
-      })
+      }),
     );
 
     // Supplementary balls
@@ -87,7 +87,7 @@ export default function GameOptionsScreen() {
         ...generateSet({
           maxNumber: displayCfg.suppMax,
           pickCount: displayCfg.suppCount,
-        })
+        }),
       );
     }
 
@@ -97,7 +97,7 @@ export default function GameOptionsScreen() {
         ...generateSet({
           maxNumber: displayCfg.powerballMax,
           pickCount: 1,
-        })
+        }),
       );
     }
 
@@ -106,19 +106,38 @@ export default function GameOptionsScreen() {
   };
 
   const styles = StyleSheet.create({
-    container:       { flex: 1, padding: 16 },
-    header:          { flexDirection: "row", justifyContent: "space-between", marginBottom: 16 },
-    title:           { color: tokens.color.brand.primary.value, fontSize: 20 },
-    close:           { color: tokens.color.brand.primary.value, fontSize: 20 },
-    configText:      { color: tokens.color.brand.primary.value, fontSize: 16, marginBottom: 16, textAlign: "center" },
-    numbers:         { color: tokens.color.brand.primary.value, fontSize: 24, marginVertical: 16, textAlign: "center" },
-    toggleRow:       { flexDirection: "row", alignItems: "center", marginBottom: 16 },
-    toggleText:      { color: tokens.color.brand.primary.value, marginLeft: 8 },
+    button: {
+      alignItems: "center",
+      backgroundColor: tokens.color.brand.primary.value,
+      borderRadius: 8,
+      padding: 12,
+    },
+    buttonText: { color: tokens.color.neutral["0"].value, fontSize: 18 },
+    close: { color: tokens.color.brand.primary.value, fontSize: 20 },
+    configText: {
+      color: tokens.color.brand.primary.value,
+      fontSize: 16,
+      marginBottom: 16,
+      textAlign: "center",
+    },
+    container: { flex: 1, padding: 16 },
+    disabled: { opacity: 0.5 },
+    header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginBottom: 16,
+    },
+    numbers: {
+      color: tokens.color.brand.primary.value,
+      fontSize: 24,
+      marginVertical: 16,
+      textAlign: "center",
+    },
     sliderContainer: { marginBottom: 16 },
-    sliderLabel:     { color: tokens.color.brand.primary.value },
-    disabled:        { opacity: 0.5 },
-    button:          { alignItems: "center", backgroundColor: tokens.color.brand.primary.value, borderRadius: 8, padding: 12 },
-    buttonText:      { color: tokens.color.neutral["0"].value, fontSize: 18 },
+    sliderLabel: { color: tokens.color.brand.primary.value },
+    title: { color: tokens.color.brand.primary.value, fontSize: 20 },
+    toggleRow: { alignItems: "center", flexDirection: "row", marginBottom: 16 },
+    toggleText: { color: tokens.color.brand.primary.value, marginLeft: 8 },
   });
 
   return (
@@ -147,7 +166,11 @@ export default function GameOptionsScreen() {
       )}
 
       <View accessibilityLabel="Auto toggle" style={styles.toggleRow}>
-        <Switch value={isAuto} onValueChange={setIsAuto} accessibilityRole="switch" />
+        <Switch
+          value={isAuto}
+          onValueChange={setIsAuto}
+          accessibilityRole="switch"
+        />
         <Text style={styles.toggleText}>Auto</Text>
       </View>
 
@@ -165,7 +188,9 @@ export default function GameOptionsScreen() {
           disabled={isAuto}
           accessibilityLabel="Hot cold ratio"
         />
-        <Text style={styles.sliderLabel}>Hot/Cold Numbers Used: {hotPercent}%</Text>
+        <Text style={styles.sliderLabel}>
+          Hot/Cold Numbers Used: {hotPercent}%
+        </Text>
         <Slider
           value={hotPercent}
           minimumValue={0}
@@ -177,7 +202,11 @@ export default function GameOptionsScreen() {
         />
       </View>
 
-      <Pressable style={styles.button} onPress={handleGenerate} accessibilityRole="button">
+      <Pressable
+        style={styles.button}
+        onPress={handleGenerate}
+        accessibilityRole="button"
+      >
         <Text style={styles.buttonText}>Generate Numbers</Text>
       </Pressable>
     </SafeAreaView>
