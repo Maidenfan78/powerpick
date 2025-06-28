@@ -19,6 +19,11 @@ describe("GameCard", () => {
     name: "Powerball",
     logoUrl: "http://example.com/logo.png",
     jackpot: "$1,000",
+    mainMax: null,
+    mainCount: null,
+    suppCount: null,
+    suppMax: null,
+    powerballMax: null,
   };
 
   test("renders jackpot and handles press", () => {
