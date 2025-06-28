@@ -8,19 +8,27 @@ dotenv.config();
 // 2) Read and validate env vars
 const SUPABASE_URL: string = process.env.SUPABASE_URL ?? "";
 const SUPABASE_ANON_KEY: string = process.env.SUPABASE_ANON_KEY ?? "";
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+const SUPABASE_SERVICE_ROLE_KEY: string =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
+const supabaseKey: string = SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY;
+
+if (!SUPABASE_URL || !supabaseKey) {
   throw new Error("Supabase credentials are missing");
 }
 
-// 3) Debug credentials (only log partial anon key)
-console.log("DEBUG: SUPABASE_URL      =", SUPABASE_URL);
-console.log(
-  "DEBUG: SUPABASE_ANON_KEY =",
-  SUPABASE_ANON_KEY.slice(0, 4) + "...",
-);
+// 3) Debug credentials (show which key is used)
+console.log("DEBUG: SUPABASE_URL  =", SUPABASE_URL);
+if (SUPABASE_SERVICE_ROLE_KEY) {
+  console.log(
+    "DEBUG: Using service role key",
+    SUPABASE_SERVICE_ROLE_KEY.slice(0, 4) + "...",
+  );
+} else {
+  console.log("DEBUG: Using anon key", SUPABASE_ANON_KEY.slice(0, 4) + "...");
+}
 
 // 4) Initialize Supabase client
-const supabase: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabase: SupabaseClient = createClient(SUPABASE_URL, supabaseKey);
 
 // 5) Define game configuration interface and array
 interface Game {
@@ -82,6 +90,7 @@ function formatDateDMY(dmy: string): string {
 // 8) Sync a single game
 async function syncGame(game: Game): Promise<void> {
   console.log(`\n🔄 Syncing game ${game.apiId}`);
+  let processed = 0;
   try {
     const url = `https://api.lotterywest.wa.gov.au/api/v1/games/${game.apiId}/results-csv`;
     console.log("FETCH:", url);
@@ -115,6 +124,8 @@ async function syncGame(game: Game): Promise<void> {
         console.error("UPSERT DRAW ERROR:", upsertErr);
         continue;
       }
+
+      console.log("DEBUG: Upserted draw row =", drawRows);
 
       const draw_id = drawRows.id as number;
 
@@ -151,10 +162,17 @@ async function syncGame(game: Game): Promise<void> {
         .insert(results);
 
       if (resultErr) console.error("INSERT RESULTS ERROR:", resultErr);
-      else console.log(`✅ Draw ${draw_number} upserted`);
+      else {
+        processed += 1;
+        console.log(
+          `✅ Draw ${draw_number} upserted (${results.length} results)`,
+        );
+      }
     }
   } catch (err) {
     console.error("SYNC ERROR:", game.apiId, err);
+  } finally {
+    console.log(`Finished game ${game.apiId}: processed ${processed} draws`);
   }
 }
 
