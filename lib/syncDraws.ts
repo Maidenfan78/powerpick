@@ -24,18 +24,44 @@ const supabase: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // 5) Define game configuration interface and array
 interface Game {
-  id: number;
-  table: string;
-  hasCounts?: boolean;
-  hasPowerball?: boolean;
+  apiId: number;
+  gameId: string;
+  mainTypeId: number;
+  suppTypeId?: number;
+  powerballTypeId?: number;
 }
 
 const GAMES: Game[] = [
-  { id: 5130, table: "oz_lotto_draws", hasCounts: true },
-  { id: 5132, table: "powerball_draws", hasPowerball: true },
-  { id: 5127, table: "saturday_lotto_draws" },
-  { id: 5237, table: "set_for_life_draws" },
-  { id: 5303, table: "weekday_windfall_draws" },
+  {
+    apiId: 5130,
+    gameId: "22222222-2222-2222-2222-222222222222",
+    mainTypeId: 3,
+    suppTypeId: 4,
+  },
+  {
+    apiId: 5132,
+    gameId: "33333333-3333-3333-3333-333333333333",
+    mainTypeId: 5,
+    powerballTypeId: 6,
+  },
+  {
+    apiId: 5127,
+    gameId: "11111111-1111-1111-1111-111111111111",
+    mainTypeId: 1,
+    suppTypeId: 2,
+  },
+  {
+    apiId: 5237,
+    gameId: "55555555-5555-5555-5555-555555555555",
+    mainTypeId: 9,
+    suppTypeId: 10,
+  },
+  {
+    apiId: 5303,
+    gameId: "44444444-4444-4444-4444-444444444444",
+    mainTypeId: 7,
+    suppTypeId: 8,
+  },
 ];
 
 // 6) CSV parsing helpers
@@ -53,22 +79,11 @@ function formatDateDMY(dmy: string): string {
   return `${y}-${m}-${d}`;
 }
 
-// 7) Interface for upsert record
-interface DrawRecord {
-  draw_number: number;
-  draw_date: string;
-  winning_numbers: number[];
-  supplementary_numbers?: number[];
-  number_of_main?: number;
-  number_of_supps?: number;
-  powerball?: number | null;
-}
-
 // 8) Sync a single game
 async function syncGame(game: Game): Promise<void> {
-  console.log(`\n🔄 Syncing ${game.table}`);
+  console.log(`\n🔄 Syncing game ${game.apiId}`);
   try {
-    const url = `https://api.lotterywest.wa.gov.au/api/v1/games/${game.id}/results-csv`;
+    const url = `https://api.lotterywest.wa.gov.au/api/v1/games/${game.apiId}/results-csv`;
     console.log("FETCH:", url);
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -78,41 +93,68 @@ async function syncGame(game: Game): Promise<void> {
     console.log(`DEBUG: Parsed rows = ${rows.length}`);
     if (rows[0]) console.log("DEBUG: First row =", rows[0]);
 
-    const records: DrawRecord[] = rows.map((row) => {
+    for (const row of rows) {
       const draw_number = Number(row["Draw number"]);
       const draw_date = formatDateDMY(row["Draw date"]);
       const winning_numbers = extractNumbers(row, "Winning Number");
-
-      if (game.hasPowerball) {
-        const powerball = Number(row["Powerball Number"]) || null;
-        return { draw_number, draw_date, winning_numbers, powerball };
-      }
-
       const supplementary_numbers = extractNumbers(row, "Supplementary Number");
-      if (game.hasCounts) {
-        return {
-          draw_number,
-          draw_date,
-          winning_numbers,
-          supplementary_numbers,
-          number_of_main: winning_numbers.length,
-          number_of_supps: supplementary_numbers.length,
-        };
+      const powerball = game.powerballTypeId
+        ? Number(row["Powerball Number"]) || null
+        : null;
+
+      const { data: drawRows, error: upsertErr } = await supabase
+        .from("draws")
+        .upsert(
+          { game_id: game.gameId, draw_number, draw_date },
+          { onConflict: "game_id,draw_number" },
+        )
+        .select()
+        .single();
+
+      if (upsertErr) {
+        console.error("UPSERT DRAW ERROR:", upsertErr);
+        continue;
       }
 
-      return { draw_number, draw_date, winning_numbers, supplementary_numbers };
-    });
+      const draw_id = drawRows.id as number;
 
-    // Remove <T> generic from .from and specify generic on upsert instead
-    const { data, error } = await supabase
-      .from(game.table)
-      .upsert<DrawRecord>(records, { onConflict: "draw_number" });
+      await supabase.from("draw_results").delete().eq("draw_id", draw_id);
 
-    if (error) console.error("UPSERT ERROR:", game.table, error);
-    const inserted = data as DrawRecord[] | null;
-    console.log(`✅ ${game.table}: ${inserted?.length ?? 0} rows`);
+      const results = [
+        ...winning_numbers.map((n) => ({
+          draw_id,
+          ball_type_id: game.mainTypeId,
+          number: n,
+        })),
+      ];
+
+      if (game.suppTypeId) {
+        results.push(
+          ...supplementary_numbers.map((n) => ({
+            draw_id,
+            ball_type_id: game.suppTypeId!,
+            number: n,
+          })),
+        );
+      }
+
+      if (game.powerballTypeId && powerball) {
+        results.push({
+          draw_id,
+          ball_type_id: game.powerballTypeId,
+          number: powerball,
+        });
+      }
+
+      const { error: resultErr } = await supabase
+        .from("draw_results")
+        .insert(results);
+
+      if (resultErr) console.error("INSERT RESULTS ERROR:", resultErr);
+      else console.log(`✅ Draw ${draw_number} upserted`);
+    }
   } catch (err) {
-    console.error("SYNC ERROR:", game.table, err);
+    console.error("SYNC ERROR:", game.apiId, err);
   }
 }
 
