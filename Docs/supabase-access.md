@@ -6,8 +6,8 @@ environment variable when running `yarn sync-draws` or other node
 scripts.
 
 ```
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_ANON_KEY=anon-key
+EXPO_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=anon-key
 SUPABASE_SERVICE_ROLE_KEY=service-role-key
 ```
 
