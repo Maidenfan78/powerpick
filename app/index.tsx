@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import Header from "../components/Header";
 import RegionPicker from "../components/RegionPicker";
-import ComingSoon from "../components/ComingSoon"; 
+import ComingSoon from "../components/ComingSoon";
 import { useTheme } from "../lib/theme";
 import GameGrid from "../components/GameGrid";
 import { Game, fetchGames } from "../lib/gamesApi";
@@ -18,7 +18,7 @@ const ERROR_COLOR = "#FF6666";
 export default function IndexScreen() {
   const { tokens } = useTheme();
   const router = useRouter();
-    const region = useRegionStore((s) => s.region);
+  const region = useRegionStore((s) => s.region);
   const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

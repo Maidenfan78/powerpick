@@ -90,18 +90,18 @@ export async function fetchHotColdNumbers(
     .from("hot_cold_numbers")
     .select("*")
     .eq("game_id", gameId)
-    .single();
+    .maybeSingle();
   if (error) {
     console.error("Error fetching hot/cold:", error);
     throw error;
   }
   return {
-    mainHot: data.main_hot ?? [],
-    mainCold: data.main_cold ?? [],
-    suppHot: data.supp_hot ?? [],
-    suppCold: data.supp_cold ?? [],
-    powerballHot: data.powerball_hot ?? [],
-    powerballCold: data.powerball_cold ?? [],
+    mainHot: data?.main_hot ?? [],
+    mainCold: data?.main_cold ?? [],
+    suppHot: data?.supp_hot ?? [],
+    suppCold: data?.supp_cold ?? [],
+    powerballHot: data?.powerball_hot ?? [],
+    powerballCold: data?.powerball_cold ?? [],
   } as HotColdNumbers;
 }
 
