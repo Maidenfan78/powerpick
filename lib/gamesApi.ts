@@ -52,7 +52,7 @@ export async function fetchGames(force = false): Promise<Game[]> {
 
   const { data: rows, error } = await supabase
     .from("games")
-    .select<GameRow>(
+    .select(
       "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max",
     );
 
@@ -162,9 +162,7 @@ export async function fetchRecentDraws(
 
   const { data, error } = await supabase
     .from("draws")
-    .select<DrawRow>(
-      "draw_number, draw_date, draw_results(number, ball_types(name))",
-    )
+    .select("draw_number, draw_date, draw_results(number, ball_types(name))")
     .eq("game_id", gameId)
     .order("draw_number", { ascending: false })
     .limit(10);
@@ -173,18 +171,28 @@ export async function fetchRecentDraws(
     throw error;
   }
 
-  const draws = (data ?? []).map((row) => {
+  const rows = (data ?? []) as unknown as DrawRow[];
+  const draws = rows.map((row: DrawRow) => {
     const results = row.draw_results || [];
     const winning_numbers = results
-      .filter((r) => r.ball_types?.name === "main")
+      .filter(
+        (r: { number: number; ball_types: { name: string } | null }) =>
+          r.ball_types?.name === "main",
+      )
       .map((r) => r.number)
-      .sort((a, b) => a - b);
+      .sort((a: number, b: number) => a - b);
     const supplementary_numbers = results
-      .filter((r) => r.ball_types?.name === "supplementary")
+      .filter(
+        (r: { number: number; ball_types: { name: string } | null }) =>
+          r.ball_types?.name === "supplementary",
+      )
       .map((r) => r.number)
-      .sort((a, b) => a - b);
+      .sort((a: number, b: number) => a - b);
     const powerball =
-      results.find((r) => r.ball_types?.name === "powerball")?.number ?? null;
+      results.find(
+        (r: { number: number; ball_types: { name: string } | null }) =>
+          r.ball_types?.name === "powerball",
+      )?.number ?? null;
 
     return {
       draw_number: row.draw_number,

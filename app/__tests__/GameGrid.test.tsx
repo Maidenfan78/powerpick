@@ -12,8 +12,28 @@ const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 
 describe("GameGrid", () => {
   const games = [
-    { id: "1", name: "Game 1", logoUrl: "url1", jackpot: "$1" },
-    { id: "2", name: "Game 2", logoUrl: "url2", jackpot: "$2" },
+    {
+      id: "1",
+      name: "Game 1",
+      logoUrl: "url1",
+      jackpot: "$1",
+      mainMax: null,
+      mainCount: null,
+      suppCount: null,
+      suppMax: null,
+      powerballMax: null,
+    },
+    {
+      id: "2",
+      name: "Game 2",
+      logoUrl: "url2",
+      jackpot: "$2",
+      mainMax: null,
+      mainCount: null,
+      suppCount: null,
+      suppMax: null,
+      powerballMax: null,
+    },
   ];
 
   test("renders games and triggers selection", () => {
