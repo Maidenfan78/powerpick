@@ -147,22 +147,34 @@ describe("fetchRecentDraws", () => {
   test("requests latest draws", async () => {
     const selectMock = jest.fn().mockReturnThis();
     const orderMock = jest.fn().mockReturnThis();
+    const eqMock = jest.fn().mockReturnThis();
     const limitMock = jest.fn().mockResolvedValue({
       data: [
-        { draw_number: 1, draw_date: "2020-01-01", winning_numbers: [1, 2, 3] },
+        {
+          draw_number: 1,
+          draw_date: "2020-01-01",
+          draw_results: [
+            { number: 1, ball_types: { name: "main" } },
+            { number: 2, ball_types: { name: "main" } },
+            { number: 3, ball_types: { name: "powerball" } },
+          ],
+        },
       ],
       error: null,
     });
     fromMock.mockReturnValue({
       select: selectMock,
+      eq: eqMock,
       order: orderMock,
       limit: limitMock,
     });
 
-    const result = await fetchRecentDraws("Powerball");
-    expect(fromMock).toHaveBeenCalledWith("powerball_draws");
+    const result = await fetchRecentDraws("game1");
+    expect(fromMock).toHaveBeenCalledWith("draws");
+    expect(eqMock).toHaveBeenCalledWith("game_id", "game1");
     expect(orderMock).toHaveBeenCalledWith("draw_number", { ascending: false });
     expect(limitMock).toHaveBeenCalledWith(10);
-    expect(result[0].draw_number).toBe(1);
+    expect(result[0].winning_numbers).toEqual([1, 2]);
+    expect(result[0].powerball).toBe(3);
   });
 });
