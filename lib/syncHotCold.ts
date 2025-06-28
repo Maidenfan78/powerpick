@@ -13,20 +13,11 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
 const supabase: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 interface GameConfig {
-  id: number;
-  table: string;
+  id: string;
   main_max: number;
   supp_max?: number | null;
   powerball_max?: number | null;
 }
-
-const GAME_TABLES: Record<number, string> = {
-  5130: "oz_lotto_draws",
-  5132: "powerball_draws",
-  5127: "saturday_lotto_draws",
-  5237: "set_for_life_draws",
-  5303: "weekday_windfall_draws",
-};
 
 interface DrawRow {
   winning_numbers: number[];
@@ -35,7 +26,7 @@ interface DrawRow {
 }
 
 export interface HotColdRecord {
-  game_id: number;
+  game_id: string;
   main_hot: number[];
   main_cold: number[];
   supp_hot?: number[];
@@ -93,13 +84,32 @@ export function computeHotCold(
 
 async function updateGameHotCold(game: GameConfig): Promise<void> {
   const { data, error } = await supabase
-    .from(game.table)
-    .select("winning_numbers, supplementary_numbers, powerball");
+    .from("draws")
+    .select<{
+      draw_results: { number: number; ball_types: { name: string } | null }[];
+    }>("draw_results(number, ball_types(name))")
+    .eq("game_id", game.id);
 
   if (error) throw error;
 
-  // force it to your known shape:
-  const rows = (data ?? []) as DrawRow[];
+  const rows = (data ?? []).map((row) => {
+    const results = row.draw_results || [];
+    const winning_numbers = results
+      .filter((r) => r.ball_types?.name === "main")
+      .map((r) => r.number);
+    const supplementary_numbers = results
+      .filter((r) => r.ball_types?.name === "supplementary")
+      .map((r) => r.number);
+    const powerball =
+      results.find((r) => r.ball_types?.name === "powerball")?.number ?? null;
+    return {
+      winning_numbers,
+      supplementary_numbers: supplementary_numbers.length
+        ? supplementary_numbers
+        : null,
+      powerball,
+    } as DrawRow;
+  });
   const record = computeHotCold(rows, game);
 
   const { error: upsertError } = await supabase
@@ -116,12 +126,8 @@ export async function syncAllHotCold(): Promise<void> {
   if (error) throw error;
   const games = (data ?? []) as GameConfig[];
   for (const g of games) {
-    const table = GAME_TABLES[g.id];
-    if (!table) continue;
-    await updateGameHotCold({ ...g, table });
+    await updateGameHotCold(g);
   }
 }
 
-  syncAllHotCold().catch((err) => console.error("FATAL:", err));
-  
-
+syncAllHotCold().catch((err) => console.error("FATAL:", err));
