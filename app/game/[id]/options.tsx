@@ -34,6 +34,23 @@ export default function GameOptionsScreen() {
   }
   const description = descParts.join(" + ");
 
+  const displayCfg: GameConfig =
+    config ??
+    ({
+      mainMax: 50,
+      mainCount: 6,
+    } as GameConfig);
+  const mainNums = current.slice(0, displayCfg.mainCount);
+  const suppNums = displayCfg.suppCount
+    ? current.slice(
+        displayCfg.mainCount,
+        displayCfg.mainCount + displayCfg.suppCount,
+      )
+    : [];
+  const powerballNum = displayCfg.powerballMax
+    ? current[displayCfg.mainCount + (displayCfg.suppCount ?? 0)]
+    : undefined;
+
   const handleGenerate = () => {
     const cfg: GameConfig =
       config ??
@@ -104,7 +121,15 @@ export default function GameOptionsScreen() {
       )}
 
       {current.length > 0 && (
-        <Text style={styles.numbers}>{current.join(" - ")}</Text>
+        <>
+          <Text style={styles.numbers}>Main: {mainNums.join(" - ")}</Text>
+          {suppNums.length > 0 && (
+            <Text style={styles.numbers}>Supp: {suppNums.join(" - ")}</Text>
+          )}
+          {powerballNum !== undefined && (
+            <Text style={styles.numbers}>Powerball: {powerballNum}</Text>
+          )}
+        </>
       )}
 
       <Pressable
