@@ -13,6 +13,7 @@
 - Run `yarn install --offline` to install from the `/vendor` mirror (configured via `.yarnrc`)
 - Update the mirror with `npm install --prefix vendor`
 - `requirements.txt` is intentionally empty as no Python packages are needed
+- Do not edit packages inside `/vendor` manually
 
 ## Coding Conventions
 
@@ -26,6 +27,7 @@
 - Run `npm test -- --coverage`
 - Preference for assertions from `@testing-library/react-native`
 - Mock all external API or Supabase calls
+- Tests must run without network access
 
 ## Formatting & Linting
 
@@ -36,7 +38,12 @@
 
 - Title format: `[feat][fix][chore]: short description`
 - Add test summary and step-by-step instructions in the PR body
+- Commit messages should match `[feat][fix][chore]: summary`
 
 ## Agent Behavior
 
 - If generating new code, include relevant tests
+- Do not upload or create non binary files
+- Keep `.env` local by copying from `.env.example`
+- Feature branches should use `feat/`, `fix/` or `chore/` prefixes
+- Do not commit `node_modules/` or compiled output
