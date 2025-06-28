@@ -23,7 +23,7 @@ export default function Header() {
     },
     logo: {
       height: 80,
-      width: 500,
+      width: 160,
     },
   });
 
