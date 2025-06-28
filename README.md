@@ -106,7 +106,8 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
    yarn test               # runs Jest smoke suite
    ```
 
-2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys (`EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_ANON_KEY`) along with any Slack webhooks.
+2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys (`EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_ANON_KEY`).
+   The older names `SUPABASE_URL` and `SUPABASE_ANON_KEY` are still read if the new ones are missing.
 3. **Database** – run `/supabase/init.sql` or `supabase db reset` then `supabase start`.
 4. **Create Indexes** – `node lib/createIndexes.ts` prints SQL. Execute it via the Supabase SQL editor.
 5. **Sync Draw History** – `yarn sync-draws` fetches the latest results for all games.
