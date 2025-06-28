@@ -82,26 +82,35 @@ export function computeHotCold(
   return record;
 }
 
+interface DrawResultRow {
+  draw_results: {
+    number: number;
+    ball_types: { name: string } | null;
+  }[];
+}
+
 async function updateGameHotCold(game: GameConfig): Promise<void> {
   const { data, error } = await supabase
     .from("draws")
-    .select<{
-      draw_results: { number: number; ball_types: { name: string } | null }[];
-    }>("draw_results(number, ball_types(name))")
+    .select("draw_results(number, ball_types(name))")
     .eq("game_id", game.id);
 
   if (error) throw error;
 
-  const rows = (data ?? []).map((row) => {
+  const typedRows = (data ?? []) as DrawResultRow[];
+  type Result = DrawResultRow["draw_results"][number];
+
+  const rows = typedRows.map((row: DrawResultRow) => {
     const results = row.draw_results || [];
     const winning_numbers = results
-      .filter((r) => r.ball_types?.name === "main")
-      .map((r) => r.number);
+      .filter((r: Result) => r.ball_types?.name === "main")
+      .map((r: Result) => r.number);
     const supplementary_numbers = results
-      .filter((r) => r.ball_types?.name === "supplementary")
-      .map((r) => r.number);
+      .filter((r: Result) => r.ball_types?.name === "supplementary")
+      .map((r: Result) => r.number);
     const powerball =
-      results.find((r) => r.ball_types?.name === "powerball")?.number ?? null;
+      results.find((r: Result) => r.ball_types?.name === "powerball")?.number ??
+      null;
     return {
       winning_numbers,
       supplementary_numbers: supplementary_numbers.length
