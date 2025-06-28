@@ -2,7 +2,7 @@
 
 The data sync scripts require write permissions to your Supabase
 project. Use a **service role key** via the `SUPABASE_SERVICE_ROLE_KEY`
-environment variable when running `npm run sync-draws` or other node
+environment variable when running `yarn sync-draws` or other node
 scripts.
 
 ```

@@ -91,7 +91,7 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 - **Accent (`#F5A623`)** – energy, call-to-action, 4.6:1 on brand-primary.
 - Dark-mode variants (`#081935`, `#FFC04D`) defined in `app/tokens.json`.
 - All colour pairs pass WCAG 2.1 AA; primary text meets AAA.
-- See `design/tokens.json` and Figma **Powerpick Design System** for full ramp.
+- See `app/tokens.json` and Figma **Powerpick Design System** for full ramp.
 
 ---
 
@@ -103,21 +103,21 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
    git clone git@github.com:<org>/powerpick.git
    cd powerpick
    yarn install --offline  # installs from /vendor without network
-   npm test               # runs Jest smoke suite
+   yarn test               # runs Jest smoke suite
    ```
 
 2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys and Slack webhooks.
 3. **Database** – run `/supabase/init.sql` or `supabase db reset` then `supabase start`.
 4. **Create Indexes** – `node lib/createIndexes.ts` prints SQL. Execute it via the Supabase SQL editor.
-5. **Sync Draw History** – `npm run sync:draws` fetches the latest results for all games.
-6. **Update Hot & Cold Numbers** – `npm run sync:hotcold` populates analytics.
+5. **Sync Draw History** – `yarn sync-draws` fetches the latest results for all games.
+6. **Update Hot & Cold Numbers** – `yarn sync-hotcold` populates analytics.
 7. **Run the App**
    \| Platform | Command | Notes |
    \| -------- | ---------------------- | ----- |
-   \| Mobile | `npm run start` | Scan QR in **Expo Go** |
-   \| Web | `npm run web` | Opens `http://localhost:19006` |
+   \| Mobile | `yarn start` | Scan QR in **Expo Go** |
+   \| Web | `yarn web` | Opens `http://localhost:19006` |
 
-> **Tip:** Use `npm run lint` & `npm run format` before every commit to keep CI green.
+> **Tip:** Use `yarn lint` & `yarn format` before every commit to keep CI green.
 
 ---
 
@@ -194,6 +194,7 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ┃ ┣ 📜supabase.ts
 ┃ ┣ 📜syncDraws.cjs
 ┃ ┣ 📜syncDraws.ts
+┃ ┣ 📜syncHotCold.ts
 ┃ ┣ 📜testUtils.tsx
 ┃ ┗ 📜theme.tsx
 ┣ 📂personas
@@ -233,7 +234,7 @@ All role personas live in `/personas/` and are _the_ reference for tone, deliver
 Additional research & design artefacts:
 
 - `Docs/Research/` – user interviews, demographic data.
-- `design/tokens.json` – source of truth for colour/spacing typography.
+- `app/tokens.json` – source of truth for colour and spacing tokens.
 
 ---
 
