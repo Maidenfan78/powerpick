@@ -4,13 +4,16 @@ import { calculateHotColdNumbers } from "./hotCold.ts";
 
 dotenv.config();
 
-const SUPABASE_URL: string = process.env.SUPABASE_URL ?? "";
-const SUPABASE_ANON_KEY: string = process.env.SUPABASE_ANON_KEY ?? "";
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  throw new Error("Supabase credentials are missing");
-}
+let supabase: SupabaseClient;
 
-const supabase: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+function initSupabase(): void {
+  const SUPABASE_URL: string = process.env.SUPABASE_URL ?? "";
+  const SUPABASE_ANON_KEY: string = process.env.SUPABASE_ANON_KEY ?? "";
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    throw new Error("Supabase credentials are missing");
+  }
+  supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
 
 interface GameConfig {
   id: string;
@@ -103,7 +106,7 @@ async function updateGameHotCold(game: GameConfig): Promise<void> {
     throw new Error(msg);
   }
 
-  const typedRows = (data ?? []) as DrawResultRow[];
+  const typedRows = (data ?? []) as unknown as DrawResultRow[];
   type Result = DrawResultRow["draw_results"][number];
 
   const rows = typedRows.map((row: DrawResultRow) => {
@@ -157,4 +160,12 @@ export async function syncAllHotCold(): Promise<void> {
   }
 }
 
-syncAllHotCold().catch((err) => console.error("FATAL:", err));
+async function main(): Promise<void> {
+  initSupabase();
+  await syncAllHotCold();
+}
+
+main().catch((err) => {
+  const errObj = err instanceof Error ? err : new Error(String(err));
+  console.error("FATAL:", errObj);
+});
