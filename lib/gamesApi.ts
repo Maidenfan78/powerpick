@@ -1,5 +1,6 @@
 // lib/gamesApi.ts
 import { supabase } from "./supabase";
+import { normalizeName } from "./gameConfigs";
 
 const STORAGE_BUCKET = "powerpick";
 
@@ -102,4 +103,37 @@ export async function fetchHotColdNumbers(
     powerballHot: data.powerball_hot ?? [],
     powerballCold: data.powerball_cold ?? [],
   } as HotColdNumbers;
+}
+
+export interface DrawResult {
+  draw_number: number;
+  draw_date: string;
+  winning_numbers: number[];
+  supplementary_numbers?: number[] | null;
+  powerball?: number | null;
+}
+
+const DRAW_TABLES: Record<string, string> = {
+  [normalizeName("Powerball")]: "powerball_draws",
+  [normalizeName("Saturday Lotto")]: "saturday_lotto_draws",
+  [normalizeName("Oz Lotto")]: "oz_lotto_draws",
+  [normalizeName("Set for Life")]: "set_for_life_draws",
+  [normalizeName("Weekday Windfall")]: "weekday_windfall_draws",
+};
+
+export async function fetchRecentDraws(
+  gameName: string,
+): Promise<DrawResult[]> {
+  const table = DRAW_TABLES[normalizeName(gameName)];
+  if (!table) throw new Error(`Unknown game: ${gameName}`);
+  const { data, error } = await supabase
+    .from(table)
+    .select("*")
+    .order("draw_number", { ascending: false })
+    .limit(10);
+  if (error) {
+    console.error("Error fetching draws:", error);
+    throw error;
+  }
+  return (data ?? []) as DrawResult[];
 }

@@ -1,4 +1,4 @@
-import { fetchGames, fetchHotColdNumbers } from "../gamesApi";
+import { fetchGames, fetchHotColdNumbers, fetchRecentDraws } from "../gamesApi";
 import { supabase } from "../supabase";
 
 jest.mock("../supabase", () => ({
@@ -122,5 +122,29 @@ describe("fetchHotColdNumbers", () => {
     expect(result.mainHot).toEqual([1, 2]);
     expect(selectMock).toHaveBeenCalledWith("*");
     expect(eqMock).toHaveBeenCalledWith("game_id", "1");
+  });
+});
+
+describe("fetchRecentDraws", () => {
+  test("requests latest draws", async () => {
+    const selectMock = jest.fn().mockReturnThis();
+    const orderMock = jest.fn().mockReturnThis();
+    const limitMock = jest.fn().mockResolvedValue({
+      data: [
+        { draw_number: 1, draw_date: "2020-01-01", winning_numbers: [1, 2, 3] },
+      ],
+      error: null,
+    });
+    fromMock.mockReturnValue({
+      select: selectMock,
+      order: orderMock,
+      limit: limitMock,
+    });
+
+    const result = await fetchRecentDraws("Powerball");
+    expect(fromMock).toHaveBeenCalledWith("powerball_draws");
+    expect(orderMock).toHaveBeenCalledWith("draw_number", { ascending: false });
+    expect(limitMock).toHaveBeenCalledWith(10);
+    expect(result[0].draw_number).toBe(1);
   });
 });
