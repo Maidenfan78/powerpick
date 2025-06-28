@@ -95,7 +95,13 @@ async function updateGameHotCold(game: GameConfig): Promise<void> {
     .select("draw_results(number, ball_types(name))")
     .eq("game_id", game.id);
 
-  if (error) throw error;
+  if (error) {
+    const msg =
+      typeof error === "object" && error && "message" in error
+        ? String((error as { message: unknown }).message)
+        : String(error);
+    throw new Error(msg);
+  }
 
   const typedRows = (data ?? []) as DrawResultRow[];
   type Result = DrawResultRow["draw_results"][number];
@@ -124,7 +130,13 @@ async function updateGameHotCold(game: GameConfig): Promise<void> {
   const { error: upsertError } = await supabase
     .from("hot_cold_numbers")
     .upsert(record, { onConflict: "game_id" });
-  if (upsertError) throw upsertError;
+  if (upsertError) {
+    const msg =
+      typeof upsertError === "object" && upsertError && "message" in upsertError
+        ? String((upsertError as { message: unknown }).message)
+        : String(upsertError);
+    throw new Error(msg);
+  }
   console.log(`✅ Updated hot/cold for game ${game.id}`);
 }
 
@@ -132,7 +144,13 @@ export async function syncAllHotCold(): Promise<void> {
   const { data, error } = await supabase
     .from("games")
     .select("id, main_max, supp_max, powerball_max");
-  if (error) throw error;
+  if (error) {
+    const msg =
+      typeof error === "object" && error && "message" in error
+        ? String((error as { message: unknown }).message)
+        : String(error);
+    throw new Error(msg);
+  }
   const games = (data ?? []) as GameConfig[];
   for (const g of games) {
     await updateGameHotCold(g);
