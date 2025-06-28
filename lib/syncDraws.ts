@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import fetch from "cross-fetch";
 
 // 1) Load environment variables
 dotenv.config();
@@ -75,6 +76,7 @@ async function syncGame(game: Game): Promise<void> {
     const csv = await res.text();
     const rows = parseCsv(csv);
     console.log(`DEBUG: Parsed rows = ${rows.length}`);
+    if (rows[0]) console.log("DEBUG: First row =", rows[0]);
 
     const records: DrawRecord[] = rows.map((row) => {
       const draw_number = Number(row["Draw number"]);
