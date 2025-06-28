@@ -121,7 +121,11 @@ export default function GameOptionsScreen() {
       marginBottom: 16,
       textAlign: "center",
     },
-    container: { flex: 1, padding: 16 },
+    container: {
+      backgroundColor: tokens.color.brand.primary.value,
+      flex: 1,
+      padding: 16,
+    },
     disabled: { opacity: 0.5 },
     header: {
       flexDirection: "row",

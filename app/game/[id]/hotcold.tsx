@@ -25,7 +25,11 @@ export default function HotColdScreen() {
   if (!game) return null;
 
   const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16 },
+    container: {
+      backgroundColor: tokens.color.brand.primary.value,
+      flex: 1,
+      padding: 16,
+    },
     text: {
       color: tokens.color.brand.primary.value,
       fontSize: 16,

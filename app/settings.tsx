@@ -22,7 +22,10 @@ export default function SettingsScreen() {
       marginTop: 8,
       paddingVertical: 8,
     },
-    container: { flex: 1 },
+    container: {
+      backgroundColor: tokens.color.brand.primary.value,
+      flex: 1,
+    },
     dismiss: {
       color: tokens.color.neutral["0"].value,
       fontSize: 20,
