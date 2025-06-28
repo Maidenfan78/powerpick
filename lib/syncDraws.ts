@@ -209,8 +209,5 @@ export async function syncAllGames(concurrency = 2): Promise<void> {
 
 export { parseCsv, extractNumbers };
 
-// 10) If run directly, invoke sync
-const isDirectRun = typeof require !== "undefined" && require.main === module;
-if (isDirectRun) {
-  syncAllGames().catch((err) => console.error("FATAL:", err));
-}
+// 10) Always invoke sync when this file is run:
+syncAllGames().catch((err) => console.error("FATAL:", err));

@@ -122,10 +122,6 @@ export async function syncAllHotCold(): Promise<void> {
   }
 }
 
-const invokedDirectly =
-  (typeof require !== "undefined" && require.main === module) ||
-  process.argv[1]?.split(/[\\/]/).pop() === "syncHotCold.ts";
-
-if (invokedDirectly) {
   syncAllHotCold().catch((err) => console.error("FATAL:", err));
-}
+  
+
