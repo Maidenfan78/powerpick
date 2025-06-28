@@ -7,12 +7,14 @@ dotenv.config();
 let supabase: SupabaseClient;
 
 function initSupabase(): void {
-  const SUPABASE_URL: string = process.env.SUPABASE_URL ?? "";
-  const SUPABASE_ANON_KEY: string = process.env.SUPABASE_ANON_KEY ?? "";
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  const SUPABASE_URL = process.env.SUPABASE_URL;
+  // Use the service role key for backend sync to bypass RLS
+  const SUPABASE_KEY =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_ANON_KEY;
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
     throw new Error("Supabase credentials are missing");
   }
-  supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 }
 
 interface GameConfig {
@@ -49,12 +51,7 @@ export function computeHotCold(
     cfg.main_max,
     percent,
   );
-
-  const record: HotColdRecord = {
-    game_id: cfg.id,
-    main_hot,
-    main_cold,
-  };
+  const record: HotColdRecord = { game_id: cfg.id, main_hot, main_cold };
 
   if (cfg.supp_max) {
     const suppDraws = rows.flatMap((r) => r.supplementary_numbers ?? []);
@@ -93,52 +90,61 @@ interface DrawResultRow {
 }
 
 async function updateGameHotCold(game: GameConfig): Promise<void> {
-  const { data, error } = await supabase
-    .from("draws")
-    .select("draw_results(number, ball_types(name))")
-    .eq("game_id", game.id);
+  const batchSize = 5000;
+  const typedRows: DrawResultRow[] = [];
 
-  if (error) {
-    const msg =
-      typeof error === "object" && error && "message" in error
-        ? String((error as { message: unknown }).message)
-        : String(error);
-    throw new Error(msg);
+  for (let from = 0; ; from += batchSize) {
+    const to = from + batchSize - 1;
+    const { data, error } = await supabase
+      .from("draws")
+      .select("draw_results(number, ball_types(name))")
+      .eq("game_id", game.id)
+      .range(from, to);
+
+    if (error) {
+      throw new Error(
+        typeof error === "object" && "message" in error
+          ? String((error as { message: unknown }).message)
+          : String(error),
+      );
+    }
+
+    const page = (data ?? []) as unknown as DrawResultRow[];
+    if (page.length === 0) break;
+    typedRows.push(...page);
+    if (page.length < batchSize) break;
   }
 
-  const typedRows = (data ?? []) as unknown as DrawResultRow[];
-  type Result = DrawResultRow["draw_results"][number];
-
-  const rows = typedRows.map((row: DrawResultRow) => {
-    const results = row.draw_results || [];
+  const rows: DrawRow[] = typedRows.map((row) => {
+    const results = row.draw_results;
     const winning_numbers = results
-      .filter((r: Result) => r.ball_types?.name === "main")
-      .map((r: Result) => r.number);
+      .filter((r) => r.ball_types?.name === "main")
+      .map((r) => r.number);
     const supplementary_numbers = results
-      .filter((r: Result) => r.ball_types?.name === "supplementary")
-      .map((r: Result) => r.number);
+      .filter((r) => r.ball_types?.name === "supplementary")
+      .map((r) => r.number);
     const powerball =
-      results.find((r: Result) => r.ball_types?.name === "powerball")?.number ??
-      null;
+      results.find((r) => r.ball_types?.name === "powerball")?.number ?? null;
     return {
       winning_numbers,
       supplementary_numbers: supplementary_numbers.length
         ? supplementary_numbers
         : null,
       powerball,
-    } as DrawRow;
+    };
   });
-  const record = computeHotCold(rows, game);
 
+  const record = computeHotCold(rows, game);
   const { error: upsertError } = await supabase
     .from("hot_cold_numbers")
     .upsert(record, { onConflict: "game_id" });
+
   if (upsertError) {
-    const msg =
-      typeof upsertError === "object" && upsertError && "message" in upsertError
+    throw new Error(
+      typeof upsertError === "object" && "message" in upsertError
         ? String((upsertError as { message: unknown }).message)
-        : String(upsertError);
-    throw new Error(msg);
+        : String(upsertError),
+    );
   }
   console.log(`✅ Updated hot/cold for game ${game.id}`);
 }
@@ -147,14 +153,16 @@ export async function syncAllHotCold(): Promise<void> {
   const { data, error } = await supabase
     .from("games")
     .select("id, main_max, supp_max, powerball_max");
+
   if (error) {
-    const msg =
-      typeof error === "object" && error && "message" in error
+    throw new Error(
+      typeof error === "object" && "message" in error
         ? String((error as { message: unknown }).message)
-        : String(error);
-    throw new Error(msg);
+        : String(error),
+    );
   }
-  const games = (data ?? []) as GameConfig[];
+
+  const games = (data ?? []) as unknown as GameConfig[];
   for (const g of games) {
     await updateGameHotCold(g);
   }

@@ -38,31 +38,31 @@ INSERT INTO public.games (
   (
     '11111111-1111-1111-1111-111111111111',
     'Saturday Lotto','AU',
-    'https://…/tattslotto.png',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/tattslotto.png',
     5000000,'2025-06-22 11:19:16.610769+00',
     45,6,2,45,NULL
   ),(
     '22222222-2222-2222-2222-222222222222',
     'Oz Lotto','AU',
-    'https://…/Oz_Lotto.png',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/Oz_Lotto.png',
     5000000,'2025-06-22 11:19:16.610769+00',
     47,7,3,47,NULL
   ),(
     '33333333-3333-3333-3333-333333333333',
     'Powerball','AU',
-    'https://…/powerball.png',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/powerball.png',
     5000000,'2025-06-22 11:19:16.610769+00',
     35,7,0,0,20
   ),(
     '44444444-4444-4444-4444-444444444444',
     'Weekday Windfall','AU',
-    'https://…/weekday_windfall.png',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/weekday_windfall.png',
     5000000,'2025-06-22 11:19:16.610769+00',
     45,6,2,45,NULL
   ),(
     '55555555-5555-5555-5555-555555555555',
     'Set for Life','AU',
-    'https://…/set_for_life.png',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/set_for_life.png',
     5000000,'2025-06-22 11:19:16.610769+00',
     44,7,2,44,NULL
   )
