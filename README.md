@@ -65,6 +65,8 @@ Road‑mapping is broken into **phases** – each two weeks long and tracked in 
 | **5** |  15‑18 | Pre‑Launch Hardening                  | Zero P1 bugs; store listings approved                                        |
 | **6** |  19‑∞  | Launch & Growth                       | Continuous ASO, feature expansion                                            |
 
+_Current phase: **4 – Implementation**_
+
 For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.md`](Docs/WORKFLOW.md).
 
 ---
@@ -127,6 +129,7 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ┣ 📜.prettierignore
 ┣ 📜.yarnrc
 ┣ 📜AGENTS.md
+┣ 📜LICENSE
 ┣ 📜app.config.ts
 ┣ 📜app.json
 ┣ 📜assets.d.ts
@@ -150,13 +153,18 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ┃ ┗ 📜tokens.json
 ┣ 📂assets
 ┃ ┣ 📜adaptive-icon.png
-┃ ┣ 📜logo.png
 ┃ ┣ 📜favicon.png
 ┃ ┣ 📜icon.png
+┃ ┣ 📜logo.png
+┃ ┣ 📜logo.svg
 ┃ ┣ 📜placeholder.png
-┃ ┗ 📜splash-icon.png
+┃ ┣ 📜powerball.png
+┃ ┣ 📜tattslotto.png
+┃ ┣ 📜splash-icon.png
+┃ ┗ 📜weekday_windfall.png
 ┣ 📂components
 ┃ ┣ 📜Auth.tsx
+┃ ┣ 📜ComingSoon.tsx
 ┃ ┣ 📜GameCard.tsx
 ┃ ┣ 📜GameGrid.tsx
 ┃ ┣ 📜Header.tsx
@@ -179,6 +187,8 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ┃ ┣ 📜gameConfigs.ts
 ┃ ┣ 📜gamesApi.ts
 ┃ ┣ 📜generator.ts
+┃ ┣ 📜hotCold.ts
+┃ ┣ 📜regionConfig.ts
 ┃ ┣ 📜supabase.ts
 ┃ ┣ 📜syncDraws.cjs
 ┃ ┣ 📜syncDraws.ts

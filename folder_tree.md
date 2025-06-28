@@ -5,6 +5,7 @@
 ┣ 📜.prettierignore
 ┣ 📜.yarnrc
 ┣ 📜AGENTS.md
+┣ 📜LICENSE
 ┣ 📜app.config.ts
 ┣ 📜app.json
 ┣ 📜assets.d.ts
@@ -31,10 +32,15 @@
 ┃ ┣ 📜favicon.png
 ┃ ┣ 📜icon.png
 ┃ ┣ 📜logo.png
+┃ ┣ 📜logo.svg
 ┃ ┣ 📜placeholder.png
-┃ ┗ 📜splash-icon.png
+┃ ┣ 📜powerball.png
+┃ ┣ 📜tattslotto.png
+┃ ┣ 📜splash-icon.png
+┃ ┗ 📜weekday_windfall.png
 ┣ 📂components
 ┃ ┣ 📜Auth.tsx
+┃ ┣ 📜ComingSoon.tsx
 ┃ ┣ 📜GameCard.tsx
 ┃ ┣ 📜GameGrid.tsx
 ┃ ┣ 📜Header.tsx
@@ -57,6 +63,8 @@
 ┃ ┣ 📜gameConfigs.ts
 ┃ ┣ 📜gamesApi.ts
 ┃ ┣ 📜generator.ts
+┃ ┣ 📜hotCold.ts
+┃ ┣ 📜regionConfig.ts
 ┃ ┣ 📜supabase.ts
 ┃ ┣ 📜syncDraws.cjs
 ┃ ┣ 📜syncDraws.ts
