@@ -87,7 +87,7 @@ describe("GameOptionsScreen", () => {
     const { getByText } = render(<GameOptionsScreen />, { wrapper: Wrapper });
     expect(getByText("Pick 8 main + 2 supp + Powerball")).toBeTruthy();
   });
-  test("sliders are disabled when auto is on", () => {
+  test("hot ratio slider is disabled when auto is on", () => {
     const { getByLabelText } = render(<GameOptionsScreen />, {
       wrapper: Wrapper,
     });
@@ -95,12 +95,12 @@ describe("GameOptionsScreen", () => {
     expect(ratio.props.disabled).toBe(true);
   });
 
-  test("sliders are disabled when auto is on", () => {
+  test("hot percent slider is disabled when auto is on", () => {
     const { getByLabelText } = render(<GameOptionsScreen />, {
       wrapper: Wrapper,
     });
-    const ratio = getByLabelText("Hot cold ratio");
-    expect(ratio.props.disabled).toBe(true);
+    const percent = getByLabelText("Hot cold percent");
+    expect(percent.props.disabled).toBe(true);
   });
 
   test("sliders can be adjusted when auto is off", () => {

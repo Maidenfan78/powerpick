@@ -6,8 +6,18 @@ test("generateSet returns numbers within range", () => {
   let i = 0;
   const rand = () => seq[i++ % seq.length];
   const nums = generateSet({ maxNumber: 10, pickCount: 3 }, rand);
-  expect(nums).toEqual([3, 4, 5]);
+  expect(nums).toEqual([3, 5, 6]);
   expect(nums.every((n) => n >= 1 && n <= 10)).toBe(true);
+});
+
+test("generateSet favors hot numbers when ratio is 1", () => {
+  const rand = () => 0.5;
+  const nums = generateSet(
+    { maxNumber: 10, pickCount: 3, hotNumbers: [1, 2, 3], hotRatio: 1 },
+    rand,
+  );
+  const hotCount = nums.filter((n) => [1, 2, 3].includes(n)).length;
+  expect(hotCount).toBeGreaterThanOrEqual(1);
 });
 
 test("generateSet throws when pickCount exceeds maxNumber", () => {

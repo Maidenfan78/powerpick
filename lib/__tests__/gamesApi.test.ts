@@ -1,4 +1,4 @@
-import { fetchGames } from "../gamesApi";
+import { fetchGames, fetchHotColdNumbers } from "../gamesApi";
 import { supabase } from "../supabase";
 
 jest.mock("../supabase", () => ({
@@ -95,5 +95,32 @@ describe("fetchGames", () => {
     fromMock.mockReturnValue({ select: selectMock });
 
     await expect(fetchGames()).rejects.toThrow(err);
+  });
+});
+
+describe("fetchHotColdNumbers", () => {
+  test("returns hot and cold arrays", async () => {
+    const response = {
+      data: {
+        main_hot: [1, 2],
+        main_cold: [9, 10],
+        supp_hot: [3],
+        supp_cold: [8],
+      },
+      error: null,
+    };
+    const selectMock = jest.fn().mockReturnThis();
+    const eqMock = jest.fn().mockReturnThis();
+    const singleMock = jest.fn().mockResolvedValue(response);
+    fromMock.mockReturnValue({
+      select: selectMock,
+      eq: eqMock,
+      single: singleMock,
+    });
+
+    const result = await fetchHotColdNumbers("1");
+    expect(result.mainHot).toEqual([1, 2]);
+    expect(selectMock).toHaveBeenCalledWith("*");
+    expect(eqMock).toHaveBeenCalledWith("game_id", "1");
   });
 });

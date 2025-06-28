@@ -72,3 +72,34 @@ export async function fetchGames(): Promise<Game[]> {
     };
   });
 }
+
+export interface HotColdNumbers {
+  mainHot: number[];
+  mainCold: number[];
+  suppHot?: number[];
+  suppCold?: number[];
+  powerballHot?: number[];
+  powerballCold?: number[];
+}
+
+export async function fetchHotColdNumbers(
+  gameId: string,
+): Promise<HotColdNumbers> {
+  const { data, error } = await supabase
+    .from("hot_cold_numbers")
+    .select("*")
+    .eq("game_id", gameId)
+    .single();
+  if (error) {
+    console.error("Error fetching hot/cold:", error);
+    throw error;
+  }
+  return {
+    mainHot: data.main_hot ?? [],
+    mainCold: data.main_cold ?? [],
+    suppHot: data.supp_hot ?? [],
+    suppCold: data.supp_cold ?? [],
+    powerballHot: data.powerball_hot ?? [],
+    powerballCold: data.powerball_cold ?? [],
+  } as HotColdNumbers;
+}
