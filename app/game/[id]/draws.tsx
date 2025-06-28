@@ -15,7 +15,7 @@ export default function DrawsScreen() {
   useEffect(() => {
     const load = async () => {
       if (game) {
-        const data = await fetchRecentDraws(game.name);
+        const data = await fetchRecentDraws(game.id);
         setDraws(data);
       }
     };

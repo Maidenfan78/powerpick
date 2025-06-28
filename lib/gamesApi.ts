@@ -1,6 +1,5 @@
 // lib/gamesApi.ts
 import { supabase } from "./supabase";
-import { normalizeName } from "./gameConfigs";
 
 const STORAGE_BUCKET = "powerpick";
 
@@ -113,27 +112,50 @@ export interface DrawResult {
   powerball?: number | null;
 }
 
-const DRAW_TABLES: Record<string, string> = {
-  [normalizeName("Powerball")]: "powerball_draws",
-  [normalizeName("Saturday Lotto")]: "saturday_lotto_draws",
-  [normalizeName("Oz Lotto")]: "oz_lotto_draws",
-  [normalizeName("Set for Life")]: "set_for_life_draws",
-  [normalizeName("Weekday Windfall")]: "weekday_windfall_draws",
-};
+interface DrawRow {
+  draw_number: number;
+  draw_date: string;
+  draw_results: {
+    number: number;
+    ball_types: { name: string } | null;
+  }[];
+}
 
-export async function fetchRecentDraws(
-  gameName: string,
-): Promise<DrawResult[]> {
-  const table = DRAW_TABLES[normalizeName(gameName)];
-  if (!table) throw new Error(`Unknown game: ${gameName}`);
+export async function fetchRecentDraws(gameId: string): Promise<DrawResult[]> {
   const { data, error } = await supabase
-    .from(table)
-    .select("*")
+    .from("draws")
+    .select<DrawRow>(
+      "draw_number, draw_date, draw_results(number, ball_types(name))",
+    )
+    .eq("game_id", gameId)
     .order("draw_number", { ascending: false })
     .limit(10);
   if (error) {
     console.error("Error fetching draws:", error);
     throw error;
   }
-  return (data ?? []) as DrawResult[];
+
+  return (data ?? []).map((row) => {
+    const results = row.draw_results || [];
+    const winning_numbers = results
+      .filter((r) => r.ball_types?.name === "main")
+      .map((r) => r.number)
+      .sort((a, b) => a - b);
+    const supplementary_numbers = results
+      .filter((r) => r.ball_types?.name === "supplementary")
+      .map((r) => r.number)
+      .sort((a, b) => a - b);
+    const powerball =
+      results.find((r) => r.ball_types?.name === "powerball")?.number ?? null;
+
+    return {
+      draw_number: row.draw_number,
+      draw_date: row.draw_date,
+      winning_numbers,
+      supplementary_numbers: supplementary_numbers.length
+        ? supplementary_numbers
+        : null,
+      powerball,
+    } as DrawResult;
+  });
 }
