@@ -16,7 +16,7 @@ export interface Game {
 }
 
 export interface GameRow {
-  id: string;
+  id: string | number;
   name: string;
   logo_url: string;
   jackpot: string;
@@ -60,7 +60,7 @@ export async function fetchGames(): Promise<Game[]> {
 
     console.log(`[GamesAPI] "${row.id}" → ${url}`);
     return {
-      id: row.id,
+      id: String(row.id),
       name: row.name,
       logoUrl: url,
       jackpot: `$${Number(row.jackpot).toLocaleString()}`,

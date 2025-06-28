@@ -61,6 +61,34 @@ describe("fetchGames", () => {
     );
   });
 
+  test("converts numeric ids to strings", async () => {
+    const selectMock = jest.fn().mockResolvedValue({
+      data: [
+        {
+          id: 2,
+          name: "Oz Lotto",
+          logo_url: "oz.png",
+          jackpot: "2000",
+          main_max: 47,
+          main_count: 7,
+          supp_count: 2,
+          supp_max: 47,
+          powerball_max: 3,
+        },
+      ],
+      error: null,
+    });
+    fromMock.mockReturnValue({ select: selectMock });
+    storageFromMock.mockReturnValue({
+      getPublicUrl: jest.fn().mockReturnValue({
+        data: { publicUrl: "https://cdn.example.com/oz.png" },
+      }),
+    });
+
+    const games = await fetchGames();
+    expect(games[0].id).toBe("2");
+  });
+
   test("throws when Supabase returns an error", async () => {
     const err = new Error("boom");
     const selectMock = jest.fn().mockResolvedValue({ data: null, error: err });
