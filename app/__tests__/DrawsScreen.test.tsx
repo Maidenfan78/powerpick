@@ -51,6 +51,7 @@ describe("DrawsScreen", () => {
           name: "Powerball",
           logoUrl: "",
           jackpot: "$0",
+          nextDrawTime: null,
           mainMax: 35,
           mainCount: 7,
           suppCount: 1,

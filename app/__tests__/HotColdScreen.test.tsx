@@ -56,6 +56,7 @@ describe("HotColdScreen", () => {
           name: "Test",
           logoUrl: "",
           jackpot: "$0",
+          nextDrawTime: null,
           mainMax: 5,
           mainCount: 3,
           suppCount: null,

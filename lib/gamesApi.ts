@@ -23,6 +23,7 @@ export interface Game {
   suppMax: number | null;
   powerballMax: number | null;
   fromDrawNumber: number;
+  nextDrawTime: string | null;
 }
 
 export interface GameRow {
@@ -36,6 +37,7 @@ export interface GameRow {
   supp_max: number | null;
   powerball_max: number | null;
   from_draw_number: number;
+  next_draw_time: string | null;
 }
 
 /** Collapse any “//” in the pathname (preserving “https://”) */
@@ -55,7 +57,7 @@ export async function fetchGames(force = false): Promise<Game[]> {
   const { data: rows, error } = await supabase
     .from("games")
     .select(
-      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max, from_draw_number",
+      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max, from_draw_number, next_draw_time",
     );
 
   if (error) {
@@ -92,6 +94,7 @@ export async function fetchGames(force = false): Promise<Game[]> {
       suppMax: row.supp_max ?? null,
       powerballMax: row.powerball_max ?? null,
       fromDrawNumber: row.from_draw_number,
+      nextDrawTime: row.next_draw_time ?? null,
     };
   });
 

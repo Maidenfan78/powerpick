@@ -3,6 +3,23 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { ThemeProvider } from "../../lib/theme";
 import GameGrid from "../../components/GameGrid";
+import { fetchRecentDraws } from "../../lib/gamesApi";
+
+jest.mock("../../lib/gamesApi");
+
+const fetchRecentDrawsMock = fetchRecentDraws as jest.Mock;
+
+jest.mock("expo-constants", () => ({
+  __esModule: true,
+  default: {
+    expoConfig: {
+      extra: {
+        EXPO_PUBLIC_SUPABASE_URL: "https://test.supabase",
+        EXPO_PUBLIC_SUPABASE_ANON_KEY: "anon-test-key",
+      },
+    },
+  },
+}));
 
 const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <PaperProvider>
@@ -17,6 +34,7 @@ describe("GameGrid", () => {
       name: "Game 1",
       logoUrl: "url1",
       jackpot: "$1",
+      nextDrawTime: null,
       mainMax: null,
       mainCount: null,
       suppCount: null,
@@ -29,6 +47,7 @@ describe("GameGrid", () => {
       name: "Game 2",
       logoUrl: "url2",
       jackpot: "$2",
+      nextDrawTime: null,
       mainMax: null,
       mainCount: null,
       suppCount: null,
@@ -37,6 +56,10 @@ describe("GameGrid", () => {
       fromDrawNumber: 2,
     },
   ];
+
+  beforeEach(() => {
+    fetchRecentDrawsMock.mockResolvedValue([]);
+  });
 
   test("renders games and triggers selection", () => {
     const onSelect = jest.fn();
