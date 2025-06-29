@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-native/no-unused-styles */
+import React, { useEffect, useState, useMemo } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
@@ -24,21 +25,26 @@ export default function DrawsScreen() {
 
   if (!game) return null;
 
-  const styles = StyleSheet.create({
-    container: {
-      backgroundColor: tokens.color.brand.primary.value,
-      flex: 1,
-      padding: 16,
-    },
-    item: { paddingVertical: 8 },
-    text: { color: tokens.color.neutral["0"].value, fontSize: 16 },
-    title: {
-      color: tokens.color.neutral["0"].value,
-      fontSize: 20,
-      marginBottom: 16,
-      textAlign: "center",
-    },
-  });
+  // eslint-disable-next-line react-native/no-unused-styles
+  const styles = useMemo(
+    () =>
+      StyleSheet.create({
+        container: {
+          backgroundColor: tokens.color.brand.primary.value,
+          flex: 1,
+          padding: 16,
+        },
+        item: { paddingVertical: 8 },
+        text: { color: tokens.color.neutral["0"].value, fontSize: 16 },
+        title: {
+          color: tokens.color.neutral["0"].value,
+          fontSize: 20,
+          marginBottom: 16,
+          textAlign: "center",
+        },
+      }),
+    [tokens],
+  );
 
   return (
     <SafeAreaView style={styles.container}>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react-native/no-unused-styles */
+import React, { useState, useMemo } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, Pressable, StyleSheet, Switch } from "react-native";
 import Slider from "@react-native-community/slider";
@@ -105,45 +106,54 @@ export default function GameOptionsScreen() {
     if (id) saveNumbers(id, nums);
   };
 
-  const styles = StyleSheet.create({
-    button: {
-      alignItems: "center",
-      backgroundColor: tokens.color.brand.primary.value,
-      borderRadius: 8,
-      padding: 12,
-    },
-    buttonSpacing: { marginTop: 12 },
-    buttonText: { color: tokens.color.neutral["0"].value, fontSize: 18 },
-    close: { color: tokens.color.neutral["0"].value, fontSize: 20 },
-    configText: {
-      color: tokens.color.neutral["0"].value,
-      fontSize: 16,
-      marginBottom: 16,
-      textAlign: "center",
-    },
-    container: {
-      backgroundColor: tokens.color.brand.primary.value,
-      flex: 1,
-      padding: 16,
-    },
-    disabled: { opacity: 0.5 },
-    header: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      marginBottom: 16,
-    },
-    numbers: {
-      color: tokens.color.neutral["0"].value,
-      fontSize: 24,
-      marginVertical: 16,
-      textAlign: "center",
-    },
-    sliderContainer: { marginBottom: 16 },
-    sliderLabel: { color: tokens.color.neutral["0"].value },
-    title: { color: tokens.color.neutral["0"].value, fontSize: 20 },
-    toggleRow: { alignItems: "center", flexDirection: "row", marginBottom: 16 },
-    toggleText: { color: tokens.color.neutral["0"].value, marginLeft: 8 },
-  });
+  // eslint-disable-next-line react-native/no-unused-styles
+  const styles = useMemo(
+    () =>
+      StyleSheet.create({
+        button: {
+          alignItems: "center",
+          backgroundColor: tokens.color.brand.primary.value,
+          borderRadius: 8,
+          padding: 12,
+        },
+        buttonSpacing: { marginTop: 12 },
+        buttonText: { color: tokens.color.neutral["0"].value, fontSize: 18 },
+        close: { color: tokens.color.neutral["0"].value, fontSize: 20 },
+        configText: {
+          color: tokens.color.neutral["0"].value,
+          fontSize: 16,
+          marginBottom: 16,
+          textAlign: "center",
+        },
+        container: {
+          backgroundColor: tokens.color.brand.primary.value,
+          flex: 1,
+          padding: 16,
+        },
+        disabled: { opacity: 0.5 },
+        header: {
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginBottom: 16,
+        },
+        numbers: {
+          color: tokens.color.neutral["0"].value,
+          fontSize: 24,
+          marginVertical: 16,
+          textAlign: "center",
+        },
+        sliderContainer: { marginBottom: 16 },
+        sliderLabel: { color: tokens.color.neutral["0"].value },
+        title: { color: tokens.color.neutral["0"].value, fontSize: 20 },
+        toggleRow: {
+          alignItems: "center",
+          flexDirection: "row",
+          marginBottom: 16,
+        },
+        toggleText: { color: tokens.color.neutral["0"].value, marginLeft: 8 },
+      }),
+    [tokens],
+  );
 
   return (
     <SafeAreaView style={styles.container}>

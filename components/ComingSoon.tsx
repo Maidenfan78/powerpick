@@ -1,5 +1,7 @@
+/* eslint-disable react-native/no-unused-styles */
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
+import { useMemo } from "react";
 import { useTheme } from "../lib/theme";
 
 export default function ComingSoon({
@@ -10,15 +12,20 @@ export default function ComingSoon({
   region: string;
 }) {
   const { tokens } = useTheme();
-  const styles = StyleSheet.create({
-    container: {
-      alignItems: "center",
-      backgroundColor: tokens.color.brand.primary.value,
-      flex: 1,
-      justifyContent: "center",
-    },
-    image: { height: 200, resizeMode: "contain", width: 200 },
-  });
+  // eslint-disable-next-line react-native/no-unused-styles
+  const styles = useMemo(
+    () =>
+      StyleSheet.create({
+        container: {
+          alignItems: "center",
+          backgroundColor: tokens.color.brand.primary.value,
+          flex: 1,
+          justifyContent: "center",
+        },
+        image: { height: 200, resizeMode: "contain", width: 200 },
+      }),
+    [tokens],
+  );
   return (
     <View style={styles.container}>
       <Image
