@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import fetch from "cross-fetch";
+import { log, error } from "./logger";
 
 // 1) Load environment variables
 dotenv.config();
@@ -21,14 +22,14 @@ if (!SUPABASE_URL || !supabaseKey) {
 }
 
 // 3) Debug credentials (show which key is used)
-console.log("DEBUG: SUPABASE_URL  =", SUPABASE_URL);
+log("DEBUG: SUPABASE_URL  =", SUPABASE_URL);
 if (SUPABASE_SERVICE_ROLE_KEY) {
-  console.log(
+  log(
     "DEBUG: Using service role key",
     SUPABASE_SERVICE_ROLE_KEY.slice(0, 4) + "...",
   );
 } else {
-  console.log("DEBUG: Using anon key", SUPABASE_ANON_KEY.slice(0, 4) + "...");
+  log("DEBUG: Using anon key", SUPABASE_ANON_KEY.slice(0, 4) + "...");
 }
 
 // 4) Initialize Supabase client
@@ -93,18 +94,18 @@ function formatDateDMY(dmy: string): string {
 
 // 8) Sync a single game
 async function syncGame(game: Game): Promise<void> {
-  console.log(`\n🔄 Syncing game ${game.apiId}`);
+  log(`\n🔄 Syncing game ${game.apiId}`);
   let processed = 0;
   try {
     const url = `https://api.lotterywest.wa.gov.au/api/v1/games/${game.apiId}/results-csv`;
-    console.log("FETCH:", url);
+    log("FETCH:", url);
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const csv = await res.text();
     const rows = parseCsv(csv);
-    console.log(`DEBUG: Parsed rows = ${rows.length}`);
-    if (rows[0]) console.log("DEBUG: First row =", rows[0]);
+    log(`DEBUG: Parsed rows = ${rows.length}`);
+    if (rows[0]) log("DEBUG: First row =", rows[0]);
 
     const drawRecords: {
       game_id: string;
@@ -139,7 +140,7 @@ async function syncGame(game: Game): Promise<void> {
       .select();
 
     if (upsertErr) {
-      console.error("UPSERT DRAW ERROR:", upsertErr);
+      error("UPSERT DRAW ERROR:", upsertErr);
       return;
     }
 
@@ -181,17 +182,15 @@ async function syncGame(game: Game): Promise<void> {
     const { error: resultErr } = await supabase
       .from("draw_results")
       .insert(resultRows);
-    if (resultErr) console.error("INSERT RESULTS ERROR:", resultErr);
+    if (resultErr) error("INSERT RESULTS ERROR:", resultErr);
     else {
       processed = drawRecords.length;
-      console.log(
-        `✅ Upserted ${processed} draws (${resultRows.length} results)`,
-      );
+      log(`✅ Upserted ${processed} draws (${resultRows.length} results)`);
     }
   } catch (err) {
-    console.error("SYNC ERROR:", game.apiId, err);
+    error("SYNC ERROR:", game.apiId, err);
   } finally {
-    console.log(`Finished game ${game.apiId}: processed ${processed} draws`);
+    log(`Finished game ${game.apiId}: processed ${processed} draws`);
   }
 }
 
@@ -214,4 +213,4 @@ export async function syncAllGames(concurrency = 2): Promise<void> {
 export { parseCsv, extractNumbers };
 
 // 10) Always invoke sync when this file is run:
-syncAllGames().catch((err) => console.error("FATAL:", err));
+syncAllGames().catch((err) => error("FATAL:", err));
