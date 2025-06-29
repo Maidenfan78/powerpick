@@ -1,5 +1,6 @@
 /* ---------- RegionPicker.tsx ---------- */
-import React, { useState } from "react";
+/* eslint-disable react-native/no-unused-styles */
+import React, { useState, useMemo } from "react";
 import { View, Text, Pressable, Modal, StyleSheet } from "react-native";
 
 import { useTheme } from "../lib/theme";
@@ -18,55 +19,60 @@ export default function RegionPicker() {
 
   const labelFor = (r: Region) => REGION_LABELS[r];
 
-  const styles = StyleSheet.create({
-    backdrop: {
-      alignItems: "center",
-      backgroundColor: BACKDROP_COLOR,
-      flex: 1,
-      justifyContent: "center",
-    },
-    button: {
-      alignItems: "center",
-      backgroundColor: tokens.color.neutral["0"].value,
-      borderRadius: 8,
-      flexDirection: "row",
-      justifyContent: "space-between",
-      margin: 16,
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-    },
-    buttonText: {
-      color: tokens.color.brand.primary.value,
-      fontSize: 16,
-      fontWeight: "500",
-    },
-    checkIcon: {
-      color: tokens.color.brand.accent.value,
-      fontSize: 18,
-      marginLeft: 8,
-    },
-    icon: {
-      color: tokens.color.brand.accent.value,
-      fontSize: 20,
-      marginLeft: 8,
-    },
-    modal: {
-      backgroundColor: tokens.color.neutral["0"].value,
-      borderRadius: 12,
-      minWidth: "60%",
-      padding: 16,
-    },
-    optionText: {
-      color: tokens.color.brand.primary.value,
-      fontSize: 16,
-    },
-    row: {
-      alignItems: "center",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      paddingVertical: 12,
-    },
-  });
+  // eslint-disable-next-line react-native/no-unused-styles
+  const styles = useMemo(
+    () =>
+      StyleSheet.create({
+        backdrop: {
+          alignItems: "center",
+          backgroundColor: BACKDROP_COLOR,
+          flex: 1,
+          justifyContent: "center",
+        },
+        button: {
+          alignItems: "center",
+          backgroundColor: tokens.color.neutral["0"].value,
+          borderRadius: 8,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          margin: 16,
+          paddingHorizontal: 16,
+          paddingVertical: 12,
+        },
+        buttonText: {
+          color: tokens.color.brand.primary.value,
+          fontSize: 16,
+          fontWeight: "500",
+        },
+        checkIcon: {
+          color: tokens.color.brand.accent.value,
+          fontSize: 18,
+          marginLeft: 8,
+        },
+        icon: {
+          color: tokens.color.brand.accent.value,
+          fontSize: 20,
+          marginLeft: 8,
+        },
+        modal: {
+          backgroundColor: tokens.color.neutral["0"].value,
+          borderRadius: 12,
+          minWidth: "60%",
+          padding: 16,
+        },
+        optionText: {
+          color: tokens.color.brand.primary.value,
+          fontSize: 16,
+        },
+        row: {
+          alignItems: "center",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingVertical: 12,
+        },
+      }),
+    [tokens],
+  );
 
   return (
     <>

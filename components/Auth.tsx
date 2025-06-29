@@ -3,15 +3,16 @@ import { View, Alert, StyleSheet, Text } from "react-native";
 import { supabase } from "../lib/supabase";
 import { TextInput, Button } from "react-native-paper";
 
+const styles = StyleSheet.create({
+  container: { padding: 16 },
+  input: { marginBottom: 16 },
+  signIn: { marginBottom: 8 },
+});
+
 export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const styles = StyleSheet.create({
-    container: { padding: 16 },
-    input: { marginBottom: 16 },
-    signIn: { marginBottom: 8 },
-  });
 
   async function signIn() {
     setLoading(true);
