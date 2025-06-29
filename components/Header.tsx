@@ -45,7 +45,7 @@ export default function Header() {
         accessibilityLabel="Powerpick logo"
         resizeMode="contain"
       />
-      <Pressable onPress={() => router.push("/settings")}>
+      <Pressable onPress={() => router.navigate("/settings")}>
         <Text style={styles.icon}>☰</Text>
       </Pressable>
     </View>

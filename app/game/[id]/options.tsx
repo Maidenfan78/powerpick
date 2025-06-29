@@ -9,6 +9,7 @@ import {
   Switch,
   Platform,
   Share,
+  ScrollView,
 } from "react-native";
 import Slider from "@react-native-community/slider";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -185,6 +186,7 @@ export default function GameOptionsScreen() {
           marginVertical: 16,
           textAlign: "center",
         },
+        scrollContent: { paddingBottom: 16 },
         setLabel: {
           color: tokens.color.neutral["0"].value,
           fontSize: 20,
@@ -206,147 +208,149 @@ export default function GameOptionsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>
-          {game ? `${game.name} Options` : "Game Options"}
-        </Text>
-        <Pressable onPress={() => router.back()} accessibilityRole="button">
-          <Text style={styles.close}>✕</Text>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={styles.header}>
+          <Text style={styles.title}>
+            {game ? `${game.name} Options` : "Game Options"}
+          </Text>
+          <Pressable onPress={() => router.back()} accessibilityRole="button">
+            <Text style={styles.close}>✕</Text>
+          </Pressable>
+        </View>
+        {game && (
+          <Image
+            source={game.logoUrl ? { uri: game.logoUrl } : placeholder}
+            style={styles.logo}
+            resizeMode="contain"
+            accessibilityLabel={`${game.name} logo`}
+          />
+        )}
+
+        {description !== "" && (
+          <Text style={styles.configText}>Pick {description}</Text>
+        )}
+
+        {sets.length > 0 && (
+          <>
+            {sets.map((nums, idx) => {
+              const { main, supp, pb } = sliceNumbers(nums);
+              return (
+                <View key={`set-${idx}`}>
+                  {sets.length > 1 && (
+                    <Text style={styles.setLabel}>Set {idx + 1}</Text>
+                  )}
+                  <Text style={styles.numbers}>Main: {main.join(" - ")}</Text>
+                  {supp.length > 0 && (
+                    <Text style={styles.numbers}>Supp: {supp.join(" - ")}</Text>
+                  )}
+                  {pb !== undefined && (
+                    <Text style={styles.numbers}>Powerball: {pb}</Text>
+                  )}
+                </View>
+              );
+            })}
+          </>
+        )}
+
+        <View style={styles.sliderContainer}>
+          <Text style={styles.sliderLabel}>Sets to Generate: {setCount}</Text>
+          <Slider
+            value={setCount}
+            minimumValue={1}
+            maximumValue={50}
+            step={1}
+            onValueChange={setSetCount}
+            accessibilityLabel="Set count"
+          />
+        </View>
+
+        <View accessibilityLabel="Auto toggle" style={styles.toggleRow}>
+          <Switch
+            value={isAuto}
+            onValueChange={setIsAuto}
+            accessibilityRole="switch"
+          />
+          <Text style={styles.toggleText}>Auto</Text>
+        </View>
+
+        <View
+          pointerEvents={isAuto ? "none" : "auto"}
+          style={[styles.sliderContainer, isAuto && styles.disabled]}
+        >
+          <Text style={styles.sliderLabel}>Hot vs Cold: {hotRatio}% Hot</Text>
+          <Slider
+            value={hotRatio}
+            minimumValue={0}
+            maximumValue={100}
+            step={1}
+            onValueChange={setHotRatio}
+            disabled={isAuto}
+            accessibilityLabel="Hot cold ratio"
+          />
+          <Text style={styles.sliderLabel}>
+            Hot/Cold Numbers Used: {hotPercent}%
+          </Text>
+          <Slider
+            value={hotPercent}
+            minimumValue={0}
+            maximumValue={100}
+            step={1}
+            onValueChange={setHotPercent}
+            disabled={isAuto}
+            accessibilityLabel="Hot cold percent"
+          />
+        </View>
+
+        <Pressable
+          style={styles.button}
+          onPress={handleGenerate}
+          accessibilityRole="button"
+        >
+          <Text style={styles.buttonText}>Generate Numbers</Text>
         </Pressable>
-      </View>
-      {game && (
-        <Image
-          source={game.logoUrl ? { uri: game.logoUrl } : placeholder}
-          style={styles.logo}
-          resizeMode="contain"
-          accessibilityLabel={`${game.name} logo`}
-        />
-      )}
 
-      {description !== "" && (
-        <Text style={styles.configText}>Pick {description}</Text>
-      )}
+        {sets.length > 0 && (
+          <>
+            <Pressable
+              style={[styles.button, styles.buttonSpacing]}
+              onPress={() => handleDownload("csv")}
+              accessibilityRole="button"
+            >
+              <Text style={styles.buttonText}>Download CSV</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonSpacing]}
+              onPress={() => handleDownload("txt")}
+              accessibilityRole="button"
+            >
+              <Text style={styles.buttonText}>Download TXT</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonSpacing]}
+              onPress={() => handleDownload("xlsx")}
+              accessibilityRole="button"
+            >
+              <Text style={styles.buttonText}>Download XLSX</Text>
+            </Pressable>
+          </>
+        )}
 
-      {sets.length > 0 && (
-        <>
-          {sets.map((nums, idx) => {
-            const { main, supp, pb } = sliceNumbers(nums);
-            return (
-              <View key={`set-${idx}`}>
-                {sets.length > 1 && (
-                  <Text style={styles.setLabel}>Set {idx + 1}</Text>
-                )}
-                <Text style={styles.numbers}>Main: {main.join(" - ")}</Text>
-                {supp.length > 0 && (
-                  <Text style={styles.numbers}>Supp: {supp.join(" - ")}</Text>
-                )}
-                {pb !== undefined && (
-                  <Text style={styles.numbers}>Powerball: {pb}</Text>
-                )}
-              </View>
-            );
-          })}
-        </>
-      )}
+        <Pressable
+          style={[styles.button, styles.buttonSpacing]}
+          onPress={() => router.push(`/game/${id}/draws`)}
+          accessibilityRole="button"
+        >
+          <Text style={styles.buttonText}>Last 10 Draws</Text>
+        </Pressable>
 
-      <View style={styles.sliderContainer}>
-        <Text style={styles.sliderLabel}>Sets to Generate: {setCount}</Text>
-        <Slider
-          value={setCount}
-          minimumValue={1}
-          maximumValue={50}
-          step={1}
-          onValueChange={setSetCount}
-          accessibilityLabel="Set count"
-        />
-      </View>
-
-      <View accessibilityLabel="Auto toggle" style={styles.toggleRow}>
-        <Switch
-          value={isAuto}
-          onValueChange={setIsAuto}
-          accessibilityRole="switch"
-        />
-        <Text style={styles.toggleText}>Auto</Text>
-      </View>
-
-      <View
-        pointerEvents={isAuto ? "none" : "auto"}
-        style={[styles.sliderContainer, isAuto && styles.disabled]}
-      >
-        <Text style={styles.sliderLabel}>Hot vs Cold: {hotRatio}% Hot</Text>
-        <Slider
-          value={hotRatio}
-          minimumValue={0}
-          maximumValue={100}
-          step={1}
-          onValueChange={setHotRatio}
-          disabled={isAuto}
-          accessibilityLabel="Hot cold ratio"
-        />
-        <Text style={styles.sliderLabel}>
-          Hot/Cold Numbers Used: {hotPercent}%
-        </Text>
-        <Slider
-          value={hotPercent}
-          minimumValue={0}
-          maximumValue={100}
-          step={1}
-          onValueChange={setHotPercent}
-          disabled={isAuto}
-          accessibilityLabel="Hot cold percent"
-        />
-      </View>
-
-      <Pressable
-        style={styles.button}
-        onPress={handleGenerate}
-        accessibilityRole="button"
-      >
-        <Text style={styles.buttonText}>Generate Numbers</Text>
-      </Pressable>
-
-      {sets.length > 0 && (
-        <>
-          <Pressable
-            style={[styles.button, styles.buttonSpacing]}
-            onPress={() => handleDownload("csv")}
-            accessibilityRole="button"
-          >
-            <Text style={styles.buttonText}>Download CSV</Text>
-          </Pressable>
-          <Pressable
-            style={[styles.button, styles.buttonSpacing]}
-            onPress={() => handleDownload("txt")}
-            accessibilityRole="button"
-          >
-            <Text style={styles.buttonText}>Download TXT</Text>
-          </Pressable>
-          <Pressable
-            style={[styles.button, styles.buttonSpacing]}
-            onPress={() => handleDownload("xlsx")}
-            accessibilityRole="button"
-          >
-            <Text style={styles.buttonText}>Download XLSX</Text>
-          </Pressable>
-        </>
-      )}
-
-      <Pressable
-        style={[styles.button, styles.buttonSpacing]}
-        onPress={() => router.push(`/game/${id}/draws`)}
-        accessibilityRole="button"
-      >
-        <Text style={styles.buttonText}>Last 10 Draws</Text>
-      </Pressable>
-
-      <Pressable
-        style={[styles.button, styles.buttonSpacing]}
-        onPress={() => router.push(`/game/${id}/hotcold`)}
-        accessibilityRole="button"
-      >
-        <Text style={styles.buttonText}>Hot & Cold Numbers</Text>
-      </Pressable>
+        <Pressable
+          style={[styles.button, styles.buttonSpacing]}
+          onPress={() => router.push(`/game/${id}/hotcold`)}
+          accessibilityRole="button"
+        >
+          <Text style={styles.buttonText}>Hot & Cold Numbers</Text>
+        </Pressable>
+      </ScrollView>
     </SafeAreaView>
   );
 }
