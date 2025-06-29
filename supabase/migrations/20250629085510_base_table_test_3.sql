@@ -64,8 +64,8 @@ INSERT INTO public.games (
     45, 6, 2, 45, NULL,
     513,
     'https://api.lotterywest.wa.gov.au/api/v1/games/5127/results-csv',
-    'Monday',
-    '00:00',
+    'Saturday',
+    '19:30',
     '2025-06-22 11:19:16.610769+00',
     'AEST'
   ),(
@@ -76,8 +76,8 @@ INSERT INTO public.games (
     47, 7, 3, 47, NULL,
     1474,
     'https://api.lotterywest.wa.gov.au/api/v1/games/5130/results-csv',
-    'Monday',
-    '00:00',
+    'Tuesday',
+    '20:30',
     '2025-06-22 11:19:16.610769+00',
     'AEST'
   ),(
@@ -88,8 +88,8 @@ INSERT INTO public.games (
     35, 7, 0, 0, 20,
     1144,
     'https://api.lotterywest.wa.gov.au/api/v1/games/5132/results-csv',
-    'Monday',
-    '00:00',
+    'Thursday',
+    '20:30',
     '2025-06-22 11:19:16.610769+00',
     'AEST'
   ),(
@@ -100,8 +100,8 @@ INSERT INTO public.games (
     45, 6, 2, 45, NULL,
     4392,
     'https://api.lotterywest.wa.gov.au/api/v1/games/5303/results-csv',
-    'Monday',
-    '00:00',
+    'Monday, Wednesday, Friday',
+    '20:30',
     '2025-06-22 11:19:16.610769+00',
     'AEST'
   ),(
@@ -112,8 +112,8 @@ INSERT INTO public.games (
     44, 7, 2, 44, NULL,
     1691,
     'https://api.lotterywest.wa.gov.au/api/v1/games/5237/results-csv',
-    'Monday',
-    '00:00',
+    'Thursday',
+    '20:30',
     '2025-06-22 11:19:16.610769+00',
     'AEST'
   )

@@ -1,0 +1,2 @@
+- Add latest results. Draw number and results to game card
+- Add next draw number and date/time. Maybe countdown?
