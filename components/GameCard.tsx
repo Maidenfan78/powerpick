@@ -1,6 +1,6 @@
 // components/GameCard.tsx
 /* eslint-disable react-native/no-unused-styles */
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Text,
   Image,
@@ -12,8 +12,7 @@ import {
   StyleProp,
 } from "react-native";
 import { useTheme } from "../lib/theme";
-import type { Game, DrawResult } from "../lib/gamesApi";
-import { fetchRecentDraws } from "../lib/gamesApi";
+import type { Game } from "../lib/gamesApi";
 import placeholder from "../assets/placeholder.png";
 
 type GameCardProps = {
@@ -40,38 +39,14 @@ export default function GameCard({ game, onPress }: GameCardProps) {
           fontSize: tokens.typography.fontSizes.lg.value,
           fontWeight: "700",
         },
-        jackpotLabel: {
-          color: tokens.color.neutral["500"].value,
-          fontSize: tokens.typography.fontSizes.xs.value,
-        },
-        lastDraw: {
-          color: tokens.color.neutral["600"].value,
-          fontSize: tokens.typography.fontSizes.sm.value,
-        },
-        lastDrawLabel: {
-          color: tokens.color.neutral["500"].value,
-          fontSize: tokens.typography.fontSizes.xs.value,
-          marginTop: tokens.spacing["2"].value,
-        },
         logo: {
           height: 96,
           marginBottom: tokens.spacing["3"].value,
           width: 96,
         },
-        name: {
-          color: tokens.color.brand.primary.value,
-          fontSize: tokens.typography.fontSizes.lg.value,
-          fontWeight: "700",
-          marginBottom: tokens.spacing["1"].value,
-        },
         nextDraw: {
           color: tokens.color.neutral["600"].value,
           fontSize: tokens.typography.fontSizes.sm.value,
-        },
-        nextDrawLabel: {
-          color: tokens.color.neutral["500"].value,
-          fontSize: tokens.typography.fontSizes.xs.value,
-          marginTop: tokens.spacing["2"].value,
         },
       }),
     [tokens],
@@ -79,23 +54,6 @@ export default function GameCard({ game, onPress }: GameCardProps) {
 
   const [loading, setLoading] = useState(!!game.logoUrl);
   const [error, setError] = useState(false);
-  const [lastDraw, setLastDraw] = useState<DrawResult | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    const load = async () => {
-      try {
-        const draws = await fetchRecentDraws(game.id);
-        if (!cancelled) setLastDraw(draws[0] ?? null);
-      } catch (err) {
-        console.error("GameCard fetch draws", err);
-      }
-    };
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, [game.id]);
 
   useEffect(() => {
     if (!game.logoUrl) {
@@ -132,41 +90,11 @@ export default function GameCard({ game, onPress }: GameCardProps) {
           }}
         />
       )}
-      <Text style={styles.name}>{game.name}</Text>
-      <Text style={styles.jackpotLabel}>Jackpot</Text>
       <Text style={styles.jackpot}>{game.jackpot}</Text>
       {game.nextDrawTime && (
-        <>
-          <Text style={styles.nextDrawLabel}>Next Draw</Text>
-          <Text style={styles.nextDraw}>
-            {new Date(game.nextDrawTime).toLocaleString()}
-          </Text>
-        </>
-      )}
-      {lastDraw && (
-        <>
-          <Text style={styles.lastDrawLabel}>
-            Last Draw: #{lastDraw.draw_number}
-          </Text>
-          <Text style={styles.lastDrawLabel}>Winning Numbers</Text>
-          <Text style={styles.lastDraw}>
-            {lastDraw.winning_numbers.join(" - ")}
-          </Text>
-          {lastDraw.supplementary_numbers?.length ? (
-            <>
-              <Text style={styles.lastDrawLabel}>Supps</Text>
-              <Text style={styles.lastDraw}>
-                {lastDraw.supplementary_numbers.join(" - ")}
-              </Text>
-            </>
-          ) : lastDraw.powerball !== null &&
-            lastDraw.powerball !== undefined ? (
-            <>
-              <Text style={styles.lastDrawLabel}>Powerball</Text>
-              <Text style={styles.lastDraw}>{lastDraw.powerball}</Text>
-            </>
-          ) : null}
-        </>
+        <Text style={styles.nextDraw}>
+          {new Date(game.nextDrawTime).toLocaleString()}
+        </Text>
       )}
     </Pressable>
   );

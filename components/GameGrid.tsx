@@ -13,7 +13,7 @@ export default function GameGrid({ games, onSelectGame }: GameGridProps) {
     <FlatList<Game>
       data={games}
       keyExtractor={(item: Game) => item.id}
-      numColumns={1}
+      numColumns={2}
       contentContainerStyle={styles.list}
       renderItem={({ item }: { item: Game }) => (
         <GameCard game={item} onPress={() => onSelectGame(item)} />
