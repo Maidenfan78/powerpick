@@ -22,7 +22,7 @@ export default function ComingSoon({
           flex: 1,
           justifyContent: "center",
         },
-        image: { height: 200, resizeMode: "contain", width: 200 },
+        image: { height: 500, resizeMode: "contain", width: 550},
       }),
     [tokens],
   );
