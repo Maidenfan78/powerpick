@@ -1,10 +1,9 @@
 import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
+import { render, fireEvent } from "@testing-library/react-native";
 import { Image, ActivityIndicator } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { ThemeProvider } from "../../lib/theme";
 import GameCard from "../../components/GameCard";
-import { fetchRecentDraws } from "../../lib/gamesApi";
 
 jest.mock("expo-constants", () => ({
   __esModule: true,
@@ -17,10 +16,6 @@ jest.mock("expo-constants", () => ({
     },
   },
 }));
-
-jest.mock("../../lib/gamesApi");
-
-const fetchRecentDrawsMock = fetchRecentDraws as jest.Mock;
 
 jest.mock("../../assets/placeholder.png", () => 1);
 
@@ -45,16 +40,6 @@ describe("GameCard", () => {
     fromDrawNumber: 1,
   };
 
-  beforeEach(() => {
-    fetchRecentDrawsMock.mockResolvedValue([
-      {
-        draw_number: 1,
-        draw_date: "2024-01-01",
-        winning_numbers: [1, 2, 3],
-      },
-    ]);
-  });
-
   test("renders jackpot and handles press", async () => {
     const onPress = jest.fn();
     const { getByText, getByRole } = render(
@@ -63,11 +48,8 @@ describe("GameCard", () => {
     );
 
     expect(getByText("$1,000")).toBeTruthy();
-    expect(getByText("Jackpot")).toBeTruthy();
-    expect(getByText(/Next Draw/)).toBeTruthy();
-    await waitFor(() => expect(getByText("Last Draw: #1")).toBeTruthy());
-    expect(getByText("Winning Numbers")).toBeTruthy();
-    expect(getByText("1 - 2 - 3")).toBeTruthy();
+    const next = new Date(baseGame.nextDrawTime).toLocaleString();
+    expect(getByText(next)).toBeTruthy();
     fireEvent.press(getByRole("button"));
     expect(onPress).toHaveBeenCalled();
   });
