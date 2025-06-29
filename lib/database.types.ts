@@ -109,6 +109,7 @@ export type Database = {
       games: {
         Row: {
           created_at: string;
+          from_draw_number: number;
           id: string;
           jackpot: number | null;
           logo_url: string | null;
@@ -122,6 +123,7 @@ export type Database = {
         };
         Insert: {
           created_at?: string;
+          from_draw_number: number;
           id?: string;
           jackpot?: number | null;
           logo_url?: string | null;
@@ -135,6 +137,7 @@ export type Database = {
         };
         Update: {
           created_at?: string;
+          from_draw_number?: number;
           id?: string;
           jackpot?: number | null;
           logo_url?: string | null;
@@ -147,6 +150,47 @@ export type Database = {
           supp_max?: number | null;
         };
         Relationships: [];
+      };
+      hot_cold_numbers: {
+        Row: {
+          game_id: string;
+          main_cold: number[];
+          main_hot: number[];
+          powerball_cold: number[] | null;
+          powerball_hot: number[] | null;
+          supp_cold: number[] | null;
+          supp_hot: number[] | null;
+          updated_at: string;
+        };
+        Insert: {
+          game_id: string;
+          main_cold: number[];
+          main_hot: number[];
+          powerball_cold?: number[] | null;
+          powerball_hot?: number[] | null;
+          supp_cold?: number[] | null;
+          supp_hot?: number[] | null;
+          updated_at?: string;
+        };
+        Update: {
+          game_id?: string;
+          main_cold?: number[];
+          main_hot?: number[];
+          powerball_cold?: number[] | null;
+          powerball_hot?: number[] | null;
+          supp_cold?: number[] | null;
+          supp_hot?: number[] | null;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "hot_cold_numbers_game_id_fkey";
+            columns: ["game_id"];
+            isOneToOne: true;
+            referencedRelation: "games";
+            referencedColumns: ["id"];
+          },
+        ];
       };
     };
     Views: {
