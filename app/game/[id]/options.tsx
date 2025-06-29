@@ -114,9 +114,9 @@ export default function GameOptionsScreen() {
     },
     buttonSpacing: { marginTop: 12 },
     buttonText: { color: tokens.color.neutral["0"].value, fontSize: 18 },
-    close: { color: tokens.color.brand.primary.value, fontSize: 20 },
+    close: { color: tokens.color.neutral["0"].value, fontSize: 20 },
     configText: {
-      color: tokens.color.brand.primary.value,
+      color: tokens.color.neutral["0"].value,
       fontSize: 16,
       marginBottom: 16,
       textAlign: "center",
@@ -133,16 +133,16 @@ export default function GameOptionsScreen() {
       marginBottom: 16,
     },
     numbers: {
-      color: tokens.color.brand.primary.value,
+      color: tokens.color.neutral["0"].value,
       fontSize: 24,
       marginVertical: 16,
       textAlign: "center",
     },
     sliderContainer: { marginBottom: 16 },
-    sliderLabel: { color: tokens.color.brand.primary.value },
-    title: { color: tokens.color.brand.primary.value, fontSize: 20 },
+    sliderLabel: { color: tokens.color.neutral["0"].value },
+    title: { color: tokens.color.neutral["0"].value, fontSize: 20 },
     toggleRow: { alignItems: "center", flexDirection: "row", marginBottom: 16 },
-    toggleText: { color: tokens.color.brand.primary.value, marginLeft: 8 },
+    toggleText: { color: tokens.color.neutral["0"].value, marginLeft: 8 },
   });
 
   return (

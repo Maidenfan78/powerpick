@@ -31,12 +31,12 @@ export default function HotColdScreen() {
       padding: 16,
     },
     text: {
-      color: tokens.color.brand.primary.value,
+      color: tokens.color.neutral["0"].value,
       fontSize: 16,
       marginBottom: 8,
     },
     title: {
-      color: tokens.color.brand.primary.value,
+      color: tokens.color.neutral["0"].value,
       fontSize: 20,
       marginBottom: 16,
       textAlign: "center",
