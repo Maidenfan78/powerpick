@@ -31,6 +31,16 @@ test("syncAllGames processes draws using mocked fetch and supabase", async () =>
         in: jest.fn().mockResolvedValue(undefined),
         insert: insertMock,
       } as any;
+    if (table === "games")
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return {
+        select: jest.fn().mockReturnThis(),
+        eq: jest.fn().mockReturnThis(),
+        maybeSingle: jest.fn().mockResolvedValue({
+          data: { csv_url: "http://example.com" },
+          error: null,
+        }),
+      } as any;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return {} as any;
   });

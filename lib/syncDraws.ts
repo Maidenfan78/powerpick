@@ -37,7 +37,6 @@ const supabase: SupabaseClient = createClient(SUPABASE_URL, supabaseKey);
 
 // 5) Define game configuration interface and array
 interface Game {
-  apiId: number;
   gameId: string;
   mainTypeId: number;
   suppTypeId?: number;
@@ -46,31 +45,26 @@ interface Game {
 
 const GAMES: Game[] = [
   {
-    apiId: 5130,
     gameId: "22222222-2222-2222-2222-222222222222",
     mainTypeId: 3,
     suppTypeId: 4,
   },
   {
-    apiId: 5132,
     gameId: "33333333-3333-3333-3333-333333333333",
     mainTypeId: 5,
     powerballTypeId: 6,
   },
   {
-    apiId: 5127,
     gameId: "11111111-1111-1111-1111-111111111111",
     mainTypeId: 1,
     suppTypeId: 2,
   },
   {
-    apiId: 5237,
     gameId: "55555555-5555-5555-5555-555555555555",
     mainTypeId: 9,
     suppTypeId: 10,
   },
   {
-    apiId: 5303,
     gameId: "44444444-4444-4444-4444-444444444444",
     mainTypeId: 7,
     suppTypeId: 8,
@@ -94,10 +88,17 @@ function formatDateDMY(dmy: string): string {
 
 // 8) Sync a single game
 async function syncGame(game: Game): Promise<void> {
-  log(`\n🔄 Syncing game ${game.apiId}`);
+  log(`\n🔄 Syncing game ${game.gameId}`);
   let processed = 0;
   try {
-    const url = `https://api.lotterywest.wa.gov.au/api/v1/games/${game.apiId}/results-csv`;
+    const { data: gameRow, error: gameErr } = await supabase
+      .from("games")
+      .select("csv_url")
+      .eq("id", game.gameId)
+      .maybeSingle();
+    if (gameErr) throw gameErr;
+    const url = gameRow?.csv_url;
+    if (!url) throw new Error(`Missing csv_url for game ${game.gameId}`);
     log("FETCH:", url);
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -188,9 +189,9 @@ async function syncGame(game: Game): Promise<void> {
       log(`✅ Upserted ${processed} draws (${resultRows.length} results)`);
     }
   } catch (err) {
-    error("SYNC ERROR:", game.apiId, err);
+    error("SYNC ERROR:", game.gameId, err);
   } finally {
-    log(`Finished game ${game.apiId}: processed ${processed} draws`);
+    log(`Finished game ${game.gameId}: processed ${processed} draws`);
   }
 }
 
