@@ -11,7 +11,7 @@ import { useTheme } from "../lib/theme";
 import { useRouter } from "expo-router";
 
 export default function SettingsScreen() {
-  const { tokens, scheme, toggleScheme, isCvd, toggleCvd } = useTheme();
+  const { tokens, scheme, toggleScheme } = useTheme();
   const router = useRouter();
   const styles = StyleSheet.create({
     card: {
@@ -93,8 +93,6 @@ export default function SettingsScreen() {
           value={scheme === "dark"}
           onToggle={toggleScheme}
         />
-        <Separator />
-        <Row label="Colour-Blind Mode" value={isCvd} onToggle={toggleCvd} />
       </View>
 
       {/* --- Notifications Group (Placeholder) --- */}

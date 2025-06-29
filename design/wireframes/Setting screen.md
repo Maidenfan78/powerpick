@@ -5,8 +5,6 @@
 ▸ Display Settings
 ┌──────────────────────────────────────────┐
 │ Dark Mode ⬤◯ │ ToggleScheme (ThemeSwitch.tsx)
-├──────────────────────────────────────────┤
-│ Colour-Blind Mode ⬤◯ │ toggleCvd (SettingsRow.tsx)
 └──────────────────────────────────────────┘
 
 ▸ Notifications
