@@ -9,6 +9,8 @@ import { generateSet } from "../../../lib/generator";
 import { useGeneratedNumbersStore } from "../../../stores/useGeneratedNumbersStore";
 import type { GameConfig } from "../../../lib/gameConfigs";
 import { useGamesStore } from "../../../stores/useGamesStore";
+import placeholder from "../../../assets/placeholder.png";
+import { Image } from "react-native";
 
 export default function GameOptionsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -136,6 +138,12 @@ export default function GameOptionsScreen() {
           justifyContent: "space-between",
           marginBottom: 16,
         },
+        logo: {
+          alignSelf: "center",
+          height: 80,
+          marginBottom: 8,
+          width: 80,
+        },
         numbers: {
           color: tokens.color.neutral["0"].value,
           fontSize: 24,
@@ -158,11 +166,21 @@ export default function GameOptionsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Game Options</Text>
+        <Text style={styles.title}>
+          {game ? `${game.name} Options` : "Game Options"}
+        </Text>
         <Pressable onPress={() => router.back()} accessibilityRole="button">
           <Text style={styles.close}>✕</Text>
         </Pressable>
       </View>
+      {game && (
+        <Image
+          source={game.logoUrl ? { uri: game.logoUrl } : placeholder}
+          style={styles.logo}
+          resizeMode="contain"
+          accessibilityLabel={`${game.name} logo`}
+        />
+      )}
 
       {description !== "" && (
         <Text style={styles.configText}>Pick {description}</Text>
