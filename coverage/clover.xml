@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1751154464407" clover="3.2.0">
-  <project timestamp="1751154464407" name="All files">
-    <metrics statements="459" coveredstatements="350" conditionals="315" coveredconditionals="191" methods="121" coveredmethods="92" elements="895" coveredelements="633" complexity="0" loc="459" ncloc="459" packages="6" files="23" classes="23"/>
+<coverage generated="1751164634113" clover="3.2.0">
+  <project timestamp="1751164634113" name="All files">
+    <metrics statements="461" coveredstatements="352" conditionals="321" coveredconditionals="197" methods="121" coveredmethods="92" elements="903" coveredelements="641" complexity="0" loc="461" ncloc="461" packages="6" files="23" classes="23"/>
     <package name="app">
       <metrics statements="22" coveredstatements="19" conditionals="6" coveredconditionals="5" methods="6" coveredmethods="5"/>
       <file name="index.tsx" path="C:\Users\Sav\Programing Projects\powerpick\app\index.tsx">
@@ -158,7 +158,7 @@
       </file>
     </package>
     <package name="lib">
-      <metrics statements="334" coveredstatements="238" conditionals="236" coveredconditionals="131" methods="73" coveredmethods="52"/>
+      <metrics statements="336" coveredstatements="240" conditionals="242" coveredconditionals="137" methods="73" coveredmethods="52"/>
       <file name="csvParser.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\csvParser.ts">
         <metrics statements="48" coveredstatements="44" conditionals="35" coveredconditionals="24" methods="6" coveredmethods="6"/>
         <line num="8" count="2" type="stmt"/>
@@ -338,11 +338,13 @@
         <line num="11" count="2" type="stmt"/>
       </file>
       <file name="supabase.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\supabase.ts">
-        <metrics statements="4" coveredstatements="3" conditionals="4" coveredconditionals="3" methods="0" coveredmethods="0"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="12" count="3" type="cond" truecount="3" falsecount="1"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
+        <metrics statements="6" coveredstatements="5" conditionals="10" coveredconditionals="9" methods="0" coveredmethods="0"/>
+        <line num="7" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="4" type="cond" truecount="3" falsecount="1"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
       </file>
       <file name="syncDraws.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\syncDraws.ts">
         <metrics statements="70" coveredstatements="29" conditionals="41" coveredconditionals="10" methods="13" coveredmethods="7"/>
