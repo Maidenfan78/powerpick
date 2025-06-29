@@ -12,7 +12,8 @@ import {
   StyleProp,
 } from "react-native";
 import { useTheme } from "../lib/theme";
-import type { Game } from "../lib/gamesApi";
+import type { Game, DrawResult } from "../lib/gamesApi";
+import { fetchRecentDraws } from "../lib/gamesApi";
 import placeholder from "../assets/placeholder.png";
 
 type GameCardProps = {
@@ -39,10 +40,18 @@ export default function GameCard({ game, onPress }: GameCardProps) {
           fontSize: tokens.typography.fontSizes.sm.value,
           fontWeight: "600",
         },
+        lastDraw: {
+          color: tokens.color.neutral["600"].value,
+          fontSize: tokens.typography.fontSizes.xs.value,
+        },
         logo: {
           height: 96,
           marginBottom: tokens.spacing["2"].value,
           width: 96,
+        },
+        nextDraw: {
+          color: tokens.color.neutral["600"].value,
+          fontSize: tokens.typography.fontSizes.xs.value,
         },
       }),
     [tokens],
@@ -50,6 +59,23 @@ export default function GameCard({ game, onPress }: GameCardProps) {
 
   const [loading, setLoading] = useState(!!game.logoUrl);
   const [error, setError] = useState(false);
+  const [lastDraw, setLastDraw] = useState<DrawResult | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const draws = await fetchRecentDraws(game.id);
+        if (!cancelled) setLastDraw(draws[0] ?? null);
+      } catch (err) {
+        console.error("GameCard fetch draws", err);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [game.id]);
 
   useEffect(() => {
     if (!game.logoUrl) {
@@ -87,6 +113,16 @@ export default function GameCard({ game, onPress }: GameCardProps) {
         />
       )}
       <Text style={styles.jackpot}>{game.jackpot}</Text>
+      {game.nextDrawTime && (
+        <Text style={styles.nextDraw}>
+          Next: {new Date(game.nextDrawTime).toLocaleString()}
+        </Text>
+      )}
+      {lastDraw && (
+        <Text style={styles.lastDraw}>
+          Last #{lastDraw.draw_number}: {lastDraw.winning_numbers.join(" - ")}
+        </Text>
+      )}
     </Pressable>
   );
 }

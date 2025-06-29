@@ -30,6 +30,7 @@ describe("fetchGames", () => {
           name: "Powerball",
           logo_url: "logo.png",
           jackpot: "1000",
+          next_draw_time: "2025-07-01T10:00:00Z",
           main_max: 35,
           main_count: 7,
           supp_count: null,
@@ -55,6 +56,7 @@ describe("fetchGames", () => {
         name: "Powerball",
         logoUrl: "https://cdn.example.com/logo.png",
         jackpot: "$1,000",
+        nextDrawTime: "2025-07-01T10:00:00Z",
         mainMax: 35,
         mainCount: 7,
         suppCount: null,
@@ -65,7 +67,7 @@ describe("fetchGames", () => {
     ]);
     expect(fromMock).toHaveBeenCalledWith("games");
     expect(selectMock).toHaveBeenCalledWith(
-      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max, from_draw_number",
+      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max, from_draw_number, next_draw_time",
     );
   });
 
@@ -77,6 +79,7 @@ describe("fetchGames", () => {
           name: "Oz Lotto",
           logo_url: "oz.png",
           jackpot: "2000",
+          next_draw_time: null,
           main_max: 47,
           main_count: 7,
           supp_count: 2,
@@ -114,6 +117,7 @@ describe("fetchGames", () => {
           name: "Lotto",
           logo_url: "lotto.png",
           jackpot: "3000",
+          next_draw_time: null,
           main_max: 40,
           main_count: 6,
           supp_count: 2,
