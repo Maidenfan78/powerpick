@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">85.36% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>66/77</span>
+                <span class='fraction'>70/82</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.97% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>25/41</span>
+                <span class='fraction'>27/45</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">91.78% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>63/70</span>
+                <span class='fraction'>67/73</span>
             </div>
         
             
@@ -285,6 +285,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -324,13 +325,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -375,12 +370,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
@@ -469,11 +471,9 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -484,9 +484,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -500,6 +500,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as dotenv from "dotenv";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import fetch from "cross-fetch";
+import { log, error } from "./logger.ts";
 &nbsp;
 // 1) Load environment variables
 dotenv.config();
@@ -520,14 +521,14 @@ const supabaseKey: string = SUPABASE_SERVICE_ROLE_KEY || <span class="branch-1 c
 }
 &nbsp;
 // 3) Debug credentials (show which key is used)
-console.log("DEBUG: SUPABASE_URL  =", SUPABASE_URL);
+log("DEBUG: SUPABASE_URL  =", SUPABASE_URL);
 if (SUPABASE_SERVICE_ROLE_KEY) {
-  console.log(
+  log(
     "DEBUG: Using service role key",
     SUPABASE_SERVICE_ROLE_KEY.slice(0, 4) + "...",
   );
 } else <span class="missing-if-branch" title="else path not taken" >E</span>{
-<span class="cstat-no" title="statement not covered" >  console.log("DEBUG: Using anon key", SUPABASE_ANON_KEY.slice(0, 4) + "...");</span>
+<span class="cstat-no" title="statement not covered" >  log("DEBUG: Using anon key", SUPABASE_ANON_KEY.slice(0, 4) + "...");</span>
 }
 &nbsp;
 // 4) Initialize Supabase client
@@ -535,7 +536,6 @@ const supabase: SupabaseClient = createClient(SUPABASE_URL, supabaseKey);
 &nbsp;
 // 5) Define game configuration interface and array
 interface Game {
-  apiId: number;
   gameId: string;
   mainTypeId: number;
   suppTypeId?: number;
@@ -544,31 +544,26 @@ interface Game {
 &nbsp;
 const GAMES: Game[] = [
   {
-    apiId: 5130,
     gameId: "22222222-2222-2222-2222-222222222222",
     mainTypeId: 3,
     suppTypeId: 4,
   },
   {
-    apiId: 5132,
     gameId: "33333333-3333-3333-3333-333333333333",
     mainTypeId: 5,
     powerballTypeId: 6,
   },
   {
-    apiId: 5127,
     gameId: "11111111-1111-1111-1111-111111111111",
     mainTypeId: 1,
     suppTypeId: 2,
   },
   {
-    apiId: 5237,
     gameId: "55555555-5555-5555-5555-555555555555",
     mainTypeId: 9,
     suppTypeId: 10,
   },
   {
-    apiId: 5303,
     gameId: "44444444-4444-4444-4444-444444444444",
     mainTypeId: 7,
     suppTypeId: 8,
@@ -592,18 +587,25 @@ function formatDateDMY(dmy: string): string {
 &nbsp;
 // 8) Sync a single game
 async function syncGame(game: Game): Promise&lt;void&gt; {
-  console.log(`\n🔄 Syncing game ${game.apiId}`);
+  log(`\n🔄 Syncing game ${game.gameId}`);
   let processed = 0;
   try {
-    const url = `https://api.lotterywest.wa.gov.au/api/v1/games/${game.apiId}/results-csv`;
-    console.log("FETCH:", url);
+    const { data: gameRow, error: gameErr } = await supabase
+      .from("games")
+      .select("csv_url")
+      .eq("id", game.gameId)
+      .maybeSingle();
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (gameErr) <span class="cstat-no" title="statement not covered" >throw gameErr;</span>
+    const url = gameRow?.csv_url;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!url) <span class="cstat-no" title="statement not covered" >throw new Error(`Missing csv_url for game ${game.gameId}`);</span>
+    log("FETCH:", url);
     const res = await fetch(url);
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!res.ok) <span class="cstat-no" title="statement not covered" >throw new Error(`HTTP ${res.status}`);</span>
 &nbsp;
     const csv = await res.text();
     const rows = parseCsv(csv);
-    console.log(`DEBUG: Parsed rows = ${rows.length}`);
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (rows[0]) console.log("DEBUG: First row =", rows[0]);
+    log(`DEBUG: Parsed rows = ${rows.length}`);
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (rows[0]) log("DEBUG: First row =", rows[0]);
 &nbsp;
     const drawRecords: {
       game_id: string;
@@ -638,7 +640,7 @@ async function syncGame(game: Game): Promise&lt;void&gt; {
       .select();
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (upsertErr) {
-<span class="cstat-no" title="statement not covered" >      console.error("UPSERT DRAW ERROR:", upsertErr);</span>
+<span class="cstat-no" title="statement not covered" >      error("UPSERT DRAW ERROR:", upsertErr);</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
 &nbsp;
@@ -680,17 +682,15 @@ async function syncGame(game: Game): Promise&lt;void&gt; {
     const { error: resultErr } = await supabase
       .from("draw_results")
       .insert(resultRows);
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (resultErr) <span class="cstat-no" title="statement not covered" >console.error("INSERT RESULTS ERROR:", resultErr);</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (resultErr) <span class="cstat-no" title="statement not covered" >error("INSERT RESULTS ERROR:", resultErr);</span>
     else {
       processed = drawRecords.length;
-      console.log(
-        `✅ Upserted ${processed} draws (${resultRows.length} results)`,
-      );
+      log(`✅ Upserted ${processed} draws (${resultRows.length} results)`);
     }
   } catch (err) {
-<span class="cstat-no" title="statement not covered" >    console.error("SYNC ERROR:", game.apiId, err);</span>
+    error("SYNC ERROR:", game.gameId, err);
   } finally {
-    console.log(`Finished game ${game.apiId}: processed ${processed} draws`);
+    log(`Finished game ${game.gameId}: processed ${processed} draws`);
   }
 }
 &nbsp;
@@ -713,7 +713,7 @@ export async function syncAllGames(concurrency = 2): Promise&lt;void&gt; {
 export { parseCsv, extractNumbers };
 &nbsp;
 // 10) Always invoke sync when this file is run:
-syncAllGames().catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; <span class="cstat-no" title="statement not covered" >console.error("FATAL:", err))</span>;
+syncAllGames().catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; <span class="cstat-no" title="statement not covered" >error("FATAL:", err))</span>;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -721,7 +721,7 @@ syncAllGames().catch(<span class="fstat-no" title="function not covered" >(e</sp
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-29T07:42:46.084Z
+                at 2025-06-29T12:30:08.224Z
             </div>
         <script src="../prettify.js"></script>
         <script>
