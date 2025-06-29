@@ -4,7 +4,6 @@ module.exports = {
   setupFiles: ['./jestSetup.cjs', './jestSetupMocks.cjs'],
   setupFilesAfterEnv: [
     './jestSetupAfterEnv.cjs',
-    '@testing-library/react-native/extend-expect',
   ],
   testEnvironment: 'jsdom',
   transform: {
