@@ -145,16 +145,20 @@ export default function GameCard({ game, onPress }: GameCardProps) {
       )}
       {lastDraw && (
         <>
-          <Text style={styles.lastDrawLabel}>Last Draw</Text>
-          <Text style={styles.lastDraw}>
-            #{lastDraw.draw_number}: {lastDraw.winning_numbers.join(" - ")}
-            {lastDraw.supplementary_numbers?.length
-              ? ` - Supp: ${lastDraw.supplementary_numbers.join(" - ")}`
-              : ""}
-            {lastDraw.powerball !== null && lastDraw.powerball !== undefined
-              ? ` - Powerball: ${lastDraw.powerball}`
-              : ""}
+          <Text style={styles.lastDrawLabel}>
+            Last Draw: #{lastDraw.draw_number}
           </Text>
+          <Text style={styles.lastDraw}>
+            Winning Numbers: {lastDraw.winning_numbers.join(" - ")}
+          </Text>
+          {lastDraw.supplementary_numbers?.length ? (
+            <Text style={styles.lastDraw}>
+              Supps: {lastDraw.supplementary_numbers.join(" - ")}
+            </Text>
+          ) : null}
+          {lastDraw.powerball !== null && lastDraw.powerball !== undefined ? (
+            <Text style={styles.lastDraw}>Powerball: {lastDraw.powerball}</Text>
+          ) : null}
         </>
       )}
     </Pressable>
