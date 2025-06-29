@@ -1,5 +1,5 @@
 -- ===================================================================
--- Migration: create_generic_lotto_schema + hot_cold_numbers
+-- Migration: create_generic_lotto_schema + hot_cold_numbers + added csv_url, draw_day, draw_time, next_draw_time, time_zone
 -- ===================================================================
 
 -- 1) Drop any old tables so this can be re-run cleanly
@@ -15,56 +15,107 @@ CASCADE;
 -- 2) Master games table + RLS + seed data
 -- ===================================================================
 CREATE TABLE public.games (
-  id             uuid          PRIMARY KEY DEFAULT gen_random_uuid(),
-  name           text          NOT NULL,
-  region         text          NOT NULL,
-  logo_url       text,
-  jackpot        numeric,
-  created_at     timestamptz   NOT NULL DEFAULT now(),
-  main_max       integer,
-  main_count     integer,
-  supp_count     integer,
-  supp_max       integer,
-  powerball_max  integer
+  id                uuid          PRIMARY KEY DEFAULT gen_random_uuid(),
+  name              text          NOT NULL,
+  region            text          NOT NULL,
+  logo_url          text,
+  jackpot           numeric,
+  created_at        timestamptz   NOT NULL DEFAULT now(),
+  main_max          integer,
+  main_count        integer,
+  supp_count        integer,
+  supp_max          integer,
+  powerball_max     integer,
+  from_draw_number  integer       NOT NULL,
+  csv_url           text,
+  draw_day          text,
+  draw_time         time without time zone,
+  next_draw_time    timestamptz,
+  time_zone         text
 );
 ALTER TABLE public.games ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public read games"
   ON public.games FOR SELECT TO public USING (true);
 
 INSERT INTO public.games (
-  id, name, region, logo_url, jackpot, created_at,
-  main_max, main_count, supp_count, supp_max, powerball_max
+  id,
+  name,
+  region,
+  logo_url,
+  jackpot,
+  created_at,
+  main_max,
+  main_count,
+  supp_count,
+  supp_max,
+  powerball_max,
+  from_draw_number,
+  csv_url,
+  draw_day,
+  draw_time,
+  next_draw_time,
+  time_zone
 ) VALUES
   (
     '11111111-1111-1111-1111-111111111111',
-    'Saturday Lotto','AU',
-    'https://…/tattslotto.png',
-    5000000,'2025-06-22 11:19:16.610769+00',
-    45,6,2,45,NULL
+    'Saturday Lotto', 'AU',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/tattslotto.png',
+    5000000, '2025-06-22 11:19:16.610769+00',
+    45, 6, 2, 45, NULL,
+    513,
+    'https://api.lotterywest.wa.gov.au/api/v1/games/5127/results-csv',
+    'Monday',
+    '00:00',
+    '2025-06-22 11:19:16.610769+00',
+    'AEST'
   ),(
     '22222222-2222-2222-2222-222222222222',
-    'Oz Lotto','AU',
-    'https://…/Oz_Lotto.png',
-    5000000,'2025-06-22 11:19:16.610769+00',
-    47,7,3,47,NULL
+    'Oz Lotto', 'AU',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/Oz_Lotto.png',
+    5000000, '2025-06-22 11:19:16.610769+00',
+    47, 7, 3, 47, NULL,
+    1474,
+    'https://api.lotterywest.wa.gov.au/api/v1/games/5130/results-csv',
+    'Monday',
+    '00:00',
+    '2025-06-22 11:19:16.610769+00',
+    'AEST'
   ),(
     '33333333-3333-3333-3333-333333333333',
-    'Powerball','AU',
-    'https://…/powerball.png',
-    5000000,'2025-06-22 11:19:16.610769+00',
-    35,7,0,0,20
+    'Powerball', 'AU',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/powerball.png',
+    5000000, '2025-06-22 11:19:16.610769+00',
+    35, 7, 0, 0, 20,
+    1144,
+    'https://api.lotterywest.wa.gov.au/api/v1/games/5132/results-csv',
+    'Monday',
+    '00:00',
+    '2025-06-22 11:19:16.610769+00',
+    'AEST'
   ),(
     '44444444-4444-4444-4444-444444444444',
-    'Weekday Windfall','AU',
-    'https://…/weekday_windfall.png',
-    5000000,'2025-06-22 11:19:16.610769+00',
-    45,6,2,45,NULL
+    'Weekday Windfall', 'AU',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/weekday_windfall.png',
+    5000000, '2025-06-22 11:19:16.610769+00',
+    45, 6, 2, 45, NULL,
+    4392,
+    'https://api.lotterywest.wa.gov.au/api/v1/games/5303/results-csv',
+    'Monday',
+    '00:00',
+    '2025-06-22 11:19:16.610769+00',
+    'AEST'
   ),(
     '55555555-5555-5555-5555-555555555555',
-    'Set for Life','AU',
-    'https://…/set_for_life.png',
-    5000000,'2025-06-22 11:19:16.610769+00',
-    44,7,2,44,NULL
+    'Set for Life', 'AU',
+    'https://damfzsmplbsbraqcmagv.supabase.co/storage/v1/object/public/powerpick/set_for_life.png',
+    5000000, '2025-06-22 11:19:16.610769+00',
+    44, 7, 2, 44, NULL,
+    1691,
+    'https://api.lotterywest.wa.gov.au/api/v1/games/5237/results-csv',
+    'Monday',
+    '00:00',
+    '2025-06-22 11:19:16.610769+00',
+    'AEST'
   )
 ON CONFLICT (id) DO NOTHING;
 

@@ -109,6 +109,9 @@ export type Database = {
       games: {
         Row: {
           created_at: string;
+          csv_url: string | null;
+          draw_day: string | null;
+          draw_time: string | null;
           from_draw_number: number;
           id: string;
           jackpot: number | null;
@@ -116,13 +119,18 @@ export type Database = {
           main_count: number | null;
           main_max: number | null;
           name: string;
+          next_draw_time: string | null;
           powerball_max: number | null;
           region: string;
           supp_count: number | null;
           supp_max: number | null;
+          time_zone: string | null;
         };
         Insert: {
           created_at?: string;
+          csv_url?: string | null;
+          draw_day?: string | null;
+          draw_time?: string | null;
           from_draw_number: number;
           id?: string;
           jackpot?: number | null;
@@ -130,13 +138,18 @@ export type Database = {
           main_count?: number | null;
           main_max?: number | null;
           name: string;
+          next_draw_time?: string | null;
           powerball_max?: number | null;
           region: string;
           supp_count?: number | null;
           supp_max?: number | null;
+          time_zone?: string | null;
         };
         Update: {
           created_at?: string;
+          csv_url?: string | null;
+          draw_day?: string | null;
+          draw_time?: string | null;
           from_draw_number?: number;
           id?: string;
           jackpot?: number | null;
@@ -144,10 +157,12 @@ export type Database = {
           main_count?: number | null;
           main_max?: number | null;
           name?: string;
+          next_draw_time?: string | null;
           powerball_max?: number | null;
           region?: string;
           supp_count?: number | null;
           supp_max?: number | null;
+          time_zone?: string | null;
         };
         Relationships: [];
       };

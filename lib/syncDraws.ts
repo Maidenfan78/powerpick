@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import fetch from "cross-fetch";
-import { log, error } from "./logger";
+import { log, error } from "./logger.ts";
 
 // 1) Load environment variables
 dotenv.config();
