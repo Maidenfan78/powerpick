@@ -20,6 +20,7 @@ import type { GameConfig } from "../../../lib/gameConfigs";
 import { useGamesStore } from "../../../stores/useGamesStore";
 import placeholder from "../../../assets/placeholder.png";
 import { Image } from "react-native";
+import * as FileSystem from "expo-file-system";
 
 export default function GameOptionsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -140,7 +141,9 @@ export default function GameOptionsScreen() {
       a.click();
       URL.revokeObjectURL(url);
     } else {
-      await Share.share({ message: content });
+      const fileUri = `${FileSystem.cacheDirectory}numbers.${extension}`;
+      await FileSystem.writeAsStringAsync(fileUri, content);
+      await Share.share({ url: fileUri });
     }
   };
 
@@ -228,28 +231,6 @@ export default function GameOptionsScreen() {
 
         {description !== "" && (
           <Text style={styles.configText}>Pick {description}</Text>
-        )}
-
-        {sets.length > 0 && (
-          <>
-            {sets.map((nums, idx) => {
-              const { main, supp, pb } = sliceNumbers(nums);
-              return (
-                <View key={`set-${idx}`}>
-                  {sets.length > 1 && (
-                    <Text style={styles.setLabel}>Set {idx + 1}</Text>
-                  )}
-                  <Text style={styles.numbers}>Main: {main.join(" - ")}</Text>
-                  {supp.length > 0 && (
-                    <Text style={styles.numbers}>Supp: {supp.join(" - ")}</Text>
-                  )}
-                  {pb !== undefined && (
-                    <Text style={styles.numbers}>Powerball: {pb}</Text>
-                  )}
-                </View>
-              );
-            })}
-          </>
         )}
 
         <View style={styles.sliderContainer}>
@@ -350,6 +331,28 @@ export default function GameOptionsScreen() {
         >
           <Text style={styles.buttonText}>Hot & Cold Numbers</Text>
         </Pressable>
+
+        {sets.length > 0 && (
+          <>
+            {sets.map((nums, idx) => {
+              const { main, supp, pb } = sliceNumbers(nums);
+              return (
+                <View key={`set-${idx}`}>
+                  {sets.length > 1 && (
+                    <Text style={styles.setLabel}>Set {idx + 1}</Text>
+                  )}
+                  <Text style={styles.numbers}>Main: {main.join(" - ")}</Text>
+                  {supp.length > 0 && (
+                    <Text style={styles.numbers}>Supp: {supp.join(" - ")}</Text>
+                  )}
+                  {pb !== undefined && (
+                    <Text style={styles.numbers}>Powerball: {pb}</Text>
+                  )}
+                </View>
+              );
+            })}
+          </>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
