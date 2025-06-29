@@ -1,7 +1,15 @@
 /* eslint-disable react-native/no-unused-styles */
 import React, { useState, useMemo } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, Pressable, StyleSheet, Switch } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Switch,
+  Platform,
+  Share,
+} from "react-native";
 import Slider from "@react-native-community/slider";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTheme } from "../../../lib/theme";
@@ -17,7 +25,8 @@ export default function GameOptionsScreen() {
   const { tokens } = useTheme();
   const router = useRouter();
 
-  const [current, setCurrent] = useState<number[]>([]);
+  const [sets, setSets] = useState<number[][]>([]);
+  const [setCount, setSetCount] = useState(1);
   const [isAuto, setIsAuto] = useState(true);
   const [hotRatio, setHotRatio] = useState(50);
   const [hotPercent, setHotPercent] = useState(50);
@@ -55,57 +64,83 @@ export default function GameOptionsScreen() {
     powerballMax: undefined,
   };
 
-  // Slice the current array into the pieces for display
-  const mainNums = current.slice(0, displayCfg.mainCount);
-  const suppNums =
-    displayCfg.suppCount !== undefined
-      ? current.slice(
-          displayCfg.mainCount,
-          displayCfg.mainCount + displayCfg.suppCount,
-        )
-      : [];
-  const powerballNum =
-    displayCfg.powerballMax !== undefined
-      ? current[current.length - 1]
-      : undefined;
+  // Helpers to slice a generated set into display parts
+  const sliceNumbers = (nums: number[]) => {
+    const main = nums.slice(0, displayCfg.mainCount);
+    const supp =
+      displayCfg.suppCount !== undefined
+        ? nums.slice(
+            displayCfg.mainCount,
+            displayCfg.mainCount + displayCfg.suppCount,
+          )
+        : [];
+    const pb =
+      displayCfg.powerballMax !== undefined ? nums[nums.length - 1] : undefined;
+    return { main, supp, pb };
+  };
 
   // Generate a fresh set of numbers
   const handleGenerate = () => {
-    const nums: number[] = [];
+    const newSets: number[][] = [];
+    for (let i = 0; i < setCount; i++) {
+      const nums: number[] = [];
 
-    // Main balls
-    nums.push(
-      ...generateSet({
-        maxNumber: displayCfg.mainMax,
-        pickCount: displayCfg.mainCount,
-      }),
-    );
-
-    // Supplementary balls
-    if (
-      displayCfg.suppMax !== undefined &&
-      displayCfg.suppCount !== undefined
-    ) {
+      // Main balls
       nums.push(
         ...generateSet({
-          maxNumber: displayCfg.suppMax,
-          pickCount: displayCfg.suppCount,
+          maxNumber: displayCfg.mainMax,
+          pickCount: displayCfg.mainCount,
         }),
       );
+
+      // Supplementary balls
+      if (
+        displayCfg.suppMax !== undefined &&
+        displayCfg.suppCount !== undefined
+      ) {
+        nums.push(
+          ...generateSet({
+            maxNumber: displayCfg.suppMax,
+            pickCount: displayCfg.suppCount,
+          }),
+        );
+      }
+
+      // Powerball (or equivalent)
+      if (displayCfg.powerballMax !== undefined) {
+        nums.push(
+          ...generateSet({
+            maxNumber: displayCfg.powerballMax,
+            pickCount: 1,
+          }),
+        );
+      }
+
+      newSets.push(nums);
+      if (id) saveNumbers(id, nums);
     }
 
-    // Powerball (or equivalent)
-    if (displayCfg.powerballMax !== undefined) {
-      nums.push(
-        ...generateSet({
-          maxNumber: displayCfg.powerballMax,
-          pickCount: 1,
-        }),
-      );
-    }
+    setSets(newSets);
+  };
 
-    setCurrent(nums);
-    if (id) saveNumbers(id, nums);
+  const handleDownload = async (format: "csv" | "txt" | "xlsx") => {
+    const extension = format;
+    const content =
+      format === "txt"
+        ? sets.map((s) => s.join(" ")).join("\n")
+        : sets.map((s) => s.join(",")).join("\n");
+
+    if (Platform.OS === "web") {
+      const blob = new Blob([content], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `numbers.${extension}`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } else {
+      await Share.share({ message: content });
+    }
   };
 
   // eslint-disable-next-line react-native/no-unused-styles
@@ -150,6 +185,12 @@ export default function GameOptionsScreen() {
           marginVertical: 16,
           textAlign: "center",
         },
+        setLabel: {
+          color: tokens.color.neutral["0"].value,
+          fontSize: 20,
+          marginTop: 12,
+          textAlign: "center",
+        },
         sliderContainer: { marginBottom: 16 },
         sliderLabel: { color: tokens.color.neutral["0"].value },
         title: { color: tokens.color.neutral["0"].value, fontSize: 20 },
@@ -186,17 +227,39 @@ export default function GameOptionsScreen() {
         <Text style={styles.configText}>Pick {description}</Text>
       )}
 
-      {current.length > 0 && (
+      {sets.length > 0 && (
         <>
-          <Text style={styles.numbers}>Main: {mainNums.join(" - ")}</Text>
-          {suppNums.length > 0 && (
-            <Text style={styles.numbers}>Supp: {suppNums.join(" - ")}</Text>
-          )}
-          {powerballNum !== undefined && (
-            <Text style={styles.numbers}>Powerball: {powerballNum}</Text>
-          )}
+          {sets.map((nums, idx) => {
+            const { main, supp, pb } = sliceNumbers(nums);
+            return (
+              <View key={`set-${idx}`}>
+                {sets.length > 1 && (
+                  <Text style={styles.setLabel}>Set {idx + 1}</Text>
+                )}
+                <Text style={styles.numbers}>Main: {main.join(" - ")}</Text>
+                {supp.length > 0 && (
+                  <Text style={styles.numbers}>Supp: {supp.join(" - ")}</Text>
+                )}
+                {pb !== undefined && (
+                  <Text style={styles.numbers}>Powerball: {pb}</Text>
+                )}
+              </View>
+            );
+          })}
         </>
       )}
+
+      <View style={styles.sliderContainer}>
+        <Text style={styles.sliderLabel}>Sets to Generate: {setCount}</Text>
+        <Slider
+          value={setCount}
+          minimumValue={1}
+          maximumValue={50}
+          step={1}
+          onValueChange={setSetCount}
+          accessibilityLabel="Set count"
+        />
+      </View>
 
       <View accessibilityLabel="Auto toggle" style={styles.toggleRow}>
         <Switch
@@ -242,6 +305,32 @@ export default function GameOptionsScreen() {
       >
         <Text style={styles.buttonText}>Generate Numbers</Text>
       </Pressable>
+
+      {sets.length > 0 && (
+        <>
+          <Pressable
+            style={[styles.button, styles.buttonSpacing]}
+            onPress={() => handleDownload("csv")}
+            accessibilityRole="button"
+          >
+            <Text style={styles.buttonText}>Download CSV</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.button, styles.buttonSpacing]}
+            onPress={() => handleDownload("txt")}
+            accessibilityRole="button"
+          >
+            <Text style={styles.buttonText}>Download TXT</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.button, styles.buttonSpacing]}
+            onPress={() => handleDownload("xlsx")}
+            accessibilityRole="button"
+          >
+            <Text style={styles.buttonText}>Download XLSX</Text>
+          </Pressable>
+        </>
+      )}
 
       <Pressable
         style={[styles.button, styles.buttonSpacing]}

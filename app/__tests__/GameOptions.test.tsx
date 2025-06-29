@@ -81,6 +81,22 @@ describe("GameOptionsScreen", () => {
     expect(getByText("Powerball: 8")).toBeTruthy();
   });
 
+  test("generates multiple sets when set count changed", () => {
+    (generator.generateSet as jest.Mock)
+      .mockReturnValueOnce([1, 2, 3, 4, 5, 6, 7])
+      .mockReturnValueOnce([8])
+      .mockReturnValueOnce([9, 10, 11, 12, 13, 14, 15])
+      .mockReturnValueOnce([16]);
+    const { getByText, getByLabelText } = render(<GameOptionsScreen />, {
+      wrapper: Wrapper,
+    });
+    const countSlider = getByLabelText("Set count");
+    fireEvent(countSlider, "valueChange", 2);
+    fireEvent.press(getByText("Generate Numbers"));
+    expect(getByText("Set 1")).toBeTruthy();
+    expect(getByText("Set 2")).toBeTruthy();
+  });
+
   test("uses configuration from the API", async () => {
     fetchGamesMock.mockResolvedValueOnce([
       {
@@ -118,6 +134,13 @@ describe("GameOptionsScreen", () => {
     expect(percent.props.disabled).toBe(true);
   });
 
+  test("set count slider is rendered", () => {
+    const { getByLabelText } = render(<GameOptionsScreen />, {
+      wrapper: Wrapper,
+    });
+    expect(getByLabelText("Set count")).toBeTruthy();
+  });
+
   test("sliders can be adjusted when auto is off", () => {
     const { getByLabelText } = render(<GameOptionsScreen />, {
       wrapper: Wrapper,
@@ -133,6 +156,17 @@ describe("GameOptionsScreen", () => {
     const { getByText } = render(<GameOptionsScreen />, { wrapper: Wrapper });
     expect(getByText("Last 10 Draws")).toBeTruthy();
     expect(getByText("Hot & Cold Numbers")).toBeTruthy();
+  });
+
+  test("download buttons appear after generating", () => {
+    const { getByText, queryByText } = render(<GameOptionsScreen />, {
+      wrapper: Wrapper,
+    });
+    expect(queryByText("Download CSV")).toBeNull();
+    fireEvent.press(getByText("Generate Numbers"));
+    expect(getByText("Download CSV")).toBeTruthy();
+    expect(getByText("Download TXT")).toBeTruthy();
+    expect(getByText("Download XLSX")).toBeTruthy();
   });
 
   test("pressing navigation buttons pushes routes", () => {
