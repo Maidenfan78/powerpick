@@ -12,7 +12,15 @@ const EXPO_PUBLIC_SUPABASE_ANON_KEY =
   process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
 
 if (!EXPO_PUBLIC_SUPABASE_URL || !EXPO_PUBLIC_SUPABASE_ANON_KEY) {
-  throw new Error("Supabase credentials missing");
+  const missing = [];
+  if (!EXPO_PUBLIC_SUPABASE_URL) missing.push("EXPO_PUBLIC_SUPABASE_URL");
+  if (!EXPO_PUBLIC_SUPABASE_ANON_KEY)
+    missing.push("EXPO_PUBLIC_SUPABASE_ANON_KEY");
+  throw new Error(
+    `Supabase credentials missing. Please set ${missing.join(
+      " and ",
+    )} in your app config or environment variables.`,
+  );
 }
 
 export const supabase = createClient(
