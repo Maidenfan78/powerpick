@@ -108,9 +108,12 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 
 2. **Environment** – duplicate `.env.example` as `.env` (the file is gitignored) and add your Supabase keys (`EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_ANON_KEY`).
    The older names `SUPABASE_URL` and `SUPABASE_ANON_KEY` are still read if the new ones are missing.
-3. **Database** – run `/supabase/init.sql` or `supabase db reset` then `supabase start`.
-4. **Create Indexes** – `node lib/createIndexes.ts` prints SQL. Execute it via the Supabase SQL editor.
-5. **Sync Draw History** – `yarn sync-draws` fetches the latest results for all games.
+3. **Database** – run `supabase db reset` then `supabase start` to apply the
+   migrations in `supabase/migrations/`.
+4. **Create Indexes** – `node lib/createIndexes.ts` prints SQL. Execute it via
+   the Supabase SQL editor.
+5. **Sync Draw History** – `yarn sync-draws` fetches the latest results for all
+   games.
 6. **Update Hot & Cold Numbers** – `yarn sync-hotcold` populates analytics.
 7. **Run the App**
    \| Platform | Command | Notes |
@@ -135,6 +138,7 @@ powerpick
 ├── LICENSE
 ├── app.config.ts
 ├── app.json
+├── index.js
 ├── assets.d.ts
 ├── babel.config.cjs
 ├── jest.config.cjs
@@ -185,15 +189,16 @@ powerpick
 │       └── competitive-colours.md
 ├── lib
 │   ├── **tests**
+│   ├── createIndexes.ts
 │   ├── csvParser.ts
 │   ├── database.types.ts
 │   ├── gameConfigs.ts
 │   ├── gamesApi.ts
 │   ├── generator.ts
 │   ├── hotCold.ts
+│   ├── logger.ts
 │   ├── regionConfig.ts
 │   ├── supabase.ts
-│   ├── syncDraws.cjs
 │   ├── syncDraws.ts
 │   ├── syncHotCold.ts
 │   ├── testUtils.tsx
@@ -236,7 +241,12 @@ All role personas live in `/personas/` and are _the_ reference for tone, deliver
 Additional research & design artefacts:
 
 - `Docs/Research/` – user interviews, demographic data.
+- `Docs/supabase-access.md` – how to run sync scripts with service keys.
 - `app/tokens.json` – source of truth for colour and spacing tokens.
+
+The Supabase schema typings in `lib/database.types.ts` now include draw
+schedule fields (`csv_url`, `draw_day`, `draw_time`, `next_draw_time`,
+`time_zone`).
 
 ---
 

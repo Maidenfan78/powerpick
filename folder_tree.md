@@ -8,6 +8,7 @@ powerpick
 ├── LICENSE
 ├── app.config.ts
 ├── app.json
+├── index.js
 ├── assets.d.ts
 ├── babel.config.cjs
 ├── jest.config.cjs
@@ -58,15 +59,16 @@ powerpick
 │ └── competitive-colours.md
 ├── lib
 │ ├── **tests**
+│ ├── createIndexes.ts
 │ ├── csvParser.ts
 │ ├── database.types.ts
 │ ├── gameConfigs.ts
 │ ├── gamesApi.ts
 │ ├── generator.ts
 │ ├── hotCold.ts
+│ ├── logger.ts
 │ ├── regionConfig.ts
 │ ├── supabase.ts
-│ ├── syncDraws.cjs
 │ ├── syncDraws.ts
 │ ├── syncHotCold.ts
 │ ├── testUtils.tsx
