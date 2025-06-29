@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.47% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/19</span>
+                <span class='fraction'>18/20</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.77% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/9</span>
+                <span class='fraction'>8/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">88.23% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/16</span>
+                <span class='fraction'>15/17</span>
             </div>
         
             
@@ -170,7 +170,14 @@
 <a name='L105'></a><a href='#L105'>105</a>
 <a name='L106'></a><a href='#L106'>106</a>
 <a name='L107'></a><a href='#L107'>107</a>
-<a name='L108'></a><a href='#L108'>108</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -190,7 +197,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,7 +290,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* ---------- RegionPicker.tsx ---------- */
-import React, { useState } from "react";
+/* eslint-disable react-native/no-unused-styles */
+import React, { useState, useMemo } from "react";
 import { View, Text, Pressable, Modal, StyleSheet } from "react-native";
 &nbsp;
 import { useTheme } from "../lib/theme";
@@ -297,55 +310,60 @@ export default function RegionPicker() {
 &nbsp;
   const labelFor = (r: Region) =&gt; REGION_LABELS[r];
 &nbsp;
-  const styles = StyleSheet.create({
-    backdrop: {
-      alignItems: "center",
-      backgroundColor: BACKDROP_COLOR,
-      flex: 1,
-      justifyContent: "center",
-    },
-    button: {
-      alignItems: "center",
-      backgroundColor: tokens.color.neutral["0"].value,
-      borderRadius: 8,
-      flexDirection: "row",
-      justifyContent: "space-between",
-      margin: 16,
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-    },
-    buttonText: {
-      color: tokens.color.brand.primary.value,
-      fontSize: 16,
-      fontWeight: "500",
-    },
-    checkIcon: {
-      color: tokens.color.brand.accent.value,
-      fontSize: 18,
-      marginLeft: 8,
-    },
-    icon: {
-      color: tokens.color.brand.accent.value,
-      fontSize: 20,
-      marginLeft: 8,
-    },
-    modal: {
-      backgroundColor: tokens.color.neutral["0"].value,
-      borderRadius: 12,
-      minWidth: "60%",
-      padding: 16,
-    },
-    optionText: {
-      color: tokens.color.brand.primary.value,
-      fontSize: 16,
-    },
-    row: {
-      alignItems: "center",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      paddingVertical: 12,
-    },
-  });
+  // eslint-disable-next-line react-native/no-unused-styles
+  const styles = useMemo(
+    () =&gt;
+      StyleSheet.create({
+        backdrop: {
+          alignItems: "center",
+          backgroundColor: BACKDROP_COLOR,
+          flex: 1,
+          justifyContent: "center",
+        },
+        button: {
+          alignItems: "center",
+          backgroundColor: tokens.color.neutral["0"].value,
+          borderRadius: 8,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          margin: 16,
+          paddingHorizontal: 16,
+          paddingVertical: 12,
+        },
+        buttonText: {
+          color: tokens.color.brand.primary.value,
+          fontSize: 16,
+          fontWeight: "500",
+        },
+        checkIcon: {
+          color: tokens.color.brand.accent.value,
+          fontSize: 18,
+          marginLeft: 8,
+        },
+        icon: {
+          color: tokens.color.brand.accent.value,
+          fontSize: 20,
+          marginLeft: 8,
+        },
+        modal: {
+          backgroundColor: tokens.color.neutral["0"].value,
+          borderRadius: 12,
+          minWidth: "60%",
+          padding: 16,
+        },
+        optionText: {
+          color: tokens.color.brand.primary.value,
+          fontSize: 16,
+        },
+        row: {
+          alignItems: "center",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingVertical: 12,
+        },
+      }),
+    [tokens],
+  );
 &nbsp;
   return (
     &lt;&gt;
@@ -391,7 +409,7 @@ export default function RegionPicker() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-29T05:32:54.512Z
+                at 2025-06-29T07:42:46.084Z
             </div>
         <script src="../prettify.js"></script>
         <script>
