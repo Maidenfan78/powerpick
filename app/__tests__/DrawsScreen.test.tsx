@@ -56,6 +56,7 @@ describe("DrawsScreen", () => {
           suppCount: 1,
           suppMax: 40,
           powerballMax: 20,
+          fromDrawNumber: 1,
         },
       ],
     });

@@ -65,6 +65,7 @@ describe("GameOptionsScreen", () => {
         suppCount: null,
         suppMax: null,
         powerballMax: 20,
+        fromDrawNumber: 100,
       },
     ]);
     const games = await fetchGames();
@@ -91,6 +92,7 @@ describe("GameOptionsScreen", () => {
         suppCount: 2,
         suppMax: 40,
         powerballMax: 20,
+        fromDrawNumber: 100,
       },
     ]);
     const games = await fetchGames();

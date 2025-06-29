@@ -61,6 +61,7 @@ describe("HotColdScreen", () => {
           suppCount: null,
           suppMax: null,
           powerballMax: null,
+          fromDrawNumber: 1,
         },
       ],
     });

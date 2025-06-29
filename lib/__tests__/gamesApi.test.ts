@@ -35,6 +35,7 @@ describe("fetchGames", () => {
           supp_count: null,
           supp_max: null,
           powerball_max: 20,
+          from_draw_number: 100,
         },
       ],
       error: null,
@@ -59,11 +60,12 @@ describe("fetchGames", () => {
         suppCount: null,
         suppMax: null,
         powerballMax: 20,
+        fromDrawNumber: 100,
       },
     ]);
     expect(fromMock).toHaveBeenCalledWith("games");
     expect(selectMock).toHaveBeenCalledWith(
-      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max",
+      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max, from_draw_number",
     );
   });
 
@@ -80,6 +82,7 @@ describe("fetchGames", () => {
           supp_count: 2,
           supp_max: 47,
           powerball_max: 3,
+          from_draw_number: 200,
         },
       ],
       error: null,
@@ -116,6 +119,7 @@ describe("fetchGames", () => {
           supp_count: 2,
           supp_max: 40,
           powerball_max: null,
+          from_draw_number: 300,
         },
       ],
       error: null,

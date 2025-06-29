@@ -25,6 +25,7 @@ interface GameConfig {
   main_max: number;
   supp_max?: number | null;
   powerball_max?: number | null;
+  from_draw_number: number;
 }
 
 interface DrawRow {
@@ -102,6 +103,7 @@ async function updateGameHotCold(game: GameConfig): Promise<void> {
       .from("draws")
       .select("draw_results(number, ball_types(name))")
       .eq("game_id", game.id)
+      .gte("draw_number", game.from_draw_number)
       .range(from, to);
 
     if (error) {
@@ -155,7 +157,7 @@ async function updateGameHotCold(game: GameConfig): Promise<void> {
 export async function syncAllHotCold(): Promise<void> {
   const { data, error } = await supabase
     .from("games")
-    .select("id, main_max, supp_max, powerball_max");
+    .select("id, main_max, supp_max, powerball_max, from_draw_number");
 
   if (error) {
     throw new Error(
