@@ -25,3 +25,20 @@ test("falls back to env vars when expoConfig is null", () => {
     "env-anon-key",
   );
 });
+
+test("throws helpful error when credentials are missing", () => {
+  delete process.env.EXPO_PUBLIC_SUPABASE_URL;
+  delete process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+
+  jest.doMock("expo-constants", () => ({
+    __esModule: true,
+    default: { expoConfig: null },
+  }));
+
+  expect(() => {
+    jest.isolateModules(() => {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      require("../supabase");
+    });
+  }).toThrow(/EXPO_PUBLIC_SUPABASE_URL.*EXPO_PUBLIC_SUPABASE_ANON_KEY/);
+});
