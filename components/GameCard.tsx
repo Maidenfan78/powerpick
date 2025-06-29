@@ -148,16 +148,23 @@ export default function GameCard({ game, onPress }: GameCardProps) {
           <Text style={styles.lastDrawLabel}>
             Last Draw: #{lastDraw.draw_number}
           </Text>
+          <Text style={styles.lastDrawLabel}>Winning Numbers</Text>
           <Text style={styles.lastDraw}>
-            Winning Numbers: {lastDraw.winning_numbers.join(" - ")}
+            {lastDraw.winning_numbers.join(" - ")}
           </Text>
           {lastDraw.supplementary_numbers?.length ? (
-            <Text style={styles.lastDraw}>
-              Supps: {lastDraw.supplementary_numbers.join(" - ")}
-            </Text>
-          ) : null}
-          {lastDraw.powerball !== null && lastDraw.powerball !== undefined ? (
-            <Text style={styles.lastDraw}>Powerball: {lastDraw.powerball}</Text>
+            <>
+              <Text style={styles.lastDrawLabel}>Supps</Text>
+              <Text style={styles.lastDraw}>
+                {lastDraw.supplementary_numbers.join(" - ")}
+              </Text>
+            </>
+          ) : lastDraw.powerball !== null &&
+            lastDraw.powerball !== undefined ? (
+            <>
+              <Text style={styles.lastDrawLabel}>Powerball</Text>
+              <Text style={styles.lastDraw}>{lastDraw.powerball}</Text>
+            </>
           ) : null}
         </>
       )}
