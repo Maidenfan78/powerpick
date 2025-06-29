@@ -24,6 +24,7 @@ describe("GameCard", () => {
     suppCount: null,
     suppMax: null,
     powerballMax: null,
+    fromDrawNumber: 1,
   };
 
   test("renders jackpot and handles press", () => {

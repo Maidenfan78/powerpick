@@ -17,6 +17,7 @@ describe("computeHotCold", () => {
         main_max: 5,
         supp_max: 10,
         powerball_max: 10,
+        from_draw_number: 1,
       },
       40,
     );

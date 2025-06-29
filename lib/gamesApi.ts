@@ -22,6 +22,7 @@ export interface Game {
   suppCount: number | null;
   suppMax: number | null;
   powerballMax: number | null;
+  fromDrawNumber: number;
 }
 
 export interface GameRow {
@@ -34,6 +35,7 @@ export interface GameRow {
   supp_count: number | null;
   supp_max: number | null;
   powerball_max: number | null;
+  from_draw_number: number;
 }
 
 /** Collapse any “//” in the pathname (preserving “https://”) */
@@ -53,7 +55,7 @@ export async function fetchGames(force = false): Promise<Game[]> {
   const { data: rows, error } = await supabase
     .from("games")
     .select(
-      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max",
+      "id, name, logo_url, jackpot, main_max, main_count, supp_count, supp_max, powerball_max, from_draw_number",
     );
 
   if (error) {
@@ -89,6 +91,7 @@ export async function fetchGames(force = false): Promise<Game[]> {
       suppCount: row.supp_count ?? null,
       suppMax: row.supp_max ?? null,
       powerballMax: row.powerball_max ?? null,
+      fromDrawNumber: row.from_draw_number,
     };
   });
 

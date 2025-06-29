@@ -22,6 +22,7 @@ describe("GameGrid", () => {
       suppCount: null,
       suppMax: null,
       powerballMax: null,
+      fromDrawNumber: 1,
     },
     {
       id: "2",
@@ -33,6 +34,7 @@ describe("GameGrid", () => {
       suppCount: null,
       suppMax: null,
       powerballMax: null,
+      fromDrawNumber: 2,
     },
   ];
 
