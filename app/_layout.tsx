@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     ...Platform.select({
-      web: { maxWidth: 600, marginLeft: "auto", marginRight: "auto" },
+      web: { maxWidth: 1280, marginLeft: "auto", marginRight: "auto" },
     }),
   },
 });

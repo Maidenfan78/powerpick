@@ -37,7 +37,7 @@ export default function GameCard({ game, onPress }: GameCardProps) {
         jackpot: {
           color: tokens.color.neutral["600"].value,
           fontSize: tokens.typography.fontSizes.lg.value,
-          fontWeight: "700",
+          fontWeight: "500",
         },
         logo: {
           height: 96,
