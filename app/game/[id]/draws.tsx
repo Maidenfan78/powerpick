@@ -31,9 +31,9 @@ export default function DrawsScreen() {
       padding: 16,
     },
     item: { paddingVertical: 8 },
-    text: { color: tokens.color.brand.primary.value, fontSize: 16 },
+    text: { color: tokens.color.neutral["0"].value, fontSize: 16 },
     title: {
-      color: tokens.color.brand.primary.value,
+      color: tokens.color.neutral["0"].value,
       fontSize: 20,
       marginBottom: 16,
       textAlign: "center",
