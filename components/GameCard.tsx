@@ -33,25 +33,45 @@ export default function GameCard({ game, onPress }: GameCardProps) {
           borderRadius: tokens.radius.md.value,
           flex: 1,
           margin: tokens.spacing["2"].value,
-          padding: tokens.spacing["3"].value,
+          padding: tokens.spacing["4"].value,
         },
         jackpot: {
           color: tokens.color.neutral["600"].value,
-          fontSize: tokens.typography.fontSizes.sm.value,
-          fontWeight: "600",
+          fontSize: tokens.typography.fontSizes.lg.value,
+          fontWeight: "700",
+        },
+        jackpotLabel: {
+          color: tokens.color.neutral["500"].value,
+          fontSize: tokens.typography.fontSizes.xs.value,
         },
         lastDraw: {
           color: tokens.color.neutral["600"].value,
+          fontSize: tokens.typography.fontSizes.sm.value,
+        },
+        lastDrawLabel: {
+          color: tokens.color.neutral["500"].value,
           fontSize: tokens.typography.fontSizes.xs.value,
+          marginTop: tokens.spacing["2"].value,
         },
         logo: {
           height: 96,
-          marginBottom: tokens.spacing["2"].value,
+          marginBottom: tokens.spacing["3"].value,
           width: 96,
+        },
+        name: {
+          color: tokens.color.brand.primary.value,
+          fontSize: tokens.typography.fontSizes.lg.value,
+          fontWeight: "700",
+          marginBottom: tokens.spacing["1"].value,
         },
         nextDraw: {
           color: tokens.color.neutral["600"].value,
+          fontSize: tokens.typography.fontSizes.sm.value,
+        },
+        nextDrawLabel: {
+          color: tokens.color.neutral["500"].value,
           fontSize: tokens.typography.fontSizes.xs.value,
+          marginTop: tokens.spacing["2"].value,
         },
       }),
     [tokens],
@@ -112,16 +132,24 @@ export default function GameCard({ game, onPress }: GameCardProps) {
           }}
         />
       )}
+      <Text style={styles.name}>{game.name}</Text>
+      <Text style={styles.jackpotLabel}>Jackpot</Text>
       <Text style={styles.jackpot}>{game.jackpot}</Text>
       {game.nextDrawTime && (
-        <Text style={styles.nextDraw}>
-          Next: {new Date(game.nextDrawTime).toLocaleString()}
-        </Text>
+        <>
+          <Text style={styles.nextDrawLabel}>Next Draw</Text>
+          <Text style={styles.nextDraw}>
+            {new Date(game.nextDrawTime).toLocaleString()}
+          </Text>
+        </>
       )}
       {lastDraw && (
-        <Text style={styles.lastDraw}>
-          Last #{lastDraw.draw_number}: {lastDraw.winning_numbers.join(" - ")}
-        </Text>
+        <>
+          <Text style={styles.lastDrawLabel}>Last Draw</Text>
+          <Text style={styles.lastDraw}>
+            #{lastDraw.draw_number}: {lastDraw.winning_numbers.join(" - ")}
+          </Text>
+        </>
       )}
     </Pressable>
   );

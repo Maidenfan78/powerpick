@@ -63,8 +63,9 @@ describe("GameCard", () => {
     );
 
     expect(getByText("$1,000")).toBeTruthy();
-    expect(getByText(/Next:/)).toBeTruthy();
-    await waitFor(() => expect(getByText(/Last #1/)).toBeTruthy());
+    expect(getByText("Jackpot")).toBeTruthy();
+    expect(getByText(/Next Draw/)).toBeTruthy();
+    await waitFor(() => expect(getByText(/Last Draw/)).toBeTruthy());
     fireEvent.press(getByRole("button"));
     expect(onPress).toHaveBeenCalled();
   });
