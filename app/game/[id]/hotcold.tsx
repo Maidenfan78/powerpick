@@ -3,7 +3,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useTheme } from "../../../lib/theme";
-import { fetchHotColdNumbers, HotColdNumbers } from "../../../lib/gamesApi";
+import {
+  fetchHotColdNumbers,
+  fetchRecentDraws,
+  HotColdNumbers,
+} from "../../../lib/gamesApi";
+import { calculateHotColdNumbers } from "../../../lib/hotCold";
 import { useGamesStore } from "../../../stores/useGamesStore";
 
 export default function HotColdScreen() {
@@ -16,11 +21,56 @@ export default function HotColdScreen() {
     const load = async () => {
       if (id) {
         const data = await fetchHotColdNumbers(id);
-        setNumbers(data);
+        if (
+          data.mainHot.length === 0 &&
+          data.mainCold.length === 0 &&
+          game?.mainMax
+        ) {
+          try {
+            const draws = await fetchRecentDraws(id);
+            const mainDraws = draws.map((d) => d.winning_numbers);
+            const { hot: mainHot, cold: mainCold } = calculateHotColdNumbers(
+              mainDraws,
+              game.mainMax,
+              20,
+            );
+            const result: HotColdNumbers = { mainHot, mainCold };
+            if (game.suppMax) {
+              const supp = draws.flatMap((d) => d.supplementary_numbers ?? []);
+              const grouped = supp.map((n) => [n]);
+              const { hot, cold } = calculateHotColdNumbers(
+                grouped,
+                game.suppMax,
+                20,
+              );
+              result.suppHot = hot;
+              result.suppCold = cold;
+            }
+            if (game.powerballMax) {
+              const pb = draws
+                .map((d) => d.powerball)
+                .filter((n): n is number => typeof n === "number")
+                .map((n) => [n]);
+              const { hot, cold } = calculateHotColdNumbers(
+                pb,
+                game.powerballMax,
+                20,
+              );
+              result.powerballHot = hot;
+              result.powerballCold = cold;
+            }
+            setNumbers(result);
+          } catch (err) {
+            console.error("Hot/cold fallback failed", err);
+            setNumbers(data);
+          }
+        } else {
+          setNumbers(data);
+        }
       }
     };
     load();
-  }, [id]);
+  }, [id, game]);
 
   if (!game) return null;
 
