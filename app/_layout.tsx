@@ -5,16 +5,29 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "../lib/theme";
 import Header from "../components/Header";
+import { View, StyleSheet, Platform } from "react-native";
 
 export default function Layout() {
   return (
     <ThemeProvider>
       <SafeAreaProvider>
         <StatusBar style="auto" />
-        <Stack screenOptions={{ header: () => <Header /> }}>
-          <Stack.Screen name="index" />
-        </Stack>
+        <View style={styles.container}>
+          <Stack screenOptions={{ header: () => <Header /> }}>
+            <Stack.Screen name="index" />
+          </Stack>
+        </View>
       </SafeAreaProvider>
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+    ...Platform.select({
+      web: { maxWidth: 600, marginLeft: "auto", marginRight: "auto" },
+    }),
+  },
+});
