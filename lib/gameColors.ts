@@ -3,7 +3,7 @@ export const gameColors: Record<string, string> = {
   "Oz Lotto": "#015700",
   Powerball: "#1d3782",
   "Set for Life": "#3bb3c3",
-  "Weekday Windfall": "#573888",
+  "Weekday Windfall": "#c4cae1",
 };
 
 export const getGameColor = (name: string): string =>
