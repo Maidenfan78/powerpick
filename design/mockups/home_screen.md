@@ -56,15 +56,15 @@
 
 ## Colour Palette
 
-| Role                 | Colour    |
-|----------------------|-----------|
-| Screen background    | #121212   |
-| App bar/backgrounds  | #000000   |
-| Card background      | #1E1E1E   |
-| Dropdown background  | #1E1E1E   |
-| Primary accent       | #7B1FA2   |
-| Text primary         | #FFFFFF   |
-| Text secondary/icons | #B0B0B0   |
+| Role                 | Colour  |
+| -------------------- | ------- |
+| Screen background    | #121212 |
+| App bar/backgrounds  | #000000 |
+| Card background      | #1E1E1E |
+| Dropdown background  | #1E1E1E |
+| Primary accent       | #7B1FA2 |
+| Text primary         | #FFFFFF |
+| Text secondary/icons | #B0B0B0 |
 
 ## Spacing & Typography
 
