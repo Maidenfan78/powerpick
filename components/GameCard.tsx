@@ -13,10 +13,10 @@ import {
 } from "react-native";
 import type { Game } from "../lib/gamesApi";
 import placeholder from "../assets/placeholder.png";
+import { getGameColor } from "../lib/gameColors";
 
 const CARD_BG = "#1E1E1E";
 const WHITE = "#FFFFFF";
-const ACCENT = "#7B1FA2";
 
 type GameCardProps = {
   game: Game;
@@ -43,7 +43,7 @@ export default function GameCard({ game, onPress }: GameCardProps) {
           fontWeight: "700",
         },
         logo: {
-          backgroundColor: ACCENT,
+          backgroundColor: getGameColor(game.name),
           borderRadius: 64,
           height: 96,
           marginBottom: 10,
@@ -56,7 +56,7 @@ export default function GameCard({ game, onPress }: GameCardProps) {
           marginTop: 4,
         },
       }),
-    [],
+    [game.name],
   );
 
   const [loading, setLoading] = useState(!!game.logoUrl);
