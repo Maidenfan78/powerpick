@@ -8,10 +8,16 @@ import { useRegionStore, Region } from "../stores/useRegionStore";
 import { REGION_LABELS } from "../lib/regionConfig";
 
 const BACKDROP_COLOR = "rgba(0,0,0,0.4)";
+const HEADER_BG = "#1E1E1E";
+const WHITE = "#FFFFFF";
 
 const REGION_OPTIONS: Region[] = ["AU", "US", "EU"];
 
-export default function RegionPicker() {
+export default function RegionPicker({
+  variant = "default",
+}: {
+  variant?: "default" | "header";
+}) {
   const { tokens } = useTheme();
   const region = useRegionStore((s) => s.region);
   const setRegion = useRegionStore((s) => s.setRegion);
@@ -31,17 +37,21 @@ export default function RegionPicker() {
         },
         button: {
           alignItems: "center",
-          backgroundColor: tokens.color.neutral["0"].value,
+          backgroundColor:
+            variant === "header" ? HEADER_BG : tokens.color.neutral["0"].value,
           borderRadius: 8,
           flexDirection: "row",
+          height: variant === "header" ? 36 : undefined,
           justifyContent: "space-between",
-          margin: 16,
-          paddingHorizontal: 16,
-          paddingVertical: 12,
+          margin: variant === "header" ? 0 : 16,
+          paddingHorizontal: 12,
+          paddingVertical: variant === "header" ? 0 : 12,
+          width: variant === "header" ? 140 : undefined,
         },
         buttonText: {
-          color: tokens.color.brand.primary.value,
-          fontSize: 16,
+          color:
+            variant === "header" ? WHITE : tokens.color.brand.primary.value,
+          fontSize: 14,
           fontWeight: "500",
         },
         checkIcon: {
@@ -50,8 +60,8 @@ export default function RegionPicker() {
           marginLeft: 8,
         },
         icon: {
-          color: tokens.color.brand.accent.value,
-          fontSize: 20,
+          color: variant === "header" ? WHITE : tokens.color.brand.accent.value,
+          fontSize: 16,
           marginLeft: 8,
         },
         modal: {
@@ -71,7 +81,7 @@ export default function RegionPicker() {
           paddingVertical: 12,
         },
       }),
-    [tokens],
+    [tokens, variant],
   );
 
   return (

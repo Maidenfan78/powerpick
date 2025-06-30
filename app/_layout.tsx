@@ -14,7 +14,7 @@ export default function Layout() {
         <StatusBar style="auto" />
         <View style={styles.container}>
           <Stack screenOptions={{ header: () => <Header /> }}>
-            <Stack.Screen name="index" />
+            <Stack.Screen name="index" options={{ headerShown: false }} />
           </Stack>
         </View>
       </SafeAreaProvider>

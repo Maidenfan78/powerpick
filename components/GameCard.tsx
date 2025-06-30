@@ -1,5 +1,5 @@
 // components/GameCard.tsx
-/* eslint-disable react-native/no-unused-styles */
+/* eslint-disable react-native/no-unused-styles, react-native/no-color-literals, react-native/sort-styles */
 import React, { useState, useMemo, useEffect } from "react";
 import {
   Text,
@@ -11,9 +11,12 @@ import {
   ViewStyle,
   StyleProp,
 } from "react-native";
-import { useTheme } from "../lib/theme";
 import type { Game } from "../lib/gamesApi";
 import placeholder from "../assets/placeholder.png";
+
+const CARD_BG = "#1E1E1E";
+const WHITE = "#FFFFFF";
+const ACCENT = "#7B1FA2";
 
 type GameCardProps = {
   game: Game;
@@ -21,35 +24,38 @@ type GameCardProps = {
 };
 
 export default function GameCard({ game, onPress }: GameCardProps) {
-  const { tokens } = useTheme();
   // eslint-disable-next-line react-native/no-unused-styles
   const styles = useMemo(
     () =>
       StyleSheet.create({
         card: {
           alignItems: "center",
-          backgroundColor: tokens.color.neutral["0"].value,
-          borderRadius: tokens.radius.md.value,
+          backgroundColor: CARD_BG,
+          borderRadius: 8,
           flex: 1,
-          margin: tokens.spacing["2"].value,
-          padding: tokens.spacing["4"].value,
+          margin: 4,
+          paddingHorizontal: 12,
+          paddingVertical: 16,
         },
         jackpot: {
-          color: tokens.color.neutral["600"].value,
-          fontSize: tokens.typography.fontSizes.lg.value,
-          fontWeight: "500",
+          color: WHITE,
+          fontSize: 18,
+          fontWeight: "700",
         },
         logo: {
-          height: 96,
-          marginBottom: tokens.spacing["3"].value,
-          width: 96,
+          backgroundColor: ACCENT,
+          borderRadius: 32,
+          height: 64,
+          marginBottom: 12,
+          width: 64,
         },
         nextDraw: {
-          color: tokens.color.neutral["600"].value,
-          fontSize: tokens.typography.fontSizes.sm.value,
+          color: WHITE,
+          fontSize: 14,
+          marginTop: 4,
         },
       }),
-    [tokens],
+    [],
   );
 
   const [loading, setLoading] = useState(!!game.logoUrl);
