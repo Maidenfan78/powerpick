@@ -7,13 +7,13 @@ import HomeTopBar from "../components/HomeTopBar";
 import BottomNav from "../components/BottomNav";
 import ComingSoon from "../components/ComingSoon";
 import GameGrid from "../components/GameGrid";
+import { SCREEN_BG } from "../lib/constants";
 import { Game, fetchGames } from "../lib/gamesApi";
 import { useRouter } from "expo-router";
 import { useGamesStore } from "../stores/useGamesStore";
 import { useRegionStore } from "../stores/useRegionStore";
 import { REGION_PLACEHOLDER_IMAGES, REGION_LABELS } from "../lib/regionConfig";
 
-const SCREEN_BG = "#121212";
 const WHITE = "#FFFFFF";
 
 const ERROR_COLOR = "#FF6666";

@@ -19,6 +19,7 @@ import { useGeneratedNumbersStore } from "../../../stores/useGeneratedNumbersSto
 import type { GameConfig } from "../../../lib/gameConfigs";
 import { useGamesStore } from "../../../stores/useGamesStore";
 import { getGameColor } from "../../../lib/gameColors";
+import { SCREEN_BG } from "../../../lib/constants";
 import * as FileSystem from "expo-file-system";
 
 export default function GameOptionsScreen() {
@@ -168,9 +169,7 @@ export default function GameOptionsScreen() {
           textAlign: "center",
         },
         container: {
-          backgroundColor: game
-            ? getGameColor(game.name)
-            : tokens.color.brand.primary.value,
+          backgroundColor: SCREEN_BG,
           flex: 1,
           padding: 16,
         },
