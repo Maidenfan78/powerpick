@@ -1,11 +1,11 @@
-/* eslint-disable react-native/no-unused-styles */
+/* eslint-disable react-native/no-unused-styles, react-native/no-color-literals, react-native/sort-styles */
 import { useEffect, useState, useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import RegionPicker from "../components/RegionPicker";
+import HomeTopBar from "../components/HomeTopBar";
+import BottomNav from "../components/BottomNav";
 import ComingSoon from "../components/ComingSoon";
-import { useTheme } from "../lib/theme";
 import GameGrid from "../components/GameGrid";
 import { Game, fetchGames } from "../lib/gamesApi";
 import { useRouter } from "expo-router";
@@ -13,10 +13,12 @@ import { useGamesStore } from "../stores/useGamesStore";
 import { useRegionStore } from "../stores/useRegionStore";
 import { REGION_PLACEHOLDER_IMAGES, REGION_LABELS } from "../lib/regionConfig";
 
+const SCREEN_BG = "#121212";
+const WHITE = "#FFFFFF";
+
 const ERROR_COLOR = "#FF6666";
 
 export default function IndexScreen() {
-  const { tokens } = useTheme();
   const router = useRouter();
   const region = useRegionStore((s) => s.region);
   const [games, setGames] = useState<Game[]>([]);
@@ -49,31 +51,18 @@ export default function IndexScreen() {
   const styles = useMemo(
     () =>
       StyleSheet.create({
-        container: {
-          backgroundColor: tokens.color.brand.primary.value,
-          flex: 1,
-          padding: 16,
-        },
-        debugText: {
-          color: tokens.color.neutral["0"].value,
-          fontSize: 18,
-        },
-        errorText: {
-          color: ERROR_COLOR,
-          fontSize: 18,
-        },
-        gridContainer: {
-          flex: 1,
-          marginTop: 20,
-        },
+        container: { backgroundColor: SCREEN_BG, flex: 1 },
+        debugText: { color: WHITE, fontSize: 18 },
+        errorText: { color: ERROR_COLOR, fontSize: 18 },
+        gridContainer: { flex: 1, paddingVertical: 8 },
       }),
-    [tokens],
+    [],
   );
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
-      <RegionPicker />
+      <HomeTopBar />
 
       {region === "AU" ? (
         <View style={styles.gridContainer}>
@@ -91,6 +80,7 @@ export default function IndexScreen() {
           region={REGION_LABELS[region]}
         />
       )}
+      <BottomNav />
     </SafeAreaView>
   );
 }
