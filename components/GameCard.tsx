@@ -44,12 +44,13 @@ export default function GameCard({ game, onPress }: GameCardProps) {
         },
         logo: {
           backgroundColor: ACCENT,
-          borderRadius: 32,
-          height: 64,
-          marginBottom: 12,
-          width: 64,
+          borderRadius: 64,
+          height: 96,
+          marginBottom: 10,
+          width: 96,
         },
         nextDraw: {
+          textAlign: "center",
           color: WHITE,
           fontSize: 14,
           marginTop: 4,
@@ -84,7 +85,7 @@ export default function GameCard({ game, onPress }: GameCardProps) {
         <Image
           source={imageSource}
           style={styles.logo}
-          resizeMode="contain"
+          resizeMode="center"
           onLoadStart={() => {
             setLoading(true);
             setError(false);
