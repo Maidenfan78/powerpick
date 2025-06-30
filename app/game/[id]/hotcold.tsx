@@ -11,6 +11,7 @@ import {
 } from "../../../lib/gamesApi";
 import { calculateHotColdNumbers } from "../../../lib/hotCold";
 import { useGamesStore } from "../../../stores/useGamesStore";
+import { getGameColor } from "../../../lib/gameColors";
 
 export default function HotColdScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -80,7 +81,9 @@ export default function HotColdScreen() {
     () =>
       StyleSheet.create({
         container: {
-          backgroundColor: tokens.color.brand.primary.value,
+          backgroundColor: game
+            ? getGameColor(game.name)
+            : tokens.color.brand.primary.value,
           flex: 1,
           padding: 16,
         },
@@ -96,7 +99,7 @@ export default function HotColdScreen() {
           textAlign: "center",
         },
       }),
-    [tokens],
+    [tokens, game],
   );
 
   return (

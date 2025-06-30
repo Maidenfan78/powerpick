@@ -6,6 +6,7 @@ import { useLocalSearchParams } from "expo-router";
 import { useTheme } from "../../../lib/theme";
 import { fetchRecentDraws, DrawResult } from "../../../lib/gamesApi";
 import { useGamesStore } from "../../../stores/useGamesStore";
+import { getGameColor } from "../../../lib/gameColors";
 
 export default function DrawsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -30,7 +31,9 @@ export default function DrawsScreen() {
     () =>
       StyleSheet.create({
         container: {
-          backgroundColor: tokens.color.brand.primary.value,
+          backgroundColor: game
+            ? getGameColor(game.name)
+            : tokens.color.brand.primary.value,
           flex: 1,
           padding: 16,
         },
@@ -43,7 +46,7 @@ export default function DrawsScreen() {
           textAlign: "center",
         },
       }),
-    [tokens],
+    [tokens, game],
   );
 
   return (
