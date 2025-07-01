@@ -38,15 +38,15 @@ Powerpick is an **insight companion** for casual lotto players aged **25 –�
 
 ## ✨ Core Features (v1)
 
-| Category                         | Feature                                                                                       |
-| -------------------------------- | --------------------------------------------------------------------------------------------- |
-| **Draw History**                 | Latest 20 draws for Saturday Lotto, Powerball, Oz Lotto, Weekday Windfall, Set for Life       |
-| **Analytics**                    | Hot/Cold, Overdue, Pair frequency, Gap charts                                                 |
-| **Predictions**                  | Generate number sets using **bell‑curve sum balancing using combination of hot/cold numbers** |
+| Category                         | Feature                                                                                        |
+| -------------------------------- | ---------------------------------------------------------------------------------------------  |
+| **Draw History**                 | Latest 20 draws for Saturday Lotto, Powerball, Oz Lotto, Weekday Windfall, Set for Life        |
+| **Analytics**                    | Hot/Cold, Overdue, Pair frequency, Gap charts                                                  |
+| **Predictions**                  | Generate number sets using **bell‑curve sum balancing using combination of hot/cold numbers**  |
 | + hot/cold sliders; save & share |
-| **Accounts**                     | Optional sign‑in (Supabase Auth) to sync saved predictions                                    |
-| **Notifications**                | Push alerts for new draw results (Expo Notifications)                                         |
-| **Monetisation**                 | One‑time **Pro** unlock: unlimited predictions, advanced stats, remove ads (Stripe IAP)       |
+| **Accounts**                     | Optional sign‑in (Supabase Auth) to sync saved predictions                                     |
+| **Notifications**                | Push alerts for new draw results (Expo Notifications)                                          |
+| **Monetisation**                 | One‑time **Pro** unlock: unlimited predictions, advanced stats, remove ads (Stripe IAP)        |
 
 ### 🎲 Bell‑Curve Sum Balancing (Why It Matters)
 
