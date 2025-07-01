@@ -32,3 +32,31 @@ test("getGameConfig handles mixed-case names and aliases", () => {
   expect(getGameConfig("PoWeRbAlL")).toEqual(canonical);
   expect(getGameConfig("sat lotto")).toEqual(getGameConfig("Saturday Lotto"));
 });
+
+test("generateSet respects windowPct parameter", () => {
+  const rand = () => 0.5;
+  const cfg = { maxNumber: 20, pickCount: 5 };
+
+  const mean = (cfg.pickCount * (cfg.maxNumber + 1)) / 2;
+  const totalRange = cfg.pickCount * (cfg.maxNumber - 1);
+  const check = (sum: number, pct: number) => {
+    const hw = pct / 2;
+    const lower = mean - totalRange * hw;
+    const upper = mean + totalRange * hw;
+    expect(sum).toBeGreaterThanOrEqual(lower);
+    expect(sum).toBeLessThanOrEqual(upper);
+  };
+
+  const s70 = generateSet({ ...cfg }, rand).reduce((a, b) => a + b, 0);
+  check(s70, 0.7);
+  const s50 = generateSet({ ...cfg, windowPct: 0.5 }, rand).reduce(
+    (a, b) => a + b,
+    0,
+  );
+  check(s50, 0.5);
+  const s90 = generateSet({ ...cfg, windowPct: 0.9 }, rand).reduce(
+    (a, b) => a + b,
+    0,
+  );
+  check(s90, 0.9);
+});

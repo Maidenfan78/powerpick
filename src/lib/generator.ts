@@ -1,4 +1,6 @@
 // src/lib/generator.ts
+import * as fs from "fs/promises";
+import { join } from "path";
 
 export interface GeneratorConfig {
   maxNumber: number;
@@ -9,11 +11,13 @@ export interface GeneratorConfig {
   coldNumbers?: number[];
   /** Value between 0 and 1 representing how strongly to favour hot numbers */
   hotRatio?: number;
-  /** 
-   * Width of the bell-curve sum window as a fraction of the full range 
-   * (0.5–0.9). Defaults to 0.7 (i.e. middle 70% of sums). 
+  /**
+   * Width of the bell-curve sum window as a fraction of the full range
+   * (0.5–0.9). Defaults to 0.7 (i.e. middle 70% of sums).
    */
   windowPct?: number;
+  /** Optional per-ball weight multipliers (1-indexed). */
+  weights?: number[];
 }
 
 /**
@@ -32,6 +36,7 @@ export function generateSet(
     coldNumbers = [],
     hotRatio = 0,
     windowPct = 0.7,
+    weights,
   } = config;
 
   if (pickCount > maxNumber) {
@@ -50,14 +55,16 @@ export function generateSet(
   for (let attempt = 0; attempt < 100; attempt++) {
     numbers.length = 0;
     const pool = Array.from({ length: maxNumber }, (_, i) => i + 1);
-    const weights = pool.map((n) => {
-      if (hotNumbers.includes(n)) return 1 + hotRatio;
-      if (coldNumbers.includes(n)) return Math.max(0, 1 - hotRatio);
-      return 1;
+    const baseWeights = pool.map((n) => weights?.[n] ?? 1);
+    const adjusted = baseWeights.map((w, i) => {
+      const n = i + 1;
+      if (hotNumbers.includes(n)) return w * (1 + hotRatio);
+      if (coldNumbers.includes(n)) return w * Math.max(0, 1 - hotRatio);
+      return w;
     });
 
     const tempPool = [...pool];
-    const tempWeights = [...weights];
+    const tempWeights = [...adjusted];
     while (numbers.length < pickCount && tempPool.length > 0) {
       const total = tempWeights.reduce((s, w) => s + w, 0);
       let r = rand() * total;
@@ -77,4 +84,16 @@ export function generateSet(
   }
 
   return [...numbers];
+}
+
+/** Load weight multipliers from assets/weights/<game>.json if present. */
+export async function loadWeightVector(game: string): Promise<number[] | null> {
+  try {
+    const filePath = join(__dirname, "../../assets/weights", `${game}.json`);
+    const text = await fs.readFile(filePath, "utf8");
+    const json = JSON.parse(text) as { weights?: number[] };
+    return Array.isArray(json.weights) ? json.weights : null;
+  } catch {
+    return null;
+  }
 }
