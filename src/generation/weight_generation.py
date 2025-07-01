@@ -9,6 +9,7 @@ and emit a JSON file for assets/weights/<game>.json.
 import pandas as pd
 import numpy as np
 import json
+import os
 from datetime import datetime
 
 # ──────────── Configuration ────────────
@@ -16,6 +17,7 @@ DRAW_CSV_PATH    = "data/draw_history.csv"  # your draws CSV
 DECAY_HALF_LIFE  = 120                     # in draws
 GAME_ID          = "saturday_lotto"        # used for output filename
 OUTPUT_DIR       = "assets/weights"         # where to save JSON
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ──────────── Load Data ────────────
 df = pd.read_csv(DRAW_CSV_PATH, parse_dates=["draw_date"])
