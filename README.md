@@ -132,7 +132,7 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 ```
 powerpick
 ├── .env.example
-├── .eslintrc.cjs
+├── eslint.config.js
 ├── .gitignore
 ├── .prettierignore
 ├── .yarnrc
