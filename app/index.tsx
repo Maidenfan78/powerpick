@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import HomeTopBar from "../components/HomeTopBar";
-import BottomNav from "../components/BottomNav";
 import ComingSoon from "../components/ComingSoon";
 import GameGrid from "../components/GameGrid";
 import { SCREEN_BG } from "../lib/constants";
@@ -80,7 +79,6 @@ export default function IndexScreen() {
           region={REGION_LABELS[region]}
         />
       )}
-      <BottomNav />
     </SafeAreaView>
   );
 }

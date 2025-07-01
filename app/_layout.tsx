@@ -5,6 +5,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "../lib/theme";
 import Header from "../components/Header";
+import BottomNav from "../components/BottomNav";
 import { View, StyleSheet, Platform } from "react-native";
 
 export default function Layout() {
@@ -13,9 +14,12 @@ export default function Layout() {
       <SafeAreaProvider>
         <StatusBar style="auto" />
         <View style={styles.container}>
-          <Stack screenOptions={{ header: () => <Header /> }}>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-          </Stack>
+          <View style={styles.stackContainer}>
+            <Stack screenOptions={{ header: () => <Header /> }}>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+            </Stack>
+          </View>
+          <BottomNav />
         </View>
       </SafeAreaProvider>
     </ThemeProvider>
@@ -29,5 +33,8 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: { maxWidth: 1280, marginLeft: "auto", marginRight: "auto" },
     }),
+  },
+  stackContainer: {
+    flex: 1,
   },
 });
