@@ -38,15 +38,15 @@ Powerpick is an **insight companion** for casual lotto players aged **25 –�
 
 ## ✨ Core Features (v1)
 
-| Category                         | Feature                                                                                        |
-| -------------------------------- | ---------------------------------------------------------------------------------------------  |
-| **Draw History**                 | Latest 20 draws for Saturday Lotto, Powerball, Oz Lotto, Weekday Windfall, Set for Life        |
-| **Analytics**                    | Hot/Cold, Overdue, Pair frequency, Gap charts                                                  |
-| **Predictions**                  | Generate number sets using **bell‑curve sum balancing using combination of hot/cold numbers**  |
+| Category                         | Feature                                                                                       |
+| -------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Draw History**                 | Latest 20 draws for Saturday Lotto, Powerball, Oz Lotto, Weekday Windfall, Set for Life       |
+| **Analytics**                    | Hot/Cold, Overdue, Pair frequency, Gap charts                                                 |
+| **Predictions**                  | Generate number sets using **bell‑curve sum balancing using combination of hot/cold numbers** |
 | + hot/cold sliders; save & share |
-| **Accounts**                     | Optional sign‑in (Supabase Auth) to sync saved predictions                                     |
-| **Notifications**                | Push alerts for new draw results (Expo Notifications)                                          |
-| **Monetisation**                 | One‑time **Pro** unlock: unlimited predictions, advanced stats, remove ads (Stripe IAP)        |
+| **Accounts**                     | Optional sign‑in (Supabase Auth) to sync saved predictions                                    |
+| **Notifications**                | Push alerts for new draw results (Expo Notifications)                                         |
+| **Monetisation**                 | One‑time **Pro** unlock: unlimited predictions, advanced stats, remove ads (Stripe IAP)       |
 
 ### 🎲 Bell‑Curve Sum Balancing (Why It Matters)
 
@@ -69,7 +69,7 @@ Road‑mapping is broken into **phases** – each two weeks long and tracked in 
 | **7** |  15‑18 | Pre‑Launch Hardening                  | Zero P1 bugs; store listings approved                                        |
 | **8** |  19‑∞  | Launch & Growth                       | Continuous ASO, feature expansion                                            |
 
-_Current phase: **4 – Implementation**_
+_Current phase: **4 – Implementation** (Sprints ongoing, basic sign‑in in place)_
 
 For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.md`](Docs/WORKFLOW.md).
 
@@ -97,6 +97,7 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 - Game options screen with hot/cold sliders and CSV/TXT/XLSX export
 - Draw history and hot/cold number screens
 - Light/dark mode toggle in Settings
+- Basic sign‑in screen using Supabase Auth; generated numbers persist via AsyncStorage
 
 ---
 

@@ -10,5 +10,4 @@ This phase covers **Implementation Sprints 1‑3**, where the core user flows co
 
 Further adjustments may expand on these goals as the project progresses.
 
-**Current status (June 2025):** the region picker and number generator are live,
-saving predictions locally via Zustand. Sync scripts update draw data and hot/cold analytics in Supabase.
+**Current status (July 2025):** the app now includes a basic sign‑in screen using Supabase Auth. The region picker and number generator are fully functional, and generated numbers persist locally via Zustand. Sync scripts continue to pull draw data and update hot/cold analytics in Supabase.
