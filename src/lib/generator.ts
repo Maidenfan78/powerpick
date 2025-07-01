@@ -1,3 +1,5 @@
+// src/lib/generator.ts
+
 export interface GeneratorConfig {
   maxNumber: number;
   pickCount: number;
@@ -7,12 +9,17 @@ export interface GeneratorConfig {
   coldNumbers?: number[];
   /** Value between 0 and 1 representing how strongly to favour hot numbers */
   hotRatio?: number;
+  /** 
+   * Width of the bell-curve sum window as a fraction of the full range 
+   * (0.5–0.9). Defaults to 0.7 (i.e. middle 70% of sums). 
+   */
+  windowPct?: number;
 }
 
 /**
  * Generate a set of unique numbers using a simple bell-curve sum balance.
- * The sum of the numbers will fall within the middle 70% of the
- * theoretical minimum/maximum range.
+ * The sum of the numbers will fall within the middle `windowPct * 100%` of the
+ * theoretical minimum/maximum range (default 70%).
  */
 export function generateSet(
   config: GeneratorConfig,
@@ -24,16 +31,21 @@ export function generateSet(
     hotNumbers = [],
     coldNumbers = [],
     hotRatio = 0,
+    windowPct = 0.7,
   } = config;
+
   if (pickCount > maxNumber) {
     throw new Error("pickCount cannot exceed maxNumber");
   }
 
   const numbers: number[] = [];
+  // expected sum and full range of sums
   const mean = (pickCount * (maxNumber + 1)) / 2;
   const totalRange = pickCount * (maxNumber - 1);
-  const lower = mean - totalRange * 0.35;
-  const upper = mean + totalRange * 0.35;
+  // half-window = windowPct/2 (e.g. 0.7/2 = 0.35)
+  const halfWindow = windowPct / 2;
+  const lower = mean - totalRange * halfWindow;
+  const upper = mean + totalRange * halfWindow;
 
   for (let attempt = 0; attempt < 100; attempt++) {
     numbers.length = 0;
@@ -58,9 +70,11 @@ export function generateSet(
       tempWeights.splice(idx, 1);
       numbers.push(n);
     }
+
     numbers.sort((a, b) => a - b);
     const sum = numbers.reduce((s, n) => s + n, 0);
     if (sum >= lower && sum <= upper) break;
   }
+
   return [...numbers];
 }
