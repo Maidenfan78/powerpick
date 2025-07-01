@@ -24,9 +24,9 @@ jest.mock("../../assets/coming_soon_eur.png", () => 3);
 import React from "react";
 import { render } from "@testing-library/react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import { ThemeProvider } from "../../lib/theme"; // ← correct import name
+import { ThemeProvider } from "../../src/lib/theme"; // ← correct import name
 import IndexScreen from "../../app/index";
-import { useRegionStore } from "../../stores/useRegionStore";
+import { useRegionStore } from "../../src/stores/useRegionStore";
 
 test("renders default region label", () => {
   const tree = render(

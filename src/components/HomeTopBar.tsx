@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { View, Image, Text, Pressable, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import RegionPicker from "./RegionPicker";
-import logoImg from "../assets/logo.png";
+import logoImg from "../../assets/logo.png";
 
 const BLACK = "#000000";
 const WHITE = "#FFFFFF";

@@ -13,13 +13,13 @@ import {
 } from "react-native";
 import Slider from "@react-native-community/slider";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useTheme } from "../../../lib/theme";
-import { generateSet } from "../../../lib/generator";
-import { useGeneratedNumbersStore } from "../../../stores/useGeneratedNumbersStore";
-import type { GameConfig } from "../../../lib/gameConfigs";
-import { useGamesStore } from "../../../stores/useGamesStore";
-import { getGameColor } from "../../../lib/gameColors";
-import { SCREEN_BG } from "../../../lib/constants";
+import { useTheme } from "../../../src/lib/theme";
+import { generateSet } from "../../../src/lib/generator";
+import { useGeneratedNumbersStore } from "../../../src/stores/useGeneratedNumbersStore";
+import type { GameConfig } from "../../../src/lib/gameConfigs";
+import { useGamesStore } from "../../../src/stores/useGamesStore";
+import { getGameColor } from "../../../src/lib/gameColors";
+import { SCREEN_BG } from "../../../src/lib/constants";
 import * as FileSystem from "expo-file-system";
 
 export default function GameOptionsScreen() {

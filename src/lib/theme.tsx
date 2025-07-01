@@ -17,7 +17,7 @@ import React, {
 } from "react";
 import { useColorScheme } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import baseTokens from "../app/tokens.json";
+import baseTokens from "../../app/tokens.json";
 
 /* -------------------------------------------------------------------------- */
 /*                              Type definitions                               */

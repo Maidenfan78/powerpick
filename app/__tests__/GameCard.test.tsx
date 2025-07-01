@@ -2,8 +2,8 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import { Image, ActivityIndicator } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import { ThemeProvider } from "../../lib/theme";
-import GameCard from "../../components/GameCard";
+import { ThemeProvider } from "../../src/lib/theme";
+import GameCard from "../../src/components/GameCard";
 
 jest.mock("expo-constants", () => ({
   __esModule: true,

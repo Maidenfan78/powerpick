@@ -3,15 +3,15 @@ import React, { useEffect, useState, useMemo } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { useTheme } from "../../../lib/theme";
+import { useTheme } from "../../../src/lib/theme";
 import {
   fetchHotColdNumbers,
   fetchRecentDraws,
   HotColdNumbers,
-} from "../../../lib/gamesApi";
-import { calculateHotColdNumbers } from "../../../lib/hotCold";
-import { useGamesStore } from "../../../stores/useGamesStore";
-import { getGameColor } from "../../../lib/gameColors";
+} from "../../../src/lib/gamesApi";
+import { calculateHotColdNumbers } from "../../../src/lib/hotCold";
+import { useGamesStore } from "../../../src/stores/useGamesStore";
+import { getGameColor } from "../../../src/lib/gameColors";
 
 export default function HotColdScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();

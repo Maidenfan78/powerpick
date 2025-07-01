@@ -3,15 +3,18 @@ import { useEffect, useState, useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import HomeTopBar from "../components/HomeTopBar";
-import ComingSoon from "../components/ComingSoon";
-import GameGrid from "../components/GameGrid";
-import { SCREEN_BG } from "../lib/constants";
-import { Game, fetchGames } from "../lib/gamesApi";
+import HomeTopBar from "../src/components/HomeTopBar";
+import ComingSoon from "../src/components/ComingSoon";
+import GameGrid from "../src/components/GameGrid";
+import { SCREEN_BG } from "../src/lib/constants";
+import { Game, fetchGames } from "../src/lib/gamesApi";
 import { useRouter } from "expo-router";
-import { useGamesStore } from "../stores/useGamesStore";
-import { useRegionStore } from "../stores/useRegionStore";
-import { REGION_PLACEHOLDER_IMAGES, REGION_LABELS } from "../lib/regionConfig";
+import { useGamesStore } from "../src/stores/useGamesStore";
+import { useRegionStore } from "../src/stores/useRegionStore";
+import {
+  REGION_PLACEHOLDER_IMAGES,
+  REGION_LABELS,
+} from "../src/lib/regionConfig";
 
 const WHITE = "#FFFFFF";
 

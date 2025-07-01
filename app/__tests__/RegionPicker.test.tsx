@@ -1,9 +1,9 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import { ThemeProvider } from "../../lib/theme";
-import RegionPicker from "../../components/RegionPicker";
-import { useRegionStore } from "../../stores/useRegionStore";
+import { ThemeProvider } from "../../src/lib/theme";
+import RegionPicker from "../../src/components/RegionPicker";
+import { useRegionStore } from "../../src/stores/useRegionStore";
 
 const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <PaperProvider>

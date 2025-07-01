@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "../lib/theme";
 import { useRouter } from "expo-router";
 import { Text } from "react-native";
-import logo from "../assets/logo.png"; // Local PNG fallback logo for header
+import logo from "../../assets/logo.png"; // Local PNG fallback logo for header
 
 export default function Header() {
   const { tokens } = useTheme();

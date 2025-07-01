@@ -1,10 +1,10 @@
 import React from "react";
 import { render, waitFor } from "@testing-library/react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import { ThemeProvider } from "../../lib/theme";
+import { ThemeProvider } from "../../src/lib/theme";
 import DrawsScreen from "../../app/game/[id]/draws";
-import { fetchRecentDraws } from "../../lib/gamesApi";
-import { useGamesStore } from "../../stores/useGamesStore";
+import { fetchRecentDraws } from "../../src/lib/gamesApi";
+import { useGamesStore } from "../../src/stores/useGamesStore";
 
 jest.mock("expo-constants", () => ({
   __esModule: true,
@@ -23,7 +23,7 @@ jest.mock("expo-router", () => ({
   useLocalSearchParams: () => ({ id: "1" }),
 }));
 
-jest.mock("../../lib/gamesApi");
+jest.mock("../../src/lib/gamesApi");
 
 const fetchRecentDrawsMock = fetchRecentDraws as jest.Mock;
 
