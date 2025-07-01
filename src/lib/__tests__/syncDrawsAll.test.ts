@@ -22,14 +22,18 @@ test("syncAllGames processes draws using mocked fetch and supabase", async () =>
   const deleteMock = jest.fn(() => ({ in: () => Promise.resolve() }));
   const insertMock = jest.fn(() => Promise.resolve({ error: null }));
   const fromMock = jest.fn((table: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if (table === "draws") return { upsert: upsertMock } as any;
+    if (table === "draws")
+      return { upsert: upsertMock } as { upsert: jest.Mock };
     if (table === "draw_results")
       return {
         delete: deleteMock,
         in: jest.fn().mockResolvedValue(undefined),
         insert: insertMock,
-      } as any;
+      } as {
+        delete: jest.Mock;
+        in: jest.Mock;
+        insert: jest.Mock;
+      };
     if (table === "games")
       return {
         select: jest.fn().mockReturnThis(),
@@ -38,12 +42,16 @@ test("syncAllGames processes draws using mocked fetch and supabase", async () =>
           data: { csv_url: "http://example.com" },
           error: null,
         }),
-      } as any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return {} as any;
+      } as {
+        select: jest.Mock;
+        eq: jest.Mock;
+        maybeSingle: jest.Mock;
+      };
+    return {} as Record<string, never>;
   });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const createClientMock = jest.fn(() => ({ from: fromMock }) as any);
+  const createClientMock = jest.fn(
+    () => ({ from: fromMock }) as { from: typeof fromMock },
+  );
   jest.doMock("@supabase/supabase-js", () => ({
     createClient: createClientMock,
   }));
