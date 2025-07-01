@@ -44,14 +44,26 @@ weights_df = (
 )
 
 # ──────────── Normalize & Build List ────────────
+# determine the highest ball number
 max_ball = int(weights_df["ball_number"].max())
-weight_list = [0.0] * (max_ball + 1)
-for _, row in weights_df.iterrows():
-    idx = int(row["ball_number"])
-    weight_list[idx] = float(row["decay_weight"])
 
-avg = np.mean(weight_list[1:])  # ignore index 0
-weight_list = [0.0 if i == 0 else w / avg for i, w in enumerate(weight_list)]
+# prepare a zero-filled list for all possible balls (index 0 unused)
+weight_list = [0.0] * (max_ball + 1)
+
+# convert the pandas Series to native Python lists of ints and floats
+ball_numbers  = weights_df["ball_number"].astype(int).tolist()
+decay_weights = weights_df["decay_weight"].tolist()
+
+# fill in our weight_list using the native types
+for idx, w in zip(ball_numbers, decay_weights):
+    weight_list[idx] = w
+
+# compute the average (excluding index 0) and normalize
+avg = np.mean(weight_list[1:])
+weight_list = [
+    0.0 if i == 0 else w / avg
+    for i, w in enumerate(weight_list)
+]
 
 # ──────────── Output JSON ────────────
 output = {
