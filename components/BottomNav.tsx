@@ -1,7 +1,8 @@
-/* eslint-disable react-native/no-color-literals, react-native/sort-styles */
-import React from "react";
+/* eslint-disable react-native/no-color-literals, react-native/sort-styles, react-native/no-unused-styles */
+import React, { useMemo } from "react";
 import { View, Pressable, Text, StyleSheet } from "react-native";
 import { useRouter, usePathname } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const BLACK = "#000000";
 const GREY = "#B0B0B0";
@@ -15,6 +16,26 @@ const NAV_ITEMS = [
 export default function BottomNav() {
   const router = useRouter();
   const pathname = usePathname();
+  const insets = useSafeAreaInsets();
+
+  const styles = useMemo(
+    () =>
+      StyleSheet.create({
+        container: {
+          alignItems: "center",
+          backgroundColor: BLACK,
+          flexDirection: "row",
+          height: 56 + insets.bottom,
+          justifyContent: "space-around",
+          paddingBottom: insets.bottom,
+        },
+        item: { alignItems: "center" },
+        icon: { color: GREY, fontSize: 24 },
+        label: { color: GREY, fontSize: 12 },
+        active: { color: PURPLE },
+      }),
+    [insets.bottom],
+  );
 
   return (
     <View style={styles.container}>
@@ -39,17 +60,3 @@ export default function BottomNav() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    backgroundColor: BLACK,
-    flexDirection: "row",
-    height: 56,
-    justifyContent: "space-around",
-  },
-  item: { alignItems: "center" },
-  icon: { color: GREY, fontSize: 24 },
-  label: { color: GREY, fontSize: 12 },
-  active: { color: PURPLE },
-});
