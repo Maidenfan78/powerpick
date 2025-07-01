@@ -25,7 +25,6 @@ export default function RegionPicker({
 
   const labelFor = (r: Region) => REGION_LABELS[r];
 
-  // eslint-disable-next-line react-native/no-unused-styles
   const styles = useMemo(
     () =>
       StyleSheet.create({

@@ -56,19 +56,17 @@ test("syncAllHotCold reads games and updates records", async () => {
   }));
   const upsertHotCold = jest.fn(() => Promise.resolve({ error: null }));
   const fromMock = jest.fn((table: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if (table === "games") return { select: selectGames } as any;
+    if (table === "games")
+      return { select: selectGames } as { select: jest.Mock };
     if (table === "draws")
-      return {
-        select: selectDraws,
-      } as any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if (table === "hot_cold_numbers") return { upsert: upsertHotCold } as any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return {} as any;
+      return { select: selectDraws } as { select: jest.Mock };
+    if (table === "hot_cold_numbers")
+      return { upsert: upsertHotCold } as { upsert: jest.Mock };
+    return {} as Record<string, never>;
   });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const createClientMock = jest.fn(() => ({ from: fromMock }) as any);
+  const createClientMock = jest.fn(
+    () => ({ from: fromMock }) as { from: typeof fromMock },
+  );
   jest.doMock("@supabase/supabase-js", () => ({
     createClient: createClientMock,
   }));
