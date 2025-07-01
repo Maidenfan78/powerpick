@@ -36,14 +36,15 @@ Powerpick is an **insight companion** for casual lotto players aged **25 –�
 
 ## ✨ Core Features (v1)
 
-| Category          | Feature                                                                                  |
-| ----------------- | ---------------------------------------------------------------------------------------- |
-| **Draw History**  | Latest 20 draws for Saturday Lotto, Powerball, Oz Lotto, Weekday Windfall, Set for Life  |
-| **Analytics**     | Hot/Cold, Overdue, Pair frequency, Gap charts                                            |
-| **Predictions**   | Generate number sets using **bell‑curve sum balancing** + hot/cold sliders; save & share |
-| **Accounts**      | Optional sign‑in (Supabase Auth) to sync saved predictions                               |
-| **Notifications** | Push alerts for new draw results (Expo Notifications)                                    |
-| **Monetisation**  | One‑time **Pro** unlock: unlimited predictions, advanced stats, remove ads (Stripe IAP)  |
+| Category                         | Feature                                                                                       |
+| -------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Draw History**                 | Latest 20 draws for Saturday Lotto, Powerball, Oz Lotto, Weekday Windfall, Set for Life       |
+| **Analytics**                    | Hot/Cold, Overdue, Pair frequency, Gap charts                                                 |
+| **Predictions**                  | Generate number sets using **bell‑curve sum balancing using combination of hot/cold numbers** |
+| + hot/cold sliders; save & share |
+| **Accounts**                     | Optional sign‑in (Supabase Auth) to sync saved predictions                                    |
+| **Notifications**                | Push alerts for new draw results (Expo Notifications)                                         |
+| **Monetisation**                 | One‑time **Pro** unlock: unlimited predictions, advanced stats, remove ads (Stripe IAP)       |
 
 ### 🎲 Bell‑Curve Sum Balancing (Why It Matters)
 
@@ -62,8 +63,9 @@ Road‑mapping is broken into **phases** – each two weeks long and tracked in 
 | **2** |  5‑6   | Concept & Visual Design (UI/UX + Art) | Approved high‑fi mock‑ups                                                    |
 | **3** |  7‑8   | Tech Scaffold (FE + BE)               | Header & Region Selector render live data                                    |
 | **4** |  9‑14  | Implementation Sprints 1‑3            | Users can select region → generate & save numbers                            |
-| **5** |  15‑18 | Pre‑Launch Hardening                  | Zero P1 bugs; store listings approved                                        |
-| **6** |  19‑∞  | Launch & Growth                       | Continuous ASO, feature expansion                                            |
+| **6** |  15‑18 | Improve predictions code with ML      | When approved                                                                |
+| **7** |  15‑18 | Pre‑Launch Hardening                  | Zero P1 bugs; store listings approved                                        |
+| **8** |  19‑∞  | Launch & Growth                       | Continuous ASO, feature expansion                                            |
 
 _Current phase: **4 – Implementation**_
 
@@ -216,8 +218,6 @@ powerpick
 │   └── migrations
 ├── vendor
 └── folder_tree.md
-
-
 
 ```
 
