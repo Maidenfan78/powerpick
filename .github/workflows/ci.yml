@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [22.x]           # ← if you’ve bumped to Node 20; otherwise keep 18.x
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,16 +20,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: yarn
 
-      - name: Install dependencies (offline)
-        run: yarn install --frozen-lockfile --offline
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Lint
         run: yarn lint
 
+      - name: Auto-format
+        run: yarn format        # ← runs `prettier --write`
+
       - name: Check formatting
-        run: yarn format:check
+        run: yarn format:check  # ← runs `prettier --check`
 
       - name: Type-check
         run: yarn tsc --noEmit
