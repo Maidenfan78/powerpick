@@ -147,7 +147,6 @@ export default function GameOptionsScreen() {
     }
   };
 
-  // eslint-disable-next-line react-native/no-unused-styles
   const styles = useMemo(
     () =>
       StyleSheet.create({

@@ -1,5 +1,5 @@
 // components/GameCard.tsx
-/* eslint-disable react-native/no-unused-styles, react-native/no-color-literals, react-native/sort-styles */
+/* eslint-disable react-native/no-unused-styles, react-native/sort-styles */
 import React, { useState, useMemo, useEffect } from "react";
 import {
   Text,
@@ -24,7 +24,6 @@ type GameCardProps = {
 };
 
 export default function GameCard({ game, onPress }: GameCardProps) {
-  // eslint-disable-next-line react-native/no-unused-styles
   const styles = useMemo(
     () =>
       StyleSheet.create({

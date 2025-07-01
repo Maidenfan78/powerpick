@@ -25,14 +25,12 @@ test("syncAllGames processes draws using mocked fetch and supabase", async () =>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (table === "draws") return { upsert: upsertMock } as any;
     if (table === "draw_results")
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return {
         delete: deleteMock,
         in: jest.fn().mockResolvedValue(undefined),
         insert: insertMock,
       } as any;
     if (table === "games")
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return {
         select: jest.fn().mockReturnThis(),
         eq: jest.fn().mockReturnThis(),

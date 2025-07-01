@@ -15,7 +15,7 @@ import { useRouter } from "expo-router";
 export default function SettingsScreen() {
   const { tokens, scheme, toggleScheme } = useTheme();
   const router = useRouter();
-  // eslint-disable-next-line react-native/no-unused-styles
+
   const styles = useMemo(
     () =>
       StyleSheet.create({
@@ -139,7 +139,7 @@ function Row({
   disabled?: boolean;
 }) {
   const { tokens } = useTheme();
-  // eslint-disable-next-line react-native/no-unused-styles
+
   const styles = useMemo(
     () =>
       StyleSheet.create({
@@ -169,7 +169,7 @@ function Row({
 
 function Separator() {
   const { tokens } = useTheme();
-  // eslint-disable-next-line react-native/no-unused-styles
+
   const styles = useMemo(
     () =>
       StyleSheet.create({

@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-unused-styles, react-native/no-color-literals, react-native/sort-styles */
+/* eslint-disable react-native/no-unused-styles */
 import { useEffect, useState, useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -49,7 +49,6 @@ export default function IndexScreen() {
     router.push(`/game/${game.id}/options`);
   };
 
-  // eslint-disable-next-line react-native/no-unused-styles
   const styles = useMemo(
     () =>
       StyleSheet.create({

@@ -12,7 +12,6 @@ export default function Header() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
-  // eslint-disable-next-line react-native/no-unused-styles
   const styles = useMemo(
     () =>
       StyleSheet.create({

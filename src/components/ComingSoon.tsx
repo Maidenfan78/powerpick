@@ -12,7 +12,7 @@ export default function ComingSoon({
   region: string;
 }) {
   const { tokens } = useTheme();
-  // eslint-disable-next-line react-native/no-unused-styles
+
   const styles = useMemo(
     () =>
       StyleSheet.create({

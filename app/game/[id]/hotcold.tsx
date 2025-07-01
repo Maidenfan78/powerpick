@@ -76,7 +76,6 @@ export default function HotColdScreen() {
 
   if (!game) return null;
 
-  // eslint-disable-next-line react-native/no-unused-styles
   const styles = useMemo(
     () =>
       StyleSheet.create({

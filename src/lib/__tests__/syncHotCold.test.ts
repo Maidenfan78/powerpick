@@ -2,7 +2,7 @@ describe("computeHotCold", () => {
   test("calculates hot and cold numbers from rows", () => {
     process.env.SUPABASE_URL = "http://localhost";
     process.env.SUPABASE_ANON_KEY = "anon";
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { computeHotCold } = require("../syncHotCold");
     const rows = [
       { winning_numbers: [1, 2, 3], supplementary_numbers: [7], powerball: 9 },
