@@ -15,6 +15,7 @@ powerpick
 ├── jestSetup.cjs
 ├── jestSetupAfterEnv.cjs
 ├── jestSetupMocks.cjs
+├── metro.config.cjs
 ├── package.json
 ├── README.md
 ├── requirements.txt
@@ -39,13 +40,6 @@ powerpick
 │ ├── tattslotto.png
 │ ├── splash-icon.png
 │ └── weekday_windfall.png
-├── components
-│ ├── Auth.tsx
-│ ├── ComingSoon.tsx
-│ ├── GameCard.tsx
-│ ├── GameGrid.tsx
-│ ├── Header.tsx
-│ └── RegionPicker.tsx
 ├── coverage
 ├── design
 │ ├── mockups
@@ -57,28 +51,40 @@ powerpick
 │ ├── WORKFLOW.md
 │ └── Research
 │ └── competitive-colours.md
-├── lib
-│ ├── **tests**
-│ ├── createIndexes.ts
-│ ├── csvParser.ts
-│ ├── database.types.ts
-│ ├── gameConfigs.ts
-│ ├── gamesApi.ts
-│ ├── generator.ts
-│ ├── hotCold.ts
-│ ├── logger.ts
-│ ├── regionConfig.ts
-│ ├── supabase.ts
-│ ├── syncDraws.ts
-│ ├── syncHotCold.ts
-│ ├── testUtils.tsx
-│ └── theme.tsx
-├── personas
-│ └── The Team.md
-├── stores
+├── src
+│ ├── components
+│ │ ├── Auth.tsx
+│ │ ├── BottomNav.tsx
+│ │ ├── ComingSoon.tsx
+│ │ ├── GameCard.tsx
+│ │ ├── GameGrid.tsx
+│ │ ├── Header.tsx
+│ │ ├── HomeTopBar.tsx
+│ │ └── RegionPicker.tsx
+│ ├── lib
+│ │ ├── **tests**
+│ │ ├── constants.ts
+│ │ ├── createIndexes.ts
+│ │ ├── csvParser.ts
+│ │ ├── database.types.ts
+│ │ ├── gameColors.ts
+│ │ ├── gameConfigs.ts
+│ │ ├── gamesApi.ts
+│ │ ├── generator.ts
+│ │ ├── hotCold.ts
+│ │ ├── logger.ts
+│ │ ├── regionConfig.ts
+│ │ ├── supabase.ts
+│ │ ├── syncDraws.ts
+│ │ ├── syncHotCold.ts
+│ │ ├── testUtils.tsx
+│ │ └── theme.tsx
+│ └── stores
 │ ├── useGamesStore.ts
 │ ├── useGeneratedNumbersStore.ts
 │ └── useRegionStore.ts
+├── personas
+│ └── The Team.md
 ├── supabase
 │ ├── .temp
 │ └── migrations

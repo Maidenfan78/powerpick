@@ -15,12 +15,14 @@
 2. [Core Features (v1)](#-core-features-v1)
 3. [Roadmap](#-roadmap)
 4. [Tech Stack](#-tech-stack)
-5. [Getting Started (Development)](#-getting-started-development)
-6. [Workflow & Contributing](#-workflow--contributing)
-7. [Repository Structure](#-repository-structure)
-8. [Personas & Documentation](#-personas--documentation)
-9. [License](#-license)
-10. [Acknowledgements](#-acknowledgements)
+5. [Implemented Screens & Features](#-implemented-screens--features)
+6. [Visual Language & Accessibility](#-visual-language--accessibility)
+7. [Getting Started (Development)](#-getting-started-development)
+8. [Workflow & Contributing](#-workflow--contributing)
+9. [Repository Structure](#-repository-structure)
+10. [Personas & Documentation](#-personas--documentation)
+11. [License](#-license)
+12. [Acknowledgements](#-acknowledgements)
 
 ---
 
@@ -87,6 +89,17 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 
 ---
 
+## ✅ Implemented Screens & Features
+
+- Home screen with live game grid
+- Region selector in the header
+- Bottom navigation bar linking Home and Settings
+- Game options screen with hot/cold sliders and CSV/TXT/XLSX export
+- Draw history and hot/cold number screens
+- Light/dark mode toggle in Settings
+
+---
+
 ## 🎨 Visual Language & Accessibility
 
 - **Screen background**: `#121212`
@@ -129,6 +142,16 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 
 ---
 
+## 🛠️ Workflow & Contributing
+
+See [Docs/WORKFLOW.md](Docs/WORKFLOW.md) for the full guide. Key points:
+
+- Name branches with `feat/`, `fix/` or `chore/` prefixes.
+- Run `yarn lint`, `yarn format`, and `yarn test` before pushing.
+- Open PRs early and keep commits focused.
+
+---
+
 ## 🗂️ Repository Structure
 
 ```
@@ -149,6 +172,7 @@ powerpick
 ├── jestSetup.cjs
 ├── jestSetupAfterEnv.cjs
 ├── jestSetupMocks.cjs
+├── metro.config.cjs
 ├── package.json
 ├── README.md
 ├── requirements.txt
@@ -173,13 +197,6 @@ powerpick
 │   ├── tattslotto.png
 │   ├── splash-icon.png
 │   └── weekday_windfall.png
-├── components
-│   ├── Auth.tsx
-│   ├── ComingSoon.tsx
-│   ├── GameCard.tsx
-│   ├── GameGrid.tsx
-│   ├── Header.tsx
-│   └── RegionPicker.tsx
 ├── coverage
 ├── design
 │   ├── mockups
@@ -191,28 +208,40 @@ powerpick
 │   ├── WORKFLOW.md
 │   └── Research
 │       └── competitive-colours.md
-├── lib
-│   ├── **tests**
-│   ├── createIndexes.ts
-│   ├── csvParser.ts
-│   ├── database.types.ts
-│   ├── gameConfigs.ts
-│   ├── gamesApi.ts
-│   ├── generator.ts
-│   ├── hotCold.ts
-│   ├── logger.ts
-│   ├── regionConfig.ts
-│   ├── supabase.ts
-│   ├── syncDraws.ts
-│   ├── syncHotCold.ts
-│   ├── testUtils.tsx
-│   └── theme.tsx
+├── src
+│   ├── components
+│   │   ├── Auth.tsx
+│   │   ├── BottomNav.tsx
+│   │   ├── ComingSoon.tsx
+│   │   ├── GameCard.tsx
+│   │   ├── GameGrid.tsx
+│   │   ├── Header.tsx
+│   │   ├── HomeTopBar.tsx
+│   │   └── RegionPicker.tsx
+│   ├── lib
+│   │   ├── **tests**
+│   │   ├── constants.ts
+│   │   ├── createIndexes.ts
+│   │   ├── csvParser.ts
+│   │   ├── database.types.ts
+│   │   ├── gameColors.ts
+│   │   ├── gameConfigs.ts
+│   │   ├── gamesApi.ts
+│   │   ├── generator.ts
+│   │   ├── hotCold.ts
+│   │   ├── logger.ts
+│   │   ├── regionConfig.ts
+│   │   ├── supabase.ts
+│   │   ├── syncDraws.ts
+│   │   ├── syncHotCold.ts
+│   │   ├── testUtils.tsx
+│   │   └── theme.tsx
+│   └── stores
+│       ├── useGamesStore.ts
+│       ├── useGeneratedNumbersStore.ts
+│       └── useRegionStore.ts
 ├── personas
 │   └── The Team.md
-├── stores
-│   ├── useGamesStore.ts
-│   ├── useGeneratedNumbersStore.ts
-│   └── useRegionStore.ts
 ├── supabase
 │   ├── .temp
 │   └── migrations
