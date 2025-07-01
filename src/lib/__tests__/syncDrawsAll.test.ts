@@ -27,7 +27,7 @@ test("syncAllGames processes draws using mocked fetch and supabase", async () =>
     if (table === "draw_results")
       return {
         delete: deleteMock,
-        in: jest.fn().mockResolvedValue(undefined),
+        in: jest.fn(async () => undefined) as unknown as jest.Mock,
         insert: insertMock,
       } as {
         delete: jest.Mock;
@@ -38,10 +38,10 @@ test("syncAllGames processes draws using mocked fetch and supabase", async () =>
       return {
         select: jest.fn().mockReturnThis(),
         eq: jest.fn().mockReturnThis(),
-        maybeSingle: jest.fn().mockResolvedValue({
+        maybeSingle: jest.fn(async () => ({
           data: { csv_url: "http://example.com" },
           error: null,
-        }),
+        })) as unknown as jest.Mock,
       } as {
         select: jest.Mock;
         eq: jest.Mock;
