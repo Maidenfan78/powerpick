@@ -113,6 +113,14 @@ export default function SettingsScreen() {
         />
       </View>
 
+      {/* --- Account Group --- */}
+      <Text style={styles.groupTitle}>▸ Account</Text>
+      <View style={styles.card}>
+        <Pressable onPress={() => router.push("/login")}>
+          <Text style={styles.linkText}>Sign In</Text>
+        </Pressable>
+      </View>
+
       {/* --- App Info Group --- */}
       <Text style={styles.groupTitle}>▸ App Info</Text>
       <View style={styles.card}>
