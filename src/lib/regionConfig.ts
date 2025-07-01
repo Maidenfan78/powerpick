@@ -1,6 +1,6 @@
 import { Region } from "../stores/useRegionStore";
-import comingSoonUSA from "../assets/coming_soon_usa.png";
-import comingSoonEU from "../assets/coming_soon_eur.png";
+import comingSoonUSA from "../../assets/coming_soon_usa.png";
+import comingSoonEU from "../../assets/coming_soon_eur.png";
 
 export const REGION_LABELS: Record<Region, string> = {
   AU: "Australia",

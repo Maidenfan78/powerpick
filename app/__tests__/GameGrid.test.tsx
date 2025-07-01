@@ -1,11 +1,11 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import { ThemeProvider } from "../../lib/theme";
-import GameGrid from "../../components/GameGrid";
-import { fetchRecentDraws } from "../../lib/gamesApi";
+import { ThemeProvider } from "../../src/lib/theme";
+import GameGrid from "../../src/components/GameGrid";
+import { fetchRecentDraws } from "../../src/lib/gamesApi";
 
-jest.mock("../../lib/gamesApi");
+jest.mock("../../src/lib/gamesApi");
 
 const fetchRecentDrawsMock = fetchRecentDraws as jest.Mock;
 

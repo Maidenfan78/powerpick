@@ -1,12 +1,12 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import { ThemeProvider } from "../../lib/theme";
+import { ThemeProvider } from "../../src/lib/theme";
 import GameOptionsScreen from "../../app/game/[id]/options";
-import * as generator from "../../lib/generator";
-import { fetchGames } from "../../lib/gamesApi";
-import { useGeneratedNumbersStore } from "../../stores/useGeneratedNumbersStore";
-import { useGamesStore } from "../../stores/useGamesStore";
+import * as generator from "../../src/lib/generator";
+import { fetchGames } from "../../src/lib/gamesApi";
+import { useGeneratedNumbersStore } from "../../src/stores/useGeneratedNumbersStore";
+import { useGamesStore } from "../../src/stores/useGamesStore";
 
 jest.mock("expo-constants", () => ({
   __esModule: true,
@@ -36,8 +36,8 @@ declare module "expo-router" {
   const pushMock: jest.Mock<any, any>;
 }
 
-jest.mock("../../lib/generator");
-jest.mock("../../lib/gamesApi");
+jest.mock("../../src/lib/generator");
+jest.mock("../../src/lib/gamesApi");
 
 const fetchGamesMock = fetchGames as jest.Mock;
 

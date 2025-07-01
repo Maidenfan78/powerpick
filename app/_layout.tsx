@@ -3,9 +3,9 @@ import React from "react";
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { ThemeProvider } from "../lib/theme";
-import Header from "../components/Header";
-import BottomNav from "../components/BottomNav";
+import { ThemeProvider } from "../src/lib/theme";
+import Header from "../src/components/Header";
+import BottomNav from "../src/components/BottomNav";
 import { View, StyleSheet, Platform } from "react-native";
 
 export default function Layout() {

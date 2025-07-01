@@ -9,7 +9,7 @@ import {
   Switch,
 } from "react-native";
 import { useMemo } from "react";
-import { useTheme } from "../lib/theme";
+import { useTheme } from "../src/lib/theme";
 import { useRouter } from "expo-router";
 
 export default function SettingsScreen() {

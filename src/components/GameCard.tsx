@@ -12,7 +12,7 @@ import {
   StyleProp,
 } from "react-native";
 import type { Game } from "../lib/gamesApi";
-import placeholder from "../assets/placeholder.png";
+import placeholder from "../../assets/placeholder.png";
 import { getGameColor } from "../lib/gameColors";
 
 const CARD_BG = "#1E1E1E";

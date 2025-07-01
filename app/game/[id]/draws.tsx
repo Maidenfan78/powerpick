@@ -3,10 +3,10 @@ import React, { useEffect, useState, useMemo } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { useTheme } from "../../../lib/theme";
-import { fetchRecentDraws, DrawResult } from "../../../lib/gamesApi";
-import { useGamesStore } from "../../../stores/useGamesStore";
-import { getGameColor } from "../../../lib/gameColors";
+import { useTheme } from "../../../src/lib/theme";
+import { fetchRecentDraws, DrawResult } from "../../../src/lib/gamesApi";
+import { useGamesStore } from "../../../src/stores/useGamesStore";
+import { getGameColor } from "../../../src/lib/gameColors";
 
 export default function DrawsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
