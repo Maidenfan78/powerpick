@@ -18,6 +18,8 @@ import { generateSet } from "../../../lib/generator";
 import { useGeneratedNumbersStore } from "../../../stores/useGeneratedNumbersStore";
 import type { GameConfig } from "../../../lib/gameConfigs";
 import { useGamesStore } from "../../../stores/useGamesStore";
+import { getGameColor } from "../../../lib/gameColors";
+import { SCREEN_BG } from "../../../lib/constants";
 import * as FileSystem from "expo-file-system";
 
 export default function GameOptionsScreen() {
@@ -151,7 +153,9 @@ export default function GameOptionsScreen() {
       StyleSheet.create({
         button: {
           alignItems: "center",
-          backgroundColor: tokens.color.brand.primary.value,
+          backgroundColor: game
+            ? getGameColor(game.name)
+            : tokens.color.brand.primary.value,
           borderRadius: 8,
           padding: 12,
         },
@@ -165,15 +169,20 @@ export default function GameOptionsScreen() {
           textAlign: "center",
         },
         container: {
-          backgroundColor: tokens.color.brand.primary.value,
+          backgroundColor: SCREEN_BG,
           flex: 1,
           padding: 16,
         },
         disabled: { opacity: 0.5 },
         header: {
+          backgroundColor: game
+            ? getGameColor(game.name)
+            : tokens.color.brand.primary.value,
+          borderRadius: 8,
           flexDirection: "row",
           justifyContent: "space-between",
           marginBottom: 16,
+          padding: 8,
         },
         numbers: {
           color: tokens.color.neutral["0"].value,
@@ -198,7 +207,7 @@ export default function GameOptionsScreen() {
         },
         toggleText: { color: tokens.color.neutral["0"].value, marginLeft: 8 },
       }),
-    [tokens],
+    [tokens, game],
   );
 
   return (

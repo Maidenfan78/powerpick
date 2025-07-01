@@ -24,6 +24,6 @@ export default function GameGrid({ games, onSelectGame }: GameGridProps) {
 
 const styles = StyleSheet.create({
   list: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
   },
 });

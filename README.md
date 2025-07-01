@@ -87,11 +87,13 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 
 ## 🎨 Visual Language & Accessibility
 
-- **Primary (`#0C244B`)** – trust, stability, legibility on light & dark backgrounds (9.3:1 on white).
-- **Accent (`#F5A623`)** – energy, call-to-action, 4.6:1 on brand-primary.
-- Dark-mode variants (`#081935`, `#FFC04D`) defined in `app/tokens.json`.
-- All colour pairs pass WCAG 2.1 AA; primary text meets AAA.
-- See `app/tokens.json` and Figma **Powerpick Design System** for full ramp.
+- **Screen background**: `#121212`
+- **App bar & bottom nav backgrounds**: `#000000`
+- **Card & dropdown background**: `#1E1E1E`
+- **Primary accent**: `#7B1FA2`
+- **Text primary**: `#FFFFFF`
+- **Text secondary & icons**: `#B0B0B0`
+- **Spacing & corner radii**: margins/gutters 8 dp; corner radius 8 dp (cards & dropdown), 16 dp (tab control)
 
 ---
 
