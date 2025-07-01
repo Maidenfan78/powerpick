@@ -1,6 +1,6 @@
 powerpick
 ├── .env.example
-├── .eslintrc.cjs
+├── eslint.config.js
 ├── .gitignore
 ├── .prettierignore
 ├── .yarnrc

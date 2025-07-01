@@ -13,11 +13,11 @@ New contributors should skim the _Quick Reference_ table, then jump to the deta
 
 ## 2 · Quick Reference
 
-| Name / Script | Purpose                                 | Invocation                          | Model / Tool chain     | Key Files                         |
-| ------------- | --------------------------------------- | ----------------------------------- | ---------------------- | --------------------------------- |
-| **lint**      | Detect style & rule violations (ESLint) | `yarn lint` · `yarn lint:fix`       | eslint @ flat‑config   | `.eslintrc`, `.eslintignore`      |
-| **format**    | Apply repository code‑style (Prettier)  | `yarn format` · `yarn format:check` | prettier               | `.prettierrc`                     |
-| **test**      | Run unit tests with coverage ≥ 80 %     | `yarn test`                         | jest, @testing‑library | `jest.config.js`, `app/__tests__` |
+| Name / Script | Purpose                                 | Invocation                          | Model / Tool chain     | Key Files                           |
+| ------------- | --------------------------------------- | ----------------------------------- | ---------------------- | ----------------------------------- |
+| **lint**      | Detect style & rule violations (ESLint) | `yarn lint` · `yarn lint:fix`       | eslint @ flat‑config   | `eslint.config.js`, `.eslintignore` |
+| **format**    | Apply repository code‑style (Prettier)  | `yarn format` · `yarn format:check` | prettier               | `.prettierrc`                       |
+| **test**      | Run unit tests with coverage ≥ 80 %     | `yarn test`                         | jest, @testing‑library | `jest.config.js`, `app/__tests__`   |
 
 ---
 
