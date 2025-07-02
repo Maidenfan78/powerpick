@@ -3,7 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import HomeTopBar from "../src/components/HomeTopBar";
+import RegionPicker from "../src/components/RegionPicker";
 import ComingSoon from "../src/components/ComingSoon";
 import GameGrid from "../src/components/GameGrid";
 import { SCREEN_BG } from "../src/lib/constants";
@@ -56,6 +56,7 @@ export default function IndexScreen() {
         debugText: { color: WHITE, fontSize: 18 },
         errorText: { color: ERROR_COLOR, fontSize: 18 },
         gridContainer: { flex: 1, paddingVertical: 8 },
+        pickerContainer: { padding: 8 },
       }),
     [],
   );
@@ -63,7 +64,9 @@ export default function IndexScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
-      <HomeTopBar />
+      <View style={styles.pickerContainer}>
+        <RegionPicker variant="header" />
+      </View>
 
       {region === "AU" ? (
         <View style={styles.gridContainer}>
