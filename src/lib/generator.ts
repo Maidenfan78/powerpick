@@ -1,6 +1,5 @@
 // src/lib/generator.ts
-import * as fs from "fs/promises";
-import { join } from "path";
+// Note: avoid Node-specific imports for React Native compatibility
 
 export interface GeneratorConfig {
   maxNumber: number;
@@ -89,9 +88,8 @@ export function generateSet(
 /** Load weight multipliers from assets/weights/<game>.json if present. */
 export async function loadWeightVector(game: string): Promise<number[] | null> {
   try {
-    const filePath = join(__dirname, "../../assets/weights", `${game}.json`);
-    const text = await fs.readFile(filePath, "utf8");
-    const json = JSON.parse(text) as { weights?: number[] };
+    const mod = await import(`../../assets/weights/${game}.json`);
+    const json = mod as unknown as { weights?: number[] };
     return Array.isArray(json.weights) ? json.weights : null;
   } catch {
     return null;
