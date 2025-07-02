@@ -11,6 +11,10 @@ import {
 import { useMemo } from "react";
 import { useTheme } from "../src/lib/theme";
 import { useRouter } from "expo-router";
+import { SCREEN_BG } from "../src/lib/constants";
+
+const BLACK = "#000000";
+const WHITE = "#FFFFFF";
 
 export default function SettingsScreen() {
   const { tokens, scheme, toggleScheme } = useTheme();
@@ -28,7 +32,7 @@ export default function SettingsScreen() {
           paddingVertical: 8,
         },
         container: {
-          backgroundColor: tokens.color.brand.primary.value,
+          backgroundColor: SCREEN_BG,
           flex: 1,
         },
         dismiss: {
@@ -43,7 +47,7 @@ export default function SettingsScreen() {
         },
         header: {
           alignItems: "center",
-          backgroundColor: tokens.color.brand.primary.value,
+          backgroundColor: BLACK,
           flexDirection: "row",
           justifyContent: "space-between",
           padding: 16,
@@ -61,7 +65,7 @@ export default function SettingsScreen() {
         },
         label: { fontSize: 16 },
         linkText: {
-          color: tokens.color.brand.primary.value,
+          color: WHITE,
           fontSize: 16,
           paddingHorizontal: 16,
           paddingVertical: 12,
@@ -151,7 +155,7 @@ function Row({
   const styles = useMemo(
     () =>
       StyleSheet.create({
-        label: { color: tokens.color.brand.primary.value, fontSize: 16 },
+        label: { color: WHITE, fontSize: 16 },
         row: {
           alignItems: "center",
           flexDirection: "row",
