@@ -38,6 +38,7 @@ def slugify(text: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
     return slug or "game"
 
+
 # ──────────── Determine Games ────────────
 headers = {"apikey": SUPABASE_KEY, "Authorization": f"Bearer {SUPABASE_KEY}"}
 
@@ -49,6 +50,7 @@ else:
         f"{SUPABASE_URL}/rest/v1/games",
         headers=headers,
         params={"select": "id,name"},
+        timeout=10,
     )
     resp.raise_for_status()
     for g in resp.json():
@@ -63,21 +65,34 @@ for game in games:
         "game_id": f"eq.{game['id']}",
         "order": "draw_date.desc",
     }
+
+    # ──────────── Paging Loop ────────────
     while True:
         rng = f"{offset}-{offset + batch - 1}"
+        print(f"Fetching draws {rng} for game {game['slug']}…")
         h = {**headers, "Range-Unit": "items", "Range": rng}
         res = requests.get(
-            f"{SUPABASE_URL}/rest/v1/draws", headers=h, params=params
+            f"{SUPABASE_URL}/rest/v1/draws",
+            headers=h,
+            params=params,
+            timeout=10,
         )
         res.raise_for_status()
         page = res.json()
+
         if not page:
             break
+
         rows.extend(page)
+
+        # if this was a short page, we're done
         if len(page) < batch:
             break
-    offset += batch
 
+        # otherwise bump the offset for the next batch
+        offset += batch
+
+    # ──────────── Build DataFrame ────────────
     records = []
     for r in rows:
         nums = sorted(
@@ -95,59 +110,49 @@ for game in games:
         .sort_values("draw_date", ascending=False)
         .reset_index(drop=True)
     )
-    
+
     # ──────────── Compute Decay Weights ────────────
-    df["draw_index"]   = df.index
+    df["draw_index"] = df.index
     df["decay_weight"] = 0.5 ** (df["draw_index"] / DECAY_HALF_LIFE)
-    
+
     # ──────────── Aggregate Frequencies ────────────
     ball_cols = [c for c in df.columns if c.startswith("ball")]
-    melted   = df.melt(
+    melted = df.melt(
         id_vars=["draw_index", "decay_weight"],
         value_vars=ball_cols,
-        value_name="ball_number"
+        value_name="ball_number",
     ).dropna(subset=["ball_number"])
-    
+
     weights_df = (
-        melted
-        .groupby("ball_number")["decay_weight"]
+        melted.groupby("ball_number")["decay_weight"]
         .sum()
         .reset_index()
         .sort_values("ball_number")
     )
-    
+
     # ──────────── Normalize & Build List ────────────
-    # determine the highest ball number
     max_ball = int(weights_df["ball_number"].max())
-    
-    # prepare a zero-filled list for all possible balls (index 0 unused)
     weight_list = [0.0] * (max_ball + 1)
-    
-    # convert the pandas Series to native Python lists of ints and floats
-    ball_numbers  = weights_df["ball_number"].astype(int).tolist()
+
+    ball_numbers = weights_df["ball_number"].astype(int).tolist()
     decay_weights = weights_df["decay_weight"].tolist()
-    
-    # fill in our weight_list using the native types
+
     for idx, w in zip(ball_numbers, decay_weights):
         weight_list[idx] = w
-    
-    # compute the average (excluding index 0) and normalize
+
     avg = np.mean(weight_list[1:])
-    weight_list = [
-        0.0 if i == 0 else w / avg
-        for i, w in enumerate(weight_list)
-    ]
-    
+    weight_list = [0.0 if i == 0 else w / avg for i, w in enumerate(weight_list)]
+
     # ──────────── Output JSON ────────────
     output = {
         "generated_at": datetime.utcnow().isoformat() + "Z",
         "decay_half_life": DECAY_HALF_LIFE,
-        "weights": weight_list
+        "weights": weight_list,
     }
-    
+
     out_path = f"{OUTPUT_DIR}/{game['slug']}.json"
     with open(out_path, "w") as f:
         json.dump(output, f, indent=2)
-    
+
     print(f"✔ Saved weights → {out_path}")
     print(f"Sum of weights (excluding index 0): {sum(weight_list[1:]):.2f}")
