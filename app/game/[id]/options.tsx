@@ -19,9 +19,7 @@ import { useGeneratedNumbersStore } from "../../../src/stores/useGeneratedNumber
 import type { GameConfig } from "../../../src/lib/gameConfigs";
 import { useGamesStore } from "../../../src/stores/useGamesStore";
 import { getGameColor } from "../../../src/lib/gameColors";
-import { SCREEN_BG } from "../../../src/lib/constants";
-
-const BLACK = "#000000";
+import { SCREEN_BG, CARD_BG } from "../../../src/lib/constants";
 import * as FileSystem from "expo-file-system";
 
 export default function GameOptionsScreen() {
@@ -154,9 +152,7 @@ export default function GameOptionsScreen() {
       StyleSheet.create({
         button: {
           alignItems: "center",
-          backgroundColor: game
-            ? getGameColor(game.name)
-            : tokens.color.brand.primary.value,
+          backgroundColor: CARD_BG,
           borderRadius: 8,
           padding: 12,
         },
@@ -176,7 +172,9 @@ export default function GameOptionsScreen() {
         },
         disabled: { opacity: 0.5 },
         header: {
-          backgroundColor: BLACK,
+          backgroundColor: game
+            ? getGameColor(game.name)
+            : tokens.color.brand.primary.value,
           borderRadius: 8,
           flexDirection: "row",
           justifyContent: "space-between",
