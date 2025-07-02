@@ -86,10 +86,16 @@ export function generateSet(
 }
 
 /** Load weight multipliers from assets/weights/<game>.json if present. */
+// Preloaded JSON imports so Metro can resolve them statically.
+const weightLoaders: Record<string, () => Promise<{ weights?: number[] }>> = {
+  sample_game: () => import("../../assets/weights/sample_game.json"),
+};
+
 export async function loadWeightVector(game: string): Promise<number[] | null> {
+  const loader = weightLoaders[game];
+  if (!loader) return null;
   try {
-    const mod = await import(`../../assets/weights/${game}.json`);
-    const json = mod as unknown as { weights?: number[] };
+    const json = (await loader()) as { weights?: number[] };
     return Array.isArray(json.weights) ? json.weights : null;
   } catch {
     return null;
