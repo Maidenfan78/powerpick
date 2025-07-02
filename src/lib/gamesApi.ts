@@ -42,7 +42,8 @@ export interface GameRow {
 
 /** Collapse any “//” in the pathname (preserving “https://”) */
 function normalizeUrl(url: string): string {
-  return url.replace(/([^:]\/)\/+/g, "$1");
+  // Collapse duplicate slashes except after the protocol
+  return url.replace(/([^:])\/{2,}/g, "$1/");
 }
 
 export async function fetchGames(force = false): Promise<Game[]> {
