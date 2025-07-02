@@ -7,6 +7,7 @@ import RegionPicker from "../src/components/RegionPicker";
 import ComingSoon from "../src/components/ComingSoon";
 import GameGrid from "../src/components/GameGrid";
 import { SCREEN_BG } from "../src/lib/constants";
+import { useTheme } from "../src/lib/theme";
 import { Game, fetchGames } from "../src/lib/gamesApi";
 import { useRouter } from "expo-router";
 import { useGamesStore } from "../src/stores/useGamesStore";
@@ -16,11 +17,9 @@ import {
   REGION_LABELS,
 } from "../src/lib/regionConfig";
 
-const WHITE = "#FFFFFF";
-
-const ERROR_COLOR = "#FF6666";
 
 export default function IndexScreen() {
+  const { tokens } = useTheme();
   const router = useRouter();
   const region = useRegionStore((s) => s.region);
   const [games, setGames] = useState<Game[]>([]);
@@ -53,12 +52,12 @@ export default function IndexScreen() {
     () =>
       StyleSheet.create({
         container: { backgroundColor: SCREEN_BG, flex: 1 },
-        debugText: { color: WHITE, fontSize: 18 },
-        errorText: { color: ERROR_COLOR, fontSize: 18 },
+        debugText: { color: tokens.color.text.primary.value, fontSize: 18 },
+        errorText: { color: tokens.color.text.error.value, fontSize: 18 },
         gridContainer: { flex: 1, paddingVertical: 8 },
         pickerContainer: { padding: 8 },
       }),
-    [],
+    [tokens],
   );
 
   return (

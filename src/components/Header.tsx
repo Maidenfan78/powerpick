@@ -3,10 +3,10 @@ import { View, StyleSheet, Platform, Image } from "react-native";
 import { useMemo } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import logo from "../../assets/logo.png"; // Local PNG fallback logo for header
-
-const BLACK = "#000000";
+import { useTheme } from "../lib/theme";
 
 export default function Header() {
+  const { tokens } = useTheme();
   const insets = useSafeAreaInsets();
 
   const styles = useMemo(
@@ -14,7 +14,7 @@ export default function Header() {
       StyleSheet.create({
         container: {
           alignItems: "center",
-          backgroundColor: BLACK,
+          backgroundColor: tokens.color.ui.header.value,
           flexDirection: "row",
           height: TOP_BAR_HEIGHT + insets.top,
           justifyContent: "space-between",
@@ -26,7 +26,7 @@ export default function Header() {
           width: 160,
         },
       }),
-    [insets.top],
+    [insets.top, tokens],
   );
 
   return (

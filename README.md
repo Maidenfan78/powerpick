@@ -31,7 +31,7 @@
 Powerpick is an **insight companion** for casual lotto players aged **25 – 55** who enjoy analysing trends before buying a ticket. It sits between the extremes of _pure luck_ and _snake‑oil predictions_ – surfacing real statistics in a clean, lightning‑fast UI.
 
 - **Audience mindset:** data‑curious, mobile‑first, prefers visuals over spreadsheets.
-- **Design language:** deep‑blue foundation (`#0C244B`) for trust, gold/orange accents (`#F5A623`) for excitement, AA+ contrast throughout.
+- **Design language:** dark foundation (`#141414`) with black bars (`#000000`), purple highlights (`#7B1FA2`), and AA+ contrast throughout.
 - **Value proposition:** one‑tap draw lookup, digestible analytics, and fun yet transparent number suggestions – all wrapped in a freemium model that respects attention (banner ads only on the free tier).
 
 ---
@@ -102,12 +102,12 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 
 ## 🎨 Visual Language & Accessibility
 
-- **Screen background**: `#121212`
+- **Screen background**: `#141414`
 - **App bar & bottom nav backgrounds**: `#000000`
-- **Card & dropdown background**: `#1E1E1E`
+- **Card & dropdown background**: `#1d1d1d`
 - **Primary accent**: `#7B1FA2`
 - **Text primary**: `#FFFFFF`
-- **Text secondary & icons**: `#B0B0B0`
+- **Text secondary & icons**: `#9a9a9a`
 - **Spacing & corner radii**: margins/gutters 8 dp; corner radius 8 dp (cards & dropdown), 16 dp (tab control)
 
 ---

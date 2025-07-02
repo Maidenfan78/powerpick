@@ -4,11 +4,10 @@ import { View, Image, Text, Pressable, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import RegionPicker from "./RegionPicker";
 import logoImg from "../../assets/logo.png";
-
-const BLACK = "#000000";
-const WHITE = "#FFFFFF";
+import { useTheme } from "../lib/theme";
 
 export default function HomeTopBar() {
+  const { tokens } = useTheme();
   const insets = useSafeAreaInsets();
 
   const styles = useMemo(
@@ -16,7 +15,7 @@ export default function HomeTopBar() {
       StyleSheet.create({
         container: {
           alignItems: "center",
-          backgroundColor: BLACK,
+          backgroundColor: tokens.color.ui.header.value,
           flexDirection: "row",
           height: 56 + insets.top,
           justifyContent: "space-between",
@@ -29,11 +28,11 @@ export default function HomeTopBar() {
           width: 120,
         },
         menuIcon: {
-          color: WHITE,
+          color: tokens.color.text.primary.value,
           fontSize: 24,
         },
       }),
-    [insets.top],
+    [insets.top, tokens],
   );
 
   return (
