@@ -20,6 +20,8 @@ import type { GameConfig } from "../../../src/lib/gameConfigs";
 import { useGamesStore } from "../../../src/stores/useGamesStore";
 import { getGameColor } from "../../../src/lib/gameColors";
 import { SCREEN_BG } from "../../../src/lib/constants";
+
+const BLACK = "#000000";
 import * as FileSystem from "expo-file-system";
 
 export default function GameOptionsScreen() {
@@ -174,9 +176,7 @@ export default function GameOptionsScreen() {
         },
         disabled: { opacity: 0.5 },
         header: {
-          backgroundColor: game
-            ? getGameColor(game.name)
-            : tokens.color.brand.primary.value,
+          backgroundColor: BLACK,
           borderRadius: 8,
           flexDirection: "row",
           justifyContent: "space-between",
