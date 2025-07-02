@@ -3,10 +3,8 @@ import React, { useMemo } from "react";
 import { View, Pressable, Text, StyleSheet } from "react-native";
 import { useRouter, usePathname } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTheme } from "../lib/theme";
 
-const BLACK = "#000000";
-const GREY = "#B0B0B0";
-const PURPLE = "#7B1FA2";
 
 const NAV_ITEMS = [
   { key: "home", icon: "🏠", label: "Home", path: "/" },
@@ -14,6 +12,7 @@ const NAV_ITEMS = [
 ];
 
 export default function BottomNav() {
+  const { tokens } = useTheme();
   const router = useRouter();
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
@@ -23,18 +22,18 @@ export default function BottomNav() {
       StyleSheet.create({
         container: {
           alignItems: "center",
-          backgroundColor: BLACK,
+          backgroundColor: tokens.color.ui.nav.value,
           flexDirection: "row",
           height: 56 + insets.bottom,
           justifyContent: "space-around",
           paddingBottom: insets.bottom,
         },
         item: { alignItems: "center" },
-        icon: { color: GREY, fontSize: 24 },
-        label: { color: GREY, fontSize: 12 },
-        active: { color: PURPLE },
+        icon: { color: tokens.color.text.disabled.value, fontSize: 24 },
+        label: { color: tokens.color.text.disabled.value, fontSize: 12 },
+        active: { color: tokens.color.brand.highlight.value },
       }),
-    [insets.bottom],
+    [insets.bottom, tokens],
   );
 
   return (

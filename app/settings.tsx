@@ -13,9 +13,6 @@ import { useTheme } from "../src/lib/theme";
 import { useRouter } from "expo-router";
 import { SCREEN_BG } from "../src/lib/constants";
 
-const BLACK = "#000000";
-const WHITE = "#FFFFFF";
-
 export default function SettingsScreen() {
   const { tokens, scheme, toggleScheme } = useTheme();
   const router = useRouter();
@@ -47,7 +44,7 @@ export default function SettingsScreen() {
         },
         header: {
           alignItems: "center",
-          backgroundColor: BLACK,
+          backgroundColor: tokens.color.ui.header.value,
           flexDirection: "row",
           justifyContent: "space-between",
           padding: 16,
@@ -65,7 +62,7 @@ export default function SettingsScreen() {
         },
         label: { fontSize: 16 },
         linkText: {
-          color: WHITE,
+          color: tokens.color.text.primary.value,
           fontSize: 16,
           paddingHorizontal: 16,
           paddingVertical: 12,
@@ -155,7 +152,7 @@ function Row({
   const styles = useMemo(
     () =>
       StyleSheet.create({
-        label: { color: WHITE, fontSize: 16 },
+        label: { color: tokens.color.text.primary.value, fontSize: 16 },
         row: {
           alignItems: "center",
           flexDirection: "row",

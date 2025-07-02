@@ -3,7 +3,7 @@
 ## Overall View Hierarchy
 
 1. **Safe-area container** (full screen)
-   - Background: **#121212**
+   - Background: **#141414**
    - Vertical layout:
      1. Status bar (native)
      2. Top app bar
@@ -17,7 +17,7 @@
 - **Contents** (horizontal row, spaced):
   1. **Left**: App logo placeholder (width ~120 dp)
   2. **Center**: Region selector dropdown
-     - Container: width ~140 dp, height ~36 dp, background **#1E1E1E**, corner radius ~8 dp
+     - Container: width ~140 dp, height ~36 dp, background **#1d1d1d**, corner radius ~8 dp
      - Padding: 0 dp vertically, 12 dp horizontal
      - Layout: text label + down-caret icon, arranged in a row, centered
      - **Label**: 14 sp, medium weight, white (e.g. “NSW”)
@@ -32,7 +32,7 @@
   - **Container**:
     - Width = (screen_width – 3×8 dp)/2
     - Height ≈ 160 dp
-    - Background **#1E1E1E**, corner radius **8 dp**
+    - Background **#1d1d1d**, corner radius **8 dp**
   - **Padding**: top/bottom 16 dp, left/right 12 dp
   - **Layout**: vertical, center-aligned
     1. **Icon placeholder**
@@ -52,19 +52,19 @@
 - **Each item**:
   - Icon (24 dp) above label (12 sp)
   - **Selected**: tinted **#7B1FA2**
-  - **Unselected**: tinted **#B0B0B0**
+  - **Unselected**: tinted **#9a9a9a**
 
 ## Colour Palette
 
 | Role                 | Colour  |
 | -------------------- | ------- |
-| Screen background    | #121212 |
+| Screen background    | #141414 |
 | App bar/backgrounds  | #000000 |
-| Card background      | #1E1E1E |
-| Dropdown background  | #1E1E1E |
+| Card background      | #1d1d1d |
+| Dropdown background  | #1d1d1d |
 | Primary accent       | #7B1FA2 |
 | Text primary         | #FFFFFF |
-| Text secondary/icons | #B0B0B0 |
+| Text secondary/icons | #9a9a9a |
 
 ## Spacing & Typography
 

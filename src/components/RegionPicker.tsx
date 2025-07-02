@@ -8,8 +8,6 @@ import { useRegionStore, Region } from "../stores/useRegionStore";
 import { REGION_LABELS } from "../lib/regionConfig";
 
 const BACKDROP_COLOR = "rgba(0,0,0,0.4)";
-const HEADER_BG = "#1E1E1E";
-const WHITE = "#FFFFFF";
 
 const REGION_OPTIONS: Region[] = ["AU", "US", "EU"];
 
@@ -37,7 +35,9 @@ export default function RegionPicker({
         button: {
           alignItems: "center",
           backgroundColor:
-            variant === "header" ? HEADER_BG : tokens.color.neutral["0"].value,
+            variant === "header"
+              ? tokens.color.ui.menu.value
+              : tokens.color.neutral["0"].value,
           borderRadius: 8,
           flexDirection: "row",
           height: variant === "header" ? 36 : undefined,
@@ -49,7 +49,9 @@ export default function RegionPicker({
         },
         buttonText: {
           color:
-            variant === "header" ? WHITE : tokens.color.brand.primary.value,
+            variant === "header"
+              ? tokens.color.text.primary.value
+              : tokens.color.brand.primary.value,
           fontSize: 14,
           fontWeight: "500",
         },
@@ -59,7 +61,10 @@ export default function RegionPicker({
           marginLeft: 8,
         },
         icon: {
-          color: variant === "header" ? WHITE : tokens.color.brand.accent.value,
+          color:
+            variant === "header"
+              ? tokens.color.text.primary.value
+              : tokens.color.brand.accent.value,
           fontSize: 16,
           marginLeft: 8,
         },

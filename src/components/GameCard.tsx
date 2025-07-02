@@ -14,9 +14,8 @@ import {
 import type { Game } from "../lib/gamesApi";
 import placeholder from "../../assets/placeholder.png";
 import { getGameColor } from "../lib/gameColors";
+import { useTheme } from "../lib/theme";
 
-const CARD_BG = "#1E1E1E";
-const WHITE = "#FFFFFF";
 
 type GameCardProps = {
   game: Game;
@@ -24,12 +23,13 @@ type GameCardProps = {
 };
 
 export default function GameCard({ game, onPress }: GameCardProps) {
+  const { tokens } = useTheme();
   const styles = useMemo(
     () =>
       StyleSheet.create({
         card: {
           alignItems: "center",
-          backgroundColor: CARD_BG,
+          backgroundColor: tokens.color.ui.card.value,
           borderRadius: 8,
           flex: 1,
           margin: 4,
@@ -37,7 +37,7 @@ export default function GameCard({ game, onPress }: GameCardProps) {
           paddingVertical: 16,
         },
         jackpot: {
-          color: WHITE,
+          color: tokens.color.text.primary.value,
           fontSize: 18,
           fontWeight: "700",
         },
@@ -50,12 +50,12 @@ export default function GameCard({ game, onPress }: GameCardProps) {
         },
         nextDraw: {
           textAlign: "center",
-          color: WHITE,
+          color: tokens.color.text.primary.value,
           fontSize: 14,
           marginTop: 4,
         },
       }),
-    [game.name],
+    [game.name, tokens],
   );
 
   const [loading, setLoading] = useState(!!game.logoUrl);

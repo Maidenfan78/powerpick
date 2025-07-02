@@ -1,2 +1,4 @@
-export const SCREEN_BG = "#121212";
-export const CARD_BG = "#1E1E1E";
+import tokens from "../../app/tokens.json";
+
+export const SCREEN_BG = tokens.color.ui.background.value;
+export const CARD_BG = tokens.color.ui.card.value;
