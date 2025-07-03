@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1751200208476" clover="3.2.0">
-  <project timestamp="1751200208476" name="All files">
-    <metrics statements="542" coveredstatements="463" conditionals="382" coveredconditionals="260" methods="149" coveredmethods="120" elements="1073" coveredelements="843" complexity="0" loc="542" ncloc="542" packages="6" files="25" classes="25"/>
+<coverage generated="1751541764258" clover="3.2.0">
+  <project timestamp="1751541764258" name="All files">
+    <metrics statements="590" coveredstatements="475" conditionals="431" coveredconditionals="279" methods="160" coveredmethods="121" elements="1181" coveredelements="875" complexity="0" loc="590" ncloc="590" packages="6" files="29" classes="29"/>
     <package name="app">
-      <metrics statements="23" coveredstatements="20" conditionals="6" coveredconditionals="5" methods="7" coveredmethods="6"/>
+      <metrics statements="28" coveredstatements="24" conditionals="6" coveredconditionals="5" methods="10" coveredmethods="8"/>
       <file name="index.tsx" path="C:\Users\Sav\Programing Projects\powerpick\app\index.tsx">
-        <metrics statements="23" coveredstatements="20" conditionals="6" coveredconditionals="5" methods="7" coveredmethods="6"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="19" count="4" type="stmt"/>
-        <line num="20" count="4" type="stmt"/>
-        <line num="21" count="12" type="stmt"/>
+        <metrics statements="22" coveredstatements="19" conditionals="6" coveredconditionals="5" methods="7" coveredmethods="6"/>
+        <line num="21" count="4" type="stmt"/>
         <line num="22" count="4" type="stmt"/>
-        <line num="23" count="4" type="stmt"/>
+        <line num="23" count="12" type="stmt"/>
         <line num="24" count="4" type="stmt"/>
-        <line num="25" count="14" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="14" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
         <line num="30" count="2" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
         <line num="32" count="2" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="44" count="4" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="49" count="4" type="stmt"/>
-        <line num="51" count="2" type="stmt"/>
-        <line num="73" count="4" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="46" count="4" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="50" count="4" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="62" count="4" type="stmt"/>
+      </file>
+      <file name="login.tsx" path="C:\Users\Sav\Programing Projects\powerpick\app\login.tsx">
+        <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
       </file>
     </package>
     <package name="app.game.[id]">
-      <metrics statements="117" coveredstatements="82" conditionals="98" coveredconditionals="61" methods="34" coveredmethods="22"/>
+      <metrics statements="117" coveredstatements="82" conditionals="96" coveredconditionals="59" methods="34" coveredmethods="22"/>
       <file name="draws.tsx" path="C:\Users\Sav\Programing Projects\powerpick\app\game\[id]\draws.tsx">
         <metrics statements="18" coveredstatements="18" conditionals="12" coveredconditionals="7" methods="7" coveredmethods="7"/>
-        <line num="11" count="2" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
         <line num="13" count="2" type="stmt"/>
-        <line num="14" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="20" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="26" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="27" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="29" count="2" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
         <line num="49" count="2" type="stmt"/>
@@ -56,46 +64,46 @@
       </file>
       <file name="hotcold.tsx" path="C:\Users\Sav\Programing Projects\powerpick\app\game\[id]\hotcold.tsx">
         <metrics statements="37" coveredstatements="22" conditionals="27" coveredconditionals="15" methods="11" coveredmethods="6"/>
-        <line num="16" count="2" type="stmt"/>
         <line num="17" count="2" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
-        <line num="19" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="30" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="31" count="1" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="42" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
-        <line num="50" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="51" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="51" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="52" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
         <line num="55" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
-        <line num="76" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="77" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="79" count="2" type="stmt"/>
         <line num="81" count="1" type="stmt"/>
         <line num="102" count="2" type="stmt"/>
       </file>
       <file name="options.tsx" path="C:\Users\Sav\Programing Projects\powerpick\app\game\[id]\options.tsx">
-        <metrics statements="62" coveredstatements="42" conditionals="59" coveredconditionals="39" methods="16" coveredmethods="9"/>
+        <metrics statements="62" coveredstatements="42" conditionals="57" coveredconditionals="37" methods="16" coveredmethods="9"/>
         <line num="26" count="15" type="stmt"/>
         <line num="27" count="15" type="stmt"/>
         <line num="28" count="15" type="stmt"/>
@@ -147,17 +155,17 @@
         <line num="144" count="0" type="stmt"/>
         <line num="145" count="0" type="stmt"/>
         <line num="146" count="0" type="stmt"/>
-        <line num="151" count="15" type="stmt"/>
-        <line num="153" count="10" type="stmt"/>
-        <line num="212" count="15" type="stmt"/>
-        <line num="219" count="0" type="stmt"/>
-        <line num="297" count="0" type="stmt"/>
-        <line num="304" count="0" type="stmt"/>
-        <line num="311" count="0" type="stmt"/>
-        <line num="321" count="1" type="stmt"/>
-        <line num="329" count="1" type="stmt"/>
-        <line num="338" count="4" type="stmt"/>
-        <line num="339" count="4" type="stmt"/>
+        <line num="150" count="15" type="stmt"/>
+        <line num="152" count="10" type="stmt"/>
+        <line num="210" count="15" type="stmt"/>
+        <line num="215" count="0" type="stmt"/>
+        <line num="285" count="0" type="stmt"/>
+        <line num="292" count="0" type="stmt"/>
+        <line num="299" count="0" type="stmt"/>
+        <line num="309" count="1" type="stmt"/>
+        <line num="317" count="1" type="stmt"/>
+        <line num="326" count="4" type="stmt"/>
+        <line num="327" count="4" type="stmt"/>
       </file>
     </package>
     <package name="assets">
@@ -172,99 +180,116 @@
       </file>
       <file name="placeholder.png" path="C:\Users\Sav\Programing Projects\powerpick\assets\placeholder.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
     </package>
-    <package name="components">
-      <metrics statements="51" coveredstatements="43" conditionals="28" coveredconditionals="25" methods="25" coveredmethods="20"/>
-      <file name="ComingSoon.tsx" path="C:\Users\Sav\Programing Projects\powerpick\components\ComingSoon.tsx">
+    <package name="src.components">
+      <metrics statements="60" coveredstatements="44" conditionals="44" coveredconditionals="36" methods="26" coveredmethods="19"/>
+      <file name="Auth.tsx" path="C:\Users\Sav\Programing Projects\powerpick\src\components\Auth.tsx">
+        <metrics statements="14" coveredstatements="5" conditionals="7" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="33" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+      </file>
+      <file name="ComingSoon.tsx" path="C:\Users\Sav\Programing Projects\powerpick\src\components\ComingSoon.tsx">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="14" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
         <line num="29" count="2" type="stmt"/>
       </file>
-      <file name="GameCard.tsx" path="C:\Users\Sav\Programing Projects\powerpick\components\GameCard.tsx">
-        <metrics statements="26" coveredstatements="20" conditionals="26" coveredconditionals="23" methods="9" coveredmethods="6"/>
-        <line num="25" count="8" type="stmt"/>
-        <line num="27" count="8" type="stmt"/>
-        <line num="29" count="5" type="stmt"/>
-        <line num="80" count="8" type="stmt"/>
-        <line num="81" count="8" type="stmt"/>
-        <line num="82" count="8" type="stmt"/>
-        <line num="84" count="8" type="stmt"/>
-        <line num="85" count="5" type="stmt"/>
-        <line num="86" count="5" type="stmt"/>
-        <line num="87" count="5" type="stmt"/>
-        <line num="88" count="5" type="stmt"/>
-        <line num="89" count="5" type="cond" truecount="3" falsecount="1"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="94" count="5" type="stmt"/>
-        <line num="95" count="5" type="stmt"/>
-        <line num="96" count="5" type="stmt"/>
-        <line num="100" count="8" type="stmt"/>
-        <line num="101" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="102" count="2" type="stmt"/>
-        <line num="107" count="8" type="cond" truecount="4" falsecount="0"/>
-        <line num="109" count="8" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="126" count="0" type="stmt"/>
-        <line num="128" count="0" type="stmt"/>
-        <line num="130" count="0" type="stmt"/>
-        <line num="131" count="0" type="stmt"/>
-      </file>
-      <file name="GameGrid.tsx" path="C:\Users\Sav\Programing Projects\powerpick\components\GameGrid.tsx">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="15" count="3" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-      </file>
-      <file name="RegionPicker.tsx" path="C:\Users\Sav\Programing Projects\powerpick\components\RegionPicker.tsx">
-        <metrics statements="17" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="10" coveredmethods="8"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="15" count="10" type="stmt"/>
-        <line num="16" count="32" type="stmt"/>
-        <line num="17" count="32" type="stmt"/>
-        <line num="18" count="10" type="stmt"/>
-        <line num="20" count="40" type="stmt"/>
-        <line num="23" count="10" type="stmt"/>
-        <line num="25" count="4" type="stmt"/>
-        <line num="77" count="10" type="stmt"/>
-        <line num="79" count="2" type="stmt"/>
+      <file name="GameCard.tsx" path="C:\Users\Sav\Programing Projects\powerpick\src\components\GameCard.tsx">
+        <metrics statements="15" coveredstatements="10" conditionals="14" coveredconditionals="14" methods="6" coveredmethods="3"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="28" count="5" type="stmt"/>
+        <line num="60" count="5" type="stmt"/>
+        <line num="61" count="5" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
+        <line num="64" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="70" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="72" count="5" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
         <line num="89" count="0" type="stmt"/>
         <line num="91" count="0" type="stmt"/>
-        <line num="94" count="30" type="stmt"/>
-        <line num="98" count="2" type="stmt"/>
-        <line num="99" count="2" type="stmt"/>
-        <line num="100" count="2" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+      </file>
+      <file name="GameGrid.tsx" path="C:\Users\Sav\Programing Projects\powerpick\src\components\GameGrid.tsx">
+        <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="5" coveredmethods="5"/>
+        <line num="7" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+      </file>
+      <file name="RegionPicker.tsx" path="C:\Users\Sav\Programing Projects\powerpick\src\components\RegionPicker.tsx">
+        <metrics statements="20" coveredstatements="18" conditionals="19" coveredconditionals="18" methods="10" coveredmethods="8"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="20" count="10" type="stmt"/>
+        <line num="21" count="10" type="stmt"/>
+        <line num="22" count="10" type="stmt"/>
+        <line num="23" count="32" type="stmt"/>
+        <line num="24" count="32" type="stmt"/>
+        <line num="25" count="10" type="stmt"/>
+        <line num="27" count="40" type="stmt"/>
+        <line num="29" count="10" type="stmt"/>
+        <line num="31" count="4" type="stmt"/>
+        <line num="94" count="10" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="111" count="30" type="stmt"/>
+        <line num="115" count="2" type="stmt"/>
+        <line num="116" count="2" type="stmt"/>
+        <line num="117" count="2" type="stmt"/>
+        <line num="118" count="2" type="cond" truecount="1" falsecount="1"/>
       </file>
     </package>
-    <package name="lib">
-      <metrics statements="336" coveredstatements="304" conditionals="248" coveredconditionals="167" methods="73" coveredmethods="63"/>
-      <file name="csvParser.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\csvParser.ts">
+    <package name="src.lib">
+      <metrics statements="370" coveredstatements="311" conditionals="283" coveredconditionals="177" methods="80" coveredmethods="63"/>
+      <file name="constants.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\constants.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+      </file>
+      <file name="csvParser.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\csvParser.ts">
         <metrics statements="48" coveredstatements="44" conditionals="35" coveredconditionals="24" methods="6" coveredmethods="6"/>
-        <line num="8" count="12" type="stmt"/>
-        <line num="9" count="13" type="stmt"/>
-        <line num="10" count="13" type="stmt"/>
-        <line num="11" count="36" type="cond" truecount="1" falsecount="1"/>
-        <line num="13" count="13" type="stmt"/>
-        <line num="18" count="12" type="stmt"/>
-        <line num="19" count="12" type="cond" truecount="1" falsecount="1"/>
-        <line num="20" count="12" type="stmt"/>
-        <line num="21" count="12" type="stmt"/>
-        <line num="25" count="12" type="stmt"/>
-        <line num="26" count="12" type="stmt"/>
-        <line num="27" count="12" type="stmt"/>
-        <line num="29" count="12" type="stmt"/>
-        <line num="30" count="12" type="stmt"/>
-        <line num="31" count="12" type="cond" truecount="1" falsecount="1"/>
-        <line num="32" count="12" type="cond" truecount="1" falsecount="1"/>
-        <line num="35" count="107" type="cond" truecount="2" falsecount="0"/>
-        <line num="36" count="83" type="cond" truecount="2" falsecount="0"/>
-        <line num="38" count="70" type="stmt"/>
-        <line num="39" count="70" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="7" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="11" count="21" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="18" count="7" type="stmt"/>
+        <line num="19" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="7" type="stmt"/>
+        <line num="21" count="7" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
+        <line num="26" count="7" type="stmt"/>
+        <line num="27" count="7" type="stmt"/>
+        <line num="29" count="7" type="stmt"/>
+        <line num="30" count="7" type="stmt"/>
+        <line num="31" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="35" count="62" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="48" type="cond" truecount="2" falsecount="0"/>
+        <line num="38" count="40" type="stmt"/>
+        <line num="39" count="40" type="cond" truecount="2" falsecount="0"/>
         <line num="40" count="2" type="stmt"/>
         <line num="44" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="45" count="1" type="cond" truecount="1" falsecount="1"/>
@@ -272,21 +297,21 @@
         <line num="47" count="0" type="stmt"/>
         <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="50" count="2" type="stmt"/>
-        <line num="52" count="68" type="stmt"/>
-        <line num="53" count="525" type="cond" truecount="2" falsecount="0"/>
-        <line num="54" count="512" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="38" type="stmt"/>
+        <line num="53" count="270" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="262" type="cond" truecount="1" falsecount="1"/>
         <line num="55" count="0" type="stmt"/>
         <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="57" count="512" type="cond" truecount="2" falsecount="0"/>
-        <line num="58" count="57" type="stmt"/>
-        <line num="60" count="11" type="stmt"/>
-        <line num="63" count="12" type="stmt"/>
-        <line num="64" count="25" type="stmt"/>
-        <line num="65" count="25" type="cond" truecount="2" falsecount="0"/>
-        <line num="66" count="70" type="stmt"/>
-        <line num="67" count="70" type="stmt"/>
-        <line num="69" count="25" type="stmt"/>
-        <line num="71" count="12" type="stmt"/>
+        <line num="57" count="262" type="cond" truecount="2" falsecount="0"/>
+        <line num="58" count="32" type="stmt"/>
+        <line num="60" count="6" type="stmt"/>
+        <line num="63" count="7" type="stmt"/>
+        <line num="64" count="15" type="stmt"/>
+        <line num="65" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="66" count="40" type="stmt"/>
+        <line num="67" count="40" type="stmt"/>
+        <line num="69" count="15" type="stmt"/>
+        <line num="71" count="7" type="stmt"/>
         <line num="74" count="2" type="stmt"/>
         <line num="75" count="2" type="stmt"/>
         <line num="76" count="2" type="stmt"/>
@@ -294,7 +319,13 @@
         <line num="78" count="2" type="stmt"/>
         <line num="79" count="2" type="stmt"/>
       </file>
-      <file name="gameConfigs.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\gameConfigs.ts">
+      <file name="gameColors.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\gameColors.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="15" type="cond" truecount="2" falsecount="0"/>
+      </file>
+      <file name="gameConfigs.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\gameConfigs.ts">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="10" count="16" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
@@ -303,132 +334,143 @@
         <line num="48" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="49" count="5" type="stmt"/>
       </file>
-      <file name="gamesApi.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\gamesApi.ts">
+      <file name="gamesApi.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\gamesApi.ts">
         <metrics statements="63" coveredstatements="56" conditionals="64" coveredconditionals="53" methods="14" coveredmethods="12"/>
-        <line num="4" count="7" type="stmt"/>
-        <line num="5" count="7" type="stmt"/>
-        <line num="6" count="7" type="stmt"/>
-        <line num="7" count="7" type="stmt"/>
-        <line num="11" count="7" type="stmt"/>
-        <line num="13" count="7" type="stmt"/>
-        <line num="45" count="3" type="stmt"/>
-        <line num="49" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="54" count="2" type="stmt"/>
-        <line num="57" count="5" type="stmt"/>
-        <line num="63" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="64" count="1" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="11" count="6" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="50" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="58" count="5" type="stmt"/>
+        <line num="64" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="65" count="1" type="stmt"/>
-        <line num="68" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="69" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="72" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="75" count="3" type="stmt"/>
-        <line num="76" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="79" count="3" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="69" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="70" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="73" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="77" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="80" count="3" type="stmt"/>
-        <line num="82" count="3" type="stmt"/>
-        <line num="85" count="3" type="stmt"/>
+        <line num="81" count="3" type="stmt"/>
+        <line num="83" count="3" type="stmt"/>
         <line num="86" count="3" type="stmt"/>
-        <line num="101" count="4" type="stmt"/>
+        <line num="87" count="3" type="stmt"/>
         <line num="102" count="4" type="stmt"/>
-        <line num="118" count="4" type="stmt"/>
-        <line num="119" count="4" type="cond" truecount="5" falsecount="0"/>
-        <line num="120" count="1" type="stmt"/>
-        <line num="122" count="3" type="stmt"/>
-        <line num="127" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="128" count="0" type="stmt"/>
+        <line num="103" count="4" type="stmt"/>
+        <line num="119" count="4" type="stmt"/>
+        <line num="120" count="4" type="cond" truecount="5" falsecount="0"/>
+        <line num="121" count="1" type="stmt"/>
+        <line num="123" count="3" type="stmt"/>
+        <line num="128" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="129" count="0" type="stmt"/>
-        <line num="131" count="3" type="stmt"/>
-        <line num="139" count="3" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="132" count="3" type="stmt"/>
         <line num="140" count="3" type="stmt"/>
-        <line num="164" count="3" type="stmt"/>
-        <line num="165" count="3" type="cond" truecount="5" falsecount="0"/>
-        <line num="166" count="1" type="stmt"/>
-        <line num="169" count="2" type="stmt"/>
-        <line num="175" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="176" count="0" type="stmt"/>
+        <line num="141" count="3" type="stmt"/>
+        <line num="165" count="3" type="stmt"/>
+        <line num="166" count="3" type="cond" truecount="5" falsecount="0"/>
+        <line num="167" count="1" type="stmt"/>
+        <line num="170" count="2" type="stmt"/>
+        <line num="176" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="177" count="0" type="stmt"/>
-        <line num="180" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="181" count="2" type="stmt"/>
-        <line num="182" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="183" count="1" type="stmt"/>
-        <line num="186" count="3" type="stmt"/>
-        <line num="188" count="2" type="stmt"/>
-        <line num="189" count="1" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="181" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="182" count="2" type="stmt"/>
+        <line num="183" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="184" count="1" type="stmt"/>
+        <line num="187" count="3" type="stmt"/>
+        <line num="189" count="2" type="stmt"/>
         <line num="190" count="1" type="stmt"/>
-        <line num="193" count="3" type="stmt"/>
-        <line num="195" count="0" type="stmt"/>
+        <line num="191" count="1" type="stmt"/>
+        <line num="194" count="3" type="stmt"/>
         <line num="196" count="0" type="stmt"/>
-        <line num="198" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="200" count="3" type="stmt"/>
-        <line num="203" count="1" type="stmt"/>
-        <line num="214" count="2" type="stmt"/>
+        <line num="197" count="0" type="stmt"/>
+        <line num="199" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="201" count="3" type="stmt"/>
+        <line num="204" count="1" type="stmt"/>
         <line num="215" count="2" type="stmt"/>
-        <line num="219" count="9" type="stmt"/>
+        <line num="216" count="2" type="stmt"/>
         <line num="220" count="9" type="stmt"/>
         <line num="221" count="9" type="stmt"/>
         <line num="222" count="9" type="stmt"/>
+        <line num="223" count="9" type="stmt"/>
       </file>
-      <file name="generator.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\generator.ts">
-        <metrics statements="31" coveredstatements="31" conditionals="16" coveredconditionals="14" methods="6" coveredmethods="6"/>
-        <line num="27" count="3" type="stmt"/>
-        <line num="28" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="40" count="20" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="42" count="20" type="cond" truecount="2" falsecount="0"/>
-        <line num="43" count="17" type="cond" truecount="1" falsecount="1"/>
-        <line num="44" count="17" type="stmt"/>
-        <line num="47" count="2" type="stmt"/>
-        <line num="48" count="2" type="stmt"/>
-        <line num="49" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="50" count="54" type="stmt"/>
-        <line num="51" count="6" type="stmt"/>
-        <line num="52" count="6" type="stmt"/>
-        <line num="53" count="6" type="stmt"/>
-        <line num="54" count="16" type="stmt"/>
-        <line num="55" count="16" type="stmt"/>
-        <line num="57" count="6" type="stmt"/>
-        <line num="58" count="6" type="stmt"/>
-        <line num="59" count="6" type="stmt"/>
-        <line num="61" count="6" type="stmt"/>
-        <line num="62" count="6" type="stmt"/>
-        <line num="63" count="2" type="cond" truecount="3" falsecount="1"/>
-        <line num="65" count="2" type="stmt"/>
+      <file name="generator.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\generator.ts">
+        <metrics statements="42" coveredstatements="35" conditionals="23" coveredconditionals="17" methods="9" coveredmethods="7"/>
+        <line num="39" count="6" type="stmt"/>
+        <line num="41" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="45" count="5" type="stmt"/>
+        <line num="47" count="5" type="stmt"/>
+        <line num="48" count="5" type="stmt"/>
+        <line num="50" count="5" type="stmt"/>
+        <line num="51" count="5" type="stmt"/>
+        <line num="52" count="5" type="stmt"/>
+        <line num="54" count="5" type="stmt"/>
+        <line num="55" count="5" type="stmt"/>
+        <line num="56" count="80" type="stmt"/>
+        <line num="57" count="80" type="cond" truecount="2" falsecount="0"/>
+        <line num="58" count="5" type="stmt"/>
+        <line num="59" count="80" type="stmt"/>
+        <line num="60" count="80" type="cond" truecount="2" falsecount="0"/>
+        <line num="61" count="77" type="cond" truecount="1" falsecount="1"/>
+        <line num="62" count="77" type="stmt"/>
+        <line num="65" count="5" type="stmt"/>
+        <line num="66" count="5" type="stmt"/>
+        <line num="67" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="68" count="324" type="stmt"/>
+        <line num="69" count="21" type="stmt"/>
+        <line num="70" count="21" type="stmt"/>
+        <line num="71" count="21" type="stmt"/>
+        <line num="72" count="148" type="stmt"/>
+        <line num="73" count="148" type="stmt"/>
+        <line num="75" count="21" type="stmt"/>
+        <line num="76" count="21" type="stmt"/>
+        <line num="77" count="21" type="stmt"/>
+        <line num="80" count="27" type="stmt"/>
+        <line num="81" count="21" type="stmt"/>
+        <line num="82" count="5" type="cond" truecount="3" falsecount="1"/>
+        <line num="85" count="5" type="stmt"/>
+        <line num="90" count="2" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="96" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="101" count="0" type="stmt"/>
       </file>
-      <file name="hotCold.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\hotCold.ts">
+      <file name="hotCold.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\hotCold.ts">
         <metrics statements="10" coveredstatements="10" conditionals="6" coveredconditionals="5" methods="3" coveredmethods="3"/>
-        <line num="17" count="8" type="stmt"/>
-        <line num="18" count="8" type="stmt"/>
-        <line num="19" count="18" type="stmt"/>
-        <line num="20" count="36" type="cond" truecount="3" falsecount="1"/>
-        <line num="23" count="50" type="stmt"/>
-        <line num="24" count="61" type="cond" truecount="2" falsecount="0"/>
-        <line num="26" count="8" type="stmt"/>
-        <line num="27" count="8" type="stmt"/>
-        <line num="28" count="8" type="stmt"/>
-        <line num="29" count="8" type="stmt"/>
+        <line num="17" count="7" type="stmt"/>
+        <line num="18" count="7" type="stmt"/>
+        <line num="19" count="17" type="stmt"/>
+        <line num="20" count="35" type="cond" truecount="3" falsecount="1"/>
+        <line num="23" count="45" type="stmt"/>
+        <line num="24" count="57" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="7" type="stmt"/>
+        <line num="27" count="7" type="stmt"/>
+        <line num="28" count="7" type="stmt"/>
+        <line num="29" count="7" type="stmt"/>
       </file>
-      <file name="logger.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\logger.ts">
-        <metrics statements="4" coveredstatements="3" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="2"/>
+      <file name="logger.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\logger.ts">
+        <metrics statements="4" coveredstatements="2" conditionals="6" coveredconditionals="2" methods="3" coveredmethods="1"/>
         <line num="2" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="5" count="0" type="stmt"/>
-        <line num="9" count="74" type="cond" truecount="1" falsecount="1"/>
-        <line num="13" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="9" count="34" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
-      <file name="regionConfig.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\regionConfig.ts">
+      <file name="regionConfig.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\regionConfig.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="5" count="2" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
       </file>
-      <file name="supabase.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\supabase.ts">
+      <file name="supabase.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\supabase.ts">
         <metrics statements="10" coveredstatements="10" conditionals="14" coveredconditionals="12" methods="0" coveredmethods="0"/>
         <line num="7" count="8" type="cond" truecount="2" falsecount="0"/>
         <line num="9" count="8" type="cond" truecount="2" falsecount="0"/>
@@ -441,8 +483,8 @@
         <line num="19" count="1" type="stmt"/>
         <line num="26" count="7" type="stmt"/>
       </file>
-      <file name="syncDraws.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\syncDraws.ts">
-        <metrics statements="73" coveredstatements="67" conditionals="45" coveredconditionals="27" methods="13" coveredmethods="11"/>
+      <file name="syncDraws.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\syncDraws.ts">
+        <metrics statements="80" coveredstatements="66" conditionals="53" coveredconditionals="29" methods="15" coveredmethods="11"/>
         <line num="7" count="2" type="stmt"/>
         <line num="11" count="2" type="cond" truecount="1" falsecount="2"/>
         <line num="13" count="2" type="cond" truecount="1" falsecount="2"/>
@@ -456,85 +498,92 @@
         <line num="32" count="0" type="stmt"/>
         <line num="36" count="2" type="stmt"/>
         <line num="46" count="2" type="stmt"/>
-        <line num="78" count="21" type="stmt"/>
-        <line num="79" count="63" type="stmt"/>
-        <line num="80" count="12" type="stmt"/>
-        <line num="81" count="12" type="stmt"/>
-        <line num="85" count="30" type="stmt"/>
-        <line num="86" count="10" type="stmt"/>
-        <line num="91" count="15" type="stmt"/>
-        <line num="92" count="15" type="stmt"/>
-        <line num="93" count="15" type="stmt"/>
-        <line num="94" count="15" type="stmt"/>
-        <line num="99" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="100" count="10" type="stmt"/>
-        <line num="101" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="102" count="10" type="stmt"/>
-        <line num="103" count="10" type="stmt"/>
-        <line num="104" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="106" count="10" type="stmt"/>
-        <line num="107" count="10" type="stmt"/>
-        <line num="108" count="10" type="stmt"/>
-        <line num="109" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="115" count="10" type="stmt"/>
-        <line num="116" count="10" type="stmt"/>
-        <line num="121" count="10" type="stmt"/>
-        <line num="122" count="10" type="stmt"/>
-        <line num="123" count="10" type="stmt"/>
-        <line num="124" count="10" type="stmt"/>
-        <line num="125" count="10" type="stmt"/>
-        <line num="126" count="10" type="cond" truecount="2" falsecount="0"/>
-        <line num="130" count="10" type="stmt"/>
-        <line num="131" count="10" type="stmt"/>
-        <line num="138" count="10" type="stmt"/>
-        <line num="143" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="78" count="11" type="stmt"/>
+        <line num="79" count="33" type="stmt"/>
+        <line num="80" count="7" type="stmt"/>
+        <line num="81" count="7" type="stmt"/>
+        <line num="85" count="15" type="stmt"/>
+        <line num="86" count="5" type="stmt"/>
+        <line num="91" count="5" type="stmt"/>
+        <line num="92" count="5" type="stmt"/>
+        <line num="93" count="5" type="stmt"/>
+        <line num="94" count="5" type="stmt"/>
+        <line num="99" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="100" count="5" type="stmt"/>
+        <line num="101" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="102" count="5" type="stmt"/>
+        <line num="103" count="5" type="stmt"/>
+        <line num="104" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="106" count="5" type="stmt"/>
+        <line num="107" count="5" type="stmt"/>
+        <line num="108" count="5" type="stmt"/>
+        <line num="109" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="115" count="5" type="stmt"/>
+        <line num="116" count="5" type="stmt"/>
+        <line num="121" count="5" type="stmt"/>
+        <line num="122" count="5" type="stmt"/>
+        <line num="123" count="5" type="stmt"/>
+        <line num="124" count="5" type="stmt"/>
+        <line num="125" count="5" type="stmt"/>
+        <line num="126" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="130" count="5" type="stmt"/>
+        <line num="131" count="5" type="stmt"/>
+        <line num="138" count="5" type="stmt"/>
+        <line num="143" count="5" type="cond" truecount="1" falsecount="1"/>
         <line num="144" count="0" type="stmt"/>
         <line num="145" count="0" type="stmt"/>
-        <line num="148" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="149" count="10" type="stmt"/>
-        <line num="151" count="10" type="stmt"/>
-        <line num="156" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="157" count="10" type="stmt"/>
-        <line num="158" count="10" type="stmt"/>
-        <line num="159" count="10" type="stmt"/>
-        <line num="165" count="10" type="cond" truecount="2" falsecount="0"/>
-        <line num="166" count="8" type="stmt"/>
+        <line num="148" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="149" count="5" type="stmt"/>
+        <line num="151" count="5" type="stmt"/>
+        <line num="156" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="157" count="5" type="stmt"/>
+        <line num="158" count="5" type="stmt"/>
+        <line num="159" count="5" type="stmt"/>
+        <line num="165" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="166" count="4" type="stmt"/>
         <line num="167" count="0" type="stmt"/>
-        <line num="174" count="10" type="cond" truecount="3" falsecount="1"/>
+        <line num="174" count="5" type="cond" truecount="3" falsecount="1"/>
         <line num="175" count="0" type="stmt"/>
-        <line num="183" count="10" type="stmt"/>
-        <line num="186" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="188" count="10" type="stmt"/>
-        <line num="189" count="10" type="stmt"/>
-        <line num="192" count="5" type="stmt"/>
-        <line num="194" count="15" type="stmt"/>
-        <line num="200" count="3" type="stmt"/>
-        <line num="201" count="3" type="stmt"/>
-        <line num="204" count="5" type="stmt"/>
-        <line num="205" count="15" type="stmt"/>
-        <line num="206" count="15" type="cond" truecount="1" falsecount="1"/>
-        <line num="207" count="15" type="stmt"/>
-        <line num="211" count="3" type="stmt"/>
-        <line num="217" count="2" type="stmt"/>
+        <line num="183" count="5" type="stmt"/>
+        <line num="186" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="188" count="5" type="stmt"/>
+        <line num="189" count="5" type="stmt"/>
+        <line num="192" count="0" type="stmt"/>
+        <line num="194" count="5" type="stmt"/>
+        <line num="200" count="1" type="stmt"/>
+        <line num="201" count="1" type="stmt"/>
+        <line num="204" count="1" type="stmt"/>
+        <line num="205" count="5" type="stmt"/>
+        <line num="206" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="207" count="5" type="stmt"/>
+        <line num="211" count="1" type="stmt"/>
+        <line num="216" count="0" type="stmt"/>
+        <line num="217" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="218" count="0" type="stmt"/>
+        <line num="220" count="0" type="stmt"/>
+        <line num="226" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="227" count="0" type="stmt"/>
+        <line num="228" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="229" count="0" type="stmt"/>
       </file>
-      <file name="syncHotCold.ts" path="C:\Users\Sav\Programing Projects\powerpick\lib\syncHotCold.ts">
-        <metrics statements="61" coveredstatements="54" conditionals="48" coveredconditionals="22" methods="18" coveredmethods="16"/>
+      <file name="syncHotCold.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\syncHotCold.ts">
+        <metrics statements="72" coveredstatements="54" conditionals="66" coveredconditionals="26" methods="19" coveredmethods="15"/>
         <line num="5" count="3" type="stmt"/>
-        <line num="11" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="14" count="3" type="cond" truecount="1" falsecount="2"/>
-        <line num="17" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="11" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="1" type="cond" truecount="1" falsecount="2"/>
+        <line num="17" count="1" type="cond" truecount="3" falsecount="1"/>
         <line num="18" count="0" type="stmt"/>
-        <line num="20" count="3" type="stmt"/>
-        <line num="52" count="7" type="stmt"/>
-        <line num="53" count="4" type="stmt"/>
-        <line num="58" count="4" type="stmt"/>
-        <line num="60" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="52" count="6" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
+        <line num="60" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="61" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="62" count="3" type="stmt"/>
         <line num="63" count="1" type="stmt"/>
         <line num="68" count="1" type="stmt"/>
         <line num="69" count="1" type="stmt"/>
-        <line num="72" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="72" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="73" count="1" type="stmt"/>
         <line num="74" count="3" type="stmt"/>
         <line num="75" count="3" type="stmt"/>
@@ -542,86 +591,97 @@
         <line num="77" count="1" type="stmt"/>
         <line num="82" count="1" type="stmt"/>
         <line num="83" count="1" type="stmt"/>
-        <line num="86" count="4" type="stmt"/>
-        <line num="97" count="2" type="stmt"/>
-        <line num="98" count="2" type="stmt"/>
-        <line num="100" count="2" type="stmt"/>
-        <line num="101" count="2" type="stmt"/>
-        <line num="102" count="2" type="stmt"/>
-        <line num="109" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="86" count="3" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="109" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="110" count="0" type="stmt"/>
-        <line num="117" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="118" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="119" count="2" type="stmt"/>
-        <line num="120" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="123" count="2" type="stmt"/>
-        <line num="124" count="2" type="stmt"/>
-        <line num="125" count="2" type="stmt"/>
-        <line num="126" count="2" type="stmt"/>
-        <line num="127" count="2" type="stmt"/>
-        <line num="128" count="2" type="stmt"/>
-        <line num="129" count="2" type="stmt"/>
+        <line num="117" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="118" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="119" count="1" type="stmt"/>
+        <line num="120" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="124" count="1" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="127" count="1" type="stmt"/>
+        <line num="128" count="1" type="stmt"/>
+        <line num="129" count="1" type="stmt"/>
         <line num="130" count="0" type="stmt"/>
-        <line num="132" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="133" count="2" type="stmt"/>
-        <line num="142" count="2" type="stmt"/>
-        <line num="143" count="2" type="stmt"/>
-        <line num="147" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="132" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="133" count="1" type="stmt"/>
+        <line num="142" count="1" type="stmt"/>
+        <line num="143" count="1" type="stmt"/>
+        <line num="147" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="148" count="0" type="stmt"/>
-        <line num="154" count="2" type="stmt"/>
-        <line num="158" count="4" type="stmt"/>
-        <line num="162" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="163" count="0" type="stmt"/>
-        <line num="170" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="171" count="4" type="stmt"/>
-        <line num="172" count="2" type="stmt"/>
-        <line num="177" count="3" type="stmt"/>
-        <line num="178" count="3" type="stmt"/>
-        <line num="181" count="3" type="stmt"/>
-        <line num="182" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="183" count="0" type="stmt"/>
+        <line num="154" count="1" type="stmt"/>
+        <line num="158" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="165" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="173" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="174" count="0" type="stmt"/>
+        <line num="178" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="180" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="182" count="0" type="stmt"/>
+        <line num="185" count="1" type="stmt"/>
+        <line num="189" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="190" count="0" type="stmt"/>
+        <line num="197" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="198" count="1" type="stmt"/>
+        <line num="199" count="1" type="stmt"/>
+        <line num="204" count="0" type="stmt"/>
+        <line num="205" count="0" type="stmt"/>
+        <line num="208" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="209" count="0" type="stmt"/>
+        <line num="210" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="211" count="0" type="stmt"/>
       </file>
-      <file name="theme.tsx" path="C:\Users\Sav\Programing Projects\powerpick\lib\theme.tsx">
+      <file name="theme.tsx" path="C:\Users\Sav\Programing Projects\powerpick\src\lib\theme.tsx">
         <metrics statements="28" coveredstatements="21" conditionals="12" coveredconditionals="5" methods="8" coveredmethods="5"/>
-        <line num="42" count="7" type="stmt"/>
-        <line num="45" count="20" type="cond" truecount="1" falsecount="1"/>
-        <line num="49" count="20" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="8" type="stmt"/>
+        <line num="45" count="21" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="21" type="cond" truecount="1" falsecount="1"/>
         <line num="50" count="0" type="stmt"/>
         <line num="51" count="0" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
-        <line num="55" count="20" type="stmt"/>
-        <line num="62" count="7" type="stmt"/>
-        <line num="64" count="7" type="stmt"/>
-        <line num="66" count="7" type="stmt"/>
-        <line num="67" count="43" type="stmt"/>
-        <line num="68" count="43" type="cond" truecount="1" falsecount="1"/>
-        <line num="69" count="43" type="stmt"/>
-        <line num="72" count="7" type="stmt"/>
-        <line num="74" count="7" type="stmt"/>
-        <line num="79" count="20" type="cond" truecount="1" falsecount="1"/>
-        <line num="80" count="20" type="stmt"/>
-        <line num="83" count="20" type="stmt"/>
-        <line num="84" count="20" type="stmt"/>
-        <line num="85" count="20" type="cond" truecount="1" falsecount="1"/>
-        <line num="90" count="20" type="stmt"/>
+        <line num="55" count="21" type="stmt"/>
+        <line num="62" count="8" type="stmt"/>
+        <line num="64" count="8" type="stmt"/>
+        <line num="66" count="8" type="stmt"/>
+        <line num="67" count="41" type="stmt"/>
+        <line num="68" count="41" type="cond" truecount="1" falsecount="1"/>
+        <line num="69" count="41" type="stmt"/>
+        <line num="72" count="8" type="stmt"/>
+        <line num="74" count="8" type="stmt"/>
+        <line num="79" count="21" type="cond" truecount="1" falsecount="1"/>
+        <line num="80" count="21" type="stmt"/>
+        <line num="83" count="21" type="stmt"/>
+        <line num="84" count="21" type="stmt"/>
+        <line num="85" count="21" type="cond" truecount="1" falsecount="1"/>
+        <line num="90" count="21" type="stmt"/>
         <line num="91" count="0" type="stmt"/>
         <line num="92" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="93" count="0" type="stmt"/>
         <line num="94" count="0" type="stmt"/>
-        <line num="98" count="20" type="stmt"/>
-        <line num="99" count="20" type="stmt"/>
-        <line num="101" count="20" type="stmt"/>
+        <line num="98" count="21" type="stmt"/>
+        <line num="99" count="21" type="stmt"/>
+        <line num="101" count="21" type="stmt"/>
       </file>
     </package>
-    <package name="stores">
+    <package name="src.stores">
       <metrics statements="12" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="10" coveredmethods="9"/>
-      <file name="useGamesStore.ts" path="C:\Users\Sav\Programing Projects\powerpick\stores\useGamesStore.ts">
+      <file name="useGamesStore.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\stores\useGamesStore.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="10" count="4" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
         <line num="13" count="57" type="stmt"/>
       </file>
-      <file name="useGeneratedNumbersStore.ts" path="C:\Users\Sav\Programing Projects\powerpick\stores\useGeneratedNumbersStore.ts">
+      <file name="useGeneratedNumbersStore.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\stores\useGeneratedNumbersStore.ts">
         <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
         <line num="10" count="2" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
@@ -631,7 +691,7 @@
         <line num="19" count="5" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
       </file>
-      <file name="useRegionStore.ts" path="C:\Users\Sav\Programing Projects\powerpick\stores\useRegionStore.ts">
+      <file name="useRegionStore.ts" path="C:\Users\Sav\Programing Projects\powerpick\src\stores\useRegionStore.ts">
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="11" count="2" type="stmt"/>
         <line num="13" count="0" type="stmt"/>

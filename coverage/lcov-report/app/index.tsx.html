@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/25</span>
+                <span class='fraction'>21/24</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.95% </span>
+                <span class="strong">86.36% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>20/23</span>
+                <span class='fraction'>19/22</span>
             </div>
         
             
@@ -149,17 +149,7 @@
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -174,7 +164,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
@@ -206,7 +198,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -219,19 +210,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -260,17 +240,19 @@ import { useEffect, useState, useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import RegionPicker from "../components/RegionPicker";
-import ComingSoon from "../components/ComingSoon";
-import { useTheme } from "../lib/theme";
-import GameGrid from "../components/GameGrid";
-import { Game, fetchGames } from "../lib/gamesApi";
+import RegionPicker from "../src/components/RegionPicker";
+import ComingSoon from "../src/components/ComingSoon";
+import GameGrid from "../src/components/GameGrid";
+import { SCREEN_BG } from "../src/lib/constants";
+import { useTheme } from "../src/lib/theme";
+import { Game, fetchGames } from "../src/lib/gamesApi";
 import { useRouter } from "expo-router";
-import { useGamesStore } from "../stores/useGamesStore";
-import { useRegionStore } from "../stores/useRegionStore";
-import { REGION_PLACEHOLDER_IMAGES, REGION_LABELS } from "../lib/regionConfig";
-&nbsp;
-const ERROR_COLOR = "#FF6666";
+import { useGamesStore } from "../src/stores/useGamesStore";
+import { useRegionStore } from "../src/stores/useRegionStore";
+import {
+  REGION_PLACEHOLDER_IMAGES,
+  REGION_LABELS,
+} from "../src/lib/regionConfig";
 &nbsp;
 export default function IndexScreen() {
   const { tokens } = useTheme();
@@ -302,27 +284,14 @@ export default function IndexScreen() {
 <span class="cstat-no" title="statement not covered" >    router.push(`/game/${game.id}/options`);</span>
   };
 &nbsp;
-  // eslint-disable-next-line react-native/no-unused-styles
   const styles = useMemo(
     () =&gt;
       StyleSheet.create({
-        container: {
-          backgroundColor: tokens.color.brand.primary.value,
-          flex: 1,
-          padding: 16,
-        },
-        debugText: {
-          color: tokens.color.neutral["0"].value,
-          fontSize: 18,
-        },
-        errorText: {
-          color: ERROR_COLOR,
-          fontSize: 18,
-        },
-        gridContainer: {
-          flex: 1,
-          marginTop: 20,
-        },
+        container: { backgroundColor: SCREEN_BG, flex: 1 },
+        debugText: { color: tokens.color.text.primary.value, fontSize: 18 },
+        errorText: { color: tokens.color.text.error.value, fontSize: 18 },
+        gridContainer: { flex: 1, paddingVertical: 8 },
+        pickerContainer: { padding: 8 },
       }),
     [tokens],
   );
@@ -330,8 +299,9 @@ export default function IndexScreen() {
   return (
     &lt;SafeAreaView style={styles.container}&gt;
       &lt;StatusBar style="light" /&gt;
-      &lt;RegionPicker /&gt;
-&nbsp;
+      &lt;View style={styles.pickerContainer}&gt;
+        &lt;RegionPicker variant="header" /&gt;
+      &lt;/View&gt;
       {region === "AU" ? (
         &lt;View style={styles.gridContainer}&gt;
           {error ? (
@@ -358,7 +328,7 @@ export default function IndexScreen() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-29T12:30:08.224Z
+                at 2025-07-03T11:22:43.973Z
             </div>
         <script src="../prettify.js"></script>
         <script>

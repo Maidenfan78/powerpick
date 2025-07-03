@@ -217,3 +217,82 @@ GRANT INSERT, UPDATE, DELETE ON
   public.ball_types,
   public.draws,
   public.draw_results TO service_role;
+
+-- 8) Helper: map day-name ➜ 0-6
+create or replace function public.dow_from_dayname(p_day text)
+returns int
+language sql immutable as $$
+  select case lower(trim(p_day))
+    when 'sunday'    then 0
+    when 'monday'    then 1
+    when 'tuesday'   then 2
+    when 'wednesday' then 3
+    when 'thursday'  then 4
+    when 'friday'    then 5
+    when 'saturday'  then 6
+  end;
+$$;
+
+-- 9) One-time seed for next_draw_time
+update public.games g
+set next_draw_time =
+  (
+    date_trunc('day', now() at time zone g.time_zone)
+    + g.draw_time
+    + (
+        ( public.dow_from_dayname(g.draw_day) 
+          - extract(dow from (now() at time zone g.time_zone))
+          + 7
+        ) % 7
+      ) * interval '1 day'
+  ) at time zone g.time_zone
+where next_draw_time is null;
+
+-- 10) Trigger function: recalc next draw after every result insert
+create or replace function public.update_next_draw()
+returns trigger
+language plpgsql security definer as $$
+declare
+  target_dow int;
+  tz         text;
+  lt         time;
+  draw_ts    timestamptz;
+  next_ts    timestamptz;
+begin
+  /* fetch schedule from `games` */
+  select public.dow_from_dayname(draw_day), time_zone, draw_time
+    into target_dow, tz, lt
+  from public.games where id = new.game_id;
+
+  /* timestamp of the draw we just inserted */
+  draw_ts := (new.draw_date::timestamptz + lt) at time zone tz;
+
+  /* start with this week’s scheduled time */
+  next_ts := (date_trunc('day', draw_ts) + lt);
+
+  /* roll forward until it’s strictly after draw_ts */
+  while next_ts <= draw_ts loop
+    next_ts := next_ts + interval '1 week';
+  end loop;
+
+  /* update source-of-truth column */
+  update public.games
+     set next_draw_time = next_ts
+   where id = new.game_id;
+
+  return new;
+end;
+$$;
+
+-- 11) Attach trigger
+drop trigger if exists trg_update_next_draw on public.draws;
+create trigger trg_update_next_draw
+after insert on public.draws
+for each row execute function public.update_next_draw();
+
+-- 12) OPTIONAL: daily “safety net” job stub (comment out if not needed)
+select cron.schedule(
+  'sync_next_draw_times',
+  '0 4 * * *',  -- 04:00 every day
+  $$ select 1 $$  -- replace with net.http_post(...) when your Edge Function is ready
+);
