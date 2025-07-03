@@ -16,7 +16,7 @@ export default function Layout() {
         <View style={styles.container}>
           <View style={styles.stackContainer}>
             <Stack screenOptions={{ header: () => <Header /> }}>
-              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="index" />
             </Stack>
           </View>
           <BottomNav />
