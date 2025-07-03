@@ -211,7 +211,20 @@ export async function syncAllGames(concurrency = 2): Promise<void> {
   await Promise.all(workers);
 }
 
+// Sync a single game by its ID
+export async function syncGameById(gameId: string): Promise<void> {
+  const game = GAMES.find((g) => g.gameId === gameId);
+  if (!game) {
+    throw new Error(`Unknown game ID: ${gameId}`);
+  }
+  await syncGame(game);
+}
+
 export { parseCsv, extractNumbers };
 
-// 10) Always invoke sync when this file is run:
-syncAllGames().catch((err) => error("FATAL:", err));
+// 10) If executed directly via Node, run the sync
+if (process.argv[1] && process.argv[1].endsWith("syncDraws.ts")) {
+  const gameId = process.argv[2];
+  const runner = gameId ? syncGameById(gameId) : syncAllGames();
+  runner.catch((err) => error("FATAL:", err));
+}

@@ -129,9 +129,10 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
    migrations in `supabase/migrations/`.
 4. **Create Indexes** – `node lib/createIndexes.ts` prints SQL. Execute it via
    the Supabase SQL editor.
-5. **Sync Draw History** – `yarn sync-draws` fetches the latest results for all
-   games.
-6. **Update Hot & Cold Numbers** – `yarn sync-hotcold` populates analytics.
+5. **Sync Draw History** – `yarn sync-draws [gameId]` fetches results. Pass a
+   game ID to update just that game.
+6. **Update Hot & Cold Numbers** – `yarn sync-hotcold [gameId]` recalculates
+   analytics for one game or all games when no ID is given.
 7. **Run the App**
    \| Platform | Command | Notes |
    \| -------- | ---------------------- | ----- |
