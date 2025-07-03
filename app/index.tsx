@@ -17,7 +17,6 @@ import {
   REGION_LABELS,
 } from "../src/lib/regionConfig";
 
-
 export default function IndexScreen() {
   const { tokens } = useTheme();
   const router = useRouter();

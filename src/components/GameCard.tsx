@@ -16,7 +16,6 @@ import placeholder from "../../assets/placeholder.png";
 import { getGameColor } from "../lib/gameColors";
 import { useTheme } from "../lib/theme";
 
-
 type GameCardProps = {
   game: Game;
   onPress: (e: GestureResponderEvent) => void;

@@ -5,7 +5,6 @@ import { useRouter, usePathname } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "../lib/theme";
 
-
 const NAV_ITEMS = [
   { key: "home", icon: "🏠", label: "Home", path: "/" },
   { key: "settings", icon: "⚙️", label: "Settings", path: "/settings" },

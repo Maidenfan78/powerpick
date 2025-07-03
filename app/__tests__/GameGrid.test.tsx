@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { ThemeProvider } from "../../src/lib/theme";
-import GameGrid from "../../src/components/GameGrid";
+import GameGrid, { getNumColumns } from "../../src/components/GameGrid";
 import { fetchRecentDraws } from "../../src/lib/gamesApi";
 
 jest.mock("../../src/lib/gamesApi");
@@ -70,5 +70,11 @@ describe("GameGrid", () => {
 
     fireEvent.press(getByLabelText("Open Game 2 options"));
     expect(onSelect).toHaveBeenCalledWith(games[1]);
+  });
+
+  test("calculates responsive columns", () => {
+    expect(getNumColumns(1300)).toBe(4);
+    expect(getNumColumns(900)).toBe(3);
+    expect(getNumColumns(600)).toBe(2);
   });
 });
