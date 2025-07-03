@@ -3,10 +3,10 @@ from PIL import Image
 size = 256
 
 # Open the original image
-img = Image.open("weekday_windfall.png")
+img = Image.open("powerball.png")
 
 # Resize the image to size x size pixels
 img_resized = img.resize((size, size), Image.LANCZOS)
 
 # Save the resized image with the size in the filename
-img_resized.save(f"weekday_windfall{size}.png")
+img_resized.save(f"powerball{size}.png")
