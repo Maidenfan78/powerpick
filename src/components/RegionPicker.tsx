@@ -2,6 +2,7 @@
 /* eslint-disable react-native/no-unused-styles */
 import React, { useState, useMemo } from "react";
 import { View, Text, Pressable, Modal, StyleSheet } from "react-native";
+import { useRouter, usePathname } from "expo-router";
 
 import { useTheme } from "../lib/theme";
 import { useRegionStore, Region } from "../stores/useRegionStore";
@@ -17,6 +18,8 @@ export default function RegionPicker({
   variant?: "default" | "header";
 }) {
   const { tokens } = useTheme();
+  const router = useRouter();
+  const pathname = usePathname();
   const region = useRegionStore((s) => s.region);
   const setRegion = useRegionStore((s) => s.setRegion);
   const [visible, setVisible] = useState(false);
@@ -112,6 +115,7 @@ export default function RegionPicker({
                   e.stopPropagation();
                   setRegion(opt);
                   setVisible(false);
+                  if (pathname !== "/") router.navigate("/");
                 }}
               >
                 <Text style={styles.optionText}>{labelFor(opt)}</Text>

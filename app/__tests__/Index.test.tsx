@@ -11,7 +11,10 @@ jest.mock("expo-constants", () => ({
 }));
 
 // Avoid requiring the real expo-router module in tests
-jest.mock("expo-router", () => ({ useRouter: () => ({ push: jest.fn() }) }));
+jest.mock("expo-router", () => ({
+  useRouter: () => ({ push: jest.fn() }),
+  usePathname: () => "/",
+}));
 
 // Simplify native modules that rely on browser APIs
 jest.mock("expo-status-bar", () => ({ StatusBar: () => null }));
