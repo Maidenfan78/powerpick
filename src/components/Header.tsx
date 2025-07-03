@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import logo from "../../assets/logo.png"; // Local PNG fallback logo for header
 import { useTheme } from "../lib/theme";
+import RegionPicker from "./RegionPicker";
 
 export default function Header() {
   const { tokens } = useTheme();
@@ -37,6 +38,7 @@ export default function Header() {
         accessibilityLabel="Powerpick logo"
         resizeMode="contain"
       />
+      <RegionPicker variant="header" />
     </View>
   );
 }
