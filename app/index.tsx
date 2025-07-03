@@ -63,6 +63,7 @@ export default function IndexScreen() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
       <View style={styles.pickerContainer}>
+        <RegionPicker variant="header" />
       </View>
       {region === "AU" ? (
         <View style={styles.gridContainer}>

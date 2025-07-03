@@ -154,7 +154,34 @@ async function updateGameHotCold(game: GameConfig): Promise<void> {
   console.log(`✅ Updated hot/cold for game ${game.id}`);
 }
 
-export async function syncAllHotCold(): Promise<void> {
+export async function syncHotColdForGame(gameId: string): Promise<void> {
+  if (!supabase) initSupabase();
+  const { data, error } = await supabase
+    .from("games")
+    .select("id, main_max, supp_max, powerball_max, from_draw_number")
+    .eq("id", gameId)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error(
+      typeof error === "object" && "message" in error
+        ? String((error as { message: unknown }).message)
+        : String(error),
+    );
+  }
+
+  if (!data) return;
+  await updateGameHotCold(data as unknown as GameConfig);
+}
+
+export async function syncAllHotCold(gameId?: string): Promise<void> {
+  if (!supabase) initSupabase();
+
+  if (gameId) {
+    await syncHotColdForGame(gameId);
+    return;
+  }
+
   const { data, error } = await supabase
     .from("games")
     .select("id, main_max, supp_max, powerball_max, from_draw_number");
@@ -174,11 +201,13 @@ export async function syncAllHotCold(): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  initSupabase();
-  await syncAllHotCold();
+  const gameId = process.argv[2];
+  await syncAllHotCold(gameId);
 }
 
-main().catch((err) => {
-  const errObj = err instanceof Error ? err : new Error(String(err));
-  console.error("FATAL:", errObj);
-});
+if (process.argv[1] && process.argv[1].endsWith("syncHotCold.ts")) {
+  main().catch((err) => {
+    const errObj = err instanceof Error ? err : new Error(String(err));
+    console.error("FATAL:", errObj);
+  });
+}
