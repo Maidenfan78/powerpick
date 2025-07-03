@@ -5,6 +5,18 @@ import { ThemeProvider } from "../../src/lib/theme";
 import RegionPicker from "../../src/components/RegionPicker";
 import { useRegionStore } from "../../src/stores/useRegionStore";
 
+jest.mock("expo-router", () => {
+  const navigate = jest.fn();
+  return {
+    __esModule: true,
+    useRouter: () => ({ navigate }),
+    usePathname: () => "/other",
+    navigateMock: navigate,
+  };
+});
+
+import { navigateMock } from "expo-router";
+
 const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <PaperProvider>
     <ThemeProvider>{children}</ThemeProvider>
@@ -13,6 +25,7 @@ const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 
 describe("RegionPicker", () => {
   beforeEach(() => {
+    navigateMock.mockClear();
     useRegionStore.setState({
       region: "AU",
       setRegion: (r) => useRegionStore.setState({ region: r }),
@@ -31,6 +44,7 @@ describe("RegionPicker", () => {
     await waitFor(() => expect(useRegionStore.getState().region).toBe("US"));
     expect(queryByText("Australia")).toBeNull();
     expect(getByText("USA")).toBeTruthy();
+    expect(navigateMock).toHaveBeenCalledWith("/");
   });
 
   test("selecting option only sets region once", async () => {
@@ -46,5 +60,6 @@ describe("RegionPicker", () => {
 
     await waitFor(() => expect(useRegionStore.getState().region).toBe("US"));
     expect(setRegionMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
   });
 });
