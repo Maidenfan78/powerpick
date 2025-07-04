@@ -7282,9 +7282,9 @@ rc@~1.2.7:
     strip-json-comments "~2.0.1"
 
 react-devtools-core@^6.1.1:
-  version "6.1.3"
-  resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-6.1.3.tgz#ef56dce098f47109ba4743efb50e327a5dfabd01"
-  integrity sha512-4be9IVco12d/4D7NpZgNjffbYIo/MAk4f5eBJR8PpKyiR7tgwe29liQbxyqDov5Ybc2crGABZyYAmdeU6NowKg==
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-6.1.4.tgz#3c4836831b72cb198ea24b3b6e3eece6ba491667"
+  integrity sha512-1mrUI6BQ/jEB1DEC8l5JsmrhQPAXs/zc5b7tgoYfRZ9IrHw4hc9v95RWOFJAGar5f2ujoI53HztN7X1BcZ7UgQ==
   dependencies:
     shell-quote "^1.6.1"
     ws "^7"
