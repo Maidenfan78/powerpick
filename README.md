@@ -174,10 +174,19 @@ Schedule the Node sync scripts (`yarn sync-draws` and `yarn sync-hotcold`) on Ve
 
 **Checklist**
 
-- Add `vercel.json` with build and cron config.
-- Connect Expo EAS to your repo and store credentials in GitHub secrets.
-- Define Supabase cron SQL for any DB-local tasks.
-- Use GitHub Actions for mobile builds and heavy workflows.
+- `vercel.json` defines the web export and cron schedule.
+- `.github/workflows/mobile.yml` runs EAS builds on `release/*` branches.
+- Example Edge Function lives in `supabase/functions/rollup`.
+- Schedule DB-local tasks with `pg_cron` and trigger via Supabase.
+
+### Cross-Platform Deployment Checklist
+
+1. Confirm this repo's `origin` points to GitHub.
+2. Link the project to Vercel and enable previews.
+3. Create an Expo project and set `EXPO_TOKEN` in GitHub secrets.
+4. Deploy web builds to Vercel from `vercel.json`.
+5. Trigger native builds via `.github/workflows/mobile.yml`.
+6. Deploy Edge Functions from `supabase/functions` and schedule them with `pg_cron`.
 
 ---
 
