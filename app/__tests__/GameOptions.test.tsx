@@ -31,11 +31,6 @@ jest.mock("expo-router", () => {
 });
 import { pushMock } from "expo-router";
 
-declare module "expo-router" {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const pushMock: jest.Mock<any, any>;
-}
-
 jest.mock("../../src/lib/generator");
 jest.mock("../../src/lib/gamesApi");
 

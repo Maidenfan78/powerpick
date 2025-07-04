@@ -17,11 +17,6 @@ jest.mock("expo-router", () => {
 
 import { navigateMock } from "expo-router";
 
-declare module "expo-router" {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const navigateMock: jest.Mock<any, any>;
-}
-
 const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <PaperProvider>
     <ThemeProvider>{children}</ThemeProvider>
