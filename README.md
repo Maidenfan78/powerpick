@@ -19,10 +19,11 @@
 6. [Visual Language & Accessibility](#-visual-language--accessibility)
 7. [Getting Started (Development)](#-getting-started-development)
 8. [Workflow & Contributing](#-workflow--contributing)
-9. [Repository Structure](#-repository-structure)
-10. [Personas & Documentation](#-personas--documentation)
-11. [License](#-license)
-12. [Acknowledgements](#-acknowledgements)
+9. [Deployment & Scheduling](#-deployment--scheduling)
+10. [Repository Structure](#-repository-structure)
+11. [Personas & Documentation](#-personas--documentation)
+12. [License](#-license)
+13. [Acknowledgements](#-acknowledgements)
 
 ---
 
@@ -129,10 +130,14 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
    migrations in `supabase/migrations/`.
 4. **Create Indexes** – `node lib/createIndexes.ts` prints SQL. Execute it via
    the Supabase SQL editor.
-5. **Sync Draw History** – now handled automatically by a Supabase cron job.
-   Run `yarn sync-draws [gameId]` to backfill or debug a specific game.
-6. **Update Hot & Cold Numbers** – updated after each draw via database
-   triggers. Use `yarn sync-hotcold [gameId]` to force a recalculation.
+5. **Sync Draw History** – schedule `yarn sync-draws` with
+   [Vercel Cron](https://vercel.com/docs/cron-jobs) or a GitHub Actions
+   workflow. The script requires `SUPABASE_SERVICE_ROLE_KEY` so it can write to
+   the database. Run `yarn sync-draws [gameId]` manually to backfill or debug a
+   specific game.
+6. **Update Hot & Cold Numbers** – invoke `yarn sync-hotcold` on the same
+   schedule after draws have synced. Database triggers also update these fields
+   whenever new results arrive.
 7. **Run the App**
    \| Platform | Command | Notes |
    \| -------- | ---------------------- | ----- |
@@ -150,6 +155,29 @@ See [Docs/WORKFLOW.md](Docs/WORKFLOW.md) for the full guide. Key points:
 - Name branches with `feat/`, `fix/` or `chore/` prefixes.
 - Run `yarn lint`, `yarn format`, and `yarn test` before pushing.
 - Open PRs early and keep commits focused.
+
+---
+
+## 🚀 Deployment & Scheduling
+
+Powerpick runs across several platforms:
+
+| Concern                              | Best surface                                        | Why                                                                |
+| ------------------------------------ | --------------------------------------------------- | ------------------------------------------------------------------ |
+| Web build, CDN, edge/serverless APIs | **Vercel**                                          | Auto‑pulls from GitHub, zero‑config CDN, built‑in Cron and secrets |
+| iOS/Android binaries & OTA updates   | **Expo EAS Build + EAS Update**                     | Cloud Mac/Linux workers, store submit, one‑click OTA patches       |
+| Database-local jobs                  | **Supabase Edge Function** scheduled via `pg_cron`  | 0 ms latency to Postgres; secrets stored in Vault                  |
+| Long/heavy workflows                 | **GitHub Actions**                                  | Up to 72 h on hosted runners, 5‑min cron granularity               |
+| Optional extra cron capacity         | Cloudflare Workers, Railway, Render, Upstash QStash | Use if you need per‑minute triggers or already pay those vendors   |
+
+Schedule the Node sync scripts (`yarn sync-draws` and `yarn sync-hotcold`) on Vercel Cron or GitHub Actions with the `SUPABASE_SERVICE_ROLE_KEY` secret. Database-first jobs can use `pg_net.http_post` to call a Supabase Edge Function.
+
+**Checklist**
+
+- Add `vercel.json` with build and cron config.
+- Connect Expo EAS to your repo and store credentials in GitHub secrets.
+- Define Supabase cron SQL for any DB-local tasks.
+- Use GitHub Actions for mobile builds and heavy workflows.
 
 ---
 
