@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npx expo export --platform web",
+  "outputDirectory": "dist",
+  "framework": "expo",
+  "crons": [
+    { "path": "/api/refresh-cache", "schedule": "*/30 * * * *" },
+    { "path": "/api/nightly-stats", "schedule": "30 14 * * *" }
+  ]
+}
