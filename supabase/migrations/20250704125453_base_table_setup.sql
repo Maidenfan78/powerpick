@@ -251,7 +251,7 @@ FROM (
   GROUP BY game_id
 ) sub
 WHERE g.id = sub.game_id
-  AND (g.next_draw_time IS NULL OR g.next_draw_time < NOW());
+  AND (g.next_draw_time IS NULL OR g.next_draw_time <= NOW());
 
 -- -------------------------------------------------------------------
 -- ★ Trigger: update_next_draw
@@ -278,7 +278,8 @@ BEGIN
 
   UPDATE public.games
     SET next_draw_time = next_ts
-  WHERE id = NEW.game_id;
+  WHERE id = NEW.game_id
+    AND (next_draw_time IS NULL OR next_ts > next_draw_time);
 
   RETURN NEW;
 END;
