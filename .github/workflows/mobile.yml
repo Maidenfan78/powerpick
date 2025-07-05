@@ -1,20 +1,30 @@
 name: Mobile Build
+
 on:
-  workflow_dispatch:
   push:
-    branches: ["release/*"]
+    branches:
+      - 'release/**'        # glob pattern must use two * for sub-folders
+  workflow_dispatch:
 
 jobs:
   mobile-build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-      - run: eas build --platform all --non-interactive
-      - run: eas submit -p all --latest
+
+      # Build iOS + Android
+      - name: EAS Build
+        run: eas build --platform all --non-interactive
+
+      # Submit to both stores
+      - name: EAS Submit
+        run: eas submit -p all --latest
         env:
           EXPO_APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APP_SPECIFIC_PW }}
-          EXPO_GOOGLE_SERVICE_ACCOUNT: ${{ secrets.PLAY_JSON }}
+          EXPO_GOOGLE_SERVICE_ACCOUNT:      ${{ secrets.PLAY_JSON }}
