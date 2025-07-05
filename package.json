@@ -23,6 +23,7 @@
     "@supabase/supabase-js": "^2.50.0",
     "cross-fetch": "^4.1.0",
     "dotenv": "^17.0.1",
+    "eas-cli": "^16.13.4",
     "expo": "^53.0.15",
     "expo-constants": "~17.1.6",
     "expo-file-system": "~18.1.10",
