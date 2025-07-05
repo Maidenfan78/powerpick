@@ -18,9 +18,17 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
+      - name: Configure EAS Project
+        if: env.EXPO_PROJECT_ID == ''
+        run: eas init --id ${{ secrets.EXPO_PROJECT_ID }} --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
       # Build iOS + Android
       - name: EAS Build
-        run: eas build --platform all --non-interactive
+        run: eas build --platform all --non-interactive --profile production
+        env:
+          EXPO_PROJECT_ID: ${{ secrets.EXPO_PROJECT_ID }}
 
       # Submit to both stores
       - name: EAS Submit
