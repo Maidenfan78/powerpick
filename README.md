@@ -29,8 +29,6 @@
 
 ## 🎯 Product Vision
 
-Powerpick is an **insight companion** for casual lotto players aged **25 – 55** who enjoy analysing trends before buying a ticket. It sits between the extremes of _pure luck_ and _snake‑oil predictions_ – surfacing real statistics in a clean, lightning‑fast UI.
-
 - **Audience mindset:** data‑curious, mobile‑first, prefers visuals over spreadsheets.
 - **Design language:** dark foundation (`#141414`) with black bars (`#000000`), purple highlights (`#7B1FA2`), and AA+ contrast throughout.
 - **Value proposition:** one‑tap draw lookup, digestible analytics, and fun yet transparent number suggestions – all wrapped in a freemium model that respects attention (banner ads only on the free tier).
