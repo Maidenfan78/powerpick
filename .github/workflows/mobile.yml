@@ -2,37 +2,45 @@ name: Mobile Build
 
 on:
   push:
-    branches:
-      - 'release/**'        # glob pattern must use two * for sub-folders
+    branches: [ main ]
+    
   workflow_dispatch:
 
 jobs:
   mobile-build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # ⬇️  cache step goes right here
+      - name: Cache Yarn
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/yarn          # Yarn’s global cache
+            **/node_modules        # project-level installs
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # dependency installation runs after the cache is restored
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Configure EAS Project
-        if: env.EXPO_PROJECT_ID == ''
-        run: eas init --id ${{ secrets.EXPO_PROJECT_ID }} --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      # Build iOS + Android
       - name: EAS Build
-        run: eas build --platform all --non-interactive --profile production
-        env:
-          EXPO_PROJECT_ID: ${{ secrets.EXPO_PROJECT_ID }}
+        run: yarn eas build --platform all --non-interactive
 
-      # Submit to both stores
-      - name: EAS Submit
-        run: eas submit -p all --latest
+      - name: Submit to stores
+        run: yarn eas submit -p all --latest
         env:
           EXPO_APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APP_SPECIFIC_PW }}
           EXPO_GOOGLE_SERVICE_ACCOUNT:      ${{ secrets.PLAY_JSON }}
