@@ -2,8 +2,8 @@
   "cli": { "version": "^16.13.4" },
   "build": {
     "production": {
-      "android": { "workflow": "managed" },
-      "ios": { "workflow": "managed" }
+      "android": {},
+      "ios": {}
     }
   }
 }
