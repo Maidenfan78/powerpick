@@ -116,7 +116,7 @@ For deeper detail see [`Docs/Phase_0.md`](Docs/Phase_0.md) and [`Docs/WORKFLOW.m
 1. **Clone & Install**
 
    ```bash
-   git clone git@github.com:<org>/powerpick.git
+   git clone git@github.com:maidenfan78/powerpick.git
    cd powerpick
    yarn install --offline  # installs from /vendor without network
    yarn test               # runs Jest smoke suite
